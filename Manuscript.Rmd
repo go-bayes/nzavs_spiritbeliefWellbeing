@@ -298,7 +298,7 @@ summary(mod.1)
 Results for both the personal well-being and life satisfaction models are presented in Table 2 and Figure 1.
 
 ```{r fig.cap = "Combination Coefficient Plots for Personal Well-being and Life Satisfaction Spirit Belief Longitudinal Models"}
-knitr::include_graphics("figs/USEcoefficientplots-1.png")
+knitr::include_graphics("Figs/USEcoefficientplots-1.png")
 ```
 
 Table 2 about here:
