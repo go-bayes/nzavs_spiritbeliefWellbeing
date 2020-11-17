@@ -243,6 +243,7 @@ tab_model(mod01)
 tab_model(mod02)
 
 # Inference holds 
+library(lme4)
 mod.1 <-lmer (PWI ~  1 +  Years * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
 mod.2 <-lmer (LIFESAT ~ 1 + Years * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
 summary(mod.1)
@@ -362,7 +363,7 @@ g1/g2
 
 ```{r cache = TRUE, dependson = "mod.1"}
 #### Predicted Effects ####
-pr.PWI <- ggpredict(model = mod.1, terms = c("Years [7:9]","Beliefs"), 
+pr.PWI <- ggpredict(model = mod.1, terms = c("Years [0:9]","Beliefs"), 
                     ci.lvl = 0.95,
                     type = "fe",
                     typical = "mean",
@@ -374,6 +375,8 @@ p1<-plot(pr.PWI, facets = T) +
  # scale_y_continuous(limits=c(4.75,5.25) )  + 
   gghighlight()  +  theme_blank()+ 
   ggtitle("Predicted Values of Personal Wellbeing") 
+
+pr.PWI
 ```
 ```{r pwi_expected}
 ```
@@ -387,6 +390,9 @@ pr.LIFESAT <- ggpredict(model = mod.2, terms = c("Years [0:9]", "Beliefs"),
                         back.transform = TRUE,
                         ppd = FALSE,
                         interval = "confidence")
+# print expected intervals for the y-hats reported in the conclusion
+pr.LIFESAT
+
 p2<-plot(pr.LIFESAT,facets = T) + 
  # scale_y_continuous(limits=c(6.35,6.85) ) + 
   gghighlight() + theme_blank() + 
