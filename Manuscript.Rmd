@@ -51,97 +51,15 @@ header-includes:
    - \usepackage{rotating}
    - \usepackage{longtable}
 ---
-
-```{r include = FALSE}
-library(knitr)
-opts_chunk$set(
-    fig.align = "center",
-    root.dir = "../"
-)
+```{r libraries}
+library("tidyverse")
 library("papaja")
-library("tidyverse")
-library("tinytex")
-```
-
-```{r load_libraries, echo=FALSE, include=FALSE}
-# load libraries
-library("styler")
-library("tidyverse")
-library("lme4")
-library("ggplot2")
-library("tidyr")
-library("sjPlot")
-library("ggeffects")
-library("Amelia")
-library("table1")
-library("patchwork")
-library("parameters")
-library("prettycode")
-library("gghighlight")
-library("sjPlot")
-library("see")
-library("viridis")
-library("ggpubr")
-library("wesanderson")
-library("ggsci")
 library("here")
-library("citr")
-#library("furniture")
-library("knitr")
-library("texreg")
-```
-```{r load_data, include=FALSE}
-ldf.5<-readRDS("~/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/00Bulbulia\ Pubs/2020/ldf.5") 
-```
-```{r data processing, cache = TRUE, dependson = "ldf.5", include=FALSE}
-# filter only those who are measured 
-dfben  <-ldf.5 %>%
-  dplyr:: filter(Wave !=2009)%>% # exclude wave 1 (no spirit measures that wave)
-  dplyr::filter(YearMeasured==1)%>%
-  dplyr::group_by(Id) %>% filter(n() > 2)%>% # select those who have responded to at least 3 waves # Also works for 5 and 7
-  dplyr::filter(n() !=0)%>%
-  dplyr::ungroup(Id)%>%
-  dplyr:: mutate(Years = as.numeric(years))%>%
-  dplyr::mutate(Age.10yrs = (Age/10))%>%
-  dplyr::mutate(Religion.Church.Log = log(Religion.Church+ 1))%>%
-  dplyr::mutate(Pol.Orient.S = scale(Pol.Orient, center = TRUE, scale = TRUE),
-         Age.10yrs.C = scale(Age.10yrs, center = TRUE, scale = FALSE),
-         Male = factor(Gender),
-         Employed = factor(Employed),
-         Partner = factor(Partner),
-         Edu.S = scale(as.numeric(Edu) ,scale=TRUE,center=TRUE),
-         Education = as.numeric(Edu),
-         Urban = factor(Urban),
-         Believe.Spirit = as.factor(Believe.Spirit),
-         Believe.God = as.factor(Believe.God),
-         EthnicCategories = factor(EthnicCats),
-         LIFESAT.S = scale(LIFESAT, center = TRUE, scale = TRUE),
-         PWI.S = scale(PWI, center = TRUE, scale = TRUE),
-         Deprivation.S = scale(NZdep, scale=TRUE, center=TRUE),
-         Relid.C = scale(Relid, scale = TRUE,center=TRUE),
-         Religious = as.factor(Religious),
-         Religion.Church.Log.C = scale(Religion.Church.Log, center = TRUE, scale = FALSE))
-```
-```{r}
-# nice labels
-table1::label(dfben$Age.10yrs.C) <- "Age in Decades (C)"
-table1::label(dfben$PWI) <- "Personal Wellbeing"
-table1::label(dfben$LIFESAT) <- "Life Satisfaction"
-
-table1::label(dfben$Deprivation.S) <- "Deprivation (S)"
-table1::label(dfben$Pol.Orient) <- "Political Conservative"
-table1::label(dfben$Pol.Orient.S) <- "Political Conservative (S)"
-table1::label(dfben$NZdep) <- "NZ Deprivation Index"
-dfben$Partner <- factor(dfben$Partner, labels = c("No Partner","Has Partner"))
-dfben$Employed <- factor(dfben$Employed, labels = c("Not Employed","Employed"))
-table1::label(dfben$Edu.S) <- "Education (S)"
-
-# create beliefs indicator
-dfben$Beliefs<- factor(ifelse(dfben$Believe.God == "Not Believe God" & dfben$Believe.Spirit == "Not Believe Spirit", "_Skeptic_", 
-                                        ifelse(dfben$Believe.God == "Not Believe God" & dfben$Believe.Spirit == "Believe Spirit", "_SpiritExcludesGod_",
-                                               ifelse(dfben$Believe.God == "Believe God" & dfben$Believe.Spirit == "Believe Spirit","GodAndSpirit","GodExcludesSpirit"))))
 ```
 
+```{r runanalysis, include = FALSE}
+source('short.R')
+```
 The relationship between spirituality and psychological well-being is a matter of enduring fascination [@Ellsworth2010-yu]. Most previous attempts to quantify the relationship between these two domains find a positive association: spirituality predicts well-being [@Russinova2002-rq; @Ginsburg1995-jr; @Zaza2005-ac; @Koenig2010-gk; @Smith2003-re; @Smith2003-re; @Koenig2001-ow]. However, critics raise three challenges.
 
 <!-- In spirituality/psychological wellbeing research,sSsubjective in spirituality health research, psychological well-being is typically decomposed into two categories: emotional well-being (i.e., the presence or absence of positive feelings about life) and functional well-being (i.e., psychological and social well-being) [@Keyes2002-bb]. -->
@@ -169,11 +87,14 @@ The Time 10 (2018) wave of the NZAVS included 47,951 respondents. We analyzed da
 ## Measures
 
 
-**Life Satisfaction** Life satisfaction is a measure of emotional well-being that was assessed using a 2-item version of the Satisfaction With Life Scale, which has previously been shown to correlate with aspects of religiosity [@Diener1985-xy]. Participants rated their agreement with the statements (a) "I am satisfied with my life"; and (b) "In most ways my life is close to ideal." The items were rated on 7-point response options ranging from 1 = strongly disagree to 7 = strongly agree. The mean Cronbach’s alpha for this 2-item scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher life satisfaction. Overall scores were means of the 2-items. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
+### Life Satisfaction
+Life satisfaction is a measure of emotional well-being that was assessed using a 2-item version of the Satisfaction With Life Scale, which has previously been shown to correlate with aspects of religiosity [@Diener1985-xy]. Participants rated their agreement with the statements (a) "I am satisfied with my life"; and (b) "In most ways my life is close to ideal." The items were rated on 7-point response options ranging from 1 = strongly disagree to 7 = strongly agree. The mean Cronbach’s alpha for this 2-item scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher life satisfaction. Overall scores were means of the 2-items. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
 
-**Personal well-being** Personal well-being is a measure of function all well-being that was assessed using a 4-item version of the Australian Unity well-being Index [@Cummins2017-ur]. Participants rated their satisfaction with (a) "Your standard of living"; (b) "Your health"; (c) "Your future security"; (d) "Your personal relationships." Items were rated using a 10-point response option ranging from 1 = completely dissatisfied to 10 = completely satisfied. The mean Cronbach’s alpha for this scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher personal well-being. Overall scores were means of the 4-items. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
+### Personal well-being 
+Personal well-being is a measure of function all well-being that was assessed using a 4-item version of the Australian Unity well-being Index [@Cummins2017-ur]. Participants rated their satisfaction with (a) "Your standard of living"; (b) "Your health"; (c) "Your future security"; (d) "Your personal relationships." Items were rated using a 10-point response option ranging from 1 = completely dissatisfied to 10 = completely satisfied. The mean Cronbach’s alpha for this scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher personal well-being. Overall scores were means of the 4-items. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
 
-***Belief in a Spirit or a God***  We assess belief in a spirit or a God by asking two non-affective questions: "Do you believe in a spirit or life force" and "Do you believe in a god?" Responses were coded as (1) Skeptics: those who neither believe in a God nor believe in a Spirit or Life force; (2) Skeptics about God who believe in a Spirit or Life Force; (3) Believers in a God who disbelieve in a Spirit or Life force; (4) Believers in a God and Spirit or Life Force. These believe were developed for the NZAVS from the 2005 Eurobarometer. For detailed information pertaining to beliefs, see Table 1.
+### Belief in a Spirit or a God  
+We assess belief in a spirit or a God by asking two non-affective questions: "Do you believe in a spirit or life force" and "Do you believe in a god?" Responses were coded as (1) Skeptics: those who neither believe in a God nor believe in a Spirit or Life force; (2) Skeptics about God who believe in a Spirit or Life Force; (3) Believers in a God who disbelieve in a Spirit or Life force; (4) Believers in a God and Spirit or Life Force. These believe were developed for the NZAVS from the 2005 Eurobarometer. For detailed information pertaining to beliefs, see Table 1.
 
 
 Table 1 about here:
@@ -225,22 +146,30 @@ PWI &   &   &   &   &   &   &   &   &  \\
  
 ## Demographic Indicators
 
-**Age** Age was put into units of 10 years and centered at its mean. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 2.
+### Age 
+Age was put into units of 10 years and centered at its mean. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 2.
 Gender. Gender was assessed by asking participants if they were "Male" was coded as "1" and "Female" was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
 
-**Education**  Education level was measured using an 11-point rating developed by the New Zealand Qualification Authority known as the New Zealand Qualification Framework (NZQF; 0 = no qualification, 10 = doctoral degree). Education was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
+### Education
+Education level was measured using an 11-point rating developed by the New Zealand Qualification Authority known as the New Zealand Qualification Framework (NZQF; 0 = no qualification, 10 = doctoral degree). Education was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
 
-**Deprivation** We measured the socio-economic status of participants’ immediate (small area) neighborhood using the 2013 New Zealand Deprivation Index, which uses aggregate census information about the residents of small neighborhood-type units to assign a decile-rank index from 1 (most affluent) to 10 (most impoverished) [@Atkinson2014-ex]. The index is based on a Principal Components Analysis of the following nine variables (in weighted order): the proportion of adults who received a means-tested benefit, household income, proportion not owning own home, proportion single-parent families, proportion unemployed, proportion lacking qualifications, proportion household crowding, proportion no telephone access, and proportion no car access. Thus, the index reflects the average level of deprivation for small neighborhood-type units (or small community areas of about 80–90 people each) across the entire country. Our sample had a mean deprivation index of 4.80 (SD = 2.79). Deprivation was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
+### Deprivation
+We measured the socio-economic status of participants’ immediate (small area) neighborhood using the 2013 New Zealand Deprivation Index, which uses aggregate census information about the residents of small neighborhood-type units to assign a decile-rank index from 1 (most affluent) to 10 (most impoverished) [@Atkinson2014-ex]. The index is based on a Principal Components Analysis of the following nine variables (in weighted order): the proportion of adults who received a means-tested benefit, household income, proportion not owning own home, proportion single-parent families, proportion unemployed, proportion lacking qualifications, proportion household crowding, proportion no telephone access, and proportion no car access. Thus, the index reflects the average level of deprivation for small neighborhood-type units (or small community areas of about 80–90 people each) across the entire country. Our sample had a mean deprivation index of 4.80 (SD = 2.79). Deprivation was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
 
-**Employed** Employment status was assessed by asking participants if they were currently working, "yes" was coded as "1" and "no" was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
+### Employed
+Employment status was assessed by asking participants if they were currently working, "yes" was coded as "1" and "no" was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
 
-**Partner** Participants were asked if they were in a relationship, "yes" was coded as "1" and no was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
+### Partner
+Participants were asked if they were in a relationship, "yes" was coded as "1" and no was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
 
-**Ethnicity** Ethnicity was assessed using four basic categories: (1) New Zealand European/Pakeha, (2) Maori, (3) Pacific Islander, and (4) Asian. For detailed information pertaining to yearly responses and missingness, see Table 1.
+### Ethnicity
+Ethnicity was assessed using four basic categories: (1) New Zealand European/Pakeha, (2) Maori, (3) Pacific Islander, and (4) Asian. For detailed information pertaining to yearly responses and missingness, see Table 1.
 
-**Urban** People were coded as either residing in an urban "1" or rural "0" area based on New Zealand census data. For detailed information pertaining to yearly responses and missingness, see Table 1.
+### Urban
+People were coded as either residing in an urban "1" or rural "0" area based on New Zealand census data. For detailed information pertaining to yearly responses and missingness, see Table 1.
 
-**Political Orientation** To assess political orientation, we asked people to rate their political orientation using seven-point response options (1 = Liberal; 7 = Conservative). Higher values indicate more conservative political beliefs. Political Orientation was standardized and centered at its mean. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
+### Political Orientation
+To assess political orientation, we asked people to rate their political orientation using seven-point response options (1 = Liberal; 7 = Conservative). Higher values indicate more conservative political beliefs. Political Orientation was standardized and centered at its mean. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
 
 ## Statistical Analyses
 
@@ -248,7 +177,7 @@ Statistical analysis was performed using R version 4.0.2 R version 3.6.1 (2020-0
 The model equation(s) are described in Equation 1.
 
 
-**Equation 1**
+## Equation 1
 
 \[
 \begin{aligned}
@@ -262,7 +191,6 @@ The model equation(s) are described in Equation 1.
 \end{aligned}
 \]
 
-
 Because missing values can result in biased estimates [@Blackwell2017-oq], we multiply imputed 10 datasets using the AmeliaII package in R[@Honaker2011-yu].  We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences.  
 
 ## Code
@@ -270,23 +198,6 @@ Because missing values can result in biased estimates [@Blackwell2017-oq], we mu
 All code for this analysis and a full report of the missing data imputation can be found at https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing. 
 
 # Results
-
-
-```{r, cache =TRUE, include =FALSE}
-# model 2
-mod.1 <-lmer (PWI ~  1 +  Years * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
-```
-```{r, cache=TRUE, include=FALSE}
-# model 1
-mod.1 <-lmer (LIFESAT ~ 1 + Years * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
-summary(mod.1)
-```
-
-Results for both the personal well-being and life satisfaction models are presented in Table 2 and Figure 1.
-
-
-Figure 1 about here:
-
 
 ```{r fig.cap = "Combination Coefficient Plots for Personal Well-being and Life Satisfaction Spirit Belief Longitudinal Models"}
 knitr::include_graphics("Figs/USEcoefficientplots-1.png")
@@ -356,30 +267,6 @@ Var: Residual                      & $0.74$                 & $0.42$            
 \end{table}
 \]
 
-
-```{r, echo = FALSE, include=FALSE}
-te00 <-texreg::extract(
-  mod.1,
-  level = 0.95,
-  include.random = TRUE,
-  include.rsquared = T,
-  include.nobs = T,
-  include.loo.ic = T,
-  include.waic = F)
-texreg(list(te00),
-                custom.model.names = c("PWI"),
-                caption = "Personal Wellbeing",
-                sideways = F,
-                scalebox = .5,
-                #fontsize= "footnotesize",
-                label = "tab:REGRESS_1",
-                ci.force.level = 0.95, bold = 0.05,
-                settingstars = 0,
-                booktabs = TRUE,
-                custom.note ="")
-```
-
-
 ## Personal Well-Being
 
 We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict personal well-being (PWI) with Years (0-9), Beliefs (four categories), Age.10yrs.C, Deprivation.S, Edu.S, Employed, EthnicCats, Male, Partner, Pol.Orient.S and Urban, with  Id as random effects. The model included Id as random effects.  The model's intercept, corresponding to Years = 0, Beliefs = Skeptic, Age = (sample mean), Deprivation.S = (sample mean), Edu.S =(sample mean), Employed = Not Employed, EthnicCats = Euro, Male = Not Mail, Partner = No Partner, Pol.Orient.S = (sample mean),, Urban = Not Urban and Id = 2, is at 4.94 (SE = 0.02, 95% CI [4.89, 4.99], p < .001) is at 6.63 (SE = 0.03, 95% CI [6.57, 6.70], p < .001). Within this model:
@@ -399,8 +286,8 @@ We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to
   - The effect of Having a Partner is reliably positive (beta = 0.61, SE = 0.02, std. beta = 0.37, p < .001).
   - The effect of Pol.Orient.S is reliably positive  (beta = 0.02, SE = 5.67e-03, std. beta = 0.01, p < .001).
   - The effect of Urban is reliably negative (beta = -0.02, SE = 0.01, std. beta = -0.01, p < .05).
-  
-**Interactions**
+
+##  Personal well-being: years X beliefs 
 
 ```{r fig.cap = "Combination Coefficient Plots for Personal Well-being and Life Satisfaction Spirit Belief Longitudinal Models"}
 knitr::include_graphics("Figs/USEPWI_expected-1.png")
@@ -430,8 +317,8 @@ We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to
   - The effect of HasPartner is reliably positive (beta = 0.42, SE = 0.01, std. beta = 0.35, p < .001).
   - The effect of Pol.Orient.S is reliably positive (beta = 0.01, SE = 4.23e-03, std. beta = 0.01, p < .01).
   - The effect of Urban is reliably negative (beta = -0.02, SE = 8.85e-03, std. beta = -0.02, p < .05).
-  
-**Interactions**
+
+## Life Satisfaction: years X beliefs 
 
 ```{r fig.cap = "Prediction Plot Life Satisfaction Spirit Belief Longitudinal Models"}
 knitr::include_graphics("Figs/USElifsat_expected-1.png")
@@ -441,22 +328,49 @@ knitr::include_graphics("Figs/USElifsat_expected-1.png")
   - The effect of Years X BeliefsGodExcludesSpirit is not reliable (beta = -1.59e-03, SE = 6.25e-03, std. beta = -2.70e-03, p = 0.799).  Thus, God believers who doubt in a Spirit or Life Force start maintain higher Life-Satisfaction than do other groups, but they are not expected to grow in Life-Satisfaction over time.  
 
 
-<!-- ```{r} -->
-<!-- knitr::include_graphics("Figs/Usecoefficientplots-1.png") -->
-<!-- ``` -->
-
 ## Imputed data analysis
 
 To adjust for potential biases from missing responses, we conducted a supplementary analysis in which we imputed missing values over the the longitudinal sample. This analysis is describe in Supplement 1. Averaging over the missing responses does not change inference, however we observe growth across all four groups in both personal well-being and life satisfaction. Additionally we observe substantially stronger effects for the slope of Spirit Beliefs on both personal well-being and life-satisfaction. Figures 3 and Figures 4 describe the predicted slopes of change. The inference from this analysis remains the same as from the analysis in which we delete missing values row-wise, by panel wave.  In all analyses those who believe in a spirit or life-force are expected to experience greater growth in well-being over time.
 
 Figure 3 about here
 
+```{r fig.cap = "Imputed data analysis: coefficient plot"}
+knitr::include_graphics("Figs/coefficient_plot_both_imputed-1.png")
+```
+
+
 Figure 4 about here
+
+```{r fig.cap = "Imputed data analysis: predicted personal wellbeing by years X beliefs"}
+knitr::include_graphics("Figs/predicted_PWI_impute-1.png")
+```
+
+
+Figure 5 about here
+
+```{r fig.cap = "Imputed data analysis: predicted personal wellbeing by years X beliefs"}
+knitr::include_graphics("Figs/predicted_lifesat_imputed-1.png")
+```
 
 
 # Discussion
 
-The purpose of this study has been to clarify the relationship between belief in a spirit/life force and subjective well-being, addressing three challenges from previous research: (1) tautological measures of spirituality and subjective well-being; (2) insufficiently distinct measures of spirituality and religion; (3) cross-sectional samples. Here, we ask whether beliefs in a Spirit or Life Force predict growth in personal well-being and life-satisfaction over eight years in populations who differ in the this belief, and who also differ in their belief in a God.  We find that 
+The purpose of this study has been to clarify the relationship between belief in a spirit/life force and subjective well-being, addressing three challenges from previous research: (1) tautological measures of spirituality and subjective well-being; (2) insufficiently distinct measures of spirituality and religion; (3) cross-sectional samples. Here, we ask whether beliefs in a Spirit or Life Force predict growth in personal well-being and life-satisfaction over eight years in populations who differ in the this belief, and who also differ in their belief in a God.  
+
+We find that \dots
+1. Lower subjective well-being among spirit beliefs population at outset of study, surpassed (LS) or surpassing (PWI) by the end of the interval
+2. Holds after adjusting for demograph
+3. Holds for Belief in God
+
+Questions:
+1. Why initially lower well-being in NZ? 
+2. Why the slope for spirit beliefs (and not God)?
+
+
+Importance:
+1. Methods: Disentangling
+2. Growing population: practical importance
+
 
 These findings demonstrate the importance of investigating spiritual beliefs as a domain of interest in its own right. In many Western countries, people are increasingly identifying as "spiritual but not religious" [@Zinnbauer2005-vz; @Swinton2001-vr]. Other studies find that those who have a spiritual understanding of life without a religious framework are at an increased risk of having mental disorders [@King2013-cg]. As such, it is important to understand the ramifications of belief in a spirit for psychological health. 
 To assess the relationship between a belief in a spirit or life force and subjective well-being, we improve upon past methods in three ways. 

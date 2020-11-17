@@ -242,7 +242,7 @@ parameters::check_heterogeneity(mod02, group = "ID")
 tab_model(mod01)
 tab_model(mod02)
 
-# Inference holds  FOCe INTERCEEpTS TO BE 
+# Inference holds 
 mod.1 <-lmer (PWI ~  1 +  Years * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
 mod.2 <-lmer (LIFESAT ~ 1 + Years * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
 summary(mod.1)
@@ -255,12 +255,11 @@ summary(mod.2)
 # mod.2 <-glmmTMB(PWI ~ Years * Beliefs + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id) + (1|GenCohort), data= dfben)
 ```
 
-Tables
+
 
 ```{r cache = TRUE, dependson="mod.2", dependson="mod.1"}
 tab_model(mod.2, mod.1) # Table
 ```
-
 
 ```{r, echo = FALSE, include=FALSE}
 te00 <-texreg::extract(
@@ -350,11 +349,20 @@ Plot models
 ```{r USEcoefficientplots}
 plot_models(mod.2, mod.1) + ylim(-.4, .75) + theme_abyss() + scale_colour_brewer(labels = c("Personal Wellbeing", "Life Satisfaction")) # Plots
 ```
+```{r}
+library(parameters)
+g1<-plot(parameters::model_parameters(mod.1))+ ggtitle("Personal Wellbeing Coefficients")
+g2<-plot(parameters::model_parameters(mod.2))+ ggtitle("Life Satisfaction Coefficients")
+```
+
+```{r USE_2_coefficientplots}
+g1/g2
+```
 
 
 ```{r cache = TRUE, dependson = "mod.1"}
 #### Predicted Effects ####
-pr.PWI <- ggpredict(model = mod.1, terms = c("Years [0:9]","Beliefs"), 
+pr.PWI <- ggpredict(model = mod.1, terms = c("Years [7:9]","Beliefs"), 
                     ci.lvl = 0.95,
                     type = "fe",
                     typical = "mean",
@@ -370,7 +378,7 @@ p1<-plot(pr.PWI, facets = T) +
 ```{r pwi_expected}
 ```
 
-```{r}
+```{r predictlifesat}
 pr.LIFESAT <- ggpredict(model = mod.2, terms = c("Years [0:9]", "Beliefs"),
                         ci.lvl = 0.95,
                         type = "fe",
@@ -383,20 +391,21 @@ p2<-plot(pr.LIFESAT,facets = T) +
  # scale_y_continuous(limits=c(6.35,6.85) ) + 
   gghighlight() + theme_blank() + 
   ggtitle("Predicted Values of Life Satisfaction") #+   scale_colour_brewer(palette = "Zissou1")
+p2
 ```
 
 ## Reporting
 
 ### equations
-Lifesatisfaction Model 1 equation
+Life satisfaction Model 1 equation
 
-```{r}
+```{r eq1}
 library(equatiomatic)
 print(extract_eq(mod.1, wrap = TRUE,terms_per_line =3))
 ```
 
 PWI Model 2 equation
-```{r}
+```{r eq2}
 library(equatiomatic)
 print(extract_eq(mod.2, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3))
 ```
@@ -408,7 +417,7 @@ print(extract_eq(mod.2, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3))
 model 1 report: for publication change all "significants" to "reliable"
 
 short report:
-```{r, cache =TRUE, dependson=mod.1,include=FALSE}
+```{r, report1, cache =TRUE, dependson=mod.1,include=FALSE}
 report::model_text(mod.1)
 ```
 
@@ -425,14 +434,11 @@ text_short(r1)
 r1<- report::report(mod.1)
 report::text_long(r1)
 ```
-
-
-
-### Model 2
-For publication change all "significants" to "reliable"
-
 short report
 ```{r, cache =TRUE, dependson=mod.2,include=FALSE}
+# Model 2
+# For publication change all "significants" to "reliable"
+
 report::model_text(mod.2)
 ```
 
