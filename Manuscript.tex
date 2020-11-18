@@ -112,7 +112,7 @@
   {}{\typeout{Failed to patch title.}}
 \makeatother
 \shorttitle{Longitudinal Wellbeing from Spiritual Beliefs}
-\keywords{Belief, God, Health, Longitudinal, Panel, Religion, Spirit, Spirituality, Well-being\newline\indent Word count: 5015}
+\keywords{Belief, God, Health, Longitudinal, Panel, Religion, Spirit, Spirituality, Well-being\newline\indent Word count: 5269 words in text body, 1078 words in reference section}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
 \DeclareDelayedFloatFlavor*{longtable}{table}
@@ -142,6 +142,8 @@
 \authornote{
 
 1 Wake Forest Medical School 2 Department of Psychology Virginia Commonwealth University 3 Department of Psychology Georgia State University 4 School of Psychology University of Auckland 5 School of Psychology Victoria University
+
+Correspondence concerning this article should be addressed to Ben Highland, Ben's Postal address. E-mail: \href{mailto:benhighland6420@gmail.com}{\nolinkurl{benhighland6420@gmail.com}}
 
 }
 
@@ -310,7 +312,17 @@ The model equation(s) are described in Equation 1.
 \end{aligned}
 \]
 
-Because missing values can result in biased estimates (Blackwell, Honaker, \& King, 2017), we multiply imputed 10 datasets using the AmeliaII package in R(Honaker, King, Blackwell, \& Others, 2011). We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences.
+\hypertarget{system-and-packages}{%
+\subsubsection{System and packages}\label{system-and-packages}}
+
+The analysis was performed using R version 4.0.2 (2020-06-22). The Platform was x86\_64-apple-darwin17.0 (64-bit) Running under: macOS Catalina 10.15.6
+We are greatful to the contributors and mantainers of the following packages:
+R (Version 4.0.2; R Core Team, 2020) and the R-packages \emph{Amelia} (Version 1.7.6; Honaker et al., 2011a), \emph{citr} (Version 0.3.2; Aust, 2019), \emph{dplyr} (Version 1.0.2; Wickham et al., 2020), \emph{equatiomatic} (Version 0.1.0.9000; Anderson \& Heiss, 2020), \emph{forcats} (Version 0.5.0; Wickham, 2020a), \emph{ggeffects} (Version 0.15.0; Lüdecke, 2018), \emph{gghighlight} (Version 0.3.0; Yutani, 2020), \emph{ggplot2} (Version 3.3.2; Wickham, 2016), \emph{ggsci} (Version 2.9; Xiao, 2018), \emph{lme4} (Version 1.1.23; Bates, Mächler, Bolker, \& Walker, 2015), \emph{Matrix} (Version 1.2.18; Bates \& Maechler, 2019), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{parameters} (Version 0.8.6.1; D. Lüdecke et al., 2020a), \emph{patchwork} (Version 1.0.1; Pedersen, 2020), \emph{prettycode} (Version 1.1.0; Csárdi, 2019), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{Rcpp} (Version 1.0.5.1; Eddelbuettel \& François, 2011; Eddelbuettel \& Balamuta, 2017), \emph{readr} (Version 1.3.1; Wickham, Hester, \& Francois, 2018), \emph{report} (Version 0.1.0; Makowski, Dominique, Lüdecke, \& Daniel, 2019), \emph{see} (Version 0.5.2.1; D. Lüdecke et al., 2020b), \emph{sjPlot} (Version 2.8.4; D. Lüdecke, 2020), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{styler} (Version 1.3.2; Müller \& Walthert, 2020), \emph{table1} (Version 1.2; Rich, 2020), \emph{texreg} (Version 1.37.5; Leifeld, 2013), \emph{tibble} (Version 3.0.4; Müller \& Wickham, 2020), \emph{tidyr} (Version 1.1.2; Wickham, 2020b), and \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019)"
+
+\hypertarget{missing-data}{%
+\subsubsection{Missing data}\label{missing-data}}
+
+Because missing values can result in biased estimates (Blackwell, Honaker, \& King, 2017), we multiply imputed 10 datasets using the AmeliaII package in R(Honaker et al., 2011b).We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences. Details of this analysis can be found at: \url{https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing}.
 
 \hypertarget{code}{%
 \subsection{Code}\label{code}}
@@ -321,7 +333,7 @@ All code for this analysis and a full report of the missing data imputation can 
 \section{Results}\label{results}}
 
 \begin{figure}
-\includegraphics[width=6.4in]{Figs/USEcoefficientplots-1} \caption{Combination Coefficient Plots for Personal Well-being and Life Satisfaction Spirit Belief Longitudinal Models}\label{fig:unnamed-chunk-1}
+\includegraphics[width=6.4in]{Figs/USE_2_coefficientplots-1} \caption{Combination Coefficient Plots for Personal Well-being and Life Satisfaction Spirit Belief Longitudinal Models}\label{fig:unnamed-chunk-1}
 \end{figure}
 
 Table 2 about here:
@@ -449,14 +461,14 @@ Focusing on the interaction of time with belief-type on personal well-being we o
 \hypertarget{life-satisfaction-1}{%
 \subsection{Life Satisfaction}\label{life-satisfaction-1}}
 
-We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Life Satisfaction (LIFESAT) with Years (0-9), Beliefs (four categories), Age.10yrs.C, Deprivation.S, Edu.S, Employed, EthnicCats, Male, Partner, Pol.Orient.S and Urban, with Id as random effects. Standardized parameters were obtained by fitting the model on a standardized version of the dataset.The model's total explanatory power is substantial (conditional R2 = 0.69). The model's intercept, corresponding to Years = 0, Beliefs = Skeptic, Age = (sample mean),, Deprivation.S = (sample mean), Edu.S =(sample mean), Employed = Not Employed, EthnicCats = Euro, Male = Not Mail, Partner = No Partner, Pol.Orient.S = (sample mean), Urban = Not Urban and Id = 2, is at 4.94 (SE = 0.02, 95\% CI {[}4.89, 4.99{]}, p \textless{} .001). Within this model:
+We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Life Satisfaction (LIFESAT) with Years (0-9), Beliefs (four categories), Age.10yrs.C, Deprivation (S), Education (S), Employed, EthnicCats, Male, Partner, Pol.Orient.S and Urban, with Id as random effects. Standardized parameters were obtained by fitting the model on a standardized version of the dataset. The model's total explanatory power is substantial (conditional R2 = 0.69). The model's intercept, corresponding to Years = 0, Beliefs = Skeptic, Age = (sample mean),, Deprivation.S = (sample mean), Education =(sample mean), Employed = Not Employed, EthnicCats = Euro, Male = Not Mail, Partner = No Partner, Pol.Orient.S = (sample mean), Urban = Not Urban and Id = 2, is at 4.94 (SE = 0.02, 95\% CI {[}4.89, 4.99{]}, p \textless{} .001). Within this model:
 
 \begin{itemize}
 \tightlist
 \item
   The effect of years is not reliable (beta = -5.50e-04, SE = 2.69e-03, std. beta = -9.32e-04, p = 0.838). We do not infer growth over time in Life Satisfaction among the Skeptic population
 \item
-  The effect of beliefs in SpiritExcludesGodis reliably negative (beta = -0.08, SE = 0.02, std. beta = 0.01, p \textless{} .001). We infer that overall the population that believes in a Spirit but does not believe in a God is expected to have a lower Life Satisfaction than skeptics.
+  The effect of beliefs in SpiritExcludesGod is reliably negative (beta = -0.08, SE = 0.02, std. beta = 0.01, p \textless{} .001). We infer that overall the population that believes in a Spirit but does not believe in a God is expected to have a lower Life Satisfaction than skeptics.
 \item
   The effect of beliefs in GodAndSpirit is not reliable (beta = -0.04, SE = 0.02, std. beta = 0.04, p = 0.105). We do not infer growth over time in Life Satisfaction among this (Skeptic) population
 \item
@@ -509,7 +521,7 @@ We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to
 \hypertarget{imputed-data-analysis}{%
 \subsection{Imputed data analysis}\label{imputed-data-analysis}}
 
-To adjust for potential biases from missing responses, we conducted a supplementary analysis in which we imputed missing values over the the longitudinal sample. This analysis is describe in Supplement 1. Averaging over the missing responses does not change inference, however we observe growth across all four groups in both personal well-being and life satisfaction. Additionally we observe substantially stronger effects for the slope of Spirit Beliefs on both personal well-being and life-satisfaction. Figures 3 and Figures 4 describe the predicted slopes of change. The inference from this analysis remains the same as from the analysis in which we delete missing values row-wise, by panel wave. In all analyses those who believe in a spirit or life-force are expected to experience greater growth in well-being over time.
+To adjust for potential bias from missing responses, we conducted a supplementary analysis in which we imputed missing values over the the longitudinal sample. This analysis is describe in Supplement 1. Averaging over the missing responses does not change inference, however we observe growth across all four groups in both personal well-being and life satisfaction. Additionally we observe substantially stronger effects for the slope of Spirit Beliefs on both personal well-being and life-satisfaction. Figures 3 and Figures 4 describe the predicted slopes of change. The inference from this analysis remains the same as from the analysis in which we delete missing values row-wise, by panel wave. In all analyses, those who believe in a spirit or life-force experience greater growth in both Personal Well-being and Life Satisfaction over time.
 
 Figure 3 about here:
 
@@ -536,69 +548,35 @@ The purpose of this study has been to clarify the relationship between belief in
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  At the outset of the study, in 2010, the expected subjective well-being as measured using the Personal Well-being Inventory was expected to be lower among those who believed in Spirit or Life Force but not a God (\(\hat{y}\) = 6.50, se =.03) and lower among those who believed in both a Spirit/Life-Force and a God (\(\hat{y}\) = 6.48, se =.03) in comparison both to the skeptical population who neither believed in a God nor a life force (\(\hat{y}\) = 6.64,se =.03) and to the population that believed in a God but was skeptical about belief in a Spirit or Life Force (\(\hat{y}\) 6.66, se =.05). (See Figure 2)
+  At the outset of the study, in 2010, the expected subjective well-being as measured using the Personal Well-being Inventory was expected to be lower among those who believed in Spirit or Life Force but not a God (\(\hat{y}\) = 6.50, se =.03) and lower among those who believed in both a Spirit/Life-Force and a God (\(\hat{y}\) = 6.48, se =.03) in comparison both to the skeptical population who neither believed in a God nor a life force (\(\hat{y}\) = 6.64,se =.03) and to the population that believed in a God but was skeptical about belief in a Spirit or Life Force (\(\hat{y}\) 6.66, se =.05). (See Figure 2) Similarly,the expected subjective well-being as measured using the Life Satisfaction Inventory is lower among those who believed in Spirit or Life Force but not a God (\(\hat{y}\) = 4.86, se =.02) and lower among those who believed in both a Spirit/Life-Force and a God (\(\hat{y}\) = 4.91, se =.02) in comparison both with the skeptical population who neither believed in a God nor a life force (\(\hat{y}\) = 4.94,se =.02) and the population that believed in a God but was skeptical about belief in a Spirit or Life Force (\(\hat{y}\) 5.02, se =.02) (see Figure 3)
+\item
+  However, over time, belief in a Spirit or Life Force predicts a trajectory of growth in personal well-being. In 2018, personal well-being among who believe in Spirit or Life Force but not a God had grown to (\(\hat{y}\) = 6.67, se =.03, \(\Delta \hat{y} = 0.17\)). Among those who believed in both a Spirit/Life-Force and a God Personal Well-Being had grown to (\(\hat{y}\) = 6.69, se = 0.02,\(\Delta \hat{y} = .21\)). To place this effect in practical perspective, such growth in personal well-being is about twice as large as the expected benefit of being employed and about a third as large as the expected benefit from having a romantic partner. By contrast, personal well-being among the skeptical population who neither believed in a God nor a Life Force remained stable across the eight year interval \(\hat{y} = 6.66, se = 0.03, \Delta \hat{y} = .02\)). By the same token, personal well-being among those who believe in a God but are skeptical about a Spirit/Life Force was constant \(\hat{y} = 6.70, se = 0.04, \Delta \hat{y} = .04\)). Similarly, over time, belief in a Spirit or Life Force predicts a trajectory of growth in Life Satisfaction. In 2018, life satisfaction among those who believe in Spirit or Life Force but not a God had grown to (\(\hat{y} = 5.01, se = 0.02, \Delta \hat{y} = 0.07\)). In practical terms, such growth is equivalent to the expected gain in Life Satisfaction from being employed and a sixth as large as the expected benefit to Life Satisfaction from having a romantic partner. Among those who believed in both a Spirit/Life-Force and a God, life satisfaction had grown to (\(\hat{y} = 5.03, se = 0.02, \Delta \hat{y} = 0.12\)). In practical terms, such growth is equivalent to 1.5 times the expected gain to life satisfaction from being employed and almost a third benefit to life satisfaction from having a romantic partner. By contrast, life satisfaction among the skeptical population who neither believed in a God nor a Life Force remained stable over the eight year interval \(\hat{y} = 4.94, se =0.02, \Delta \hat{y} = 0\)). Relatedly, life satisfaction in the population that believe in God but are skeptical about a Spirit/Life Force was constant \(\hat{y} = 5.00, se = 0.03, \Delta \hat{y} = -.02\)) (See Figure 3).
+\item
+  Inferred growth from spiritual beliefs is evident from 9 annual waves of data collection (8 years), and across a nationally diverse sample. On this basis of this longitudinal information accumulated across nationally, we are confident that growth in personal well-being and in life-satisfaction among those who believe in a Spirit and Life force are evident. Such effects co-occur in people who lack a belief in a God as well as among people who believe in a God as well as a Spirit or Life force.
 \end{enumerate}
 
-Similarly,the expected subjective well-being as measured using the Life Satisfaction Inventory was expected to be lower among those who believed in Spirit or Life Force but not a God (\(\hat{y}\) = 4.86, se =.02) and lower among those who believed in both a Spirit/Life-Force and a God (\(\hat{y}\) = 4.91, se =.02) in comparison both with the skeptical population who neither believed in a God nor a life force (\(\hat{y}\) = 4.94,se =.02) and to the population that believed in a God but was skeptical about belief in a Spirit or Life Force (\(\hat{y}\) 5.02, se =.02). (See Figure 3)
+\hypertarget{key-questions}{%
+\subsection{Key Questions}\label{key-questions}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  However, over time, belief in a Spirit or Life Force predicted a trajectory of growth in Personal Well-being. In 2018, the expected subjective well-being as measured using the Personal Well-being Inventory among those who believed in Spirit or Life Force but not a God was expected to grow to (\(\hat{y}\) = 6.67, se =.03, \(\Delta \hat{y} = 0.17\)). Among those who believed in both a Spirit/Life-Force and a God Personal Well-Being was expected to grow to (\(\hat{y}\) = 6.69, se = 0.02,\(\Delta \hat{y} = .21\)). In practical terms, such growth from spiritual beliefs among to the expected gain in Personal Well-being about twice as large as the expected benefit of being employed and about about a third as large as the expected benefit of having a romantic partner. In comparison, Personal Well-Being among skeptical population who neither believed in a God nor a Life Force remained stable \(\hat{y} = 6.66, se = 0.03, \Delta \hat{y} = .02\)). We also observe stability in Personal Well-being among the population that believed in God but was skeptical about a Spirit or Life Force \(\hat{y} = 6.70, se = 0.04, \Delta \hat{y} = .04\)). (See Figure 2).
-\end{enumerate}
+Two fundamental question arise from the patterns we observe in this study. The first question is why those who believed in Spirit or Life Force were initially lower in their personal well-being and life-satisfaction in the initial years of this study in comparison to religious and non-religious skeptics? During the early years of New Zealand Attitudes and Values data collection New Zealand was emerging from the twin impacts of a global financial recession and a series of devastating earthquakes that destroyed 30\% of Christchurch, New Zealand's second largest city {[}CITE{]}. Orthogonal research observes that economic and ecological distress are associated with increases in traditional religious beliefs {[}CITE, CITE{]}. Previous research finds an increase in traditional religious affiliation in the wake of the Christchurch earthquakes, with no immediate effect in subjective well-being. Experimental research has found among religious people death anxiety provokes acceptance of non-traditional religious beliefs {[}cite{]}. Because spiritual belief items were only introduced during the year of the earthquakes, we cannot here resolve whether the shifting relationship between spirit beliefs and well-being were the result of demand for spiritual beliefs among those secular and religious people who were adversely affected by the financial crisis or natural disaster. On the other hand, such exogenous influences might have adversely affected those with Spirit/Life force beliefs in the early phases of this study, and the patterns observed here are better understood as a regression to a population mean. Though beyond the scope of this study, how subjective well-being changes in response to changes in spiritual beliefs, as well as special sensitivities to distress among people with spiritual beliefs are important questions for future investigations. Despite the longitudinal quality of this study, a causal explanation remains elusive.
 
-Similarly, over time, belief in a Spirit or Life Force predicted a trajectory of growth in Life Satisfaction. In 2018, the expected subjective well-being as measured using the Life Satisfaction Inventory among those who believed in Spirit or Life Force but not a God was expected to grow to (\(\hat{y} = 5.01, se = 0.02, \Delta \hat{y} = 0.07\)). In practical terms, such growth from spiritual beliefs is approximately equivalent to the expected gain in Life Satisfaction from being employed and a sixth as large as the expected benefit to Life Satisfaction from having a romantic partner. Among those who believed in both a Spirit/Life-Force and a God Personal Well-Being was expected to grow to (\(\hat{y} = 5.03, se = 0.02, \Delta \hat{y} = 0.12\)). In practical terms, such growth from spiritual beliefs is approximately equivalent to the 1.5 times the expected gain in Life Satisfaction from being employed and almost a third the expected benefit to Life Satisfaction from having a romantic partner. In comparison, Life Satisfaction among skeptical population who neither believed in a God nor a Life Force remained stable \(\hat{y} = 4.94, se =0.02, \Delta \hat{y} = 0\)). We also observe stability in Personal Well-being among the population that believed in God but was skeptical about a Spirit or Life Force \(\hat{y} = 5.00, se = 0.03, \Delta \hat{y} = -.02\)) (See Figure 3).
+Second, our task here has been to clarify whether beliefs predict growth in well-being. However, as we have indicated at the outset, the term \enquote{spirituality} applies to a family of concepts. We have not attempted to model the diverse philosophical, social, and behavioral attributes within people who adhere to spirit beliefs. Moreover, people might identify as spiritual without having any accompanying belief in a Spirit or Life force. The task of clarifying how distinct features across a diverse family of \enquote{spirituality} concepts affect perceptions of individual well-being remain intriguing horizons.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  Such observed growth in subjective well-being among the population that believes in a Spirit or Life Force holds even after adjusting for demographic factors that are known to affect well-being. Additionally we infer growth from 9 annual waves of data collection (8 years) in a nationally diverse sample. On this basis of this window of time and sample, we infer that such growth in Life Satisifacton and in Personal Well-being reflects changes in the populations that believed in Spirit or Life Force over that period.
-\end{enumerate}
+\hypertarget{importance}{%
+\subsection{Importance}\label{importance}}
 
-Questions:
-1. Why initially lower well-being in NZ? \(\dots\)
-+ historical contingencies?
-+ possibility of non-linear futures, are we observing a regression to the mean?
-+ individual factors: earthquakes, however..why the slope for spirit beliefs (and not God)?
-+ other things besides beliefs? behaviors, social interactions, perspectives\ldots{}
-Taken as a whole, our results cannot refute the entire narrative of the positive relationship between spirituality and emotional well-being. First, our analysis focuses only on belief. Although belief is an important part of spirituality it is not by any means spirituality itself. Individuals may identify as spiritual without any accompanying belief in a spirit or life force. Moreover, practices and rituals associated with different forms of spirituality that were not tested in this study may have large effects. Second, despite flawed methods, past studies may still be accurate. New Zealand is a largely secular country, so belief in a spirit or life force may have different impacts on subjective well-being outcomes in this context than in other, more religious contexts. Overall, though, our findings add to the existing literature, helping to untangle the multifaceted relationship among religion, spirituality, and subjective well-being. \(\dots\) fruitful horizons for future research.
-
-Importance:
-1. Methods: Disentangling \(\dots\) concepts/ longitudinal
-2. Growing population: practical importance. In many Western countries, people are increasingly identifying as \enquote{spiritual but not religious} (Swinton, 2001; Zinnbauer \& Pargament, 2005). \ldots{}
-+ risks: Risks? \ldots{} Other studies find that those who have a spiritual understanding of life without a religious framework are at an increased risk of having mental disorders (King et al., 2013).
-+ However, the observed growth suggests that any kind of existential belief - regardless of whether a god is involved - might affect subjective well-being in much the same way. This result is good news as increasing numbers of individuals continue to report spiritual but not necessarily religious beliefs.
-
-\hypertarget{limitations}{%
-\subsection{Limitations}\label{limitations}}
-
-This article makes useful contributions to the continued debate regarding the relationship between religion and spirituality and mental health outcomes, but it is important to acknowledge several limitations. First, we relied upon self-reported data from the NZAVS. Although this is an accurate method for measuring belief in a spirit or life force, it may be a less accurate manner of measuring subjective well-being. It is possible that self-administration of our emotional well-being (personal well-being and life satisfaction) scales could result in mismeasurement. Second, we may not capture the full range spiritualities, which likely extend beyond belief and might even be inherently emotional. Thus, while our method avoided tautology, it might have also excluded participants who consider themselves to be spiritual but do not subscribe to a belief in a spirit or life force.
+Despite its limitations, our study is important both for its methods and its findings. We demonstrate that spirituality can be operationalised to avoid the pitfalls of tautology evident in previous research by focusing on states of beliefs, that concepts of such belief states can be refined to enable distinctions necessary to investigate spirituality in mixed secular and religious populations, and that the question of whether beliefs states predict growth in subjective well-being can be investigated in a longitudional setting. Our finding that, indeed, spiritual beliefs predict growth in perceived well-being and life satisfaction may hold practical importance. Previous research indicates that religious beliefs are associated with having a rewarding life. Western populations are increasingly identifying as \enquote{spiritual but not religious} (Swinton, 2001; Zinnbauer \& Pargament, 2005), raising the specter that the psychological from traditional might be receding. Here, we observe that even among people who lack a traditional religious belief in God, believing in a Spirit or Life force predicts incremental improvements in well-being that sum to practically large effects. Though the contextual and psychological mechanisms that underpin such growth will require many decades of research, this preliminary finding is good news for those increasing numbers of individuals continue to report spiritual beliefs but who do not affirm traditional religious beliefs.
 
 \hypertarget{authors-contributions}{%
 \subsubsection{Authors contributions}\label{authors-contributions}}
 
-CS leads and manages the NZAVS, and collected the data for this study. BH and JB conceived
-of the study. BH wrote the first draft of the manuscript and performed the analysis with input from JB. BH conducted background research and scientific literature review. All authors contributed substantially to the intellectual content of the study and the final manuscript.
+BH conceived of the study, wrote the first draft of the manuscript, and performed the initial data analysis with input from JB. EW developed the study with BH and JB and revised the manuscript. DD revised the manuscript. CS was responsible for NZAVS data collection and revised the manuscript. JB developed the study with BH and EW, performed the data re-analysis, and revised the manuscript.
 
 \hypertarget{funding-statement}{%
 \subsubsection{Funding statement}\label{funding-statement}}
 
-The New Zealand Attitudes and Values Study is supported by a grant from the Templeton
-Religion Trust (TRT0196). The funders had no role in the preparation of the article or the
-decision to publish.
-
-\hypertarget{supplemental-material}{%
-\section{Supplemental Material}\label{supplemental-material}}
-
-S1. Statistical Analysis in R
-Statistical analysis was performed using R version 3.6.1 (2019-07-05). Platform: x86\_64-w64-mingw32 (64-bit), running under: Windows 10 (Action of the Toes). Generalized Linear Mixed Models were generated using the glmmTMB (Brooks et al.~2017; Knowles and Frederick 2019) package in R. In addition, we used the following R packages: dplyr (Hadley Wickham et al.~2019), tidyr (H. Wickham and Henry 2019), sjPlot (D. Lüdecke 2020), ggeffects (Daniel Lüdecke 2018), table1 and their dependencies.
-Tables and coefficient plots were generated using the glmmTMB, ggeffects, and sjPlot packages in R. Models for both subjective well-being variables used family = gaussian, assuming a normal distribution. We ran each individual's unique ID as a random-effect. The tab\_model and plot\_model commands in sjPlot allowed for the creation of tables and coefficient plots. Predicted probability plots were generated using the ggpredict command in the ggeffects package. The table1 package in R was used for the creation of descriptive statistics tables.
+The New Zealand Attitudes and Values Study is supported by a grant from the Templeton Religion Trust (TRT0196). The funders had no role in the preparation of the article or the decision to publish.
 
 \newpage
 
@@ -610,20 +588,44 @@ Tables and coefficient plots were generated using the glmmTMB, ggeffects, and sj
 \setlength{\leftskip}{0.5in}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-R-equatiomatic}{}%
+Anderson, D., \& Heiss, A. (2020). \emph{Equatiomatic: Transform models into 'latex' equations}. Retrieved from \url{https://github.com/datalorax/equatiomatic}
+
 \leavevmode\hypertarget{ref-Ano2005-hx}{}%
 Ano, G. G., \& Vasconcelles, E. B. (2005). Religious coping and psychological adjustment to stress: A meta‐analysis. \emph{J. Clin. Psychol.}
 
 \leavevmode\hypertarget{ref-Atkinson2014-ex}{}%
 Atkinson, J., Salmond, C., \& Crampton, P. (2014). NZDep2013 index of deprivation. \emph{Wellington: Department of Public Health, University of Otago}.
 
+\leavevmode\hypertarget{ref-R-citr}{}%
+Aust, F. (2019). \emph{Citr: 'RStudio' add-in to insert markdown citations}. Retrieved from \url{https://github.com/crsh/citr}
+
+\leavevmode\hypertarget{ref-R-papaja}{}%
+Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+
+\leavevmode\hypertarget{ref-R-Matrix}{}%
+Bates, D., \& Maechler, M. (2019). \emph{Matrix: Sparse and dense matrix classes and methods}. Retrieved from \url{https://CRAN.R-project.org/package=Matrix}
+
+\leavevmode\hypertarget{ref-R-lme4}{}%
+Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2015). Fitting linear mixed-effects models using lme4. \emph{Journal of Statistical Software}, \emph{67}(1), 1--48. \url{https://doi.org/10.18637/jss.v067.i01}
+
 \leavevmode\hypertarget{ref-Blackwell2017-oq}{}%
 Blackwell, M., Honaker, J., \& King, G. (2017). A unified approach to measurement error and missing data: Details and extensions. \emph{Sociological Methods \& Research}.
+
+\leavevmode\hypertarget{ref-R-prettycode}{}%
+Csárdi, G. (2019). \emph{Prettycode: Pretty print r code in the terminal}. Retrieved from \url{https://CRAN.R-project.org/package=prettycode}
 
 \leavevmode\hypertarget{ref-Cummins2017-ur}{}%
 Cummins, R. A., Eckerseley, R., Pallant, J., Van Vugt, J., \& Misajon, R. (2017). Australian unity wellbeing index. \emph{PsycTESTS Dataset}.
 
 \leavevmode\hypertarget{ref-Diener1985-xy}{}%
 Diener, E., Emmons, R. A., Larsen, R. J., \& Griffin, S. (1985). The satisfaction with life scale. \emph{Journal of Personality Assessment}.
+
+\leavevmode\hypertarget{ref-R-Rcpp_b}{}%
+Eddelbuettel, D., \& Balamuta, J. J. (2017). Extending extitR with extitC++: A Brief Introduction to extitRcpp. \emph{PeerJ Preprints}, \emph{5}, e3188v1. \url{https://doi.org/10.7287/peerj.preprints.3188v1}
+
+\leavevmode\hypertarget{ref-R-Rcpp_a}{}%
+Eddelbuettel, D., \& François, R. (2011). Rcpp: Seamless R and C++ integration. \emph{Journal of Statistical Software}, \emph{40}(8), 1--18. \url{https://doi.org/10.18637/jss.v040.i08}
 
 \leavevmode\hypertarget{ref-Ellsworth2010-yu}{}%
 Ellsworth, R. B., \& Ellsworth, J. B. (2010). Churches that enhance spirituality and wellbeing. \emph{Int. J. Appl. Psychoanal. Studies}, \emph{6}.
@@ -640,8 +642,14 @@ Ginsburg, M. L., Quirt, C., Ginsburg, A. D., \& MacKillop, W. J. (1995). Psychia
 \leavevmode\hypertarget{ref-Hackney2003-rs}{}%
 Hackney, C. H., \& Sanders, G. S. (2003). Religiosity and mental health: A meta--analysis of recent studies. \emph{J. Sci. Study Relig.}
 
+\leavevmode\hypertarget{ref-R-purrr}{}%
+Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
+
+\leavevmode\hypertarget{ref-R-Amelia}{}%
+Honaker, J., King, G., \& Blackwell, M. (2011a). Amelia II: A program for missing data. \emph{Journal of Statistical Software}, \emph{45}(7), 1--47. Retrieved from \url{http://www.jstatsoft.org/v45/i07/}
+
 \leavevmode\hypertarget{ref-Honaker2011-yu}{}%
-Honaker, J., King, G., Blackwell, M., \& Others. (2011). Amelia II: A program for missing data. \emph{J. Stat. Softw.}, \emph{45}(7), 1--47.
+Honaker, J., King, G., Blackwell, M., \& Others. (2011b). Amelia II: A program for missing data. \emph{J. Stat. Softw.}, \emph{45}(7), 1--47.
 
 \leavevmode\hypertarget{ref-King2013-cg}{}%
 King, M., Marston, L., McManus, S., Brugha, T., Meltzer, H., \& Bebbington, P. (2013). Religion, spirituality and mental health: Results from a national study of english households. \emph{British Journal of Psychiatry}.
@@ -654,6 +662,39 @@ Koenig, H. G. (2010). Spirituality and mental health. \emph{Int. J. Appl. Psycho
 
 \leavevmode\hypertarget{ref-Koenig2001-ow}{}%
 Koenig, H. G., Associate Professor of Psychology and Religious Studies Michael E McCullough, PhD, McCullough, M. E., Larson, D. B., \& Adjunct Professor of Psychiatry David B Larson. (2001). \emph{Handbook of religion and health}. Oxford University Press.
+
+\leavevmode\hypertarget{ref-R-texreg}{}%
+Leifeld, P. (2013). texreg: Conversion of statistical model output in R to LaTeX and HTML tables. \emph{Journal of Statistical Software}, \emph{55}(8), 1--24. Retrieved from \url{http://dx.doi.org/10.18637/jss.v055.i08}
+
+\leavevmode\hypertarget{ref-R-ggeffects}{}%
+Lüdecke, D. (2018). Ggeffects: Tidy data frames of marginal effects from regression models. \emph{Journal of Open Source Software}, \emph{3}(26), 772. \url{https://doi.org/10.21105/joss.00772}
+
+\leavevmode\hypertarget{ref-R-sjPlot}{}%
+Lüdecke, D. (2020). \emph{SjPlot: Data visualization for statistics in social science}. Retrieved from \url{https://CRAN.R-project.org/package=sjPlot}
+
+\leavevmode\hypertarget{ref-R-parameters}{}%
+Lüdecke, D., Ben-Shachar, M. S., Patil, I., \& Makowski, D. (2020a). Parameters: Extracting, computing and exploring the parameters of statistical models using R. \emph{Journal of Open Source Software}, \emph{5}(53), 2445. \url{https://doi.org/10.21105/joss.02445}
+
+\leavevmode\hypertarget{ref-R-see}{}%
+Lüdecke, D., Ben-Shachar, M. S., Waggoner, P., \& Makowski, D. (2020b). See: Visualisation toolbox for 'easystats' and extra geoms, themes and color palettes for 'ggplot2'. \emph{CRAN}. \url{https://doi.org/10.5281/zenodo.3952153}
+
+\leavevmode\hypertarget{ref-R-report}{}%
+Makowski, Dominique, Lüdecke, \& Daniel. (2019). The report package for r: Ensuring the use of best practices for results reporting. \emph{CRAN}. Retrieved from \url{https://github.com/easystats/report}
+
+\leavevmode\hypertarget{ref-R-styler}{}%
+Müller, K., \& Walthert, L. (2020). \emph{Styler: Non-invasive pretty printing of r code}. Retrieved from \url{https://CRAN.R-project.org/package=styler}
+
+\leavevmode\hypertarget{ref-R-tibble}{}%
+Müller, K., \& Wickham, H. (2020). \emph{Tibble: Simple data frames}. Retrieved from \url{https://CRAN.R-project.org/package=tibble}
+
+\leavevmode\hypertarget{ref-R-patchwork}{}%
+Pedersen, T. L. (2020). \emph{Patchwork: The composer of plots}. Retrieved from \url{https://CRAN.R-project.org/package=patchwork}
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-R-table1}{}%
+Rich, B. (2020). \emph{Table1: Tables of descriptive statistics in html}. Retrieved from \url{https://CRAN.R-project.org/package=table1}
 
 \leavevmode\hypertarget{ref-Russinova2002-rq}{}%
 Russinova, Z., Wewiorski, N. J., \& Cash, D. (2002). Use of alternative health care practices by persons with serious mental illness: Perceived benefits. \emph{Am. J. Public Health}, \emph{92}(10), 1600--1603.
@@ -673,8 +714,35 @@ Underwood, L. G., \& Teresi, J. A. (2002). The daily spiritual experience scale:
 \leavevmode\hypertarget{ref-Visser2010-kq}{}%
 Visser, A., Garssen, B., \& Vingerhoets, A. (2010). Spirituality and well-being in cancer patients: A review. \emph{Psychooncology}, \emph{19}(6), 565--572.
 
+\leavevmode\hypertarget{ref-R-ggplot2}{}%
+Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
+
+\leavevmode\hypertarget{ref-R-stringr}{}%
+Wickham, H. (2019). \emph{Stringr: Simple, consistent wrappers for common string operations}. Retrieved from \url{https://CRAN.R-project.org/package=stringr}
+
+\leavevmode\hypertarget{ref-R-forcats}{}%
+Wickham, H. (2020a). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
+
+\leavevmode\hypertarget{ref-R-tidyr}{}%
+Wickham, H. (2020b). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
+
+\leavevmode\hypertarget{ref-R-tidyverse}{}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+\leavevmode\hypertarget{ref-R-dplyr}{}%
+Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
+
+\leavevmode\hypertarget{ref-R-readr}{}%
+Wickham, H., Hester, J., \& Francois, R. (2018). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
+
+\leavevmode\hypertarget{ref-R-ggsci}{}%
+Xiao, N. (2018). \emph{Ggsci: Scientific journal and sci-fi themed color palettes for 'ggplot2'}. Retrieved from \url{https://CRAN.R-project.org/package=ggsci}
+
 \leavevmode\hypertarget{ref-Yonker2012-zg}{}%
 Yonker, J. E., Schnabelrauch, C. A., \& Dehaan, L. G. (2012). The relationship between spirituality and religiosity on psychological outcomes in adolescents and emerging adults: A meta-analytic review. \emph{J. Adolesc.}, \emph{35}(2), 299--314.
+
+\leavevmode\hypertarget{ref-R-gghighlight}{}%
+Yutani, H. (2020). \emph{Gghighlight: Highlight lines and points in 'ggplot2'}. Retrieved from \url{https://CRAN.R-project.org/package=gghighlight}
 
 \leavevmode\hypertarget{ref-Zaza2005-ac}{}%
 Zaza, C., Sellick, S. M., \& Hillier, L. M. (2005). Coping with cancer. \emph{Journal of Psychosocial Oncology}.

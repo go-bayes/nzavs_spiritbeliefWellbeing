@@ -32,7 +32,7 @@ abstract: |
   <!-- https://tinyurl.com/ybremelq -->
 keywords          : "keywords"
 wordcount         : "X"
-bibliography      : ["r-references.bib"]
+bibliography      : ["b-references.bib"]
 floatsintext      : no
 figurelist        : no
 tablelist         : no
@@ -89,10 +89,21 @@ library("citr")
 library("texreg")
 ```
 
+```{r, sessioninfo, include=FALSE}
+
+citation(package = "base", lib.loc = "/Users/josephbulbulia/Dropbox/BIBS")
+toLatex(sessionInfo(), locale = FALSE)
+sapply(names(sessionInfo()$otherPkgs), function(x) print(citation(x), style = "Bibtex"))
+
+out <- sapply(names(sessionInfo()$otherPkgs),
+              function(x) print(citation(x), style = "Bibtex"))
+print(out)
+```
+
 
 # Methods
  <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
-We used `r cite_r("r-references.bib")` for all our analyses.
+We used `r cite_r("b-references.bib")` for all our analyses.
 
 
 
