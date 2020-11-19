@@ -283,14 +283,14 @@ performance::check_collinearity(mod.2)
 ```
 
 
-# Inference holds but VIFS for years x beliefs
+Inference holds but VIFS years x beliefs when years are centered.
 
-```{r model centering years, include = FALSE}
+```{r model centering years}
 library(lme4)
 mod.1a <-lmer (PWI ~  1 +  yearsC * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
 mod.2a <-lmer (LIFESAT ~ 1 + yearsC * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
-summary(mod.1)
-summary(mod.2)
+summary(mod.1a)
+summary(mod.2a)
 # identical result
 performance::check_collinearity(mod.1a)
 performance::check_collinearity(mod.2a)
@@ -299,6 +299,17 @@ performance::check_collinearity(mod.2a)
 m<-lmer (NZdep ~ Partner + (1|Id), data= dfben, na.action = na.omit)
 tab_model(m)
 model_parameters(m)
+```
+
+Model is robust without covariates
+
+```{r robust to years and beliefs only}
+library(lme4)
+mod.1aa <-lmer (PWI ~  1 +  years * Beliefs + (1|Id), data= dfben, na.action = na.omit)
+mod.2aa <-lmer (LIFESAT ~ 1 + years * Beliefs + (1|Id), data= dfben, na.action = na.omit)
+)
+# identical result
+sjPlot::tab_model(mod.1aa,mod.2aa)
 ```
 
 
