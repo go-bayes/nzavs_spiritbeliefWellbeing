@@ -73,11 +73,13 @@ library("ggeffects")
 library("Amelia")
 library("table1")
 library("patchwork")
+library("easystats")
 library("parameters")
 library("prettycode")
 library("table1")
 library("gghighlight")
 library("sjPlot")
+library("texreg")
 library("see")
 #library("viridis")
 #library("ggpubr")
@@ -86,7 +88,7 @@ library("ggsci")
 library("papaja")
 #library("here")
 library("citr")
-library("texreg")
+
 ```
 
 ```{r, sessioninfo, include=FALSE}
@@ -122,6 +124,7 @@ dfben  <-ldf.5 %>%
   dplyr::filter(n() !=0)%>%
   dplyr::ungroup(Id)%>%
   dplyr:: mutate(Years = as.numeric(years))%>%
+  dplyr:: mutate(yearsC = scale(years, center=TRUE,scale=FALSE))%>%
   dplyr::mutate(Age.10yrs = (Age/10))%>%
   dplyr::mutate(Religion.Church.Log = log(Religion.Church+ 1))%>%
   dplyr::mutate(Pol.Orient.S = scale(Pol.Orient, center = TRUE, scale = TRUE),
@@ -165,6 +168,8 @@ dfben$Beliefs<- factor(ifelse(dfben$Believe.God == "Not Believe God" & dfben$Bel
 Table of belief types
 ```{r}
 table(dfben$Beliefs)
+range(dfben$years)
+range(dfben$Years)
 ```
 
 
@@ -189,24 +194,28 @@ Table.
 table1::table1(~  Age + NZdep + Education + Employed + EthnicCategories + Male  + Partner  + Pol.Orient + Urban +  Beliefs + LIFESAT + PWI|Wave, data = dfben, overall = F)
 ```
 
+```{r}
+table1::table1(~ Beliefs|Wave, data = dfben, overall = T)
+```
 
 ```{r, include =FALSE}
-furniture::table1(dfben, Age, NZdep,Education,Employed,EthnicCategories,Male,Partner, Pol.Orient,Urban, Beliefs, LIFESAT,PWI,
-                    splitby = ~Wave, overall=F, output = "latex2", booktabs=TRUE)
+#furniture::table1(dfben, Age, NZdep,Education,Employed,EthnicCategories,Male,Partner, Pol.Orient,Urban, Beliefs, LIFESAT,PWI,
+                  #  splitby = ~Wave, overall=F, output = "latex2", booktabs=TRUE)
 ```
 
 
-```{r, include=FALSE}
-r<-report::report_participants(
-  dfben,
-  age = "Age",
-  sex = "Male",
-  education = "Education",
-  participants = "Id",
-  group = "Wave",
-  spell_n = FALSE,
-)
-```
+<!-- ```{r, include=FALSE} -->
+<!-- r<-easystats::report_participants( -->
+<!--   dfben, -->
+<!--   age = "Age", -->
+<!--   sex = "Male", -->
+<!--   education = "Education", -->
+<!--   participants = "Id", -->
+<!--   group = "Wave", -->
+<!--   spell_n = FALSE, -->
+<!-- ) -->
+<!-- ??report_participants -->
+<!-- ``` -->
 
 We demean variables following https://easystats.github.io/parameters/articles/demean.html
 
@@ -265,6 +274,31 @@ summary(mod.2)
 # mod.1 <-glmmTMB(LIFESAT ~ Years * Beliefs + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id) + (1|GenCohort), data= dfben)
 # 
 # mod.2 <-glmmTMB(PWI ~ Years * Beliefs + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id) + (1|GenCohort), data= dfben)
+```
+
+```{r check collinearity}
+# Note High VIFS from 
+performance::check_collinearity(mod.1)
+performance::check_collinearity(mod.2)
+```
+
+
+# Inference holds but VIFS for years x beliefs
+
+```{r model centering years, include = FALSE}
+library(lme4)
+mod.1a <-lmer (PWI ~  1 +  yearsC * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
+mod.2a <-lmer (LIFESAT ~ 1 + yearsC * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
+summary(mod.1)
+summary(mod.2)
+# identical result
+performance::check_collinearity(mod.1a)
+performance::check_collinearity(mod.2a)
+
+# address reviewer worry about deprivation and partner being correlated
+m<-lmer (NZdep ~ Partner + (1|Id), data= dfben, na.action = na.omit)
+tab_model(m)
+model_parameters(m)
 ```
 
 
@@ -369,6 +403,7 @@ g2<-plot(parameters::model_parameters(mod.2))+ ggtitle("Life Satisfaction Coeffi
 
 ```{r USE_2_coefficientplots}
 g1/g2
+range(dfben$yearsC)
 ```
 
 
@@ -386,7 +421,7 @@ p1<-plot(pr.PWI, facets = T) +
  # scale_y_continuous(limits=c(4.75,5.25) )  + 
   gghighlight()  +  theme_blank()+ 
   ggtitle("Predicted Values of Personal Wellbeing") 
-
+p1
 pr.PWI
 ```
 ```{r pwi_expected}
@@ -416,61 +451,61 @@ p2
 ### equations
 Life satisfaction Model 1 equation
 
-```{r eq1}
-library(equatiomatic)
-print(extract_eq(mod.1, wrap = TRUE,terms_per_line =3))
-```
+<!-- ```{r eq1} -->
+<!-- library(equatiomatic) -->
+<!-- print(extract_eq(mod.1, wrap = TRUE,terms_per_line =3)) -->
+<!-- ``` -->
 
-PWI Model 2 equation
-```{r eq2}
-library(equatiomatic)
-print(extract_eq(mod.2, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3))
-```
-
-
-## report
-
-### Model 1
-model 1 report: for publication change all "significants" to "reliable"
-
-short report:
-```{r, report1, cache =TRUE, dependson=mod.1,include=FALSE}
-report::model_text(mod.1)
-```
-
-short report
-```{r, cache=TRUE, include=FALSE }
-library(report)
-r1<- report::report(mod.1)
-table_short(r1)
-text_short(r1)
-```
+<!-- PWI Model 2 equation -->
+<!-- ```{r eq2} -->
+<!-- library(equatiomatic) -->
+<!-- print(extract_eq(mod.2, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3)) -->
+<!-- ``` -->
 
 
-```{r, cache =TRUE, dependson=mod.1, include=FALSE}
-r1<- report::report(mod.1)
-report::text_long(r1)
-```
-short report
-```{r, cache =TRUE, dependson=mod.2,include=FALSE}
-# Model 2
-# For publication change all "significants" to "reliable"
+<!-- ## report -->
 
-report::model_text(mod.2)
-```
+<!-- ### Model 1 -->
+<!-- model 1 report: for publication change all "significants" to "reliable" -->
 
-short report
-```{r,include=FALSE}
-r2 <- report::report(mod.2)
-report::text_short(r2)
-report::table_short(r2)
-```
+<!-- short report: -->
+<!-- ```{r, report1, cache =TRUE, dependson=mod.1,include=FALSE} -->
+<!-- easystats::model_text(mod.1) -->
+<!-- ``` -->
 
-long report
-```{r,include=FALSE}
-r2<- report::report(mod.2)
-report::text_long(r2)
-```
+<!-- short report -->
+<!-- ```{r, cache=TRUE, include=FALSE } -->
+<!-- library(report) -->
+<!-- r1<- easystats::report(mod.1) -->
+<!-- easystats::table_short(r1) -->
+<!-- easystats::text_short(r1) -->
+<!-- ``` -->
+
+
+<!-- ```{r, cache =TRUE, dependson=mod.1, include=FALSE} -->
+<!-- r1<- easystats::report(mod.1) -->
+<!-- easystats::text_long(r1) -->
+<!-- ``` -->
+<!-- short report -->
+<!-- ```{r, cache =TRUE, dependson=mod.2,include=FALSE} -->
+<!-- # Model 2 -->
+<!-- # For publication change all "significants" to "reliable" -->
+
+<!-- easystats::model_text(mod.2) -->
+<!-- ``` -->
+
+<!-- short report -->
+<!-- ```{r,include=FALSE} -->
+<!-- r2 <- easystats::report(mod.2) -->
+<!-- easystats::text_short(r2) -->
+<!-- easystats::table_short(r2) -->
+<!-- ``` -->
+
+<!-- long report -->
+<!-- ```{r,include=FALSE} -->
+<!-- r2<- easystats::report(mod.2) -->
+<!-- easystats::text_long(r2) -->
+<!-- ``` -->
 
 
 
@@ -668,7 +703,6 @@ explectationGraphLS
 # Combo_Graph
 #explectationGraphPWI/explectationGraphLS + plot_annotation(title = "Imputed DataSet")
 ##
-sessionInfo()
 ```
 
 # Discussion

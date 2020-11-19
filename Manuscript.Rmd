@@ -44,7 +44,7 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
-extra_dependencies: ["rotating", "booktabs", "graphicx","longtable"]
+extra_dependencies: ["rotating", "booktabs", "graphicx","longtable","graphicx"]
 header-includes:
    - \usepackage{tcolorbox}
    - \usepackage{paralist}
@@ -119,7 +119,7 @@ Employed &   &   &   &   &   &   &   &   &  \\
 \hspace{6pt}    1 &  (\%) &  (\%) & 6453 (75.5\%) & 10517 (78.1\%) &  (\%) & 9162 (78.4\%) & 12562 (78.3\%) & 10951 (77.3\%) & 11479 (77.1\%)\\ 
 EthnicCategories &   &   &   &   &   &   &   &   &  \\ 
 \hspace{6pt}    Euro &  (\%) &  (\%) & 6731 (78.8\%) & 11024 (81.8\%) &  (\%) & 9671 (82.8\%) & 13389 (83.4\%) & 11814 (83.3\%) & 12427 (83.5\%)\\ 
-\hspace{6pt}    Māori &  (\%) &  (\%) & 1188 (13.9\%) & 1608 (11.9\%) &  (\%) & 1341 (11.5\%) & 1749 (10.9\%) & 1620 (11.4\%) & 1677 (11.3\%)\\ 
+\hspace{6pt}    Maori &  (\%) &  (\%) & 1188 (13.9\%) & 1608 (11.9\%) &  (\%) & 1341 (11.5\%) & 1749 (10.9\%) & 1620 (11.4\%) & 1677 (11.3\%)\\ 
 \hspace{6pt}    Pacific &  (\%) &  (\%) & 284 (3.3\%) & 339 (2.5\%) &  (\%) & 277 (2.4\%) & 331 (2.1\%) & 243 (1.7\%) & 261 (1.8\%)\\ 
 \hspace{6pt}    Asian &  (\%) &  (\%) & 344 (4\%) & 501 (3.7\%) &  (\%) & 398 (3.4\%) & 579 (3.6\%) & 497 (3.5\%) & 518 (3.5\%)\\ 
 Male &   &   &   &   &   &   &   &   &  \\ 
@@ -147,6 +147,7 @@ PWI &   &   &   &   &   &   &   &   &  \\
 
  
 ## Demographic Indicators
+We included standard demographic indicators used in New Zealand Attitudes and Values Research: [NZAVS modelling standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf)
 
 ### Age 
 Age was put into units of 10 years and centered at its mean. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 2.
@@ -165,7 +166,7 @@ Employment status was assessed by asking participants if they were currently wor
 Participants were asked if they were in a relationship, "yes" was coded as "1" and no was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
 
 ### Ethnicity
-Ethnicity was assessed using four basic categories: (1) New Zealand European/Pakeha, (2) Māori, (3) Pacific Islander, and (4) Asian. For detailed information pertaining to yearly responses and missingness, see Table 1.
+Ethnicity was assessed using four basic categories: (1) New Zealand European/Pakeha, (2) Maori, (3) Pacific Islander, and (4) Asian. For detailed information pertaining to yearly responses and missingness, see Table 1.
 
 ### Urban
 People were coded as either residing in an urban "1" or rural "0" area based on New Zealand census data. For detailed information pertaining to yearly responses and missingness, see Table 1.
@@ -183,7 +184,7 @@ The model equation(s) are described in Equation 1.
 \operatorname{{\small LIFESAT/PWI}}  &\sim N \left(\mu,\sigma^2 \right) \\ \mu &=\alpha_{j[i]} + \beta_{1}(\operatorname{Years}) + \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\
 &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}}) + \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) + \beta_{5}(\operatorname{Age.10yrs.C})\ + \\
 &\quad \beta_{6}(\operatorname{Deprivation.S}) + \beta_{7}(\operatorname{Edu.S}) + \beta_{8}(\operatorname{Employed})\ + \\
-&\quad \beta_{9}(\operatorname{EthnicCats}_{\operatorname{Māori}}) + \beta_{10}(\operatorname{EthnicCats}_{\operatorname{Pacific}}) + \beta_{11}(\operatorname{EthnicCats}_{\operatorname{Asian}})\ + \\
+&\quad \beta_{9}(\operatorname{EthnicCats}_{\operatorname{Maori}}) + \beta_{10}(\operatorname{EthnicCats}_{\operatorname{Pacific}}) + \beta_{11}(\operatorname{EthnicCats}_{\operatorname{Asian}})\ + \\
 &\quad \beta_{12}(\operatorname{Male}_{\operatorname{1}}) + \beta_{13}(\operatorname{Partner}_{\operatorname{Has\ }}) + \beta_{14}(\operatorname{Pol.Orient.S})\ + \\
 &\quad \beta_{15}(\operatorname{Urban}) + \beta_{16}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}}) + \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
 &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ \alpha_{j} &\sim N \left(\mu_{\alpha_{j}},\sigma^2_{\alpha_{j}} \right) , \operatorname{ for  Id }~j~= 1, \dots~J = 20,979~\operatorname{Individuals}
@@ -197,7 +198,7 @@ We are greatful to the contributors and mantainers of the following packages:
 R [Version 4.0.2; @R-base] and the R-packages *Amelia* [Version 1.7.6; @R-Amelia], *citr* [Version 0.3.2; @R-citr], *dplyr* [Version 1.0.2; @R-dplyr], *equatiomatic* [Version 0.1.0.9000; @R-equatiomatic], *forcats* [Version 0.5.0; @R-forcats], *ggeffects* [Version 0.15.0; @R-ggeffects], *gghighlight* [Version 0.3.0; @R-gghighlight], *ggplot2* [Version 3.3.2; @R-ggplot2], *ggsci* [Version 2.9; @R-ggsci], *lme4* [Version 1.1.23; @R-lme4], *Matrix* [Version 1.2.18; @R-Matrix], *papaja* [Version 0.1.0.9997; @R-papaja], *parameters* [Version 0.8.6.1; @R-parameters], *patchwork* [Version 1.0.1; @R-patchwork], *prettycode* [Version 1.1.0; @R-prettycode], *purrr* [Version 0.3.4; @R-purrr], *Rcpp* [Version 1.0.5.1; @R-Rcpp_a; @R-Rcpp_b], *readr* [Version 1.3.1; @R-readr], *report* [Version 0.1.0; @R-report], *see* [Version 0.5.2.1; @R-see], *sjPlot* [Version 2.8.4; @R-sjPlot], *stringr* [Version 1.4.0; @R-stringr], *styler* [Version 1.3.2; @R-styler], *table1* [Version 1.2; @R-table1], *texreg* [Version 1.37.5; @R-texreg], *tibble* [Version 3.0.4; @R-tibble], *tidyr* [Version 1.1.2; @R-tidyr], and *tidyverse* [Version 1.3.0; @R-tidyverse]"
 
 ### Missing data
-Because missing values can result in biased estimates [@Blackwell2017-oq], we multiply imputed 10 datasets using the AmeliaII package in R[@Honaker2011-yu].We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences. Details of this analysis can be found at: https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing.
+Because missing values can result in biased estimates [@Blackwell2017-oq], we multiply imputed 10 datasets using the AmeliaII package in R[@Honaker2011-yu].We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences. Additionally the results were robust to filtering of participants of N >3 to N = 9 waves. Additionally, the findings reported below were robust to modeling only the effects of years and beliefs, without adjusting for the standard NZAVS demographic covariates. The supplement describing these analysis is located at: https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing.
 
 ## Code
 
@@ -206,19 +207,19 @@ All code for this analysis and a full report of the missing data imputation can 
 # Results
 
 ```{r fig.cap = "Combination Coefficient Plots for personal well-being and life satisfaction longitudinal growth models"}
-knitr::include_graphics("Figs/USE_2_coefficientplots-1.png")
+knitr::include_graphics("/Users/joseph/Documents/GitHub/nzavs_spiritbeliefWellbeing/Figs/USE_2_coefficientplots-1.png")
 ```
 
 Table 2 about here:
 
 \[
+
 \begin{table}
-\centering 
-\caption{"Longitudinal Models"}\label{}
+\begin{center}
 \scalebox{0.6}{
 \begin{tabular}{l c c}
 \toprule
- & Personal Well-Being & Life Satisfaction \\
+ & PWI & Life Satisfaction \\
 \midrule
 (Intercept)                        & $\mathbf{6.63}^{***}$  & $\mathbf{4.94}^{***}$  \\
                                    & $(0.03)$               & $(0.02)$               \\
@@ -236,9 +237,9 @@ Deprivation.S                      & $\mathbf{-0.14}^{***}$ & $\mathbf{-0.07}^{*
                                    & $(0.01)$               & $(0.01)$               \\
 Edu.S                              & $\mathbf{0.12}^{***}$  & $\mathbf{0.06}^{***}$  \\
                                    & $(0.01)$               & $(0.01)$               \\
-Employed1                          & $\mathbf{0.09}^{***}$  & $\mathbf{0.08}^{***}$  \\
+EmployedEmployed                   & $\mathbf{0.09}^{***}$  & $\mathbf{0.08}^{***}$  \\
                                    & $(0.01)$               & $(0.01)$               \\
-EthnicCatsMāori                    & $\mathbf{-0.30}^{***}$ & $\mathbf{-0.06}^{**}$  \\
+EthnicCatsMaori                    & $\mathbf{-0.30}^{***}$ & $\mathbf{-0.06}^{**}$  \\
                                    & $(0.03)$               & $(0.02)$               \\
 EthnicCatsPacific                  & $\mathbf{-0.29}^{***}$ & $\mathbf{-0.08}^{*}$   \\
                                    & $(0.05)$               & $(0.04)$               \\
@@ -246,7 +247,7 @@ EthnicCatsAsian                    & $-0.08$                & $-0.04$           
                                    & $(0.05)$               & $(0.03)$               \\
 Male1                              & $\mathbf{-0.11}^{***}$ & $\mathbf{-0.19}^{***}$ \\
                                    & $(0.02)$               & $(0.01)$               \\
-Partner1                           & $\mathbf{0.61}^{***}$  & $\mathbf{0.42}^{***}$  \\
+PartnerHas Partner                 & $\mathbf{0.61}^{***}$  & $\mathbf{0.42}^{***}$  \\
                                    & $(0.02)$               & $(0.01)$               \\
 Pol.Orient.S                       & $\mathbf{0.02}^{***}$  & $\mathbf{0.01}^{**}$   \\
                                    & $(0.01)$               & $(0.00)$               \\
@@ -270,6 +271,9 @@ Var: Residual                      & $0.74$                 & $0.42$            
 \multicolumn{3}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
 \end{tabular}
 }
+\caption{Regression Models}
+\label{table:coefficients}
+\end{center}
 \end{table}
 \]
 
@@ -316,7 +320,7 @@ We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to
   - The effect of Deprivation (S) is  is reliably negative (beta = -0.07, SE = 5.50e-03, std. beta = -0.06, p < .001). People who are more deprived have lower Life Satisfaction.
   - The effect of Education (S) is reliably positive (beta = 0.06, SE = 6.33e-03, std. beta = 0.05, p < .001). Educated people have greater Life Satisfaction
   - The effect of being Employed is reliably positive (beta = 0.08, SE = 9.69e-03, std. beta = 0.07, p < .001). People who are employed tend to have greater Life Satisfaction
-  - The effect of identifying as Māori is reliably negative (beta = -0.06, SE = 0.02, std. beta = -0.05, p < .01).  People who belong to the minority Māori group tend to have lower Life Satisfaction.
+  - The effect of identifying as Maori is reliably negative (beta = -0.06, SE = 0.02, std. beta = -0.05, p < .01).  People who belong to the minority Maori group tend to have lower Life Satisfaction.
   - The effect of identifying as Pacific is reliably negative (beta = -0.08, SE = 0.04, std. beta = -0.07, p < .05).  People who belong to the minority Pacific peoples group tend to have lower life satisfaction.
   - The effect of identifying as Asian is not reliably different from people of European ethnicity in life satisfaction(beta = -0.04, SE = 0.03, std. beta = -0.03, p = 0.223).
   - The effect of identifying as male is reliably negative (beta = -0.19, SE = 0.01, std. beta = -0.16, p < .001).
@@ -327,7 +331,7 @@ We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to
 ## Life Satisfaction: years X beliefs 
 
 ```{r fig.cap = "Prediction Plot Life Satisfaction Spirit Belief Longitudinal Models"}
-knitr::include_graphics("Figs/USElifsat_expected-1.png")
+knitr::include_graphics("/Users/joseph/Documents/GitHub/nzavs_spiritbeliefWellbeing/Figs/USElifsat_expected-1.png")
 ```
   - The interaction of years $\times$ beliefs in *Spirit Excludes God* ludesGod is reliably positive (beta = 0.02, SE = 3.66e-03, std. beta = 0.03, p < .001). We infer that, unlike the Skeptic population, people with beliefs in a Spirit or Life Force who do not believe in a God tend to grow in their Life Satisfaction over time.
   - The interaction of years $\times$ *God And Spirit*  is reliably positive (beta = 0.01, SE = 3.32e-03, std. beta = 0.02, p < .001). We infer that people who believe in a spirit or life force who also believe in a God tend to grow in their life satisfaction over time
@@ -347,14 +351,14 @@ knitr::include_graphics("Figs/coefficient_plot_both_imputed-1.png")
 Figure 4 about here:
 
 ```{r fig.cap = "Imputed data analysis: predicted personal wellbeing by years X beliefs"}
-knitr::include_graphics("Figs/predicted_PWI_impute-1.png")
+knitr::include_graphics("/Users/joseph/Documents/GitHub/nzavs_spiritbeliefWellbeing/Figs/predicted_PWI_impute-1.png")
 ```
 
 
 Figure 5 about here:
 
 ```{r fig.cap = "Imputed data analysis: predicted personal wellbeing by years X beliefs"}
-knitr::include_graphics("Figs/predicted_lifesat_imputed-1.png")
+knitr::include_graphics("/Users/joseph/Documents/GitHub/nzavs_spiritbeliefWellbeing/Figs/predicted_lifesat_imputed-1.png")
 ```
 
 
@@ -364,13 +368,13 @@ The purpose of this study has been to clarify the relationship between belief in
 
 1. At the outset of the study, in 2010, the expected subjective well-being as measured using the personal well-being Inventory was expected to be lower among those who believed in Spirit or Life Force but not a God ($\hat{y}$ =  6.50, se =.03) and lower among those who believed in both a Spirit/Life-Force and a God ($\hat{y}$ =  6.48, se =.03) in comparison both to the skeptical population who neither believed in a God nor a life force ($\hat{y}$ = 6.64,se =.03) and to the population that believed in a God but was skeptical about belief in a Spirit or Life Force ($\hat{y}$ 6.66, se =.05). (See Figure 2)  Similarly,the expected subjective well-being as measured using the life satisfaction Inventory is lower among those who believed in Spirit or Life Force but not a God ($\hat{y}$ = 4.86, se =.02) and lower among those who believed in both a Spirit/Life-Force and a God  ($\hat{y}$ = 4.91, se =.02) in comparison both with the skeptical population who neither believed in a God nor a life force ($\hat{y}$ = 4.94,se =.02) and the population that believed in a God but was skeptical about belief in a Spirit or Life Force ($\hat{y}$ 5.02, se =.02) (see Figure 3)
 
-2. However, over time, belief in a Spirit or Life Force predicts a trajectory of growth in personal well-being. In 2018, personal well-being among who believe in Spirit or Life Force but not a God had grown to ($\hat{y}$ = 6.67, se =.03, $\Delta \hat{y} = 0.17$). Among those who believed in both a Spirit/Life-Force and a God, personal well-being had grown to ($\hat{y}$ = 6.69, se = 0.02,$\Delta \hat{y} = .21$). To place this effect in practical perspective, such growth in personal well-being is about twice as large as the expected benefit of being employed and about a third as large as the expected benefit from having a romantic partner. By contrast, personal well-being among the skeptical population who neither believed in a God nor a Life Force remained stable across the eight year interval $\hat{y} = 6.66, se = 0.03, \Delta \hat{y} = .02$). By the same token, personal well-being among those who believe in a God but are skeptical about a Spirit/Life Force was constant $\hat{y} =  6.70, se = 0.04, \Delta \hat{y} = .04$). Similarly, over time, belief in a Spirit or Life Force predicts a trajectory of growth in life satisfaction. In 2018, life satisfaction among those who believe in Spirit or Life Force but not a God had grown to ($\hat{y} = 5.01, se = 0.02, \Delta \hat{y} = 0.07$). In practical terms, such growth is equivalent to the expected gain in life satisfaction from being employed and a sixth as large as the expected benefit to life satisfaction from having a romantic partner. Among those who believed in both a Spirit/Life-Force and a God, life satisfaction had grown to ($\hat{y} = 5.03, se = 0.02, \Delta \hat{y} = 0.12$). In practical terms, such growth is equivalent to 1.5 times the expected gain to life satisfaction from being employed and almost a third benefit to life satisfaction from having a romantic partner. By contrast, life satisfaction among the skeptical population who neither believed in a God nor a Life Force remained stable over the eight year interval $\hat{y} =  4.94, se =0.02, \Delta \hat{y} = 0$). Relatedly, life satisfaction in the population that believe in God but are skeptical about a Spirit/Life Force was constant $\hat{y} =  5.00, se = 0.03, \Delta \hat{y} = -.02$) (See Figure 3).
+2. However, over time, belief in a Spirit or Life Force predicts a trajectory of growth in personal well-being. In 2018, personal well-being among who believe in Spirit or Life Force but not a God had grown to ($\hat{y}$ = 6.67, se =.03, $\Delta \hat{y} = 0.17$). Among those who believed in both a Spirit/Life-Force and a God, personal well-being had grown to ($\hat{y} = 6.69, se = 0.02, \Delta \hat{y} = .21$). To place this effect in practical perspective, such growth in personal well-being is about twice as large as the expected benefit of being employed and about a third as large as the expected benefit from having a romantic partner. By contrast, personal well-being among the skeptical population who neither believed in a God nor a Life Force remained stable across the eight year interval $\hat{y} = 6.66, se = 0.03, \Delta \hat{y} = .02$). By the same token, personal well-being among those who believe in a God but are skeptical about a Spirit/Life Force was constant $\hat{y} =  6.70, se = 0.04, \Delta \hat{y} = .04$). Similarly, over time, belief in a Spirit or Life Force predicts a trajectory of growth in life satisfaction. In 2018, life satisfaction among those who believe in Spirit or Life Force but not a God had grown to ($\hat{y} = 5.01, se = 0.02, \Delta \hat{y} = 0.07$). In practical terms, such growth is equivalent to the expected gain in life satisfaction from being employed and a sixth as large as the expected benefit to life satisfaction from having a romantic partner. Among those who believed in both a Spirit/Life-Force and a God, life satisfaction had grown to ($\hat{y} = 5.03, se = 0.02, \Delta \hat{y} = 0.12$). In practical terms, such growth is equivalent to 1.5 times the expected gain to life satisfaction from being employed and almost a third benefit to life satisfaction from having a romantic partner. By contrast, life satisfaction among the skeptical population who neither believed in a God nor a Life Force remained stable over the eight year interval $\hat{y} =  4.94, se =0.02, \Delta \hat{y} = 0$). Relatedly, life satisfaction in the population that believe in God but are skeptical about a Spirit/Life Force was constant $\hat{y} =  5.00, se = 0.03, \Delta \hat{y} = -.02$) (See Figure 3).
 
 3. Inferred growth from spiritual beliefs is evident from 9 annual waves of data collection (8 years), and across a nationally diverse sample. On this basis of this longitudinal information accumulated across nationally, we are confident that growth in personal well-being and in life-satisfaction among those who believe in a Spirit and Life force are evident. Such effects co-occur in people who lack a belief in a God as well as among people who believe in a God as well as a Spirit or Life force. 
 
 ## Key Questions
 
-Two fundamental question arise from the patterns we observe in this study. The first question is why those who believed in Spirit or Life Force were initially lower in their personal well-being and life-satisfaction in the initial years of this study in comparison to religious and non-religious skeptics? During the early years of New Zealand Attitudes and Values data collection New Zealand was emerging from the twin impacts of a global financial recession and a series of devastating earthquakes that destroyed 30% of Christchurch, New Zealand's second largest city [CITE]. Orthogonal research observes that economic and ecological distress are associated with increases in traditional religious beliefs [CITE, CITE]. Previous research finds an increase in traditional religious affiliation in the wake of the Christchurch earthquakes, with no immediate effect in subjective well-being. Experimental research has found among religious people death anxiety provokes acceptance of non-traditional religious beliefs [CITE]. Because spiritual belief items were only introduced during the year of the earthquakes, we cannot here resolve whether the shifting relationship between spirit beliefs and well-being were the result of demand for spiritual beliefs among those secular and religious people who were adversely affected by the financial crisis or natural disaster. On the other hand, such exogenous influences might have adversely affected those with Spirit/Life force beliefs in the early phases of this study, and the patterns observed here are better understood as a regression to a population mean. Though beyond the scope of this study, how subjective well-being changes in response to changes in spiritual beliefs, as well as special sensitivities to distress among people with spiritual beliefs are important questions for future investigations. Despite the longitudinal quality of this study, a causal explanation remains elusive. 
+Two fundamental question arise from the patterns we observe in this study. The first question is why those who believed in Spirit or Life Force were initially lower in their personal well-being and life-satisfaction in the initial years of this study in comparison to religious and non-religious skeptics? During the early years of New Zealand Attitudes and Values data collection New Zealand was emerging from the twin impacts of a global financial recession and a series of devastating earthquakes that destroyed 30% of Christchurch, New Zealand's second largest city [@greaves2015regional]. Orthogonal research observes that economic and ecological distress are associated with increases in traditional religious beliefs [@sibley2012faith]. Experimental research has found among religious people death anxiety provokes acceptance of non-traditional religious beliefs [@norenzayan2006belief]. Because spiritual belief items were only introduced during the year of the earthquakes, we cannot here resolve whether the shifting relationship between spirit beliefs and well-being were the result of demand for spiritual beliefs among those secular and religious people who were adversely affected by the financial crisis or natural disaster. On the other hand, such exogenous influences might have adversely affected those with Spirit/Life force beliefs in the early phases of this study, and the patterns observed here are better understood as a regression to a population mean. Though beyond the scope of this study, how subjective well-being changes in response to changes in spiritual beliefs, as well as special sensitivities to distress among people with spiritual beliefs are important questions for future investigations. Despite the longitudinal quality of this study, a causal explanation remains elusive. 
 
 Second, our task here has been to clarify whether beliefs predict growth in well-being. However, as we have indicated at the outset, the term "spirituality" applies to a family of concepts. We have not attempted to model the diverse philosophical, social, and behavioral attributes within people who adhere to spirit beliefs. Moreover, people might identify as spiritual without having any accompanying belief in a Spirit or Life force. The task of clarifying how distinct features across a diverse family of "spirituality" concepts affect perceptions of individual well-being remain intriguing horizons. 
 
