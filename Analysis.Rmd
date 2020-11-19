@@ -565,10 +565,13 @@ imputed <- amelia(
   polytime = 3) #https://stackoverflow.com/questions/56218702/missing-data-warning-r
 #saveRDS(imputed,"imputed")
 #imputed<- readRDS("imputed")
+```
+```{r}
 
 # center and scale indiators
 imputed.2 <- transform.amelia(imputed,
                               Age.10yrs = (Age/10),
+                              yearsC = scale(Years, center=TRUE,scale=FALSE),
                               Pol.Orient.S =scale(Pol.Orient, center=TRUE,scale=TRUE),
                               Employed = factor(Employed),
                               Ethnicity = as.factor(EthnicCats),
@@ -715,6 +718,133 @@ explectationGraphLS
 #explectationGraphPWI/explectationGraphLS + plot_annotation(title = "Imputed DataSet")
 ##
 ```
+
+## analysis with centred time (to avoid multicollinearity)
+
+```{r cache = FALSE}
+# run models iterating over imputed data
+m <- 10
+models33 <- NULL
+for(i in 1:m) {
+  models33[[i]] <- lmer(PWI ~ yearsC * Beliefs + Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data=imputed3$imputations[[i]])
+}
+```
+
+```{r, cache=FALSE, dependson= models33}
+#devtools::install_github("easystats/parameters") Get development version
+library(parameters)
+mps33 <- lapply(models33, model_parameters)
+parameters::pool_parameters(mps33)
+mp33<-pool_parameters(mps33)
+
+```
+
+
+```{r coef_PWI_imputed_C}
+# coeff plot
+plot(mp33) + ggtitle("Personal Wellbeing Coefficients (Imputed)") # pick your  own title
+```
+
+```{r cache = FALSE, dependson = models3}
+## expectation
+m<-10
+out<-NULL
+for(i in 1:m) {
+  out[[i]] <- ggpredict(models33[[i]], terms =c("yearsC [minmax]","Beliefs"))
+}
+
+m<-10
+plots<-NULL
+for(i in 1:m) {
+  plots[[i]] <- plot(out[[i]], facets = T)# + scale_y_continuous(limits=c(6.35,6.85) )
+}
+```
+```{r, echo=FALSE}
+# Inspect all  # No differences
+# plots[[1]]
+# plots[[2]]
+# plots[[3]]
+# plots[[4]]
+# plots[[5]]
+# plots[[6]]
+# plots[[7]]
+# plots[[8]]
+# plots[[9]]
+# plots[[10]]
+```
+```{r predicted_PWI_impute_C}
+# to highlight differencs
+explectationGraphPWI_C <-plots[[10]] + gghighlight() + ggtitle("Predicted Values of Personal Wellbeing (imputed)")
+explectationGraphPWI_C
+```
+```{r cache =TRUE}
+## life sat models
+m <- 10
+modelsL33 <- NULL
+
+for(i in 1:m) {
+  modelsL33[[i]] <- lmer(LIFESAT ~ yearsC * Beliefs + Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban +  (1|Id), data=imputed3$imputations[[i]])
+}
+```
+```{r, cache =FALSE, dependson =  modelsL33}
+mpl33 <- lapply(modelsL33, model_parameters)
+parameters::pool_parameters(modelsL33)
+ml33<-pool_parameters(mpl33)
+ml33 # table
+p133<-plot(ml3)
+
+p133<- p133 +  labs(title ="Coefficients Life Satisafaction (imputed)")
+# get estimates for PWI from above
+p233 <- plot(mp133) + labs(title ="Coefficients Personal Wellbeing (imputed)")
+```
+
+```{r coefficient_plot_both_imputed_C}
+ p233/p133 +  plot_annotation(tag_levels = 'i')
+```
+
+```{r, cache =FALSE, dependson = "modelsL3"}
+# Expectation plots
+m<-10
+out2<-NULL
+for(i in 1:m) {
+  out2[[i]] <- ggpredict(modelsL33[[i]], terms = c("yearsC [minmax]", "Beliefs"),
+                         ci.lvl = 0.95,
+                         type = "fe",
+                         typical = "mean",
+                         #   condition = c(Euro =1),
+                         back.transform = TRUE,
+                         ppd = FALSE,
+                         interval = "confidence")
+}
+
+m<-10
+plots2<-NULL
+for(i in 1:m) {
+  plots2[[i]] <- plot(out2[[i]], facets = T) #+ scale_y_continuous(limits=c(4.75,5.25) )
+}
+```
+```{r echo = FALSE}
+# Inspect all  # No differences
+# plots2[[1]]
+# plots2[[2]]
+# plots2[[3]]
+# plots2[[4]]
+# plots2[[5]]
+# plots2[[6]]
+# plots2[[7]]
+# plots2[[8]]
+# plots2[[9]]
+# plots2[[10]]
+
+library(gghighlight)
+```
+
+```{r explectationGraphLS_C}
+# Just using one graph
+explectationGraphLS_C <-plots2[[10]] + gghighlight() + ggtitle("Predicted Values of Life Satisfaction (imputed)")
+```
+
+
 
 # Discussion
 To be continued.
