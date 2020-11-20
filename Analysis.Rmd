@@ -791,11 +791,11 @@ mpl33 <- lapply(modelsL33, model_parameters)
 parameters::pool_parameters(modelsL33)
 ml33<-pool_parameters(mpl33)
 ml33 # table
-p133<-plot(ml3)
+p133<-plot(ml33)
 
 p133<- p133 +  labs(title ="Coefficients Life Satisafaction (imputed)")
 # get estimates for PWI from above
-p233 <- plot(mp133) + labs(title ="Coefficients Personal Wellbeing (imputed)")
+p233 <- plot(ml33) + labs(title ="Coefficients Personal Wellbeing (imputed)")
 ```
 
 ```{r coefficient_plot_both_imputed_C}
@@ -842,6 +842,7 @@ library(gghighlight)
 ```{r explectationGraphLS_C}
 # Just using one graph
 explectationGraphLS_C <-plots2[[10]] + gghighlight() + ggtitle("Predicted Values of Life Satisfaction (imputed)")
+explectationGraphLS_C
 ```
 
 

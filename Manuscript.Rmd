@@ -29,7 +29,7 @@ abstract: |
   <!-- https://tinyurl.com/ybremelq -->
   
 keywords          : "Belief, God, Health, Longitudinal, Panel, Religion, Spirit, Spirituality, Well-being"
-wordcount         : "5269 words in text body, 1078 words in reference section"
+wordcount         : "5415 words in text body, 1155 words in reference section"
 bibliography      : ["b-references.bib"]
 
 floatsintext      : no
@@ -213,7 +213,6 @@ knitr::include_graphics("/Users/joseph/Documents/GitHub/nzavs_spiritbeliefWellbe
 Table 2 about here:
 
 \[
-
 \begin{table}
 \begin{center}
 \scalebox{0.6}{
