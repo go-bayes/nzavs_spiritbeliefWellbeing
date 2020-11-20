@@ -2,10 +2,10 @@
 title             : "National Longitudinal Evidence for Growth in Subjective Wellbeing from Spiritual Beliefs"
 shorttitle        : "Longitudinal Wellbeing from Spiritual Beliefs"
 author: 
-  - name          : "Ben Highland"
+  - name          : "Benjamin Highland"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
-    address       : "Ben's Postal address"
+    address       : "520 Power Plant Circle Apartment 105 Winston-Salem, NC 27101 USA"
     email         : "benhighland6420@gmail.com"
   - name          : "Everett L. Worthington"
     affiliation   : "2"
@@ -21,7 +21,7 @@ author:
     institution   : "School of Psychology Victoria University"
 
 authornote: |
-  1 Wake Forest Medical School 2 Department of Psychology Virginia Commonwealth University 3 Department of Psychology Georgia State University 4 School of Psychology University of Auckland 5 School of Psychology Victoria University
+  1 Wake Forest School of Medicine 2 Department of Psychology Virginia Commonwealth University 3 Department of Psychology Georgia State University 4 School of Psychology University of Auckland 5 School of Psychology Victoria University
 
 abstract: | 
 
@@ -64,7 +64,7 @@ source('short.R')
 ```
 The relationship between spirituality and psychological well-being is a matter of enduring fascination [@Ellsworth2010-yu]. Most previous attempts to quantify the relationship between these two domains find a positive association: spirituality predicts well-being [@Russinova2002-rq; @Ginsburg1995-jr; @Zaza2005-ac; @Koenig2010-gk; @Smith2003-re; @Koenig2001-ow]. However, critics have raised three credible challenges.
 
-<!-- In spirituality/psychological wellbeing research,subjective in spirituality health research, psychological well-being is typically decomposed into two categories: emotional well-being (i.e., the presence or absence of positive feelings about life) and functional well-being (i.e., psychological and social well-being) [@Keyes2002-bb]. -->
+<!-- In spirituality/psychological wellbeing research, subjective in spirituality health research, psychological well-being is typically decomposed into two categories: emotional well-being (i.e., the presence or absence of positive feelings about life) and functional well-being (i.e., psychological and social well-being) [@Keyes2002-bb]. -->
 
 First, previous research has frequently operationalised spirituality using measures of well-being. For example, The *Daily Spiritual Experience Scale*, which is widely used in spiritual mental health research, includes items such as "I feel thankful for my blessings" and "I feel deep inner peace or harmony" to measure spirituality [@Underwood2002-hg]. As Koenig observes, it is unsurprising that spirituality predict well-being when the same items are used to measure both constructs. Koenig aptly describes this approach as "tautological" [@Koenig2008-lv]. Indeed, recent systematic-review of spirituality/mental health research found that nearly 45% of previous studies employ tautological scales [@Garssen2016-kb]. The first challenge, then, is to define measures of spirituality that are not well-being measures dressed up in other words. 
 
