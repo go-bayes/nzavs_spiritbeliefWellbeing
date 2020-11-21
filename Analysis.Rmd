@@ -73,7 +73,7 @@ library("ggeffects")
 library("Amelia")
 library("table1")
 library("patchwork")
-library("easystats")
+#library("easystats")
 library("parameters")
 library("prettycode")
 library("table1")
@@ -87,7 +87,13 @@ library("see")
 library("ggsci")
 library("papaja")
 #library("here")
+library(parameters) # great tables, plots
 library("citr")
+library("brms")
+library("rstan")
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores ())
+#theme_set(theme_few())
 
 ```
 
@@ -144,8 +150,7 @@ dfben  <-ldf.5 %>%
          Relid.C = scale(Relid, scale = TRUE,center=TRUE),
          Religious = as.factor(Religious),
          Religion.Church.Log.C = scale(Religion.Church.Log, center = TRUE, scale = FALSE))
-```
-```{r}
+
 # nice labels
 table1::label(dfben$Age.10yrs.C) <- "Age in Decades (C)"
 table1::label(dfben$PWI) <- "Personal Wellbeing"
@@ -168,8 +173,8 @@ dfben$Beliefs<- factor(ifelse(dfben$Believe.God == "Not Believe God" & dfben$Bel
 Table of belief types
 ```{r}
 table(dfben$Beliefs)
+# years
 range(dfben$years)
-range(dfben$Years)
 ```
 
 
@@ -282,41 +287,176 @@ performance::check_collinearity(mod.1)
 performance::check_collinearity(mod.2)
 ```
 
-
-Inference holds but VIFS years x beliefs when years are centered.
+VIF high,  this is the years x factor interaction. See if it makes a difference by centering years.
 
 ```{r model centering years}
 library(lme4)
-mod.1a <-lmer (PWI ~  1 +  yearsC * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
-mod.2a <-lmer (LIFESAT ~ 1 + yearsC * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben, na.action = na.omit)
+mod.1a <-lmer (PWI ~  1 +  yearsC * Beliefs +  Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben)
+mod.2a <-lmer (LIFESAT ~ 1 + yearsC * Beliefs+ Age.10yrs.C + Deprivation.S + Edu.S  + Employed + EthnicCats + Male  + Partner  + Pol.Orient.S + Urban + (1|Id), data= dfben)
 summary(mod.1a)
 summary(mod.2a)
 # identical result
 performance::check_collinearity(mod.1a)
 performance::check_collinearity(mod.2a)
+```
+Centering years makes no difference to inference.
 
-# address reviewer worry about deprivation and partner being correlated
+
+Check reviewers interest in correlation of deprivation and having a partner.
+```{r}
 m<-lmer (NZdep ~ Partner + (1|Id), data= dfben, na.action = na.omit)
 tab_model(m)
 model_parameters(m)
 ```
 
-Model is robust without covariates
+
+
+
+Check whether model is robust without control covariates
 
 ```{r robust to years and beliefs only}
 library(lme4)
-mod.1aa <-lmer (PWI ~  1 +  years * Beliefs + (1|Id), data= dfben, na.action = na.omit)
-mod.2aa <-lmer (LIFESAT ~ 1 + years * Beliefs + (1|Id), data= dfben, na.action = na.omit)
+mod.1aa <-lmer (PWI ~  1 +  yearsC * Beliefs + (1|Id), data= dfben)
+mod.2aa <-lmer (LIFESAT ~ 1 + yearsC * Beliefs + (1|Id), data= dfben)
 )
 # identical result
 sjPlot::tab_model(mod.1aa,mod.2aa)
 ```
 
-
-
+Indeed, models are robust without control covariates
 ```{r cache = TRUE, dependson="mod.2", dependson="mod.1"}
 tab_model(mod.2, mod.1) # Table
 ```
+
+
+```{r}
+# check model with bayesian estimator (preferred)
+mod.1aaB <-brm(PWI ~  1 +  years * Beliefs + (1|Id), data= dfben, file ="mod.1aaB")
+mod.2aaB <-brm (LIFESAT ~ 1 + years * Beliefs + (1|Id), data= dfben,
+                file ="mod.2aaB")
+```
+
+note that the bayesian model recovers the time slope
+
+```{r bayesian_pwi}
+conditional_effects(mod.1aaB)[[3]]
+```
+
+```{r bayesian_lifesat}
+conditional_effects(mod.2aaB)[[3]]
+
+```
+
+
+
+Try with a tensor spline
+
+```{r}
+# complete cases
+
+dfbenTS<-dfben%>%
+  select(PWI,LIFESAT,yearsC,Beliefs,Id)%>%
+  filter(complete.cases(.))
+```
+
+
+```{r}
+# check model with bayesian estimator (preferred)
+mod.1aaB_ts <-brm(PWI ~  1 +  ts(years) + (1|Id), data= dfbenTS, file ="mod.1aaB_ts")
+
+mod.2aaB_ts <-brm (LIFESAT ~ 1 + ts(Beliefs,years) + (1|Id), data= dfbenTS,
+                file ="mod.2aaB_ts")
+```
+
+
+```{r}
+str(dfben$Beliefs)
+conditional_effects(mod.1aaB_ts, surface = TRUE)
+conditional_smooths(mod.1aaB_ts)
+```
+
+```{r}
+conditional_effects(mod.2aaB_ts, surface = TRUE)
+```
+
+
+
+```{r bayesian_pwi_plot }
+pr.PWI_b <- ggpredict(model = mod.1aaB, terms = c("years [0:9]","Beliefs"), 
+                    ci.lvl = 0.95,
+                    type = "fe",
+                    typical = "mean",
+                   # condition = c(Euro =1),
+                    back.transform = TRUE,
+                    ppd = FALSE,
+                    interval = "confidence")
+p1<-plot(pr.PWI_b, facets = T) + 
+ # scale_y_continuous(limits=c(4.75,5.25) )  + 
+  gghighlight()  +  theme_blank()+ 
+  ggtitle("Bayesian Model Predicted Values of Personal Wellbeing") 
+p1
+pr.PWI_b
+```
+
+```{r bayesian_pwi_plot }
+pr.LS_b <- ggpredict(model = mod.2aaB, terms = c("years [0:9]","Beliefs"), 
+                    ci.lvl = 0.95,
+                    type = "fe",
+                    typical = "mean",
+                   # condition = c(Euro =1),
+                    back.transform = TRUE,
+                    ppd = FALSE,
+                    interval = "confidence")
+p1<-plot(pr.LS_b, facets = T) + 
+ # scale_y_continuous(limits=c(4.75,5.25) )  + 
+  gghighlight()  +  theme_blank()+ 
+  ggtitle("Bayesian Model Predicted Values of Personal Wellbeing") 
+p1
+pr.LS_b
+```
+
+
+```{r bayesian_pwi_plot }
+pr.PWI_b <- ggpredict(model = mod.21aaB, terms = c("years [0:9]","Beliefs"), 
+                    ci.lvl = 0.95,
+                    type = "fe",
+                    typical = "mean",
+                   # condition = c(Euro =1),
+                    back.transform = TRUE,
+                    ppd = FALSE,
+                    interval = "confidence")
+p1<-plot(pr.PWI_b, facets = T) + 
+ # scale_y_continuous(limits=c(4.75,5.25) )  + 
+  gghighlight()  +  theme_blank()+ 
+  ggtitle("Vayesian Model Predicted Values of Personal Wellbeing") 
+p1
+pr.PWI_b
+```
+
+
+
+```{r bayesian_pwi_plot }
+pr.LS_b <- ggpredict(model = mod.2aaB, terms = c("years [0:9]","Beliefs"), 
+                    ci.lvl = 0.95,
+                    type = "fe",
+                    typical = "mean",
+                   # condition = c(Euro =1),
+                    back.transform = TRUE,
+                    ppd = FALSE,
+                    interval = "confidence")
+p1<-plot(pr.LS_b, facets = T) + 
+ # scale_y_continuous(limits=c(4.75,5.25) )  + 
+  gghighlight()  +  theme_blank()+ 
+  ggtitle("Bayesian Model Predicted Values of Personal Wellbeing") 
+p1
+pr.LS_b
+```
+
+
+
+
+
+
 
 ```{r, echo = FALSE, include=FALSE}
 te00 <-texreg::extract(
