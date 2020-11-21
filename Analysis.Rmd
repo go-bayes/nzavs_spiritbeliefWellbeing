@@ -121,7 +121,7 @@ dfben  <-ldf.5 %>%
   dplyr::group_by(Id) %>% filter(n() > 2)%>% # select those who have responded to at least 3 waves # Also works for 5 and 7
   dplyr::filter(n() !=0)%>%
   dplyr::ungroup(Id)%>%
-  dplyr:: mutate(Years = as.numeric(years))%>%
+  dplyr::mutate(Years = as.numeric(years))%>%
   dplyr::mutate(Age.10yrs = (Age/10))%>%
   dplyr::mutate(Religion.Church.Log = log(Religion.Church+ 1))%>%
   dplyr::mutate(Pol.Orient.S = scale(Pol.Orient, center = TRUE, scale = TRUE),
@@ -141,8 +141,7 @@ dfben  <-ldf.5 %>%
          Relid.C = scale(Relid, scale = TRUE,center=TRUE),
          Religious = as.factor(Religious),
          Religion.Church.Log.C = scale(Religion.Church.Log, center = TRUE, scale = FALSE))
-```
-```{r}
+
 # nice labels
 table1::label(dfben$Age.10yrs.C) <- "Age in Decades (C)"
 table1::label(dfben$PWI) <- "Personal Wellbeing"
