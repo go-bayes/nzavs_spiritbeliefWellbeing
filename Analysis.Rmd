@@ -1,5 +1,5 @@
 ---
-title             : "National Longitudinal Evidence for Growth in Well-being From Spiritual Beliefs"
+title             : "Supplement: National Longitudinal Evidence for Growth in Subjective Wellbeing from Spiritual Beliefs"
 shorttitle        : "Title"
 author: 
   - name          : "Ben Highland"
@@ -25,8 +25,7 @@ authornote: |
   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
   Enter author note here.
 abstract: |
- A growing body of research finds an association between spirituality and subjective well-being. However, the use of tautological scales and a reliance on cross-sectional data compromise inference. Here, drawing on nine years of panel responses from a nationally diverse longitudinal study. We systematically test whether having spiritual beliefs improves subjective well-being (N = 21,705, New Zealand, 2010-2018). Supporting previous studies, we observe that belief in a spirit or life force predicts increasing life satisfaction over time. However, we also observe that relative to the disbelieving population, belief in a spirit or life force is initially associated with lower personal well-being. Such effects, which hold, after adjusting for known demographic and personal influences on subjective well-being, are consistent with findings that spiritual beliefs are compelling to those with lower well-being. However, despite the scale and resolution of these longitudinal data, the causal interplay between spiritual beliefs and subjective well-being remain matters for future investigations. 
-  
+ Previous research finds an association between spirituality and subjective well-being. However, the widespread use of tautological spirituality scales, poorly defined concepts of spirituality, and heavy reliance on cross-sectional samples cast doubts. Here, we leverage nine waves of panel data from a nationally diverse longitudinal study to systematically test whether having spiritual beliefs leads to growth in personal well-being and life satisfaction ($N$ = 20979, New Zealand, 2010-2018). Contrary to previous research, we find that belief in a spirit or life force predicts lower personal well-being and life-satisfaction. However, in support of previous speculation, beliefs in a spirit or life force predict increasing personal well-being and life satisfaction over time relative to disbelief. These finding are robust after to known demographic influences, and intriguingly, hold among those who believe in a God but disbelieve in a Spirit or Life Force. The recent growth in spiritual beliefs and decline in traditional religion across many industrial societies motivates further causal investigations of the mechanisms by which spiritual beliefs lead to growth in subjective well-being. 
   
   
   <!-- https://tinyurl.com/ybremelq -->
@@ -51,7 +50,6 @@ editor_options:
 library("papaja")
 r_refs("r-references.bib")
 ```
-
 ```{r global_options, echo=FALSE, include = FALSE}
 knitr::opts_chunk$set(fig.path="Figs/", 
                       message=FALSE, 
@@ -64,268 +62,74 @@ knitr::opts_chunk$set(fig.path="Figs/",
                       tidy = "styler")
 ```
 ```{r load_libraries, echo=FALSE, include=FALSE}
-library("styler")
-library("tidyverse")
-library("lme4")
-library("ggplot2")
-library("tidyr")
-library("ggeffects")
-library("Amelia")
-library("table1")
-library("patchwork")
-#library("easystats")
-library("parameters")
-library("prettycode")
-library("table1")
-library("gghighlight")
-library("sjPlot")
-library("texreg")
-library("see")
-#library("viridis")
-#library("ggpubr")
-#library("wesanderson")
-library("ggsci")
-library("papaja")
-#library("here")
-library(parameters) # great tables, plots
-library("citr")
-library("brms")
-library("rstan")
-rstan_options(auto_write=TRUE)
-options(mc.cores=parallel::detectCores ())
-#theme_set(theme_few())
-
-
+source("libs.R")
+source("funs.R")
 ```
-
 ```{r, sessioninfo, include=FALSE}
+#  custom function for citing packages. 
+cite_packages()
 
-citation(package = "base", lib.loc = "/Users/josephbulbulia/Dropbox/BIBS")
-toLatex(sessionInfo(), locale = FALSE)
-sapply(names(sessionInfo()$otherPkgs), function(x) print(citation(x), style = "Bibtex"))
+# custom function for my machine to read data. you'll need to read data to your machine. tweak function in the `funs.R' script for your machine
+d<-data_read_mymachine()
 
-out <- sapply(names(sessionInfo()$otherPkgs),
-              function(x) print(citation(x), style = "Bibtex"))
-print(out)
-```
+# function to clean data, specify number of waves as 3 
+d_3<-data_clean_spirit_wellbeing(d,3) # d = dataframe, 3 = number of waves
+# function to count uinque ides
+show_unique_id(d_3$Id) 
 
+# function to count waves for participants
+count_waves_participants(d_3)
 
-# Methods
- <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
-We used `r cite_r("b-references.bib")` for all our analyses.
+# table of beliefs 
+table(d_3$Beliefs)
 
-
-
-Load data (this is sepcific to my machine)
-```{r load_data}
-ldf.5<-readRDS("~/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/00Bulbulia\ Pubs/2020/ldf.5") 
-```
-
-Processing of data.
-```{r data processing, cache = TRUE, dependson = "ldf.5"}
-# filter only those who are measured 
-dfben  <-ldf.5 %>%
-  dplyr:: filter(Wave !=2009)%>% # exclude wave 1 (no spirit measures that wave)
-  dplyr::filter(YearMeasured==1)%>%
-  dplyr::group_by(Id) %>% filter(n() > 2)%>% # select those who have responded to at least 3 waves # Also works for 5 and 7
-  dplyr::filter(n() !=0)%>%
-  dplyr::ungroup(Id)%>%
-  dplyr:: mutate(Years = as.numeric(years))%>%
-  dplyr:: mutate(yearsC = scale(years, center=TRUE,scale=FALSE))%>%
-  dplyr::mutate(Age.10yrs = (Age/10))%>%
-  dplyr::mutate(Religion.Church.Log = log(Religion.Church+ 1))%>%
-  dplyr::mutate(Pol.Orient.S = scale(Pol.Orient, center = TRUE, scale = TRUE),
-         Age.10yrs.C = scale(Age.10yrs, center = TRUE, scale = FALSE),
-         Male = factor(Gender),
-         Employed = factor(Employed),
-         Partner = factor(Partner),
-         Edu.S = scale(as.numeric(Edu) ,scale=TRUE,center=TRUE),
-         Education = as.numeric(Edu),
-         Urban = factor(Urban),
-         Believe.Spirit = as.factor(Believe.Spirit),
-         Believe.God = as.factor(Believe.God),
-         EthnicCategories = factor(EthnicCats),
-         LIFESAT.S = scale(LIFESAT, center = TRUE, scale = TRUE),
-         PWI.S = scale(PWI, center = TRUE, scale = TRUE),
-         Deprivation.S = scale(NZdep, scale=TRUE, center=TRUE),
-         Relid.C = scale(Relid, scale = TRUE,center=TRUE),
-         Religious = as.factor(Religious),
-         Religion.Church.Log.C = scale(Religion.Church.Log, center = TRUE, scale = FALSE))
-
-# nice labels
-table1::label(dfben$Age.10yrs.C) <- "Age in Decades (C)"
-table1::label(dfben$PWI) <- "Personal Wellbeing"
-table1::label(dfben$LIFESAT) <- "Life Satisfaction"
-
-table1::label(dfben$Deprivation.S) <- "Deprivation (S)"
-table1::label(dfben$Pol.Orient) <- "Political Conservative"
-table1::label(dfben$Pol.Orient.S) <- "Political Conservative (S)"
-table1::label(dfben$NZdep) <- "NZ Deprivation Index"
-dfben$Partner <- factor(dfben$Partner, labels = c("No Partner","Has Partner"))
-dfben$Employed <- factor(dfben$Employed, labels = c("Not Employed","Employed"))
-table1::label(dfben$Edu.S) <- "Education (S)"
-
-# beliefs indicator
-dfben$Beliefs<- factor(ifelse(dfben$Believe.God == "Not Believe God" & dfben$Believe.Spirit == "Not Believe Spirit", "_Skeptic_", 
-                                        ifelse(dfben$Believe.God == "Not Believe God" & dfben$Believe.Spirit == "Believe Spirit", "_SpiritExcludesGod_",
-                                               ifelse(dfben$Believe.God == "Believe God" & dfben$Believe.Spirit == "Believe Spirit","GodAndSpirit","GodExcludesSpirit"))))
-```
-
-Table of belief types
-```{r}
-table(dfben$Beliefs)
 # years
-range(dfben$years)
+range(d_3$years)
 ```
-
-
-```{r echo=FALSE}
-# nice labels
-#dfben$GodSpiritBeliefs <- factor(dfben$GodSpiritBeliefs, labels = c("Skeptic","SpiritExcludesGod","GodAndSpirit","GodExcludesSpirit"))
-# check to make sure labels are right
-#table(dfben$GodSpiritBeliefs) == table(dfben$GodSpiritBeliefs)
-```
-
-There are `r  length(unique(dfben$Id))` participants.
-
-This is the number of times participants returned responses: 
-```{r}
-dplyr::count(tally(group_by(dfben, Id), sort = TRUE, name="number_waves"),number_waves)
-```
-
-
-Table.
 
 ```{r}
 # must remove Furniture package before running table 1
-table1::table1(~  Age + NZdep + Education + Employed + EthnicCategories + Male  + Partner  + Pol.Orient + Urban +  Beliefs + LIFESAT + PWI|Wave, data = dfben, overall = F)
+demographic_table(d_3)
 ```
 
 ```{r}
-table1::table1(~ Beliefs|Wave, data = dfben, overall = T)
+beliefs_table(d_3)
 ```
 
-```{r, include =FALSE}
-#furniture::table1(dfben, Age, NZdep,Education,Employed,EthnicCategories,Male,Partner, Pol.Orient,Urban, Beliefs, LIFESAT,PWI,
-                  #  splitby = ~Wave, overall=F, output = "latex2", booktabs=TRUE)
+```{r latex_data_table}
+# you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture")
+demographic_table_latex(d_3)
 ```
 
-
-<!-- ```{r, include=FALSE} -->
-<!-- r<-easystats::report_participants( -->
-<!--   dfben, -->
-<!--   age = "Age", -->
-<!--   sex = "Male", -->
-<!--   education = "Education", -->
-<!--   participants = "Id", -->
-<!--   group = "Wave", -->
-<!--   spell_n = FALSE, -->
-<!-- ) -->
-<!-- ??report_participants -->
-<!-- ``` -->
-
-We demean variables following https://easystats.github.io/parameters/articles/demean.html
+# Bayesian estimation
 
 ```{r}
-dfben <- cbind(
-  dfben,
-  parameters::demean(dfben, select = c("Beliefs"), group = "Id")
-)
+forumula_bayesPWI <- bf(PWI ~  1 +  years * Beliefs + (1|Id))
+forumula_bayesLIFESAT <- bf(PWI ~  1 +  years * Beliefs + (1|Id))
 
-```
+# PWI
+mod.1aaB <-brm(forumula_bayesPWI, data= d_3, file ="mod.1aaB")
 
-
-# Results
-
-
-```{r models, cache = TRUE, dependson = "dfben"}
-### Spirit Belief Models ### 
-mod01<-lmer (PWI ~ Years +
-                Beliefs__Skeptic__between  +  
-                Beliefs__SpiritExcludesGod__between + 
-                Beliefs_GodAndSpirit_between  + 
-                Beliefs_GodExcludesSpirit_between +
-                Beliefs__Skeptic__within  +  
-                Beliefs__SpiritExcludesGod__within + 
-                Beliefs_GodAndSpirit_within  + 
-                Beliefs_GodExcludesSpirit_within +
-                (1|Id), data= dfben, na.action = na.omit)
-
-parameters::check_heterogeneity(mod01, group = "ID")
-parameters::check_heterogeneity(mod01, group = "ID")
-
-mod02<-lmer (LIFESAT ~ Years +
-                Beliefs__Skeptic__between  +  
-                Beliefs__SpiritExcludesGod__between + 
-                Beliefs_GodAndSpirit_between  + 
-                Beliefs_GodExcludesSpirit_between +
-                Beliefs__Skeptic__within  +  
-                Beliefs__SpiritExcludesGod__within + 
-                Beliefs_GodAndSpirit_within  + 
-                Beliefs_GodExcludesSpirit_within +
-                (1|Id), data= dfben, na.action = na.omit)
-
-parameters::check_heterogeneity(mod02, group = "ID")
-
-# inference holds, but can we use this method with factors? What do the contrasts mean? 
-tab_model(mod01)
-tab_model(mod02)
-plot_models(mod01,mod02)
+# LIFE SAT
+mod.2aaB <-brm (forumula_bayesLIFESAT, data= d_3,data= dfben,
+                file ="mod.2aaB")
 ```
 
 
 
-```{r models, cache = TRUE, dependson = "dfben"}
-### Spirit Belief Models ### 
-mod01<-lmer (PWI ~ yearsC +
-                Beliefs__Skeptic__between  +  
-                Beliefs__SpiritExcludesGod__between + 
-                Beliefs_GodAndSpirit_between  + 
-                Beliefs_GodExcludesSpirit_between +
-                Beliefs__Skeptic__within  +  
-                Beliefs__SpiritExcludesGod__within + 
-                Beliefs_GodAndSpirit_within  + 
-                Beliefs_GodExcludesSpirit_within +
-                (1|Id), data= dfben, na.action = na.omit)
-
-parameters::check_heterogeneity(mod01, group = "ID")
-
-mod02<- lmer(LIFESAT ~ yearsC +
-                Beliefs__Skeptic__between  +  
-                Beliefs__SpiritExcludesGod__between + 
-                Beliefs_GodAndSpirit_between  + 
-                Beliefs_GodExcludesSpirit_between +
-                Beliefs__Skeptic__within  +  
-                Beliefs__SpiritExcludesGod__within + 
-                Beliefs_GodAndSpirit_within  + 
-                Beliefs_GodExcludesSpirit_within +
-                (1|Id), data= dfben, na.action = na.omit)
-
-
-parameters::check_heterogeneity(mod02, group = "ID")
-
-# inference holds, but can we use this method with factors? What do the contrasts mean? 
-tab_model(mod01)
-tab_model(mod02)
-plot_models(mod01,mod02)
-
-performance::check_collinearity(mod01)
-performance::check_collinearity(mod02)
-
+```{r bayesian_pwi}
+conditional_effects(mod.1aaB)[[3]]
+```
+```{r bayesian_lifesat}
+conditional_effects(mod.2aaB)[[3]]
 
 ```
-
-
-
-
 
 parameters::check_heterogeneity(mod02, group = "ID")
 
 # inference holds, but can we use this method with factors? What do the contrasts mean? 
 tab_model(mod01)
 tab_model
-
-
 
 
 ## BAYES
@@ -416,39 +220,15 @@ parameters::check_heterogeneity(mod.1aa, group = "ID")
 parameters::check_heterogeneity(mod.2aa, group = "ID")
 
 ```
-
-
 Indeed, models are robust without control covariates
 ```{r cache = TRUE, dependson="mod.2", dependson="mod.1"}
 tab_model(mod.2, mod.1) # Table
 ```
 
-
-```{r}
-# check model with bayesian estimator (preferred)
-mod.1aaB <-brm(PWI ~  1 +  years * Beliefs + (1|Id), data= dfben, file ="mod.1aaB")
-mod.2aaB <-brm (LIFESAT ~ 1 + years * Beliefs + (1|Id), data= dfben,
-                file ="mod.2aaB")
-```
-
-note that the bayesian model recovers the time slope
-
-```{r bayesian_pwi}
-conditional_effects(mod.1aaB)[[3]]
-```
-
-```{r bayesian_lifesat}
-conditional_effects(mod.2aaB)[[3]]
-
-```
-
-
-
 Try with a tensor spline
 
 ```{r}
 # complete cases
-
 dfbenTS<-dfben%>%
   select(PWI,LIFESAT,yearsC,Beliefs,Id)%>%
   filter(complete.cases(.))
@@ -1081,6 +861,50 @@ explectationGraphLS_C
 ```
 
 
+
+
+
+<!-- We might want to look at within/between indivual change (i.e. do people who change in degree of spirit beliefs manifest different wellbeing.  I ran this as below, however, what we really want is a markov model, where we compare state changes between the different types of belief. So this model is not useful. For more on demeaning see:  -->
+<!-- https://easystats.github.io/parameters/articles/demean.html -->
+
+<!-- ```{r} -->
+<!-- dfben <- cbind( -->
+<!--   dfben, -->
+<!--   parameters::demean(dfben, select = c("Beliefs"), group = "Id") -->
+<!-- ) -->
+<!-- ``` -->
+<!-- ```{r models, cache = TRUE, dependson = "dfben"} -->
+<!-- ### Spirit Belief Models ###  -->
+<!-- mod01<-lmer (PWI ~ Years + -->
+<!--                 Beliefs__Skeptic__between  +   -->
+<!--                 Beliefs__SpiritExcludesGod__between +  -->
+<!--                 Beliefs_GodAndSpirit_between  +  -->
+<!--                 Beliefs_GodExcludesSpirit_between + -->
+<!--                 Beliefs__Skeptic__within  +   -->
+<!--                 Beliefs__SpiritExcludesGod__within +  -->
+<!--                 Beliefs_GodAndSpirit_within  +  -->
+<!--                 Beliefs_GodExcludesSpirit_within + -->
+<!--                 (1|Id), data= dfben, na.action = na.omit) -->
+
+<!-- parameters::check_heterogeneity(mod01, group = "ID") -->
+<!-- parameters::check_heterogeneity(mod01, group = "ID") -->
+
+<!-- mod02<-lmer (LIFESAT ~ Years + -->
+<!--                 Beliefs__Skeptic__between  +   -->
+<!--                 Beliefs__SpiritExcludesGod__between +  -->
+<!--                 Beliefs_GodAndSpirit_between  +  -->
+<!--                 Beliefs_GodExcludesSpirit_between + -->
+<!--                 Beliefs__Skeptic__within  +   -->
+<!--                 Beliefs__SpiritExcludesGod__within +  -->
+<!--                 Beliefs_GodAndSpirit_within  +  -->
+<!--                 Beliefs_GodExcludesSpirit_within + -->
+<!--                 (1|Id), data= dfben, na.action = na.omit) -->
+<!-- parameters::check_heterogeneity(mod02, group = "ID") -->
+<!-- # inference holds, but can we use this method with factors? What do the contrasts mean?  -->
+<!-- tab_model(mod01) -->
+<!-- tab_model(mod02) -->
+<!-- plot_models(mod01,mod02) -->
+<!-- ``` -->
 
 # Discussion
 To be continued.
