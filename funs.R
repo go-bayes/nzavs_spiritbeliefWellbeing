@@ -5,19 +5,20 @@ data_read_mymachine <- function(){
 }
 
 # this code is for citing packages 
+
 cite_packages <- function() {
   citation(package = "base", lib.loc = "/Users/josephbulbulia/Dropbox/BIBS")
-toLatex(sessionInfo(), locale = FALSE)
-sapply(names(sessionInfo()$otherPkgs), function(x) print(citation(x), style = "Bibtex"))
-out <- sapply(names(sessionInfo()$otherPkgs),
-              function(x) print(citation(x), style = "Bibtex"))
-print(out)
+  toLatex(sessionInfo(), locale = FALSE)
+  sapply(names(sessionInfo()$otherPkgs), function(x) print(citation(x), style = "Bibtex"))
+  out <- sapply(names(sessionInfo()$otherPkgs),
+                function(x) print(citation(x), style = "Bibtex"))
+  print(out)
 }
 
 
 # data clean
 data_clean_spirit_wellbeing <- function(df,y) {  
- #function for cleaning this dataset for any arbitrary number of waves
+  #function for cleaning this dataset for any arbitrary number of waves
   n_waves =  as.numeric(y)
   out <- df %>%
     dplyr::mutate(Beliefs = factor(ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Not Believe Spirit", "_Skeptic_", 
@@ -50,7 +51,7 @@ data_clean_spirit_wellbeing <- function(df,y) {
                   Relid_C = scale(Relid, scale = TRUE,center=TRUE),
                   Religious = as.factor(Religious),
                   Religion_Church_Log_C = scale(Religion.Church.Log, center = TRUE, scale = FALSE))%>%
-   dplyr::rename(Political_Conservativism = Pol.Orient)
+    dplyr::rename(Political_Conservativism = Pol.Orient)
   
   return(out)
 }
@@ -82,8 +83,8 @@ demographic_table <- function(x){
                    Urban +  
                    Beliefs + 
                    LIFESAT + PWI|Wave, data = x, 
-               overall = F)
-  }
+                 overall = F)
+}
 
 beliefs_table <- function(x){
   table1::table1(~ Beliefs|Wave, data = x, 
@@ -113,69 +114,78 @@ demographic_table_latex <- function(x){
 }
 
 
-# function for predicting PWI
+# function for predicting PWI  Not used
 
-graph_predictions_pwi <- function(x){ 
-  pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
-                              ci.lvl = 0.95,
-                              type = "fe",
-                              typical = "mean",
-                              back.transform = TRUE,
-                              ppd = FALSE,
-                              interval = "confidence")
-  plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+ 
-    ggtitle("Predicted Values of Personal Wellbeing") 
-}
+# graph_predictions_pwi <- function(x){ 
+#   pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+#                               ci.lvl = 0.95,
+#                               type = "fe",
+#                               typical = "mean",
+#                               back.transform = TRUE,
+#                               ppd = FALSE,
+#                               interval = "confidence")
+#   plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+ 
+#     ggtitle("Predicted Values of Personal Wellbeing") 
+# }
 
 
-graph_predictions_ls <- function(x){ 
-  pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
-                              ci.lvl = 0.95,
-                              type = "fe",
-                              typical = "mean",
-                              back.transform = TRUE,
-                              ppd = FALSE,
-                              interval = "confidence")
-  plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+ 
-    ggtitle("Predicted Values of Life Satisfaction") 
-}
+# graph_predictions_ls <- function(x){ 
+#   pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+#                               ci.lvl = 0.95,
+#                               type = "fe",
+#                               typical = "mean",
+#                               back.transform = TRUE,
+#                               ppd = FALSE,
+#                               interval = "confidence")
+#   plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+ 
+#     ggtitle("Predicted Values of Life Satisfaction") 
+# }
 
 
 graph_predictions <- function(x,y){ 
-  pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+  out <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
                               back.transform = TRUE,
                               ppd = FALSE,
                               interval = "confidence")
-  plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + 
-    ggtitle(y) # title to be suppled
+  plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y) # title to be suppled
 }
 
+get_predictions <- function(x){ 
+  out <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+                              ci.lvl = 0.95,
+                              type = "fe",
+                              typical = "mean",
+                              back.transform = TRUE,
+                              ppd = FALSE,
+                              interval = "confidence")
+  return(out)
+}
 
 
 # latex model function
 table_model_latex_pwi <- function(x){ # x is a model
-xtract <-texreg::extract(
-  x,
-  level = 0.95,
-  include.random = TRUE,
-  include.rsquared = F,
-  include.nobs = T,
-  include.loo.ic = F,
-  include.waic = F)
-texreg(list(xtract),
-       custom.model.names = c("PWI"),
-       caption = "Personal Wellbeing",
-       sideways = F,
-       scalebox = .5,
-       #fontsize= "footnotesize",
-       label = "tab:REGRESS_PWI",
-       ci.force.level = 0.95, bold = 0.05,
-       settingstars = 0,
-       booktabs = TRUE,
-       custom.note ="")
+  xtract <-texreg::extract(
+    x,
+    level = 0.95,
+    include.random = TRUE,
+    include.rsquared = F,
+    include.nobs = T,
+    include.loo.ic = F,
+    include.waic = F)
+  texreg(list(xtract),
+         custom.model.names = c("PWI"),
+         caption = "Personal Wellbeing",
+         sideways = F,
+         scalebox = .5,
+         #fontsize= "footnotesize",
+         label = "tab:REGRESS_PWI",
+         ci.force.level = 0.95, bold = 0.05,
+         settingstars = 0,
+         booktabs = TRUE,
+         custom.note ="")
 }
 # table function
 table_model_latex_ls <- function(x){ # x is a model
@@ -273,8 +283,8 @@ loop_lmer_model <- function(x,y){
 # table of effects
 loop_lmer_model_tab <- function(x){
   mp<-lapply(x, model_parameters)
- out<- parameters::pool_parameters(mp)
- return(out)
+  out<- parameters::pool_parameters(mp)
+  return(out)
 }
 
 
@@ -299,11 +309,11 @@ graph_predictions_imputed <-function( x, y){  # x = model objects
 
 create_hux_table<-function(x){
   as_hux(x)%>%
-  select("Parameter", "Coefficient", "CI_low","CI_high", "p") %>% 
-  set_number_format(3)%>%
-  set_left_padding(20)%>%
-  set_bold(1,everywhere)#%>% # to create lates
+    select("Parameter", "Coefficient", "CI_low","CI_high", "p") %>% 
+    set_number_format(3)%>%
+    set_left_padding(20)%>%
+    set_bold(1,everywhere)#%>% # to create lates
   #quick_latex()
 }
-                        
+
 
