@@ -19,7 +19,6 @@ author:
   - name          : "Joseph A. Bulbulia"
     affiliation   : "5"
     institution   : "School of Psychology Victoria University"
-
 authornote: |
   1 Wake Forest School of Medicine 2 Department of Psychology Virginia Commonwealth University 3 Department of Psychology Georgia State University 4 School of Psychology University of Auckland 5 School of Psychology Victoria University
   
@@ -44,8 +43,8 @@ editor_options:
 
 
 ```{r setup, include = FALSE}
-library("papaja")
-r_refs("r-references.bib")
+#library("papaja")
+#r_refs("r-references.bib")
 ```
 
 ```{r global_options, echo=FALSE, include = FALSE}
@@ -78,7 +77,7 @@ cite_packages()
 
 This reads the data into my machine. Note that the NZAVS is an ongoing longitudinal study. Our ethics requires us to protect the privacy of our participants. For this reason, we cannot post the raw data. However, we provide data to qualified researchers for the purposes of replication. Additionally we are interested in collaboration with qualified researchers. For data requests, please contact Joseph Bulbulia [joseph.bulbulia@gmail.com](joseph.bulbulia@gmail.com), Chris G. Sibley  [c.sibley@auckland.ac.nz](c.sibley@auckland.ac.nz).
 
-```{r, echo = TRUE}
+```{r, read_data, cache=TRUE}
 # custom function for my machine to read data. you'll need to read data to your machine. tweak function in the `funs.R' script for your machine
 d<-data_read_mymachine()
 
@@ -110,7 +109,7 @@ We wrote the publication in \LaTeX. For the data table in LaTeX run this code.
 
 ```{r latex_data_table, include=FALSE}
 # you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture")
-demographic_table_latex(d_3)
+#demographic_table_latex(d_3)
 ```
 
 We select a minimum of three waves because we want to recover a longitudinal sample in which a slope for the effect of Beliefs might change (or not). However, we want to consider whether our selection of three waves is sensitive to that number. So we also prepare 4-7 years of data frames for separate analyses, and we check the n's for each of those datasets.
@@ -138,7 +137,6 @@ count_waves_participants(d_5)
 count_waves_participants(d_6)
 count_waves_participants(d_7)
 count_waves_participants(d_8)
-count_waves_participants(d_9)
 ```
 
 
@@ -146,7 +144,7 @@ In the first set of analyses we included covariates to adjust for potential conf
 
 First we use a maximum Likelihood estimator. Such an estimator is faster than our preferred bayesian estimator.  We consider whether the slope of beliefs changes as a function of time, or equivalently whether the time effect differs depending on one's leve of belief. We also create a table for the two analyses (personal wellbeing and lifesatisfaction.)
 
-```{r robust to years and beliefs only, cache = TRUE, dependson=dat_3,cache =TRUE}
+```{r robust to years and beliefs only, cache = TRUE, dependson=d_3,cache =TRUE}
 library(lme4)
 pwi_formula_simple <- 'PWI ~  years * Beliefs + (1+ Beliefs|Id)'
 ls_formula_simple <- 'LIFESAT ~  years * Beliefs + (1+ Beliefs|Id)'
@@ -159,7 +157,7 @@ sjPlot::tab_model(mod.1aa,mod.2aa)
 
 We next produce a predictive graph for beliefs by time on PWI. Note, again, the function for producing this graph is in the "funs.R" file. 
 
-```{r prediction plot of ML longitudinal model, cache =TRUE, dependson=mod.1aa}
+```{r prediction plot of ML longitudinal model, cache =TRUE}
 ```{r bayesian_pwi_predict, cache =TRUE}
 graph_predictions(mod.1aa, "Predicted Values of Personal Wellbeing")
 ```
@@ -223,10 +221,9 @@ performance::check_collinearity(mod.2a)
 Here's the table, again, inference is robust. 
 
 
-```{r table of saturated models, cached =TRUE}
+```{r table of saturated models, cached = TRUE}
 sjPlot::tab_model(mod.1a,mod.2a)
 ```
-
 
 Her are thecoefficient plots for the full models
 ```{r coefficientplots_LMER_FULL, cache=TRUE}
@@ -241,13 +238,13 @@ g2<-plot(parameters::model_parameters(mod.2aa))+ ggtitle("Life Satisfaction Coef
 
 And here's the graph.
 
-```{r plot_coefficientplots_LMER_FULL, cache =TRUE}
+```{r plot_coefficientplots_LMER_FULL, cache = TRUE}
 g1/g2
 ```
 
 
 Next, recall we want to check whether inference is  robustness to the researcher degree of freedom in selecting the number of waves.
-```{r run all the models with different ns, cache=TRUE}
+```{r run all the models with different ns, cache = TRUE}
 mod.1_3 <-lmer (pwi_formula_simple, data= d_4)
 mod.2_3 <-lmer (ls_formula_simple, data= d_4)
 
@@ -296,8 +293,6 @@ tab_model(m)
 model_parameters(m)
 ```
 
-
-
 # Bayesian estimation
 
 Bayesian inference is time intensive. However, a bayesian model will pool information to produce a better, and natural estimate of uncertainty. The posterior distributions of the model describe conditional probabilities. So where we can we want to use bayesian models. Here we use the default weakly informative priors that the BRMS package produces. It is generally better to use informative priors. However, the size or our dataset does not make a difference. We report the priors at the end. 
@@ -311,14 +306,17 @@ forumula_bayesLIFESAT <- bf(LIFESAT ~  years * Beliefs + (1 + Beliefs|Id))
 mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds") # note these are very large files
 summary(mod.1_b)
 #saveRDS(mod.1_b,"backup_mod.1_b") this is excessive, but we save another backup to avoid running this model again in case of SNAFU.
+rm(mod.1_b)
 ```
+
+
 ```{r lsbayesmodel}
 # LIFE SAT
 mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds") # note these are very large files
 # saveRDS(mod.2_b,"backup_mod.2_b") this is excessive, but we save another backup to avoid running this model again in case of SNAFU.
 ```
 
-Tables
+Tables:
 ```{r lifesat bayesian model table:pwi, cache =TRUE}
 tab_model(mod.1_b)
 ```
@@ -345,29 +343,39 @@ brms::prior_summary(mod.2_b)
 tab_model(mod.1_b, mod.1_b show.ci= .95) # no difference to inference
 ```
 
+
 ```{r mixing of sd_pwi}
-plot(mod.1_b, pars ="b_") #requires stronger priors
+plot(mod.1_b, pars ="b_") 
 ```
+
 
 ```{r mixing of ls_pwi}
 plot(mod.1_b, pars ="sd_") # requires stronger priors
 ```
 
-```{r posterior predictive checks bayes:pwi, cache=TRUE}
-
-pp_1<-NULL
-pp_1<-rstanarm::pp_check(mod.1_b) + ylab("Personal Wellbeing")
-
-pp_2<-NULL
-pp_2<-rstanarm::pp_check(mod.2_b) + ylab("Life Satisfaction")
-
-# plot
-pp_1 + pp_2
-```
+# ```{r posterior predictive checks bayes:pwi, cache=TRUE}
+# # cannot run on my laptop
+# # pp_1<-rstanarm::pp_check(mod.1_b) + ylab("Personal Wellbeing")
+# # pp_2<-rstanarm::pp_check(mod.2_b) + ylab("Life Satisfaction")
+# # 
+# # # plot
+# pp_1 + pp_2
+#```
 
 Here are the prediction plots that we use in the main publication text.
 
-Prediction plots
+Predictions and plots of them. First we get the predictions.
+
+```{r}
+preds_1b<-get_predictions(mod.1_b)
+preds_1b
+```
+
+```{r}
+preds_2b<-get_predictions(mod.2_b)
+preds_2b
+```
+
 ```{r bayesian_pwi_predicted, cache=TRUE, dependson= mod.1_b}
 graph_predictions(mod.1_b, "Predicted Values of Personal Wellbeing")
 ```
