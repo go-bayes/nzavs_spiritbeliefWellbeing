@@ -1,0 +1,877 @@
+---
+title             : "Supplement:Analysis for Longitudinal Evidence for Growth in Subjective Wellbeing from Spiritual Belief"
+shorttitle        : "Supplement 1"
+author: 
+  - name          : "Benjamin Highland"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "520 Power Plant Circle Apartment 105 Winston-Salem, NC 27101 USA"
+    email         : "benhighland6420@gmail.com"
+  - name          : "Everett L. Worthington"
+    affiliation   : "2"
+    institution   : "Department of Psychology Virginia Commonwealth University"
+  - name          : "Don E Davis"
+    affiliation   : "3"
+    institution   : "Department of Psychology Georgia State University"
+  - name          : "Chris G. Sibley"
+    affiliation   : "4"
+    institution   : "School of Psychology University of Auckland"
+  - name          : "Joseph A. Bulbulia"
+    affiliation   : "5"
+    institution   : "School of Psychology Victoria University"
+
+authornote: |
+  1 Wake Forest School of Medicine 2 Department of Psychology Virginia Commonwealth University 3 Department of Psychology Georgia State University 4 School of Psychology University of Auckland 5 School of Psychology Victoria University
+  
+  
+  <!-- https://tinyurl.com/ybremelq -->
+# keywords          : "keywords"
+wordcount         : no
+bibliography      : ["b-references.bib"]
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+# documentclass     : "apa6"
+classoption       : "man"
+output            : "html_document" 
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references.bib")
+```
+
+```{r global_options, echo=FALSE, include = FALSE}
+knitr::opts_chunk$set(fig.path="Figs/", 
+                      message=FALSE, 
+                      warning=FALSE,
+                      collapse =TRUE,
+                      echo=TRUE, 
+                      #results="hide", 
+                      fig.width= 10,
+                      fig.height=8,
+                      tidy = "styler")
+```
+
+This supplement offers a step-by-step description our full analysis of the "Longitudinal Evidence for Growth in Subjective Wellbeing from Spiritual Belief."  This analysis can be found on github [https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing](https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing) 
+
+First we load our functions. We use functions to automate repetative coding, to avoid errors from repetation, and to make the data analysis easier to follow.
+
+
+```{r load_libraries, echo=TRUE, include=FALSE}
+source("libs.R")
+source("funs.R")
+```
+
+We need to give credit to those who have developed the packages we are using. This script returns a bibliography file.
+```{r, sessioninfo, include=FALSE}
+#  custom function for citing packages. 
+cite_packages()
+```
+
+This reads the data into my machine. Note that the NZAVS is an ongoing longitudinal study. Our ethics requires us to protect the privacy of our participants. For this reason, we cannot post the raw data. However, we provide data to qualified researchers for the purposes of replication. Additionally we are interested in collaboration with qualified researchers. For data requests, please contact Joseph Bulbulia [joseph.bulbulia@gmail.com](joseph.bulbulia@gmail.com), Chris G. Sibley  [c.sibley@auckland.ac.nz](c.sibley@auckland.ac.nz).
+
+```{r, echo = TRUE}
+# custom function for my machine to read data. you'll need to read data to your machine. tweak function in the `funs.R' script for your machine
+d<-data_read_mymachine()
+
+# function to clean data, specify number of waves as 3 
+d_3<-data_clean_spirit_wellbeing(d,3) # d = dataframe, 3 = number of waves
+# function to count uinque ides
+show_unique_id(d_3$Id) 
+# function to count waves for participants
+count_waves_participants(d_3)
+# table of beliefs 
+table(d_3$Beliefs)
+# years Note that we use a continuous response measure particpants. 
+range(d_3$years)
+```
+
+This code will create a demographic table.
+
+```{r, include=FALSE}
+# must remove Furniture package before running table 1
+demographic_table(d_3)
+```
+
+This table shows the  belief responses over the 9 years.  
+```{r, include=FALSE}
+beliefs_table(d_3)
+```
+
+We wrote the publication in \LaTeX. For the data table in LaTeX run this code.
+
+```{r latex_data_table, include=FALSE}
+# you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture")
+demographic_table_latex(d_3)
+```
+
+We select a minimum of three waves because we want to recover a longitudinal sample in which a slope for the effect of Beliefs might change (or not). However, we want to consider whether our selection of three waves is sensitive to that number. So we also prepare 4-7 years of data frames for separate analyses, and we check the n's for each of those datasets.
+
+```{r, include = FALSE}
+# create datasets to test robustness to years
+d_4<-data_clean_spirit_wellbeing(d,4) # 4 years
+d_5<-data_clean_spirit_wellbeing(d,5) # 5 years
+d_6<-data_clean_spirit_wellbeing(d,6) # 6 years
+d_7<-data_clean_spirit_wellbeing(d,7) # 7 years
+d_8<-data_clean_spirit_wellbeing(d,8) # 7 years
+
+# function to count uinque number of ID's
+show_unique_id(d_3$Id) 
+show_unique_id(d_4$Id)
+show_unique_id(d_5$Id) 
+show_unique_id(d_6$Id) 
+show_unique_id(d_7$Id) 
+show_unique_id(d_8$Id) 
+
+# function to count waves for participants
+count_waves_participants(d_3)
+count_waves_participants(d_4)
+count_waves_participants(d_5)
+count_waves_participants(d_6)
+count_waves_participants(d_7)
+count_waves_participants(d_8)
+count_waves_participants(d_9)
+```
+
+
+In the first set of analyses we included covariates to adjust for potential confounding effects from usual suspect factors associated with our two measures of wellbeing that might explain the relationship of spirit-beliefs to well-being. We initially included a test of Variance Inflation Factors to rule out mult-collinearity. However, upon further reading, we became aware of at least three other types of confounding that might arise from longitudinal analysis (see: [@mcelreath2020statistical]). We report our controlled analysis below, which does not change the inference in this study. However, because adding covariates can *open* a relationship between beliefs and wellbeing we have switched to reporting the simple time series model in the main text. Additionally, we are careful to state that the present student cannot infer a causal relationshp between spirit beliefs and wellbeing. Rather, we can only infer how the expected relationship between beliefs and wellbeing changes between those who differ in such beliefs over time. A causal understanding inference requires testing specific mechanistic theories. This is a matter for future research. 
+
+First we use a maximum Likelihood estimator. Such an estimator is faster than our preferred bayesian estimator.  We consider whether the slope of beliefs changes as a function of time, or equivalently whether the time effect differs depending on one's leve of belief. We also create a table for the two analyses (personal wellbeing and lifesatisfaction.)
+
+```{r robust to years and beliefs only, cache = TRUE, dependson=dat_3,cache =TRUE}
+library(lme4)
+pwi_formula_simple <- 'PWI ~  years * Beliefs + (1+ Beliefs|Id)'
+ls_formula_simple <- 'LIFESAT ~  years * Beliefs + (1+ Beliefs|Id)'
+mod.1aa <-lmer(pwi_formula_simple, data= d_3)
+mod.2aa <-lmer(ls_formula_simple, data= d_3)
+
+# table
+sjPlot::tab_model(mod.1aa,mod.2aa)
+```
+
+We next produce a predictive graph for beliefs by time on PWI. Note, again, the function for producing this graph is in the "funs.R" file. 
+
+```{r prediction plot of ML longitudinal model, cache =TRUE, dependson=mod.1aa}
+```{r bayesian_pwi_predict, cache =TRUE}
+graph_predictions(mod.1aa, "Predicted Values of Personal Wellbeing")
+```
+
+We next produce a predictive graph for beliefs by time on life satisfaction. 
+```{r bayesian_lifesat_predict, cache =TRUE}
+graph_predictions(mod.2aa, "Predicted Values of Life Satisfaction")
+```
+
+For both outcomes, the slope for beliefs in a spirit or life fource predicts a greater increase in  wellbeing. 
+
+Next we attempt a model with that is adjusted by "usual suspect" demographic inicators. We find that the relationship is a little stronger. Because these strengthened relationship might owe to confounding, we are wearing of the adjusted model.  The idea that skeptics are not increasing in well-being, whereas other groups are increasing strikes us as improbable. We do not find evidence for a such a stall in the bayesian analysis; nor do we find any such evidence for a stall in the multiply-imputed dataset analysis (which handles missing responses).  Ultimately we favour, and report the bayesian analysis because bayesian data analysis recovers an explicit estimate of posterior uncertianty.
+
+```{r lmer_model_with_full_covariates, cache =TRUE}
+library(lme4)
+pwi_formula <- 'PWI ~  years * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1 + Beliefs|Id)'
+ls_formula <- 'LIFESAT ~  years * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1 + Beliefs|Id)'
+
+mod.1 <-lmer (pwi_formula, data= d_3)
+mod.2 <-lmer (ls_formula, data= d_3)
+```
+
+Here is the table.
+```{r saturated model, cache = TRUE, dependson=d_3}
+sjPlot::tab_model(mod.1,mod.2)
+```
+
+Compare complex with simple models, and we find the inference doesn't change. 
+```{r}
+# identical result
+sjPlot::tab_model(mod.1,mod.1aa)
+sjPlot::tab_model(mod.2,mod.2aa)
+```
+
+Next we check for multi-collinearity.
+
+```{r check collinearity, cache =TRUE}
+# Note High VIFS from 
+performance::check_collinearity(mod.1)
+performance::check_collinearity(mod.2)
+```
+
+We observe that VIFs are high, for the years x beliefs interaction. However, this is likely to be an artifact of how we code the variables (we do not center by default), but to make sure let's center the years indicator and run the models again. We we do this we find that collinearity disappears, and without any effect on inference.
+
+```{r lmer model centering years}
+library(lme4)
+pwi_formulaC <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1 |Id)'
+
+ls_formulaC <- 'LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1 |Id)'
+
+mod.1a <-lmer (pwi_formulaC, data= d_3)
+mod.2a <-lmer (ls_formulaC, data= d_3)
+
+summary(mod.1a)
+summary(mod.2a)
+# identical result
+performance::check_collinearity(mod.1a)
+performance::check_collinearity(mod.2a)
+```
+
+Here's the table, again, inference is robust. 
+
+
+```{r table of saturated models, cached =TRUE}
+sjPlot::tab_model(mod.1a,mod.2a)
+```
+
+
+Her are thecoefficient plots for the full models
+```{r coefficientplots_LMER_FULL, cache=TRUE}
+plot_models(mod.2, mod.1) + ylim(-.4, .75) + theme_abyss() + scale_colour_brewer(labels = c("Personal Wellbeing", "Life Satisfaction")) # Plots
+```
+
+Here is the code for the coefficient plots of our preferred simple model
+```{r cache =TRUE}
+g1<-plot(parameters::model_parameters(mod.1aa))+ ggtitle("Personal Wellbeing Coefficients")
+g2<-plot(parameters::model_parameters(mod.2aa))+ ggtitle("Life Satisfaction Coefficients")
+```
+
+And here's the graph.
+
+```{r plot_coefficientplots_LMER_FULL, cache =TRUE}
+g1/g2
+```
+
+
+Next, recall we want to check whether inference is  robustness to the researcher degree of freedom in selecting the number of waves.
+```{r run all the models with different ns, cache=TRUE}
+mod.1_3 <-lmer (pwi_formula_simple, data= d_4)
+mod.2_3 <-lmer (ls_formula_simple, data= d_4)
+
+mod.1_4 <-lmer (pwi_formula_simple, data= d_4)
+mod.2_4 <-lmer (ls_formula_simple, data= d_4)
+
+mod.1_5 <-lmer (pwi_formula_simple, data= d_5)
+mod.2_5 <-lmer (ls_formula_simple, data= d_5)
+
+mod.1_6 <-lmer (pwi_formula_simple, data= d_6)
+mod.2_6 <-lmer (ls_formula_simple, data= d_6)
+
+mod.1_7 <-lmer (pwi_formula_simple, data= d_7)
+mod.2_7 <-lmer (ls_formula_simple, data= d_7)
+
+mod.1_8 <-lmer (pwi_formula_simple, data= d_8)
+mod.2_8 <-lmer (ls_formula_simple, data= d_8)
+```
+
+Let's plot all the models.  We we do so, we find that uncertainty increases, but that the inference remains robust. 
+
+
+Let's graph the extremes of the degree-of-freedom choice to be certain that the inference remains satisfying to the eye (and it is.)
+
+```{r extremes_of_researcher_degree_of_freedom_test, cache =TRUE}
+library(parameters)
+g1a_3<-plot(parameters::model_parameters(mod.1_3))+ ggtitle("Personal Wellbeing Coefficients: 8 Waves")
+g2a_3<-plot(parameters::model_parameters(mod.2_3))+ ggtitle("Life Satisfaction Coefficients: 8 Waves")
+
+g1a_8<-plot(parameters::model_parameters(mod.1_8))+ ggtitle("Personal Wellbeing Coefficients: 8 Waves")
+g2a_8<-plot(parameters::model_parameters(mod.2_8))+ ggtitle("Life Satisfaction Coefficients: 8 Waves")
+```
+
+Estimates robust at 8 waves
+```{r USE_2_coefficientplots_LMER_FULL,cache =TRUE}
+library(patchwork)
+g1a_3/g1a_8
+```
+
+
+Finally we model the relationshp bewteen having a partner and deprivation, to address the reviewer's worry that we might have introduced correlation of between deprivation and having a partner that could spoil inference. We indeed find such a relationship. This is an important potential confound. Again we emphasise that in a longitudinal setting the reviewers concern is even greater, as we might open a path to the outcome variable by including the demographic indicator.  
+
+```{r checkforref model,cache =TRUE}
+m<-lmer (NZdep ~ Partner + (1|Id), data= d_3, na.action = na.omit)
+tab_model(m)
+model_parameters(m)
+```
+
+
+
+# Bayesian estimation
+
+Bayesian inference is time intensive. However, a bayesian model will pool information to produce a better, and natural estimate of uncertainty. The posterior distributions of the model describe conditional probabilities. So where we can we want to use bayesian models. Here we use the default weakly informative priors that the BRMS package produces. It is generally better to use informative priors. However, the size or our dataset does not make a difference. We report the priors at the end. 
+
+```{r setmodelformula}
+forumula_bayesPWI <- bf(PWI ~ years * Beliefs + (1 + Beliefs|Id))
+forumula_bayesLIFESAT <- bf(LIFESAT ~  years * Beliefs + (1 + Beliefs|Id))
+```
+```{r pwi_bayesmodel}
+# PWI
+mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds") # note these are very large files
+summary(mod.1_b)
+#saveRDS(mod.1_b,"backup_mod.1_b") this is excessive, but we save another backup to avoid running this model again in case of SNAFU.
+```
+```{r lsbayesmodel}
+# LIFE SAT
+mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds") # note these are very large files
+# saveRDS(mod.2_b,"backup_mod.2_b") this is excessive, but we save another backup to avoid running this model again in case of SNAFU.
+```
+
+Tables
+```{r lifesat bayesian model table:pwi, cache =TRUE}
+tab_model(mod.1_b)
+```
+
+```{r lifesat bayesian model table:ls lifesat, cache =TRUE}
+tab_model(mod.2_b)
+```
+
+Here we extract the information about the priors
+
+```{r stancode for models}
+#model equation
+stancode(mod.1_b)
+stancode(mod.2_b)
+```
+
+```{r prior summaries}
+brms::prior_summary(mod.1_b)
+brms::prior_summary(mod.2_b)
+```
+
+```{r bayesian_model_table, cache=TRUE}
+#tab_model(mod.1_b, show.ci= .89) # we really should use something other than 95 but the team consensus is to use 95
+tab_model(mod.1_b, mod.1_b show.ci= .95) # no difference to inference
+```
+
+```{r mixing of sd_pwi}
+plot(mod.1_b, pars ="b_") #requires stronger priors
+```
+
+```{r mixing of ls_pwi}
+plot(mod.1_b, pars ="sd_") # requires stronger priors
+```
+
+```{r posterior predictive checks bayes:pwi, cache=TRUE}
+
+pp_1<-NULL
+pp_1<-rstanarm::pp_check(mod.1_b) + ylab("Personal Wellbeing")
+
+pp_2<-NULL
+pp_2<-rstanarm::pp_check(mod.2_b) + ylab("Life Satisfaction")
+
+# plot
+pp_1 + pp_2
+```
+
+Here are the prediction plots that we use in the main publication text.
+
+Prediction plots
+```{r bayesian_pwi_predicted, cache=TRUE, dependson= mod.1_b}
+graph_predictions(mod.1_b, "Predicted Values of Personal Wellbeing")
+```
+```{r bayesian_lifesat_predicted, cache=TRUE, dependson= mod.2_b}
+graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction")
+```
+
+
+## Imputed Analysis
+
+Finally we run the data analysis to test whether our results are robust to missing data. Missing responses can be an important source of bias in a longitudinal study. Again we write some functions to deal with all the work. I have saved the imputed files and will read them back to for analysis. 
+
+```{r echo = TRUE,  cache = TRUE, dependson = "dfben"}
+# Imputed data
+# imputed3<-amelia_imputation_clean(d_3)
+# saveRDS(imputed3,"imputed3")
+imputed3<-readRDS(imputed3)
+```
+
+We rerun the imputed dat analysis.
+
+```{r cache = TRUE, imputedsimplePWI}
+# run models iterating over imputed data
+mod_imputed_pwi<-loop_lmer_model(pwi_formula_simple,imputed3)
+```
+
+```{r imputed pwi table, cache=TRUE}
+tab_mods_ls<-loop_lmer_model_tab(mod_imputed_ls)
+create_hux_table(tab_mods_ls)
+```
+
+We graph the coefficients.
+```{r coef_PWI_imputed coefplot, cache =TRUE}
+# coeff plot
+imp_pwi <- plot(tab_mods_pwi) + ggtitle("Personal Wellbeing Coefficients (Imputed)") # pick your  own title
+imp_pwi
+```
+
+We create a graph for the predictions.
+```{r r coef_PWI_imputed coefplot, cache=TRUE}
+# function for prediction
+graph_predictions_imputed(mod_imputed_pwi,"Predicted Values of Personal Wellbeing (imputed)")
+```
+
+The inference is robust in the imputation model.
+
+## Life Satisfaction Imputation Model
+
+The following code returns the analysis for the life statisfaction model (again the functions are in the "funs.R" file).
+
+```{r cache = TRUE}
+# run models iterating over imputed data
+mod_imputed_ls<-loop_lmer_model(ls_formula_simple,imputed3)
+
+```{r table_ls_imputed,cache=TRUE}
+# table
+tab_mods_ls<-loop_lmer_model_tab(mod_imputed_ls)
+create_hux_table(tab_mods_ls)
+```
+
+Here's the graph:
+
+```{r coef_PWI_imputed, cache = TRUE}
+# coeff plot
+imp_ls<-plot(tab_mods_ls) + ggtitle("Life Satisfaction Coefficients (Imputed)") 
+imp_ls
+```
+
+```{r pred_LS_imputed,  cache = TRUE}
+# function for prediction
+graph_predictions_imputed(mod_imputed_ls,"Predicted Values of Life Satisfaction (imputed)")
+```
+
+```{r coefficient_plot_both_imputed,  cache = TRUE}
+ imp_pwi/imp_ls +  plot_annotation(tag_levels = 'i')
+```
+
+
+## Bayesian Multiple imputation models
+
+We want to run a bayesian MI model. However, we we do this, we blow up the RAM in JB's machine.  So we must satisfy ourselves with a frequentist test here. 
+
+<!-- ```{r} won't work for missing categorical predictors--> 
+<!-- form_pwi <- bf(PWI | mi() ~ years * mi(Beliefs)) + -->
+<!--   bf(Beliefs | mi() ~ years) + set_rescor(FALSE) -->
+<!-- imp_bayes_pwi <- brm(form_pwi, data = d_3) -->
+<!-- ``` -->
+
+```{r create data frame of lists for BRMS imputation}
+# brms requires a list of the imputations
+brmdat <-list(imputed3$imputations$imp1,
+              imputed3$imputations$imp2,
+              imputed3$imputations$imp3,
+              imputed3$imputations$imp4,
+              imputed3$imputations$imp5,
+              imputed3$imputations$imp6,  
+              imputed3$imputations$imp7,
+              imputed3$imputations$imp8,
+              imputed3$imputations$imp9,
+              imputed3$imputations$imp10)
+
+```
+
+<!-- ```{r bayesian imputed model_pwi} -->
+<!-- # not run -->
+<!-- #fit_imp1 <- brm_multiple(PWI ~ years * Beliefs + (1 + years|Id), data = brmdat) -->
+<!-- #summary(fit_imp1) -->
+<!-- #save(fit_imp1) -->
+<!-- ``` -->
+
+<!-- ```{r bayesian imputation model_ls} -->
+<!-- # not run -->
+<!-- #fit_imp2 <- brm_multiple(LIFESAT ~ years * Beliefs + (1+years|Id), data = brmdat, file = "fit_imp2") -->
+<!-- ``` -->
+
+In the commends of the "Analysis.Rmd" file, there are further analyeses that we ran (e.g. within/between subject effects). None affected inference. 
+
+# model equations
+```{r}
+stancode(mod.1_b)
+```
+
+\newpage
+## Priors for the Personal Wellbeing model
+
+Model priors for Personal Wellbeing including group-level ID intercept and beliefs slopes:
+
+\[
+\begin{aligned}
+\operatorname{Personal Well Being}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
+\mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
+\boldsymbol{\alpha} \sim \alpha_{0} +\alpha_j \nonumber\\
+\alpha_{0} \sim \text{StudentT}(3,7.2,2.5)\nonumber\\
+\boldsymbol{\beta}\sim \boldsymbol{b} + \beta_j \nonumber\\
+\boldsymbol{b}\sim\text{Normal}(0,2.5) \nonumber\\
+\begin{bmatrix}
+\alpha_j \\
+\beta_j
+\end{bmatrix}
+\sim 
+\text{MVNormal}
+\begin{pmatrix}
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+,\boldsymbol{S} \nonumber
+\end{pmatrix}\\
+\boldsymbol{S} = 
+\begin{pmatrix}
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix} \boldsymbol{R} \begin{pmatrix}
+\sigma_{\alpha_j} & 0 \\
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix}\\
+\sigma_{\alpha_j} \sim 
+\text{HalfCauchy}(0,2.5) \nonumber\\
+\sigma_{\beta_j} \sim 
+\text{HalfCauchy}(0,2.5) \nonumber\\
+\boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
+\sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
+\end{aligned}
+\]
+
+\newpage
+## Priors for the Life Satisfaction model:
+Model priors for Life Satisfaction Model with including group-level ID intercept and belief slopes:
+
+\[
+\begin{aligned}
+\operatorname{Life Satisfaction}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
+\mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
+\boldsymbol{\alpha} \sim \alpha_{0} +\alpha_j \nonumber\\
+\alpha_{0} \sim \text{StudentT}(3,5.5, 2.5)\nonumber\\
+\alpha_j \sim \text{StudentT}+(3,0,10)\nonumber\\
+\boldsymbol{\beta}\sim \boldsymbol{b} + \beta_j \nonumber\\
+\boldsymbol{b}\sim\text{Normal}(0,2.5) \nonumber\\
+\begin{bmatrix}
+\alpha_j \\
+\beta_j
+\end{bmatrix}
+\sim 
+\text{MVNormal}
+\begin{pmatrix}
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+,\boldsymbol{S} \nonumber
+\end{pmatrix}\\
+\boldsymbol{S} = 
+\begin{pmatrix}
+\sigma_{\alpha_j} & 0 \\
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix} \boldsymbol{R} \begin{pmatrix}
+\sigma_{\alpha_j} & 0 \\
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix}\\
+\sigma_{\alpha_j} \sim 
+\text{HalfCauchy}(0,1) \nonumber\\
+\sigma_{\beta_j} \sim 
+\text{HalfCauchy}(0,1) \nonumber\\
+\boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
+\sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
+\end{aligned}
+\]
+
+\newpage
+## Deterministic model 
+
+For the deterministic part of both the Personal Wellbeing and the Life Satisfaction models: 
+
+\[
+\begin{aligned}
+& \quad  \boldsymbol{b} = \\
+& \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\
+&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ +  \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\
+& \quad \beta_{4}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ 
+& \quad \beta_{4}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
+&\quad \beta_{6}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ 
+\end{aligned}
+\]
+
+
+
+<!-- Frequentist model: -->
+
+<!-- ```{r eq1} -->
+<!-- library(equatiomatic) -->
+<!-- summary(mod.1aa) -->
+<!-- print(extract_eq(mod.1aa, wrap = TRUE)) -->
+<!-- ``` -->
+
+<!-- ```{r eq2} -->
+<!-- library(equatiomatic) -->
+<!-- print(extract_eq(mod.1aa, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3)) -->
+<!-- ``` -->
+
+<!-- We might want to look at within/between indivual change (i.e. do people who change in degree of spirit beliefs manifest different wellbeing.  I ran this as below, however, what we really want is a markov model, where we compare state changes between the different types of belief. So this model is not useful. For more on demeaning see:  -->
+<!-- https://easystats.github.io/parameters/articles/demean.html -->
+
+<!-- ```{r} -->
+<!-- dfben <- cbind( -->
+<!--   dfben, -->
+<!--   parameters::demean(dfben, select = c("Beliefs"), group = "Id") -->
+<!-- ) -->
+<!-- ``` -->
+<!-- ```{r models, cache = TRUE, dependson = "dfben"} -->
+<!-- ### Spirit Belief Models ###  -->
+<!-- mod01<-lmer (PWI ~ Years + -->
+<!--                 Beliefs__Skeptic__between  +   -->
+<!--                 Beliefs__SpiritExcludesGod__between +  -->
+<!--                 Beliefs_GodAndSpirit_between  +  -->
+<!--                 Beliefs_GodExcludesSpirit_between + -->
+<!--                 Beliefs__Skeptic__within  +   -->
+<!--                 Beliefs__SpiritExcludesGod__within +  -->
+<!--                 Beliefs_GodAndSpirit_within  +  -->
+<!--                 Beliefs_GodExcludesSpirit_within + -->
+<!--                 (1|Id), data= dfben, na.action = na.omit) -->
+
+<!-- parameters::check_heterogeneity(mod01, group = "ID") -->
+<!-- parameters::check_heterogeneity(mod01, group = "ID") -->
+
+<!-- mod02<-lmer (LIFESAT ~ Years + -->
+<!--                 Beliefs__Skeptic__between  +   -->
+<!--                 Beliefs__SpiritExcludesGod__between +  -->
+<!--                 Beliefs_GodAndSpirit_between  +  -->
+<!--                 Beliefs_GodExcludesSpirit_between + -->
+<!--                 Beliefs__Skeptic__within  +   -->
+<!--                 Beliefs__SpiritExcludesGod__within +  -->
+<!--                 Beliefs_GodAndSpirit_within  +  -->
+<!--                 Beliefs_GodExcludesSpirit_within + -->
+<!--                 (1|Id), data= dfben, na.action = na.omit) -->
+<!-- parameters::check_heterogeneity(mod02, group = "ID") -->
+<!-- # inference holds, but can we use this method with factors? What do the contrasts mean?  -->
+<!-- tab_model(mod01) -->
+<!-- tab_model(mod02) -->
+<!-- plot_models(mod01,mod02) -->
+<!-- ``` -->
+
+
+
+<!-- ```{r eq1} -->
+<!-- #for model equation -->
+<!-- library(equatiomatic) -->
+<!-- print(extract_eq(mod.1, wrap = TRUE,terms_per_line =3)) -->
+<!-- ``` -->
+
+<!-- PWI Model 2 equation -->
+<!-- ```{r eq2} -->
+<!-- library(equatiomatic) -->
+<!-- print(extract_eq(mod.2, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3)) -->
+<!-- ``` -->
+<!-- ## report -->
+<!-- ### Model 1 -->
+<!-- model 1 report: for publication change all "significants" to "reliable" -->
+
+<!-- short report: -->
+<!-- ```{r, report1, cache =TRUE, dependson=mod.1,include=FALSE} -->
+<!-- easystats::model_text(mod.1) -->
+<!-- ``` -->
+
+<!-- short report -->
+<!-- ```{r, cache=TRUE, include=FALSE } -->
+<!-- library(report) -->
+<!-- r1<- easystats::report(mod.1) -->
+<!-- easystats::table_short(r1) -->
+<!-- easystats::text_short(r1) -->
+<!-- ``` -->
+
+
+<!-- ```{r, cache =TRUE, dependson=mod.1, include=FALSE} -->
+<!-- r1<- easystats::report(mod.1) -->
+<!-- easystats::text_long(r1) -->
+<!-- ``` -->
+<!-- short report -->
+<!-- ```{r, cache =TRUE, dependson=mod.2,include=FALSE} -->
+<!-- # Model 2 -->
+<!-- # For publication change all "significants" to "reliable" -->
+
+<!-- easystats::model_text(mod.2) -->
+<!-- ``` -->
+
+<!-- short report -->
+<!-- ```{r,include=FALSE} -->
+<!-- r2 <- easystats::report(mod.2) -->
+<!-- easystats::text_short(r2) -->
+<!-- easystats::table_short(r2) -->
+<!-- ``` -->
+
+<!-- long report -->
+<!-- ```{r,include=FALSE} -->
+<!-- r2<- easystats::report(mod.2) -->
+<!-- easystats::text_long(r2) -->
+<!-- ``` -->
+<!-- ## Equation 1: Personal Well-being  -->
+<!-- model equations for models without random intercept slope correlations; not correct, or reported\[ -->
+<!-- \begin{aligned} -->
+<!-- \operatorname{{\small PWI}}  &\sim N \left(\mu,\sigma^2 \right) \\  -->
+<!-- \mu & =  \boldsymbol{a} +  \boldsymbol{b} \\ -->
+<!-- & \quad \boldsymbol{a} =  \alpha_{0} + \alpha_{j[i]} \\ -->
+<!-- & \quad \alpha_{0} \sim \operatorname{Student T}^{+}(3,7.2,2.5) \\ -->
+<!-- & \quad  \alpha_{j[i]}  \sim \operatorname{Normal}(0, \sigma_j) \\  -->
+<!-- & \quad \sigma_j \sim \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+<!-- & \quad   \boldsymbol{b}   \sim \operatorname{Student T}^{+}(0, 2.5) \\  -->
+<!-- & \quad \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+<!-- & \quad  \boldsymbol{b} = \\ -->
+<!-- & \quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ -->
+<!-- &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ +  \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\ -->
+<!-- & \quad \beta_{5}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\  -->
+<!-- & \quad \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\ -->
+<!-- &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\  -->
+<!-- \end{aligned} -->
+<!-- \] -->
+<!-- ## Equation 2: Life Satisfaction. -->
+<!-- \[ -->
+<!-- \begin{aligned} -->
+<!-- \operatorname{{\small LifeSatisfaction}}  &\sim N \left(\mu,\sigma^2 \right) \\  -->
+<!-- \mu & =  \boldsymbol{a} +  \boldsymbol{b} \\ -->
+<!-- & \quad \boldsymbol{a} =  \alpha_{0} + \alpha_{j[i]} \\ -->
+<!-- & \quad \alpha_{0} \sim \operatorname{Student T}^{+}(3,5.5, 2.5) \\ -->
+<!-- & \quad  \alpha_{j[i]}  \sim \operatorname{Normal}(0, \sigma_j) \\  -->
+<!-- & \quad \sigma_j \sim \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+<!-- & \quad   \boldsymbol{b}   \sim \operatorname{Student T}^{+}(0, 2.5) \\  -->
+<!-- & \quad \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+<!-- & \quad  \boldsymbol{b} = \\ -->
+<!-- & \quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ -->
+<!-- &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ +  \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\ -->
+<!-- & \quad \beta_{5}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\  -->
+<!-- & \quad \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\ -->
+<!-- &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\  -->
+<!-- \end{aligned} -->
+<!-- \] -->
+<!-- ## Equation 2 -->
+<!-- \[ -->
+<!-- \begin{aligned} -->
+<!-- \operatorname{{\small LIFESAT/PWI}}  &\sim N \left(\mu,\sigma^2 \right) \\ \mu &=\alpha_{j[i]} + \beta_{1}(\operatorname{Years}) + \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ -->
+<!-- &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}}) + \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) + \beta_{5}(\operatorname{Age.10yrs.C})\ + \\ -->
+<!-- &\quad \beta_{6}(\operatorname{Deprivation.S}) + \beta_{7}(\operatorname{Edu.S}) + \beta_{8}(\operatorname{Employed})\ + \\ -->
+<!-- &\quad \beta_{9}(\operatorname{EthnicCats}_{\operatorname{Maori}}) + \beta_{10}(\operatorname{EthnicCats}_{\operatorname{Pacific}}) + \beta_{11}(\operatorname{EthnicCats}_{\operatorname{Asian}})\ + \\ -->
+<!-- &\quad \beta_{12}(\operatorname{Male}_{\operatorname{1}}) + \beta_{13}(\operatorname{Partner}_{\operatorname{Has\ }}) + \beta_{14}(\operatorname{Pol.Orient.S})\ + \\ -->
+<!-- &\quad \beta_{15}(\operatorname{Urban}) + \beta_{16}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}}) + \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\ -->
+<!-- &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ \alpha_{j} &\sim N \left(\mu_{\alpha_{j}},\sigma^2_{\alpha_{j}} \right) , \operatorname{ for  Id }~j~= 1, \dots~J = 20,979~\operatorname{Individuals} -->
+<!-- \end{aligned} -->
+<!-- \] -->
+
+
+\[
+\begin{table}[ ht ] 
+\centering 
+\caption{}\label{}
+\scalebox{.6}{
+\begin{tabular}{ l c c c c c c c c c }
+\toprule
+ &   \multicolumn{ 9 }{c}{ Wave }\\ 
+  & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 \\ 
+ & n = \emph{missing} & n = \emph{missing} & n = 8547 & n = 13472 & n = \emph{missing} & n = 11687 & n = 16048 & n = 14174 & n = 14883 \\ 
+ \midrule
+Age &   &   &   &   &   &   &   &   &  \\ 
+NZdep &   &   &   &   &   &   &   &   &  \\ 
+Education &   &   &   &   &   &   &   &   &  \\ 
+Employed &   &   &   &   &   &   &   &   &  \\ 
+\hspace{6pt}    0 &  (\%) &  (\%) & 2094 (24.5\%) & 2955 (21.9\%) &  (\%) & 2525 (21.6\%) & 3486 (21.7\%) & 3223 (22.7\%) & 3404 (22.9\%)\\ 
+\hspace{6pt}    1 &  (\%) &  (\%) & 6453 (75.5\%) & 10517 (78.1\%) &  (\%) & 9162 (78.4\%) & 12562 (78.3\%) & 10951 (77.3\%) & 11479 (77.1\%)\\ 
+EthnicCategories &   &   &   &   &   &   &   &   &  \\ 
+\hspace{6pt}    Euro &  (\%) &  (\%) & 6731 (78.8\%) & 11024 (81.8\%) &  (\%) & 9671 (82.8\%) & 13389 (83.4\%) & 11814 (83.3\%) & 12427 (83.5\%)\\ 
+\hspace{6pt}    Maori &  (\%) &  (\%) & 1188 (13.9\%) & 1608 (11.9\%) &  (\%) & 1341 (11.5\%) & 1749 (10.9\%) & 1620 (11.4\%) & 1677 (11.3\%)\\ 
+\hspace{6pt}    Pacific &  (\%) &  (\%) & 284 (3.3\%) & 339 (2.5\%) &  (\%) & 277 (2.4\%) & 331 (2.1\%) & 243 (1.7\%) & 261 (1.8\%)\\ 
+\hspace{6pt}    Asian &  (\%) &  (\%) & 344 (4\%) & 501 (3.7\%) &  (\%) & 398 (3.4\%) & 579 (3.6\%) & 497 (3.5\%) & 518 (3.5\%)\\ 
+Male &   &   &   &   &   &   &   &   &  \\ 
+\hspace{6pt}    0 &  (\%) &  (\%) & 5302 (62\%) & 8457 (62.8\%) &  (\%) & 7325 (62.7\%) & 10148 (63.2\%) & 9011 (63.6\%) & 9433 (63.4\%)\\ 
+\hspace{6pt}    1 &  (\%) &  (\%) & 3245 (38\%) & 5015 (37.2\%) &  (\%) & 4362 (37.3\%) & 5900 (36.8\%) & 5163 (36.4\%) & 5450 (36.6\%)\\ 
+Partner &   &   &   &   &   &   &   &   &  \\ 
+\hspace{6pt}    0 &  (\%) &  (\%) & 2408 (28.2\%) & 3546 (26.3\%) &  (\%) & 2815 (24.1\%) & 3773 (23.5\%) & 3330 (23.5\%) & 3556 (23.9\%)\\ 
+\hspace{6pt}    1 &  (\%) &  (\%) & 6139 (71.8\%) & 9926 (73.7\%) &  (\%) & 8872 (75.9\%) & 12275 (76.5\%) & 10844 (76.5\%) & 11327 (76.1\%)\\ 
+Pol Orient &   &   &   &   &   &   &   &   &  \\ 
+Urban &   &   &   &   &   &   &   &   &  \\ 
+\hspace{6pt}    Not\_Urban &  (\%) &  (\%) & 2865 (33.5\%) & 4278 (31.8\%) &  (\%) & 3951 (33.8\%) & 5538 (34.5\%) & 2610 (18.4\%) & 2661 (17.9\%)\\ 
+\hspace{6pt}    Urban &  (\%) &  (\%) & 5682 (66.5\%) & 9194 (68.2\%) &  (\%) & 7736 (66.2\%) & 10510 (65.5\%) & 11564 (81.6\%) & 12222 (82.1\%)\\ 
+Beliefs &   &   &   &   &   &   &   &   &  \\ 
+\hspace{6pt}    \_Skeptic\_ &  (\%) &  (\%) & 2048 (24\%) & 3286 (24.4\%) &  (\%) & 2951 (25.3\%) & 4116 (25.6\%) & 3916 (27.6\%) & 4120 (27.7\%)\\ 
+\hspace{6pt}    \_SpiritExcludesGod\_ &  (\%) &  (\%) & 2295 (26.9\%) & 3735 (27.7\%) &  (\%) & 3169 (27.1\%) & 4501 (28\%) & 3918 (27.6\%) & 3970 (26.7\%)\\ 
+\hspace{6pt}    GodAndSpirit &  (\%) &  (\%) & 3707 (43.4\%) & 5499 (40.8\%) &  (\%) & 5119 (43.8\%) & 6453 (40.2\%) & 5464 (38.5\%) & 6210 (41.7\%)\\ 
+\hspace{6pt}    GodExcludesSpirit &  (\%) &  (\%) & 497 (5.8\%) & 952 (7.1\%) &  (\%) & 448 (3.8\%) & 978 (6.1\%) & 876 (6.2\%) & 583 (3.9\%)\\ 
+LIFESAT &   &   &   &   &   &   &   &   &  \\ 
+PWI &   &   &   &   &   &   &   &   &  \\ 
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\]
+
+ 
+\[
+\begin{table}
+\begin{center}
+\scalebox{0.6}{
+\begin{tabular}{l c c}
+\toprule
+ & PWI & Life Satisfaction \\
+\midrule
+(Intercept)                        & $\mathbf{6.63}^{***}$  & $\mathbf{4.94}^{***}$  \\
+                                   & $(0.03)$               & $(0.02)$               \\
+Years                              & $0.00$                 & $-0.00$                \\
+                                   & $(0.00)$               & $(0.00)$               \\
+Beliefs\_SpiritExcludesGod\_       & $\mathbf{-0.14}^{***}$ & $\mathbf{-0.08}^{***}$ \\
+                                   & $(0.03)$               & $(0.02)$               \\
+BeliefsGodAndSpirit                & $\mathbf{-0.16}^{***}$ & $-0.04$                \\
+                                   & $(0.03)$               & $(0.02)$               \\
+BeliefsGodExcludesSpirit           & $0.02$                 & $0.07$                 \\
+                                   & $(0.05)$               & $(0.04)$               \\
+Age.10yrs.C                        & $\mathbf{0.08}^{***}$  & $\mathbf{0.09}^{***}$  \\
+                                   & $(0.01)$               & $(0.01)$               \\
+Deprivation.S                      & $\mathbf{-0.14}^{***}$ & $\mathbf{-0.07}^{***}$ \\
+                                   & $(0.01)$               & $(0.01)$               \\
+Edu.S                              & $\mathbf{0.12}^{***}$  & $\mathbf{0.06}^{***}$  \\
+                                   & $(0.01)$               & $(0.01)$               \\
+EmployedEmployed                   & $\mathbf{0.09}^{***}$  & $\mathbf{0.08}^{***}$  \\
+                                   & $(0.01)$               & $(0.01)$               \\
+EthnicCatsMaori                    & $\mathbf{-0.30}^{***}$ & $\mathbf{-0.06}^{**}$  \\
+                                   & $(0.03)$               & $(0.02)$               \\
+EthnicCatsPacific                  & $\mathbf{-0.29}^{***}$ & $\mathbf{-0.08}^{*}$   \\
+                                   & $(0.05)$               & $(0.04)$               \\
+EthnicCatsAsian                    & $-0.08$                & $-0.04$                \\
+                                   & $(0.05)$               & $(0.03)$               \\
+Male1                              & $\mathbf{-0.11}^{***}$ & $\mathbf{-0.19}^{***}$ \\
+                                   & $(0.02)$               & $(0.01)$               \\
+PartnerHas Partner                 & $\mathbf{0.61}^{***}$  & $\mathbf{0.42}^{***}$  \\
+                                   & $(0.02)$               & $(0.01)$               \\
+Pol.Orient.S                       & $\mathbf{0.02}^{***}$  & $\mathbf{0.01}^{**}$   \\
+                                   & $(0.01)$               & $(0.00)$               \\
+UrbanUrban                         & $\mathbf{-0.02}^{*}$   & $\mathbf{-0.02}^{*}$   \\
+                                   & $(0.01)$               & $(0.01)$               \\
+Years:Beliefs\_SpiritExcludesGod\_ & $\mathbf{0.02}^{**}$   & $\mathbf{0.02}^{***}$  \\
+                                   & $(0.00)$               & $(0.00)$               \\
+Years:BeliefsGodAndSpirit          & $\mathbf{0.02}^{***}$  & $\mathbf{0.01}^{***}$  \\
+                                   & $(0.00)$               & $(0.00)$               \\
+Years:BeliefsGodExcludesSpirit     & $0.00$                 & $-0.00$                \\
+                                   & $(0.01)$               & $(0.01)$               \\
+\midrule
+AIC                                & $248580.18$            & $200599.16$            \\
+BIC                                & $248775.08$            & $200793.96$            \\
+Log Likelihood                     & $-124269.09$           & $-100278.58$           \\
+Num. obs.                          & $79270$                & $78888$                \\
+Num. groups: Id                    & $20979$                & $20972$                \\
+Var: Id (Intercept)                & $1.78$                 & $0.88$                 \\
+Var: Residual                      & $0.74$                 & $0.42$                 \\
+\bottomrule
+\multicolumn{3}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
+\end{tabular}
+}
+\caption{Regression Models}
+\label{table:coefficients}
+\end{center}
+\end{table}
+\]
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
