@@ -306,7 +306,6 @@ forumula_bayesLIFESAT <- bf(LIFESAT ~  years * Beliefs + (1 + Beliefs|Id))
 mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds") # note these are very large files
 summary(mod.1_b)
 #saveRDS(mod.1_b,"backup_mod.1_b") this is excessive, but we save another backup to avoid running this model again in case of SNAFU.
-rm(mod.1_b)
 ```
 
 
@@ -368,12 +367,10 @@ Predictions and plots of them. First we get the predictions.
 
 ```{r}
 preds_1b<-get_predictions(mod.1_b)
-preds_1b
 ```
 
 ```{r}
 preds_2b<-get_predictions(mod.2_b)
-preds_2b
 ```
 
 ```{r bayesian_pwi_predicted, cache=TRUE, dependson= mod.1_b}
