@@ -93,7 +93,7 @@ beliefs_table <- function(x){
 
 
 # latex demographic table
-library("furniture")
+#library("furniture")
 demographic_table_latex <- function(x){
   furniture::table1(d_3, 
                     Age, 
@@ -143,7 +143,7 @@ demographic_table_latex <- function(x){
 
 
 graph_predictions <- function(x,y){ 
-  out <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"), 
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -154,7 +154,7 @@ graph_predictions <- function(x,y){
 }
 
 get_predictions <- function(x){ 
-  out <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"), 
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -210,6 +210,41 @@ table_model_latex_ls <- function(x){ # x is a model
          custom.note ="")
 }
 
+# dual table
+# 
+table_model_latex_dual <- function(x,y){
+  xtable <-texreg::extract(
+    x,
+    level = 0.95,
+    include.random = TRUE,
+    include.rsquared = F,
+    include.nobs = F,
+    include.loo.ic = F,
+    include.waic = F)
+ytable <-texreg::extract(
+  y,
+  level = 0.95,
+  include.random = TRUE,
+  include.rsquared = F,
+  include.nobs = F,
+  include.loo.ic = F,
+  include.waic = F)
+texreg(list(xtable,ytable),
+       custom.model.names = c("PWI","Life Sat"),
+       caption = "",
+       sideways = F,
+       scalebox = .5,
+       #fontsize= "footnotesize",
+       label = "tab:REGRESS_LS",
+       ci.force.level = 0.95, bold = 0.05,
+       settingstars = 0,
+       booktabs = TRUE,
+       custom.note ="")
+}
+
+
+
+
 # imputation functions
 amelia_imputation_clean <- function(x){
   set.seed(1234)
@@ -261,13 +296,12 @@ amelia_imputation_clean <- function(x){
                            LIFESAT = as.numeric(LIFESAT),
                            Has_Partner = as.factor(Partner),
                            Beliefs = as.factor(Beliefs),
-                           Id =as.factor(Id)) 
+                           Id =as.factor(Id), 
+                           yearsC = scale(years, center = TRUE, scale = FALSE)) 
   # center an d scale age
   out <- transform.amelia(prep3,Age_in_Decades_C = scale(Age.10yrs,scale =FALSE, center=TRUE))
   return(out)
 }
-
-
 
 # run models iterating over imputed data
 loop_lmer_model <- function(x,y){
@@ -288,6 +322,24 @@ loop_lmer_model_tab <- function(x){
 }
 
 
+## coefficient plot
+plot_coefs <- function(x,y){
+ prm1<-parameters::model_parameters(x, test = "pd", 
+                                       diagnostic ="ESS", 
+                                       effects = "fixed",
+                                       group_level=FALSE,
+                                       verbose=FALSE)
+ out1<- plot(prm1) + ggtitle("Personal Well-Being Coefficients")
+ 
+ prm2<-parameters::model_parameters(y, test = "pd", 
+                                    diagnostic ="ESS", 
+                                    effects = "fixed",
+                                    group_level=FALSE,
+                                    verbose=FALSE)
+ out2<- plot(prm2) + ggtitle("Life Satisfaction Coefficients")
+ out1/out2
+}
+
 
 ## imputation prediction plot
 ## note we just pick the tenth iteration until there is something better
@@ -297,7 +349,7 @@ graph_predictions_imputed <-function( x, y){  # x = model objects
   m<-10
   out<-NULL
   for(i in 1:m) {
-    out[[i]] <- ggpredict(x[[i]], terms =c("years [0:9]","Beliefs"))
+    out[[i]] <- ggpredict(x[[i]], terms =c("yearsC [minmax]","Beliefs"))
   }
   plots<-NULL
   for(i in 1:m) {
@@ -312,8 +364,35 @@ create_hux_table<-function(x){
     select("Parameter", "Coefficient", "CI_low","CI_high", "p") %>% 
     set_number_format(3)%>%
     set_left_padding(20)%>%
-    set_bold(1,everywhere)#%>% # to create lates
+    set_bold(1,everywhere)#%>% # to create 
   #quick_latex()
 }
 
+# 
+# pst_1<-describe_posterior(
+#   mod.1_b,
+#   centrality = "median",
+#   dispersion = FALSE,
+#   ci = 0.90,
+#   ci_method = "hdi",
+#   test = c("p_direction"))
+# pst_1%>%tibble::as_tibble()%>%
+#   # dplyr::slice(n=1:10)%>%
+#   dplyr::select(-c("Rhat","ESS"))%>%
+#   mutate_if(is.numeric, ~round(., 2))%>%
+#   mutate_all(funs(str_replace(., "b_", "")))%>%
+#   mutate_all(funs(str_replace(., "_", " X ")))%>%
+#   mutate_all(funs(str_replace(., "d_", "")))%>%
+#   ggpubr::ggtexttable(rows = NULL,
+#                       theme = ttheme("blank")) 
+
+
+plot_mcmc_intervals <- function(x,y){
+ d1 <- x %>%
+  bayestestR::estimate_density()%>%
+    plot(labels = FALSE)%>%
+    ggpar(main = y) + theme_plain()
+}
+ 
+  
 
