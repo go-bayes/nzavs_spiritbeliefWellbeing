@@ -1,5 +1,5 @@
 ---
-title             : "Supplement: Analysis for Longitudinal Evidence for Growth in Subjective well-being from Spiritual Belief"
+title             : "Supplement: Analysis for National Longitudinal Evidence for Growth in Subjective well-being from Spiritual Belief"
 author: "contact: joseph.bulbulia@gmail.com on behalf of Highland et al."
 date: "27/11/2020"
 authornote: |
@@ -80,9 +80,25 @@ beliefs_table(d_3)
 
 We wrote the publication in $\LaTeX$, which requires converting the tables to .tex files; this conversion used a custom function we wrote in the `funs.R` file. 
 
-```{r latex_data_table, include=TRUE}
+```{r latex_data_table, include=FALSE}
 # you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture")
-#demographic_table_latex(d_3) # note the furniture package conflicts with the table1 package. 
+demographic_table_latex(d_3) # note the furniture package conflicts with the table1 package. 
+conflicts()
+furniture::table1(d_3, splitby = ~Wave,
+                    Age, 
+                    NZdep,
+                    Education,
+                    Employed,
+                    Ethnic_Categories,
+                    Male,Has_Partner, 
+                    Political_Conservativism,
+                    Urban, 
+                    Beliefs, 
+                    LIFESAT,
+                    PWI,
+                    overall=F, 
+                    output = "latex2", 
+                    booktabs=TRUE)
 ```
 
 ## How many responses waves to select? 
@@ -246,9 +262,18 @@ mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds", cores = 8) # no
 
 ```{r lsbayesmodel}
 # LIFE SAT
-mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds") 
+mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds")
 # note these are very large files
 ```
+
+```{r simple_table, cache =TRUE}
+bayestestR::describe_posterior(mod.1_b, ci = 0.90,  test = c("p_direction"),diagnostic = "ESS")
+```
+
+```{r simple_table_ls, cache =TRUE}
+bayestestR::describe_posterior(mod.2_b, ci = 0.90, test = c("p_direction"), diagnostic = "ESS")
+```
+
 
 <!-- Tables: -->
 <!-- # ```{r pwi_Bayesian_model_table_pwi, cache =TRUE} -->
@@ -603,18 +628,13 @@ graph_predictions_imputed(mod_imputed_ls,"Predicted Values of Life Satisfaction 
 
 There are further analyses that we ran (e.g. within/between subject effects). These can be found in the GitHub link, posted above. The inferences remain the same.
 
+```{r}
+print(citation("brms"), bibtex=TRUE)
+```
 
 ## Data
 
-The NZAVS is an ongoing longitudinal study. Our ethics requires us to protect the privacy of our participants. For this reason, we cannot post the raw data, even anonymous data. However, we provide data by request to qualified researchers for the purposes of replication. We areare interested in collaboration with qualified researchers: please contact Chris G. Sibley: [c.sibley@auckland.ac.nz](c.sibley@auckland.ac.nz).
-
-## Credits
-Package credits:
-
-```{r, sessioninfo, include=FALSE}
-#  custom function for citing packages. 
-cite_packages()
-```
+The NZAVS is an ongoing longitudinal study. Our ethics requires us to protect the privacy of our participants. For this reason, we cannot post the raw data, even anonymous data. However, we provide data by request to qualified researchers for the purposes of replication. We areare interested in collaboration with qualified researchers: please contact Chris G. Sibley [c.sibley@auckland.ac.nz](c.sibley@auckland.ac.nz).
 
 
 # References
