@@ -1,5 +1,5 @@
 ---
-title             : "Supplement: Analysis for National Longitudinal Evidence for Growth in Subjective well-being from Spiritual Belief"
+title             : "Supplement: Analysis for National Longitudinal Evidence for Growth in Subjective Well-being from Spiritual Beliefs"
 author: "contact: joseph.bulbulia@gmail.com on behalf of Highland et al."
 date: "27/11/2020"
 authornote: |
@@ -28,7 +28,7 @@ editor_options:
 ```
 
 ```{r global_options, echo=FALSE, include = FALSE}
-knitr::opts_chunk$set(fig.path="Figs/", 
+knitr::opts_chunk$set(fig.path="figs/", 
                       message=FALSE, 
                       warning=FALSE,
                       collapse =TRUE,
@@ -80,26 +80,10 @@ beliefs_table(d_3)
 
 We wrote the publication in $\LaTeX$, which requires converting the tables to .tex files; this conversion used a custom function we wrote in the `funs.R` file. 
 
-```{r latex_data_table, include=FALSE}
-# you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture")
-demographic_table_latex(d_3) # note the furniture package conflicts with the table1 package. 
-conflicts()
-furniture::table1(d_3, splitby = ~Wave,
-                    Age, 
-                    NZdep,
-                    Education,
-                    Employed,
-                    Ethnic_Categories,
-                    Male,Has_Partner, 
-                    Political_Conservativism,
-                    Urban, 
-                    Beliefs, 
-                    LIFESAT,
-                    PWI,
-                    overall=F, 
-                    output = "latex2", 
-                    booktabs=TRUE)
-```
+<!-- ```{r latex_data_table, include=FALSE} -->
+<!-- # you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture") -->
+<!-- #demographic_table_latex(d_3) # note the furniture package conflicts with the table1 package.  -->
+<!-- ``` -->
 
 ## How many responses waves to select? 
 
@@ -134,7 +118,7 @@ The analyses for these waves is described below. These analyses reveal that the 
 
 ## Covariates
 
-In the the reported analyses, we included covariates to adjust for potential confounding effects from usual suspect factors associated with our two measures of well-being (Personal Well-Being, Life Satisfaction). Where $Z$ is a third variable, $X$ is the predictor, and $Y$ is the outcome, there are at least four types of confounding that might arise: 
+In the reported analyses, we included covariates to adjust for potential confounding effects from usual suspect factors associated with our two measures of well-being (Personal Well-Being, Life Satisfaction). Where $Z$ is a third variable, $X$ is the predictor, and $Y$ is the outcome, there are at least four types of confounding that might arise: 
 1. $Z$ causes $X$ and  $Z$ causes $Y$: $Z \leftarrow Z \rightarrow Y$
 2. $X$ causes $Z$ and  $Z$ causes $Y$: $X \rightarrow Z \rightarrow Y$
 3. $X$ causes $Z$ and $Y$ causes $Z$: $X \rightarrow Z; Y \rightarrow Z$
@@ -147,7 +131,7 @@ We report our usual-suspect analysis below, which does not change the inference 
 
 Bayesian inference require substantial computational resources. The cost of time is repaid with a model that efficiently pools information to produce a more accurate, and transparent, estimate of uncertainty. The posterior distributions of the model describe intuitive conditional probabilities. 
 
-Below we write the model in a notation that explicitly states the the default weakly informative priors that the BRMS package produces. And indicated in the model we include group-level indicator for variation in subject-level intercepts $\alpha_j$, a group-level indicator for subject-level time (or "growth")  slope  $\Beta_j$, and we model the co-variance of $\alpha_j$, Below we write the model in a notation that explicitly states the the default weakly informative priors that the BRMS package produces.  And indicated in the model we include group-level indicator for variation in subject-level intercepts $\alpha_j$, a group-level indicator for subject-level time (or "growth")  slope  $\Beta_j$, and we model the co-variance of $\alpha_j$ and  $\Beta_j$ which for computational reasons is estimate as a correlation matrix of (${\bf S}$} and ${\bf R}$).
+Below we write the model in a notation that explicitly states the the default weakly informative priors that the BRMS package produces. And indicated in the model we include group-level indicator for variation in subject-level intercepts $\alpha_j$, a group-level indicator for subject-level time (or "growth")  slope  $\beta_j$, and we model the co-variance of $\alpha_j$, Below we write the model in a notation that explicitly states the the default weakly informative priors that the BRMS package produces.  And indicated in the model we include group-level indicator for variation in subject-level intercepts $\alpha_j$, a group-level indicator for subject-level time (or "growth")  slope  $\beta_j$, and we model the co-variance of $\alpha_j$ and  $\beta_j$ which for computational reasons is estimate as a correlation matrix of (${\bf S}$} and ${\bf R}$).
 
 
 ### Priors for the Personal Well-Being model
@@ -284,14 +268,15 @@ bayestestR::describe_posterior(mod.2_b, ci = 0.90, test = c("p_direction"), diag
 <!-- # tab_model(mod.2_b) -->
 <!-- # ``` -->
 
-```{r texreg_bayes_table:pwi,cache=TRUE, include=FALSE}
-#Results for publication.
-table_model_latex_pwi(mod.1_b)
-```
 
-```{r texreg_bayes_table:ls, cache=TRUE, include=FALSE}
-table_model_latex_ls(mod.2_b)
-```
+<!-- ```{r texreg_bayes_table:pwi,cache=TRUE, include=FALSE} -->
+<!-- #Results for publication. -->
+<!-- table_model_latex_pwi(mod.1_b) -->
+<!-- ``` -->
+
+<!-- ```{r texreg_bayes_table:ls, cache=TRUE, include=FALSE} -->
+<!-- table_model_latex_ls(mod.2_b) -->
+<!-- ``` -->
 
 <!-- Coefficient plots used in manuscript-->
 <!-- ```{r coefficientplotsbayes, cache=TRUE} -->
@@ -331,11 +316,11 @@ plot(mod.2_b, pars ="b_")
 
 As do the random components
 
-```{r mixing_sd_pwi}
+```{r mixing_sd_pwi, cache=TRUE}
 plot(mod.1_b, pars ="sd_") # requires stronger priors
 ```
 
-```{r mixing_ls_pwi}
+```{r mixing_ls_pwi, cache=TRUE}
 plot(mod.2_b, pars ="sd_") # requires stronger priors
 ```
 

@@ -1,5 +1,5 @@
 ---
-title             : "National Longitudinal Evidence for Growth in Subjective Wellbeing from Spiritual Belief"
+title             : "National Longitudinal Evidence for Growth in Subjective Well-being from Spiritual Beliefs"
 shorttitle        : "Longitudinal Wellbeing from Spiritual Beliefs"
 author: 
   - name          : "Benjamin Highland"
@@ -40,7 +40,7 @@ mask              : no
 draft             : no
 documentclass     : "apa6"
 classoption       : "man"
-output            : papaja::apa6_word
+output            : papaja::apa6_pdf
 extra_dependencies: ["rotating", "booktabs", "graphicx","longtable","amsmath","amsfonts","amssymb"]
 
 ---
