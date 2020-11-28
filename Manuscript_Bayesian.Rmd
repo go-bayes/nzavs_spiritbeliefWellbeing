@@ -178,7 +178,7 @@ Statistical analysis was performed using R version 4.0.2 R version 3.6.1 (2020-0
 Because missing values can result in biased estimates [@Blackwell2017-oq], we multiply imputed 10 datasets using the AmeliaII package in R[@Honaker2011-yu].We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences. Additionally the results were robust to filtering of participants of N > 3 to N = 8 waves. In a supplemental analysis we include standard demographic indicators used in New Zealand Attitudes and Values Research: [NZAVS modelling standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf). We centered and scaled the education, deprivation, and political conservativism. We centred age was centred at and put into decade-long intervals. There are increasing worries 
 
 
-We provide the analyses of these additional analyses in the supplement.  The supplement describing these analysis is located at: https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing.
+We provide the analyses of these additional analyses in the supplement.  The supplement describing these analysis is located at: [https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing](https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing). The html document is located at: [https://osf.io/cu2gr/](https://osf.io/cu2gr/)
 
 
 ## System and packages
@@ -188,7 +188,7 @@ R [Version 4.0.2; @R-base] and the R-packages *Amelia* [Version 1.7.6; @R-Amelia
 
 
 ## Code
-All code for this analysis and a full report of the missing data imputation can be found at [https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing](https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing). 
+All code for this analysis and a full report of the missing data imputation can be found at [https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing](https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing). An html document decribing the same analysis is located at: [https://osf.io/cu2gr/](https://osf.io/cu2gr/). 
 
 # Results
 
