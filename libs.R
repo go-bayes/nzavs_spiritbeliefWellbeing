@@ -28,6 +28,11 @@ library("brms")
 library("rstan")
 library("rstanarm")
 library("tidybayes")
+library("dagitty")
+library("ggdag")
+
+citation("ggdag")
+
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores ())
 #theme_set(theme_few())

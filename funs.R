@@ -165,11 +165,37 @@ get_predictions <- function(x){
 }
 
 
+
+graph_predictions_BD <- function(x,y){ 
+  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"), 
+                              ci.lvl = 0.95,
+                              type = "fe",
+                              typical = "mean",
+                              back.transform = TRUE,
+                              ppd = FALSE,
+                              interval = "confidence")
+  plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y) # title to be suppled
+}
+
+get_predictions_BD <- function(x){ 
+  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"), 
+                              ci.lvl = 0.95,
+                              type = "fe",
+                              typical = "mean",
+                              back.transform = TRUE,
+                              ppd = FALSE,
+                              interval = "confidence")
+  return(out)
+}
+
+
+
+
 # latex model function
 table_model_latex_pwi <- function(x){ # x is a model
   xtract <-texreg::extract(
     x,
-    level = 0.95,
+    level = 0.90,
     include.random = TRUE,
     include.rsquared = F,
     include.nobs = T,
@@ -182,7 +208,7 @@ table_model_latex_pwi <- function(x){ # x is a model
          scalebox = .5,
          #fontsize= "footnotesize",
          label = "tab:REGRESS_PWI",
-         ci.force.level = 0.95, bold = 0.05,
+         ci.force.level = 0.90, bold = 0.05,
          settingstars = 0,
          booktabs = TRUE,
          custom.note ="")
@@ -191,7 +217,7 @@ table_model_latex_pwi <- function(x){ # x is a model
 table_model_latex_ls <- function(x){ # x is a model
   xtract <-texreg::extract(
     x,
-    level = 0.95,
+    level = 0.90,
     include.random = TRUE,
     include.rsquared = F,
     include.nobs = T,
@@ -204,7 +230,7 @@ table_model_latex_ls <- function(x){ # x is a model
          scalebox = .5,
          #fontsize= "footnotesize",
          label = "tab:REGRESS_LS",
-         ci.force.level = 0.95, bold = 0.05,
+         ci.force.level = 0.90, bold = 0.05,
          settingstars = 0,
          booktabs = TRUE,
          custom.note ="")
@@ -215,7 +241,7 @@ table_model_latex_ls <- function(x){ # x is a model
 table_model_latex_dual <- function(x,y){
   xtable <-texreg::extract(
     x,
-    level = 0.95,
+    level = 0.90,
     include.random = TRUE,
     include.rsquared = F,
     include.nobs = F,
@@ -223,7 +249,7 @@ table_model_latex_dual <- function(x,y){
     include.waic = F)
 ytable <-texreg::extract(
   y,
-  level = 0.95,
+  level = 0.90,
   include.random = TRUE,
   include.rsquared = F,
   include.nobs = F,
@@ -236,7 +262,7 @@ texreg(list(xtable,ytable),
        scalebox = .5,
        #fontsize= "footnotesize",
        label = "tab:REGRESS_LS",
-       ci.force.level = 0.95, bold = 0.05,
+       ci.force.level = 0.90, bold = 0.05,
        settingstars = 0,
        booktabs = TRUE,
        custom.note ="")

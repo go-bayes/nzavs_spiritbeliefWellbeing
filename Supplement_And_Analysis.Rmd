@@ -78,11 +78,40 @@ demographic_table(d_3)
 beliefs_table(d_3)
 ```
 
-We wrote the publication in $\LaTeX$, which requires converting the tables to .tex files; this conversion used a custom function we wrote in the `funs.R` file. 
+<!-- We wrote the publication in $\LaTeX$, which requires converting the tables to .tex files; this conversion used a custom function we wrote in the `funs.R` file.  -->
 
 <!-- ```{r latex_data_table, include=FALSE} -->
 <!-- # you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture") -->
-<!-- #demographic_table_latex(d_3) # note the furniture package conflicts with the table1 package.  -->
+<!-- demographic_table_latex() # note the furniture package conflicts with the table1 package. -->
+<!-- d_3%>% -->
+<!--   group_by(Wave)%>% -->
+<!-- furniture::table1( -->
+<!--                   Age,  -->
+<!--                   NZdep, -->
+<!--                   Education, -->
+<!--                   Employed, -->
+<!--                   Ethnic_Categories, -->
+<!--                   Male,Has_Partner,  -->
+<!--                   Political_Conservativism, -->
+<!--                   Urban,  -->
+<!--                   Beliefs,  -->
+<!--                   LIFESAT, -->
+<!--                   PWI, -->
+<!--                   overall=F) -->
+
+<!-- dat3<-d_3%>%dplyr::select( Age, NZdep, -->
+<!--                   Education, -->
+<!--                   Employed, -->
+<!--                   Ethnic_Categories, -->
+<!--                   Male,Has_Partner, -->
+<!--                   Political_Conservativism, -->
+<!--                   Urban, -->
+<!--                   Beliefs, -->
+<!--                   LIFESAT, -->
+<!--                   PWI,Wave) -->
+<!-- stargazer::stargazer(dat3) -->
+<!-- library(modelsummary) -->
+<!--   modelsummary::datasummary_df(ALL(Age) ~ Mean + SD + Histogram, data=dat3) -->
 <!-- ``` -->
 
 ## How many responses waves to select? 
@@ -118,13 +147,40 @@ The analyses for these waves is described below. These analyses reveal that the 
 
 ## Covariates
 
-In the reported analyses, we included covariates to adjust for potential confounding effects from usual suspect factors associated with our two measures of well-being (Personal Well-Being, Life Satisfaction). Where $Z$ is a third variable, $X$ is the predictor, and $Y$ is the outcome, there are at least four types of confounding that might arise: 
+Where $Z$ is a third variable, $X$ is the predictor, and $Y$ is the outcome, there are at least four types of confounding that might arise: 
+
 1. $Z$ causes $X$ and  $Z$ causes $Y$: $Z \leftarrow Z \rightarrow Y$
 2. $X$ causes $Z$ and  $Z$ causes $Y$: $X \rightarrow Z \rightarrow Y$
 3. $X$ causes $Z$ and $Y$ causes $Z$: $X \rightarrow Z; Y \rightarrow Z$
 4. $X$ causes $Z$; $Z$ causes $D$; and we condition on D (the descendent of $Z$: $Y$ causes $Z$: $Z$ \rightarrow D; $X \rightarrow Z; Y \rightarrow Z$ (see: [@mcelreath2020statistical], Chapter 6). 
 
-We report our usual-suspect analysis below, which does not change the inference in this study. However, the third and fourth type of confounding illustrate how conditioning on a covariates may confound by *opening* a relationship between the $X$ and $Y$ indicators in a regression analysis. Such confounding is particularly worrying in the case of longitudinal research.  The second type of counfounding can mask a relationship. We do not wish to exclude third variable explanations of the kind that arise from the first type of confounding. Indeed, we are careful to state in the main text that our study cannot infer a causal relationship between spirit beliefs and well-being. Rather, the contribution of the study comes as an inference about how the expected relationship between beliefs and well-being changes between those who differ in such beliefs over time. By contrast, a causal inference requires testing specific mechanistic theory. This is a matter for future research. Finally, the usual suspect analysis that we report below does not affect inference. We find that the relationships that we observe in the simple analysis also hold there. 
+We do not wish to exclude third variable explanations of the kind that arise from the first type of confounding. The second type of counfounding can mask a relationship. The third and fourth type of confounding illustrate how conditioning on a covariates may confound by *opening* a relationship between the $X$ and $Y$ indicators in a regression analysis. Such confounding is particularly worrying in the case of longitudinal research.  
+
+To address confounding we first obtained the New Zealand Attitudes and Values Study standard demographic indicators recommended to address confounding: [NZAVS modelling standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf). Next we modelled potential relationships between the coefficients within the model using the daggity package in R, and plotting results using the daggity and ggdag packages in R.
+
+
+```{r}
+# obtain dag
+tidy_ggdag <- dagitty::dagify(
+  WB ~ belief + years + partner + nzdep + urban + male + pols + empl,
+  WB ~~ partner + years,
+  belief ~ years + age + male + ethn,
+  partner ~ nzdep + age + belief, 
+  nzdep ~ empl,
+  pols ~ age  + empl + ethn + years,
+  empl ~ nzdep + edu + ethn,
+  exposure =  "belief",
+  outcome =   "WB")%>%
+  tidy_dagitty()
+
+# graph adjustment sets
+ggdag::ggdag_adjustment_set(tidy_ggdag, node_size = 14) + 
+  theme(legend.position = "bottom") 
+```
+
+This method reveals two adjustments sets: \{age, employment, male, political conservativism, and time\}, and \{age, ethnicty, male, and time.\}  We report the second set because employment is likely to contain more measurement error: some are not employed because they cannot find employment, others because they are not seeking employment (e.g. retirement).  However we report both model in our frequentist analysis. Neither model choice effects the results. We also report the simple unadjusted model and the fully saturated model (with potential collider and masking effects). 
+
+A word of caution, the fully-saturated model -- which would be typical in a longitudional regression analysis -- attenuates the growth in personal well-being and in life satisfaction among those who are skeptical in a spirit or Life-fore.  The inference of this study is not sentitive to this difference because the slopes differ for spirit beliefs across all models. However, we do not wish to infer that skepticism about a spirit or life force entirely prevents growth in personal well-being or life-satisfaction. We advise that researchers do not introduce variables into regression mmodels without systematically. evaluating potential confounding. 
 
 
 ## Bayesian data analysis
@@ -235,10 +291,14 @@ The deterministic part of both the Personal Well-Being and the Life Satisfaction
 \]
 
 
+
+
+
 ```{r setmodelformula}
 forumula_bayesPWI <- bf(PWI ~ yearsC * Beliefs + (1 + yearsC|Id))
 forumula_bayesLIFESAT <- bf(LIFESAT ~  yearsC * Beliefs + (1 + yearsC|Id))
 ```
+
 ```{r pwi_bayesmodel}
 # PWI
 mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds", cores = 8) # note these are very large files
@@ -250,6 +310,7 @@ mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds")
 # note these are very large files
 ```
 
+
 ```{r simple_table, cache =TRUE}
 bayestestR::describe_posterior(mod.1_b, ci = 0.90,  test = c("p_direction"),diagnostic = "ESS")
 ```
@@ -257,6 +318,8 @@ bayestestR::describe_posterior(mod.1_b, ci = 0.90,  test = c("p_direction"),diag
 ```{r simple_table_ls, cache =TRUE}
 bayestestR::describe_posterior(mod.2_b, ci = 0.90, test = c("p_direction"), diagnostic = "ESS")
 ```
+
+
 
 
 <!-- Tables: -->
@@ -301,15 +364,13 @@ brms::prior_summary(mod.2_b)
 #tab_model(mod.1_b, show.ci= .89) # we really should use something other than 95 but the team consensus is to use 95
 tab_model(mod.1_b, mod.2_b, show.ci= .95) # no difference to inference
 ```
-<!-- ```{r Bayesian_model_table, cache=TRUE, include =FALSE} -->
-<!-- table_model_latex_dual() -->
-<!-- ``` -->
 
 We inspected the posterior distributions, which look good.
 
 ```{r mixing_pwi, cache=TRUE}
 plot(mod.1_b, pars ="b_") 
 ```
+
 ```{r mixing_ls, cache=TRUE}
 plot(mod.2_b, pars ="b_") 
 ```
@@ -317,12 +378,13 @@ plot(mod.2_b, pars ="b_")
 As do the random components
 
 ```{r mixing_sd_pwi, cache=TRUE}
-plot(mod.1_b, pars ="sd_") # requires stronger priors
+plot(mod.1_b, pars ="sd_") #
 ```
 
 ```{r mixing_ls_pwi, cache=TRUE}
-plot(mod.2_b, pars ="sd_") # requires stronger priors
+plot(mod.2_b, pars ="sd_") # 
 ```
+
 
 The posterior prediction plots look reasonable.  
 
@@ -354,19 +416,147 @@ Next we graph the expected effects.
 ```{r Bayesian_pwi_predicted, cache=TRUE, dependson= mod.1_b}
 graph_predictions(mod.1_b, "Predicted Values of Personal Well-Being")
 ```
+
 ```{r Bayesian_lifesat_predicted, cache=TRUE, dependson= mod.2_b}
 graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction")
 ```
 
+To close the "back door" on potential confounds we create a regression model
+```{r dag}
+library("dagitty")
+library("ggdag")
+
+# theoretically plausible relationships
+tidy_ggdag <- dagify(
+  WB ~ belief + time + age + partner + nzdep + urban + male + pols + empl, # what might affect wellbeing?
+  WB ~~ partner, # bi-causal path
+  belief ~ time + age + male + ethn, # predictors of beliefs
+  partner ~ nzdep + age + belief,  # predictors of having a partner
+  nzdep ~ empl,  # predictor of deprivation
+  pols ~ age  + empl + ethn, # predictor of political orientation
+  empl ~ nzdep + edu + ethn, # predictor of employment
+  exposure =  "belief",
+  outcome =   "WB")%>%
+  tidy_dagitty()
+
+#graph
+ggdag_adjustment_set(tidy_ggdag, node_size = 14) + 
+  theme(legend.position = "bottom") 
+```
 
 
-### Test of the Bayesian saturacted model
+# Bayesian counfounder model
 
 
 ```{r setmodelformulaSAT}
-forumula_bayesPWI_SATUR <- bf(PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ yearsC|Id))
-forumula_bayesLIFESAT_SATUR <- bf(LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ yearsC|Id))
+forumula_bayesPWI_DAG <- bf(PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Ethnic_Categories + Male + (1+ yearsC|Id))
+forumula_bayesLIFESAT_DAG <- bf(LIFESAT ~   yearsC * Beliefs +  Age_in_Decades_C + Ethnic_Categories + Male + (1+ yearsC|Id))
 ```
+
+```{r pwi_bayesmodelPWI_DAG}
+# PWI
+mod.1_bDAG <-brm(forumula_bayesPWI_DAG, data= d_3, file ="mod.1_bDAG.rds", cores = 8) # note these are very large files
+summary(mod.1_bDAG)
+```
+
+
+```{r lsbayesmodelLS_DAG}
+# LIFE SAT
+mod.2_bDAG <-brm (forumula_bayesLIFESAT_DAG, data= d_3,cores = 8, file ="mod.2_bDAG.rds")
+###
+tab_model(mod.1_bDAG,mod.2_bDAG)
+# note these are very large files
+```
+
+The posterior prediction plots look reasonable.  
+
+```{r posteriorpredictivechecks:pwi_BAYES_CONFOUNDER, cache=TRUE}
+# cannot run on my laptop
+pp_1<-rstanarm::pp_check(mod.1_bDAG) + ylab("Personal well-being")
+pp_2<-rstanarm::pp_check(mod.2_bDAG) + ylab("Life Satisfaction") ## life sat suggests an ordinal model
+pp_1 
+```
+
+```{r posteriorpredictivechecks:ls_BAYES_CONFOUNDER}
+pp_2
+```
+
+
+```{r Bayesian_model_table, cache=TRUE, include =FALSE}
+table_model_latex_dual(mod.1_bDAG,mod.2_bDAG)
+```
+
+
+```{r cache =TRUE}
+g1dag1<-plot(parameters::model_parameters(mod.1_bDAG))+ ggtitle("Personal Well-Being Coefficients")
+g2dag1<-plot(parameters::model_parameters(mod.2_bDAG))+ ggtitle("Life Satisfaction Coefficients")
+```
+
+And here's the graph.
+
+```{r plot_coefficientplots_BayesDAG1, cache = TRUE}
+g1dag1/g2dag1
+```
+we used `r cite_r("b-references.bib")`
+
+
+
+
+
+```{r cache =TRUE}
+g1dag1<-plot(parameters::model_parameters(mod.1dag))+ ggtitle("Personal well-being Coefficients")
+g2dag1<-plot(parameters::model_parameters(mod.2dag))+ ggtitle("Life Satisfaction Coefficients")
+```
+
+And here's the graph.
+
+```{r plot_coefficientplots_LMER_FULL, cache = TRUE}
+g1dag1/g2dag1
+```
+
+Get the predictions
+
+```{r Bayesian_pwi_predictedSAT, cache=TRUE, dependson= mod.1_b}
+get_predictions(mod.1_bDAG)
+```
+
+```{r Bayesian_lifesat_predictedSAT, cache=TRUE, dependson= mod.2_b}
+get_predictions(mod.2_bDAG)
+```
+
+
+```{r Bayesian_pwi_predictedSAT, cache=TRUE, dependson= mod.1_b}
+graph_predictions(mod.1_bDAG, "Predicted Values of Personal Well-Being: Bayesian Model (Confounder Adjusted)")
+```
+
+```{r Bayesian_lifesat_predictedSAT, cache=TRUE, dependson= mod.2_b}
+graph_predictions(mod.2_bDAG, "Predicted Values of Life Satisfaction: Bayesian Model (Confounder Adjusted)")
+```
+
+
+
+# describe the posteriors 
+```{r simple_table, cache =TRUE}
+bayestestR::describe_posterior(mod.1_bDAG, test = c("p_direction"),diagnostic = "ESS")
+```
+
+```{r simple_table_ls, cache =TRUE}
+bayestestR::describe_posterior(mod.2_bDAG, test = c("p_direction"), diagnostic = "ESS")
+```
+
+
+
+## Test of the Bayesian saturacted model  for the record
+
+
+```{r setmodelformulaSAT}
+# note that BRMS automatically centers so we do not need to center years
+forumula_bayesPWI_SATUR <- bf(PWI ~  years * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ years|Id))
+
+forumula_bayesLIFESAT_SATUR <- bf(LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ years|Id))
+```
+
+
 ```{r pwi_bayesmodelSAT}
 # PWI
 mod.1_bSAT <-brm(forumula_bayesPWI_SATUR, data= d_3, file ="mod.1_bS.rds", cores = 8) # note these are very large files
@@ -376,6 +566,8 @@ summary(mod.1_bSAT)
 ```{r Bayesian_pwi_predictedSAT, cache=TRUE, dependson= mod.1_b}
 graph_predictions(mod.1_bSAT, "Predicted Values of Personal Well-Being")
 ```
+
+
 ```{r Bayesian_lifesat_predictedSAT, cache=TRUE, dependson= mod.2_b}
 graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction")
 ```
@@ -386,7 +578,6 @@ graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction")
 # LIFE SAT
 mod.2_bSAT <-brm (forumula_bayesLIFESAT_SATUR, data= d_3,cores = 8, file ="mod.2_bS.rds")
 summary(mod.2_bSAT)
-
 ###
 tab_model(mod.1_bSAT,mod.2_bSAT)
 # note these are very large files
@@ -395,9 +586,7 @@ tab_model(mod.1_bSAT,mod.2_bSAT)
 
 
 
-
-
-## ML estimation
+## REML estimation
 
 Many researchers have yet to familiarise themselves with Bayesian estimation. We therefore report results from models using a Maximum Likelihood estimator. We do so to avoid the perception of chicanery, as our experience is that such a choice does not affect inference for a dataset such as ours.  ML estimatation is also faster than our preferred Bayesian estimator. 
 
@@ -460,14 +649,99 @@ performance::check_collinearity(mod.2)
 ```
 
 
+## Adjustment using DAG 
+
+### First confounder model 
+
+```{r lmer_model_with_full_covariatesDAG1, cache =TRUE}
+library(lme4)
+pwi_formulaDag1 <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C  + Ethnic_Categories + Male + (1 + yearsC|Id)'
+ls_formulaDag1 <- 'LIFESAT ~ yearsC * Beliefs +  Age_in_Decades_C  + Ethnic_Categories + Male  + (1 + yearsC|Id)'
+
+mod.1dag1 <-lmer (pwi_formulaDag1, data= d_3)
+mod.2dag1 <-lmer (ls_formulaDag1, data= d_3)
+```
+
+Here is the table.
+```{r tab_dag1, cache = TRUE, dependson=d_3}
+sjPlot::tab_model(mod.1dag1,mod.2dag1)
+```
+
+We compared complex with simple models, and we found the inference does not change. 
+```{r}
+# identical result
+sjPlot::tab_model(mod.1dag1,mod.2dag1)
+```
+
+
+
+
+```{r Bayesian_lifesat_predict, cache =TRUE}
+graph_predictions(mod.1dag1, "Predicted Values of Life Satisfaction: Dag 1")
+```
+```{r Bayesian_lifesat_predict, cache =TRUE}
+graph_predictions(mod.2dag1, "Predicted Values of Life Satisfaction: Dag 1")
+```
+
+
+## Second confounder model 
+
+```{r lmer_model_with_full_covariates, cache =TRUE}
+library(lme4)
+pwi_formulaDag2 <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C  + Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + yearsC|Id)'
+ls_formulaDag2 <- 'LIFESAT ~ yearsC * Beliefs + Employed +  Age_in_Decades_C  + Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + yearsC|Id)'
+
+mod.1dag2 <-lmer (pwi_formulaDag2, data= d_3)
+mod.2dag2 <-lmer (ls_formulaDag2, data= d_3)
+```
+
+Here is the table
+
+```{r tab_dag2, cache = TRUE, dependson=d_3}
+sjPlot::tab_model(mod.1dag2,mod.1dag2)
+```
+
+
+```{r dag2_plotcreate cache =TRUE}
+g1dag2<-plot(parameters::model_parameters(mod.1dag2))+ ggtitle("Personal well-being Coefficients")
+g2dag2<-plot(parameters::model_parameters(mod.2dag2))+ ggtitle("Life Satisfaction Coefficients")
+```
+
+And here's the graph.
+
+```{r plot_coefficientplots_LMER_FULL_DAG2, cache = TRUE}
+g1dag2/g2dag2 
+```
+
+
+```{r Bayesian_lifesat_predict, cache =TRUE}
+graph_predictions(mod.1dag2, "Predicted Values of Life Satisfaction: Dag 2")
+```
+
+```{r Bayesian_lifesat_predict, cache =TRUE}
+graph_predictions(mod.2dag2, "Predicted Values of Life Satisfaction: Dag 2")
+```
+
+
+Note we would prefer the the first counfounder model because there is less measurement error (not employed could mean mean not retired). 
+
+Additionally the first counfounder model has fewer terms to estimate. 
+
+
+
+
+### ELSE
+For the record, we report the fully saturated "everything but the kitchen sink" model.  We show that throwing all regression coefficients produces a stronger effect for beliefs. 
+
 ```{r lmer model centering years}
 library(lme4)
 pwi_formulaC <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ yearsC|Id)'
 
 ls_formulaC <- 'LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ yearsC|Id)'
-
+summary(mod.1a)
 mod.1a <-lmer (pwi_formulaC, data= d_3)
 mod.2a <-lmer (ls_formulaC, data= d_3)
+
 
 # identical result
 performance::check_collinearity(mod.1a)
