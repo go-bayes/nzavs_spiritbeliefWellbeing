@@ -283,9 +283,15 @@ The deterministic part of both the Personal Well-Being and the Life Satisfaction
 \begin{aligned}
 & \quad  \boldsymbol{b} = \\
 & \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\
-&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ +  \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\
+&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\  + \\
+& \quad  \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\
+&\quad \beta_{5}(\operatorname{Age in Decades (C)})\  +\\ 
+& \quad  \beta_{6}(\operatorname{Ethnicity}_{\operatorname{Maori}})\ +\\
+&\quad \beta_{7}(\operatorname{Ethnicity}_{\operatorname{Pacific}})\ +  \\ 
+& \quad  \beta_{8}(\operatorname{Ethnicity}_{\operatorname{Asian}})\ +\\
+& \quad \beta_{4}(\operatorname{Male} )+ \\ 
 & \quad \beta_{4}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ 
-& \quad \beta_{4}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
+& \quad \beta_{5}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
 &\quad \beta_{6}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ 
 \end{aligned}
 \]
