@@ -114,6 +114,26 @@ demographic_table_latex <- function(x){
 }
 
 
+sample_report <-function(x){
+  x %>%
+  dplyr::select(Age, 
+                NZdep,
+                Education,
+                Employed,
+                Ethnic_Categories,
+                Male,
+                Has_Partner, 
+                Political_Conservativism,
+                Urban, 
+                Beliefs, 
+                LIFESAT,
+                PWI,
+                Wave)%>%
+  dplyr::group_by(Wave)%>%
+  report::report()%>% 
+  summary()
+}
+
 # function for predicting PWI  Not used
 
 # graph_predictions_pwi <- function(x){ 
