@@ -471,6 +471,24 @@ graph_predictions(mod.2_bDAG, "Predicted Values of Life Satisfaction: Bayesian M
 ```
 
 
+```{r mixing_pwi_DAG, cache=TRUE}
+plot(mod.1_bDAG, pars ="b_") 
+```
+
+```{r mixing_lsDAG, cache=TRUE}
+plot(mod.2_bDAG, pars ="b_") 
+```
+
+As do the random components
+
+```{r mixing_sd_pwi, cache=TRUE}
+plot(mod.1_bDAG, pars ="sd_") #
+```
+
+```{r mixing_ls_pwi, cache=TRUE}
+plot(mod.2_bDAG, pars ="sd_") # 
+```
+
 ## Bayesian model, no confounders addressed
 
 In the simple model, the in
@@ -547,24 +565,6 @@ tab_model(mod.1_b, mod.2_b, show.ci= .95) # no difference to inference
 ```
 
 We inspected the posterior distributions, which look good.
-
-```{r mixing_pwi, cache=TRUE}
-plot(mod.1_b, pars ="b_") 
-```
-
-```{r mixing_ls, cache=TRUE}
-plot(mod.2_b, pars ="b_") 
-```
-
-As do the random components
-
-```{r mixing_sd_pwi, cache=TRUE}
-plot(mod.1_b, pars ="sd_") #
-```
-
-```{r mixing_ls_pwi, cache=TRUE}
-plot(mod.2_b, pars ="sd_") # 
-```
 
 
 The posterior prediction plots look reasonable.  
@@ -670,8 +670,6 @@ sjPlot::tab_model(mod.1dag1,mod.2dag1)
 ```
 
 
-
-
 ```{r grapwi_predict_DAG, cache =TRUE}
 graph_predictions(mod.1dag1, "Predicted Values of Life Satisfaction: Dag 1")
 ```
@@ -723,127 +721,32 @@ Note we would prefer the the first counfounder model because there is less measu
 
 Additionally the first counfounder model has fewer terms to estimate. 
 
-
-### ELSE
-For the record, we report the fully saturated "everything but the kitchen sink" model.  We show that throwing all regression coefficients produces a stronger effect for beliefs. 
-
-```{r lmer model centering years_SATURATED}
-library(lme4)
-pwi_formulaC <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ yearsC|Id)'
-
-ls_formulaC <- 'LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ yearsC|Id)'
-summary(mod.1a)
-mod.1a <-lmer (pwi_formulaC, data= d_3)
-mod.2a <-lmer (ls_formulaC, data= d_3)
-
-
-# identical result
-performance::check_collinearity(mod.1a)
-performance::check_collinearity(mod.2a)
-```
-
-Here's the table, again, we find inference is robust. 
-
-
-```{r table of saturated models, cached = TRUE}
-sjPlot::tab_model(mod.1a,mod.2a)
-```
-
-
 <!-- Her are the coefficient plots for the full models -->
 <!-- ```{r coefficientplots_LMER_FULL, cache=TRUE} -->
 <!-- plot_models(mod.2, mod.1) + ylim(-.4, .75) + theme_plain()  # Plots -->
 <!-- ``` -->
 
 
-```{r robust to years and beliefs only, cache = TRUE, dependson=d_3,cache =TRUE}
-library(lme4)
-pwi_formula_simple <- 'PWI ~  yearsC * Beliefs + (1+ yearsC|Id)'
-ls_formula_simple <- 'LIFESAT ~  yearsC * Beliefs + (1+ yearsC|Id)'
-mod.1aa <-lmer(pwi_formula_simple, data= d_3)
-mod.2aa <-lmer(ls_formula_simple, data= d_3)
-
-# table
-sjPlot::tab_model(mod.1aa,mod.2aa)
-```
-
-Here is a predictive graph for years $\times$ beliefs interaction on PWI. Rhe function for producing this graph is in the `funs.R` file. 
-
-```{r Bayesian_pwi_predict, cache =TRUE}
-graph_predictions(mod.1aa, "Predicted Values of Personal well-being")
-```
-
-Here is a predictive graph for the years $\times$ beliefs interaction on life satisfaction. 
-
-```{r Bayesian_lifesat_predict, cache =TRUE}
-graph_predictions(mod.2aa, "Predicted Values of Life Satisfaction")
-```
-
-## Fully saturated model  
-
-Next we attempted a model with that is adjusted by "usual suspect" demographic indicator. The inference remains unchanged. 
-
-```{r lmer_model_with_full_covariates, cache =TRUE}
-library(lme4)
-pwi_formula <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1 + yearsC|Id)'
-ls_formula <- 'LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1 + yearsC|Id)'
-
-mod.1 <-lmer (pwi_formula, data= d_3)
-mod.2 <-lmer (ls_formula, data= d_3)
-```
-
-Here is the table.
-```{r saturated model, cache = TRUE, dependson=d_3}
-sjPlot::tab_model(mod.1,mod.2)
-```
-
-We compared complex with simple models, and we found the inference does not change. 
-```{r}
-# identical result
-sjPlot::tab_model(mod.1,mod.1aa)
-sjPlot::tab_model(mod.2,mod.2aa)
-```
-
-Next we checked for multi-collinearity. Multi-collinearity is low. (Note that we centre the "years" variable, had we not done this, mult-collinearity would have been high).  
-
-```{r check collinearity, cache =TRUE}
-# Low VIFS from 
-performance::check_collinearity(mod.1)
-performance::check_collinearity(mod.2)
-```
-
-
-```{r cache =TRUE}
-g1<-plot(parameters::model_parameters(mod.1aa))+ ggtitle("Personal well-being Coefficients")
-g2<-plot(parameters::model_parameters(mod.2aa))+ ggtitle("Life Satisfaction Coefficients")
-```
-
-And here's the graph.
-
-```{r plot_coefficientplots_LMER_FULL, cache = TRUE}
-g1/g2
-```
-
 Next, recall we want to check whether inference is robustness to the researcher degree of freedom in selecting how many number of waves a participant must have responded to for inclusion.
 
 ```{r run all the models with different ns, cache = TRUE}
-mod.1_3 <-lmer (pwi_formula_simple, data= d_4)
-mod.2_3 <-lmer (ls_formula_simple, data= d_4)
+mod.1_3 <-lmer (pwi_formulaDag1, data= d_4)
+mod.2_3 <-lmer (mod.2dag2, data= d_4)
 
-mod.1_4 <-lmer (pwi_formula_simple, data= d_4)
-mod.2_4 <-lmer (ls_formula_simple, data= d_4)
+mod.1_4 <-lmer (pwi_formulaDag1, data= d_4)
+mod.2_4 <-lmer (mod.2dag2, data= d_4)
 
-mod.1_5 <-lmer (pwi_formula_simple, data= d_5)
-mod.2_5 <-lmer (ls_formula_simple, data= d_5)
+mod.1_5 <-lmer (pwi_formulaDag1, data= d_5)
+mod.2_5 <-lmer (mod.2dag2, data= d_5)
 
-mod.1_6 <-lmer (pwi_formula_simple, data= d_6)
-mod.2_6 <-lmer (ls_formula_simple, data= d_6)
+mod.1_6 <-lmer (pwi_formulaDag1, data= d_6)
+mod.2_6 <-lmer (mod.2dag2, data= d_6)
 
-mod.1_7 <-lmer (pwi_formula_simple, data= d_7)
-mod.2_7 <-lmer (ls_formula_simple, data= d_7)
+mod.1_7 <-lmer (pwi_formulaDag1, data= d_7)
+mod.2_7 <-lmer (mod.2dag2, data= d_7)
 
-mod.1_8 <-lmer (pwi_formula_simple, data= d_8)
-mod.2_8 <-lmer (ls_formula_simple, data= d_8)
+mod.1_8 <-lmer (pwi_formulaDag1, data= d_8)
+mod.2_8 <-lmer (mod.2dag2, data= d_8)
 ```
 
 The inference is robut even to the poorly specified models using REML estimation.
@@ -866,15 +769,6 @@ g1a_3/g1a_8 +   plot_annotation(title = "Compare 3 X response model (top) with 8
 library(patchwork)
 g2a_3/g2a_8 +   plot_annotation(title = "Compare 3 X response model (top) with 8 X response model (bottom) : Life Satisfaction")
 ```
-
-Next, we modelled the relationship between having a partner and deprivation. We did so to address a reviewer's worry that we might have introduced correlation of between deprivation and having a partner that could spoil inference. We indeed found such a relationship. This is an important potential confound, and another reason to favour the simple longitudinal model that we used.  
-
-```{r checkforref model,cache =TRUE}
-m<-lmer (NZdep ~ Partner + (1|Id), data= d_3, na.action = na.omit)
-tab_model(m)
-model_parameters(m)
-```
-
 
 # Missing Data Analysis
 
