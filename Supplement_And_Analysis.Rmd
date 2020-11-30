@@ -161,7 +161,7 @@ demographic_table(d_3)
 <!--   modelsummary::datasummary_df(ALL(Age) ~ Mean + SD + Histogram, data=dat3) -->
 <!-- ``` -->
 
-## How many responses waves to select? 
+## How many waves to select? 
 
 We selected a minimum of three waves because we want to recover a longitudinal sample in which a slope for the effect of the years $\times$ beliefs effect might be recovered. However, we needed to consider whether our selection of three waves was sensitive to that degree of researcher freedom. So we also prepared 4-8 years of data frames for separate analyses.
 
