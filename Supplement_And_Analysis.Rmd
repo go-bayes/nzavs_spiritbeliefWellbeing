@@ -17,7 +17,6 @@ draft             : no
 # documentclass     : "apa6"
 classoption       : "man"
 output            : "html_document" 
-
 editor_options: 
   chunk_output_type: console
 ---
@@ -687,6 +686,49 @@ ls_formulaDag2 <- 'LIFESAT ~ yearsC * Beliefs + Employed +  Age_in_Decades_C  + 
 
 mod.1dag2 <-lmer (pwi_formulaDag2, data= d_3)
 mod.2dag2 <-lmer (ls_formulaDag2, data= d_3)
+
+
+dat <- cbind(
+  d_3,
+  demean(d_3, select = c("Age", "Beliefs"), group = "Id")
+)
+
+dat<-dat%>%
+  dplyr::mutate(Age_between_C = scale(Age_between, center =TRUE, scale = FALSE))
+
+str(dat)
+head(dat$Age_between_C)
+
+# After thought -- check within and between group aging... no differences
+# dmPWI <- 'PWI ~  Age_within * Beliefs + Age_between_C  +  Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + Age_within|Id)'
+# mod_dmPWI <-lmer (dmPWI, data= dat)
+# tab_model(mod_dmPWI)
+# summary(mod_dmPWI)
+# n1<-ggeffects::ggpredict(model = mod_dmPWI, terms = c("Age_within [minmax]","Beliefs"), 
+#                               ci.lvl = 0.95,
+#                               type = "fe",
+#                               typical = "mean",
+#                               back.transform = TRUE,
+#                               ppd = FALSE,
+#                               interval = "confidence")
+#   plot(n1, facets = T) +  gghighlight::gghighlight()  +  theme_blank() #+ ggtitle(y) # title to be suppled
+#   
+# graph_predictions(mod_dmPWI, "Predicted Values of PWI")
+# # 
+# lsPWI <- 'LIFESAT ~  Age_within * Beliefs + Age_between_C  +  Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + Age_within|Id)'
+# mod_lsPWI <-lmer (lsPWI, data= dat)
+# tab_model(mod_lsPWI)
+# summary(mod_lsPWI)
+# head(dat$Age_within)
+# n2<-ggeffects::ggpredict(model = mod_lsPWI, terms = c("Age_within [minmax]","Beliefs"),
+#                               ci.lvl = 0.95,
+#                               type = "fe",
+#                               typical = "mean",
+#                               back.transform = TRUE,
+#                               ppd = FALSE,
+#                               interval = "confidence")
+# plot(n2, facets = T) +  gghighlight::gghighlight()  +  theme_blank() #+ ggtitle(y) # title to be suppled
+
 ```
 
 Here is the table
