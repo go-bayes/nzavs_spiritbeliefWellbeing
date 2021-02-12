@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+*.rds
+*/Figs
+*.html
+*.docx
+*/table_cache
+*/Supplement_And_Analysis_cache
