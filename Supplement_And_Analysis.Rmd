@@ -368,7 +368,118 @@ ggdag_adjustment_set(tidy_ggdag, node_size = 14) +
 ```
 
 
-# Bayesian counfounder model
+
+
+## Priors in the Bayesian Model
+
+### Priors for the Personal Wellbeing model
+
+Model priors for Personal Wellbeing including group-level ID intercept and beliefs slopes are as follows:
+
+$$
+\begin{aligned}
+\operatorname{Personal Well Being}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
+\mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
+\boldsymbol{\alpha} \sim \alpha_{0} +\alpha_j \nonumber\\
+\alpha_{0} \sim \text{StudentT}(3,7.2,2.5)\nonumber\\
+\boldsymbol{\beta}\sim \boldsymbol{b} + \beta_j \nonumber\\
+\boldsymbol{b}\sim\text{Normal}(0,2.5) \nonumber\\
+\begin{bmatrix}
+\alpha_j \\
+\beta_j
+\end{bmatrix}
+\sim 
+\text{MVNormal}
+\begin{pmatrix}
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+,\boldsymbol{S} \nonumber
+\end{pmatrix}\\
+\boldsymbol{S} = 
+\begin{pmatrix}
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix} \boldsymbol{R} \begin{pmatrix}
+\sigma_{\alpha_j} & 0 \\
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix}\\
+\sigma_{\alpha_j} \sim 
+\text{HalfCauchy}(0,2.5) \nonumber\\
+\sigma_{\beta_j} \sim 
+\text{HalfCauchy}(0,2.5) \nonumber\\
+\boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
+\sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
+\end{aligned}
+$$
+
+
+### Priors for the Life Satisfaction model
+
+Model priors for Life Satisfaction Model with including group-level ID intercept and belief slopes are as follows:
+
+$$
+\begin{aligned}
+\operatorname{Life Satisfaction}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
+\mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
+\boldsymbol{\alpha} \sim \alpha_{0} +\alpha_j \nonumber\\
+\alpha_{0} \sim \text{StudentT}(3,5.5,2.5)\nonumber\\
+\alpha_j \sim \text{StudentT}+(3,0,2.5)\nonumber\\
+\boldsymbol{\beta}\sim \boldsymbol{b} + \beta_j \nonumber\\
+\boldsymbol{b}\sim\text{Normal}(0,2.5) \nonumber\\
+\begin{bmatrix}
+\alpha_j \\
+\beta_j
+\end{bmatrix}
+\sim 
+\text{MVNormal}
+\begin{pmatrix}
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+,\boldsymbol{S} \nonumber
+\end{pmatrix}\\
+\boldsymbol{S} = 
+\begin{pmatrix}
+\sigma_{\alpha_j} & 0 \\
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix} \boldsymbol{R} \begin{pmatrix}
+\sigma_{\alpha_j} & 0 \\
+0 & \sigma_{\beta_j} \nonumber
+\end{pmatrix}\\
+\sigma_{\alpha_j} \sim 
+\text{HalfCauchy}(0,1) \nonumber\\
+\sigma_{\beta_j} \sim 
+\text{HalfCauchy}(0,1) \nonumber\\
+\boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
+\sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
+\end{aligned}
+$$
+\newpage
+
+### Deterministic model 
+
+The deterministic portion of both the Personal Wellbeing and the Life Satisfaction models is as follows: 
+$$
+\begin{aligned}
+& \quad  \boldsymbol{b} = \\
+& \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\
+&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\  + \\
+& \quad  \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\
+&\quad \beta_{4}(\operatorname{Age in Decades (C)})\  +\\ 
+& \quad  \beta_{5}(\operatorname{Ethnicity}_{\operatorname{Maori}})\ +\\
+&\quad \beta_{6}(\operatorname{Ethnicity}_{\operatorname{Pacific}})\ +  \\ 
+& \quad  \beta_{7}(\operatorname{Ethnicity}_{\operatorname{Asian}})\ +\\
+& \quad \beta_{8}(\operatorname{Male} )+ \\ 
+& \quad \beta_{9}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ 
+& \quad \beta_{10}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
+&\quad \beta_{11}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ 
+\end{aligned}
+$$
+\newpage
+
+## Bayesian counfounder model
 
 
 ```{r setmodelformulaSAT}
