@@ -11,3 +11,5 @@
 /.DS_Store
 *table_cache
 *.pdf
+*.txt
+*.DS_Store
