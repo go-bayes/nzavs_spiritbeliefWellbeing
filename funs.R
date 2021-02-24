@@ -4,7 +4,7 @@ data_read_mymachine <- function(){
   out <-readRDS("~/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/00Bulbulia\ Pubs/2020/ldf.5")
 }
 
-# this code is for citing packages 
+# this code is for citing packages
 
 cite_packages <- function() {
   citation(package = "base", lib.loc = "/Users/josephbulbulia/Dropbox/BIBS")
@@ -17,17 +17,18 @@ cite_packages <- function() {
 
 
 # data clean
-data_clean_spirit_wellbeing <- function(df,y) {  
+data_clean_spirit_wellbeing <- function(df,y) {
   #function for cleaning this dataset for any arbitrary number of waves
   n_waves =  as.numeric(y)
   out <- df %>%
-    dplyr::mutate(Beliefs = factor(ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Not Believe Spirit", "_Skeptic_", 
+    dplyr::mutate(Beliefs = factor(ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Not Believe Spirit", "_Skeptic_",
                                           ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Believe Spirit", "_SpiritExcludesGod_",
                                                  ifelse(df$Believe.God == "Believe God" & df$Believe.Spirit == "Believe Spirit","GodAndSpirit","GodExcludesSpirit")))))%>%
     dplyr::filter(Wave !=2009)%>% # exclude wave 1 (no spirit measures that wave)
+    droplevels() %>% dropp unused waves
     dplyr::filter(YearMeasured==1)%>%
-    dplyr::group_by(Id) %>% 
-    dplyr::filter(n() > n_waves-1)%>% # select those who have responded to at least 3 waves # 
+    dplyr::group_by(Id) %>%
+    dplyr::filter(n() > n_waves-1)%>% # select those who have responded to at least 3 waves #
     dplyr::filter(n() !=0)%>%
     dplyr::ungroup(Id)%>%
     dplyr:: mutate(Years = as.numeric(years))%>%
@@ -52,7 +53,7 @@ data_clean_spirit_wellbeing <- function(df,y) {
                   Religious = as.factor(Religious),
                   Religion_Church_Log_C = scale(Religion.Church.Log, center = TRUE, scale = FALSE))%>%
     dplyr::rename(Political_Conservativism = Pol.Orient)
-  
+
   return(out)
 }
 
@@ -63,7 +64,7 @@ show_unique_id <- function(x){
   print(numb)
 }
 
-# Function to tally number of responses for the ids 
+# Function to tally number of responses for the ids
 count_waves_participants <- function(x){
   out<-dplyr::count(tally(group_by(x, Id), sort = TRUE, name="number_waves"), number_waves)
   print(out)
@@ -72,98 +73,98 @@ count_waves_participants <- function(x){
 
 # demographic table
 demographic_table <- function(x){
-  table1::table1(~ Age + 
-                   NZdep + 
-                   Education + 
-                   Employed + 
-                   Ethnic_Categories + 
-                   Male  + 
-                   Has_Partner  + 
-                   Political_Conservativism + 
-                   Urban +  
-                   Beliefs + 
-                   LIFESAT + PWI|Wave, data = x, 
+  table1::table1(~ Age +
+                   NZdep +
+                   Education +
+                   Employed +
+                   Ethnic_Categories +
+                   Male  +
+                   Has_Partner  +
+                   Political_Conservativism +
+                   Urban +
+                   Beliefs +
+                   LIFESAT + PWI|Wave, data = x,
                  overall = F)
 }
 
 beliefs_table <- function(x){
-  table1::table1(~ Beliefs|Wave, data = x, 
-                 overall = F)  
+  table1::table1(~ Beliefs|Wave, data = x,
+                 overall = F)
 }
 
 
 # latex demographic table
 #library("furniture")
 demographic_table_latex <- function(x){
-  furniture::table1(d_3, 
-                    Age, 
+  furniture::table1(d_3,
+                    Age,
                     NZdep,
                     Education,
                     Employed,
                     Ethnic_Categories,
-                    Male,Has_Partner, 
+                    Male,Has_Partner,
                     Political_Conservativism,
-                    Urban, 
-                    Beliefs, 
+                    Urban,
+                    Beliefs,
                     LIFESAT,
                     PWI,
-                    splitby = ~Wave, 
-                    overall=F, 
-                    output = "latex2", 
+                    splitby = ~Wave,
+                    overall=F,
+                    output = "latex2",
                     booktabs=TRUE)
 }
 
 
 sample_report <-function(x){
   x %>%
-  dplyr::select(Age, 
+  dplyr::select(Age,
                 NZdep,
                 Education,
                 Employed,
                 Ethnic_Categories,
                 Male,
-                Has_Partner, 
+                Has_Partner,
                 Political_Conservativism,
-                Urban, 
-                Beliefs, 
+                Urban,
+                Beliefs,
                 LIFESAT,
                 PWI,
                 Wave)%>%
   dplyr::group_by(Wave)%>%
-  report::report()%>% 
+  report::report()%>%
   summary()
 }
 
 # function for predicting PWI  Not used
 
-# graph_predictions_pwi <- function(x){ 
-#   pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+# graph_predictions_pwi <- function(x){
+#   pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"),
 #                               ci.lvl = 0.95,
 #                               type = "fe",
 #                               typical = "mean",
 #                               back.transform = TRUE,
 #                               ppd = FALSE,
 #                               interval = "confidence")
-#   plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+ 
-#     ggtitle("Predicted Values of Personal Wellbeing") 
+#   plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+
+#     ggtitle("Predicted Values of Personal Wellbeing")
 # }
 
 
-# graph_predictions_ls <- function(x){ 
-#   pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"), 
+# graph_predictions_ls <- function(x){
+#   pl1 <- ggeffects::ggpredict(model = x, terms = c("years [0:9]","Beliefs"),
 #                               ci.lvl = 0.95,
 #                               type = "fe",
 #                               typical = "mean",
 #                               back.transform = TRUE,
 #                               ppd = FALSE,
 #                               interval = "confidence")
-#   plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+ 
-#     ggtitle("Predicted Values of Life Satisfaction") 
+#   plot(pl1, facets = T) +  gghighlight::gghighlight()  +  theme_blank()+
+#     ggtitle("Predicted Values of Life Satisfaction")
 # }
 
 
-graph_predictions <- function(x,y){ 
-  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"), 
+graph_predictions <- function(x,y){
+  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -173,8 +174,8 @@ graph_predictions <- function(x,y){
   plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y) # title to be suppled
 }
 
-get_predictions <- function(x){ 
-  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"), 
+get_predictions <- function(x){
+  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -186,8 +187,8 @@ get_predictions <- function(x){
 
 
 
-graph_predictions_BD <- function(x,y){ 
-  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"), 
+graph_predictions_BD <- function(x,y){
+  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -197,8 +198,8 @@ graph_predictions_BD <- function(x,y){
   plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y) # title to be suppled
 }
 
-get_predictions_BD <- function(x){ 
-  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"), 
+get_predictions_BD <- function(x){
+  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -257,7 +258,7 @@ table_model_latex_ls <- function(x){ # x is a model
 }
 
 # dual table
-# 
+#
 table_model_latex_dual <- function(x,y){
   xtable <-texreg::extract(
     x,
@@ -297,9 +298,9 @@ amelia_imputation_clean <- function(x){
   # x is the longitudional dataframe (here 'd_3')
   prep <- x %>% # Remove what we do not need anymore
     dplyr::select(c(Beliefs,   # to predict missinglness
-                    Age, 
-                    Id, 
-                    Education, 
+                    Age,
+                    Id,
+                    Education,
                     NZdep,
                     KESSLER6,
                     LIFESAT,
@@ -342,8 +343,8 @@ amelia_imputation_clean <- function(x){
                            LIFESAT = as.numeric(LIFESAT),
                            Has_Partner = as.factor(Partner),
                            Beliefs = as.factor(Beliefs),
-                           Id =as.factor(Id), 
-                           yearsC = scale(years, center = TRUE, scale = FALSE)) 
+                           Id =as.factor(Id),
+                           yearsC = scale(years, center = TRUE, scale = FALSE))
   # center an d scale age
   out <- transform.amelia(prep3,Age_in_Decades_C = scale(Age.10yrs,scale =FALSE, center=TRUE))
   return(out)
@@ -370,15 +371,15 @@ loop_lmer_model_tab <- function(x){
 
 ## coefficient plot
 plot_coefs <- function(x,y){
- prm1<-parameters::model_parameters(x, test = "pd", 
-                                       diagnostic ="ESS", 
+ prm1<-parameters::model_parameters(x, test = "pd",
+                                       diagnostic ="ESS",
                                        effects = "fixed",
                                        group_level=FALSE,
                                        verbose=FALSE)
  out1<- plot(prm1) + ggtitle("Personal Well-Being Coefficients")
- 
- prm2<-parameters::model_parameters(y, test = "pd", 
-                                    diagnostic ="ESS", 
+
+ prm2<-parameters::model_parameters(y, test = "pd",
+                                    diagnostic ="ESS",
                                     effects = "fixed",
                                     group_level=FALSE,
                                     verbose=FALSE)
@@ -407,14 +408,14 @@ graph_predictions_imputed <-function( x, y){  # x = model objects
 
 create_hux_table<-function(x){
   as_hux(x)%>%
-    select("Parameter", "Coefficient", "CI_low","CI_high", "p") %>% 
+    select("Parameter", "Coefficient", "CI_low","CI_high", "p") %>%
     set_number_format(3)%>%
     set_left_padding(20)%>%
-    set_bold(1,everywhere)#%>% # to create 
+    set_bold(1,everywhere)#%>% # to create
   #quick_latex()
 }
 
-# 
+#
 # pst_1<-describe_posterior(
 #   mod.1_b,
 #   centrality = "median",
@@ -430,7 +431,7 @@ create_hux_table<-function(x){
 #   mutate_all(funs(str_replace(., "_", " X ")))%>%
 #   mutate_all(funs(str_replace(., "d_", "")))%>%
 #   ggpubr::ggtexttable(rows = NULL,
-#                       theme = ttheme("blank")) 
+#                       theme = ttheme("blank"))
 
 
 plot_mcmc_intervals <- function(x,y){
@@ -439,6 +440,6 @@ plot_mcmc_intervals <- function(x,y){
     plot(labels = FALSE)%>%
     ggpar(main = y) + theme_plain()
 }
- 
-  
+
+
 
