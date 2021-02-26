@@ -24,11 +24,11 @@ authornote: |
   1 Wake Forest School of Medicine 2 Department of Psychology Virginia Commonwealth University 3 Department of Psychology Georgia State University 4 School of Psychology University of Auckland 5 School of Psychology Victoria University
 
 abstract: | 
-  Previous research finds an association between spirituality and subjective well-being. However, the widespread use of tautological spirituality scales, poorly defined concepts of spirituality, and heavy reliance on cross-sectional samples cast doubts. Here, we leverage nine waves of panel data from a nationally diverse longitudinal study to systematically test whether having spiritual beliefs leads to growth in personal well-being and life satisfaction ($N$ = 20979, New Zealand, 2010-2018). Contrary to previous research, we find that belief in a spirit or Life Force predicts lower personal well-being and life-satisfaction. However, in support of previous speculation, beliefs in a spirit or Life Force predict increasing personal well-being and life satisfaction over time relative to disbelief. These finding are robust after to known demographic influences, and intriguingly, hold among those who believe in a God but disbelieve in a Spirit or Life Force. The recent growth in spiritual beliefs and decline in traditional religion across many industrial societies motivates further causal investigations of the mechanisms by which spiritual beliefs lead to growth in subjective well-being. 
+  Previous research finds an association between spirituality and subjective well-being. However, the widespread use of tautological spirituality scales, poorly defined concepts of spirituality, and heavy reliance on cross-sectional samples cast doubts. Here, we leverage ten waves of panel data from a nationally diverse longitudinal study to systematically test whether having spiritual beliefs leads to growth in personal well-being and life satisfaction ($N$ = 3,257, New Zealand, 2010-2020). Contrary to previous research, we find that belief in a Spirit or Life Force predicts lower personal well-being and life-satisfaction. However, in support of previous speculation, beliefs in a spirit or Life Force predict increasing personal well-being and life satisfaction over time relative to disbelief. These finding are robust after to known demographic influences, and intriguingly, hold among those who believe in a God but disbelieve in a Spirit or Life Force. The recent growth in spiritual beliefs and decline in traditional religion across many industrial societies motivates further causal investigations of the mechanisms by which spiritual beliefs lead to growth in subjective well-being. 
   <!-- https://tinyurl.com/ybremelq -->
   
 keywords          : "Belief, God, Health, Longitudinal, Panel, Religion, Spirit, Spirituality, Well-being"
-wordcount         : "5161 words in text body, 1191 words in reference section"
+wordcount         : "4760 words in text body, 1191 words in reference section"
 bibliography      : ["b-references.bib"]
 floatsintext      : no
 figurelist        : no
@@ -42,14 +42,15 @@ documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
 extra_dependencies: ["rotating", "booktabs", "graphicx","longtable","amsmath","amsfonts","amssymb"]
-
 ---
+
 ```{r libraries}
 library("tidyverse")
 library("papaja")
 library("here")
 
 ```
+
 ```{r global_options, echo=FALSE, include = FALSE}
 knitr::opts_chunk$set(#fig.path="Figs/", 
                       message=FALSE, 
@@ -64,172 +65,68 @@ knitr::opts_chunk$set(#fig.path="Figs/",
 
 The relationship between spirituality and psychological well-being is a matter of enduring fascination [@Ellsworth2010-yu]. Most previous attempts to quantify the relationship between these two domains find a positive association: spirituality predicts well-being [@Russinova2002-rq; @Ginsburg1995-jr; @Zaza2005-ac; @Koenig2010-gk; @Smith2003-re; @Koenig2001-ow]. However, critics have raised three credible challenges.
 
-First, previous research has frequently operationalised spirituality using measures of well-being. For example, The *Daily Spiritual Experience Scale*, which is widely used in spiritual mental health research, includes items to measure spirituality such as "I feel thankful for my blessings" and "I feel deep inner peace or harmony" [@Underwood2002-hg]. However, these items are also used to measure subjective well-being. Koenig describes this approach as "tautological" [@Koenig2008-lv]: it is unsurprising that spirituality is associated with well-being when the same items are used to measure both constructs. How pervasive is the use of tautological measures? A recent systematic-review of spirituality/mental health research found that nearly 45% of previous studies employ tautological scales [@Garssen2016-kb]. The first challenge, then, is to define measures of spirituality that are not well-being measures dressed up in other words. 
+First, previous research has frequently operationalised spirituality using measures of well-being. For example, The *Daily Spiritual Experience Scale*, which is widely used in spiritual mental health research, includes items to measure spirituality such as "I feel thankful for my blessings" and "I feel deep inner peace or harmony" [@Underwood2002-hg]. However, these items are also used to measure subjective well-being. Koenig describes this approach as "tautological" [@Koenig2008-lv]: it is unsurprising that spirituality is associated with well-being when the same items are used to measure both constructs. How pervasive is the use of tautological measures? A recent systematic-review of spirituality/mental health research found that nearly 45% of previous studies employ tautological scales [@Garssen2016-kb]. The first challenge, then, is to define measures of spirituality that are not well-being measures dressed up in other words.
 
-A second challenge is to disentangle concepts of spirituality from concepts of religion. The term "spirituality" was first used to describe the religious practices of ascetics and monks, however, more recently, the term has taken on a broader family of meanings that some of which apply to non-religious contexts [@Swinton2001-vr]. Notably, spirituality and health research has not converged on a unique set of meanings. Although it is commonplace across most areas of psychological science for researchers to investigate different operationalisations of focal concepts (think of memory research, or emotions research), the psychology of spirituality has mostly been conducted with cross-sectional North American samples among participants who affiliate with traditional religion [@Ano2005-hx; @Hackney2003-rs; @Sawatzky2005-rw; @Smith2003-re;  @Visser2010-kq; @Yonker2012-zg]. Whether the psychology of spirituality and health has repeated or extended the psychology of religion and health remains unclear. Put simply, cnceptual overlap between spirituality constructs and religion constructs creates a second line of terminological confusion that interacts with terminological confusion arising from overlap between spirituality constructs and well-being constructs. Indeed, researchers who have operationalised spirituality constructs as distinct from religion constructs have observed a negative association between spirituality and subjective well-being [@King2013-cg]. Thus to infer how spirituality affects subjective well-being, it is not sufficient to disentange spirituality constructs from tautological well-being constructs, it is also important to disentangle the concept of spirituality from the concept of religion, and to carefully investigate the mechanisms of well-being in populations who overlap, partially overlap, and differ in these dimensions. 
+A second challenge is to disentangle concepts of spirituality from concepts of religion. The term "spirituality" was first used to describe the religious practices of ascetics and monks, however, more recently, the term has taken on a broader family of meanings that some of which apply to non-religious contexts [@Swinton2001-vr]. Notably, spirituality and health research has not converged on a unique set of meanings. Although it is commonplace across most areas of psychological science for researchers to investigate different operationalisations of focal concepts (think of memory research, or emotions research), the psychology of spirituality has mostly been conducted with cross-sectional North American samples among participants who affiliate with traditional religion [@Ano2005-hx; @Hackney2003-rs; @Sawatzky2005-rw; @Smith2003-re; @Visser2010-kq; @Yonker2012-zg]. Whether the psychology of spirituality and health has repeated or extended the psychology of religion and health remains unclear. Put simply, cnceptual overlap between spirituality constructs and religion constructs creates a second line of terminological confusion that interacts with terminological confusion arising from overlap between spirituality constructs and well-being constructs. Indeed, researchers who have operationalised spirituality constructs as distinct from religion constructs have observed a negative association between spirituality and subjective well-being [@King2013-cg]. Thus to infer how spirituality affects subjective well-being, it is not sufficient to disentange spirituality constructs from tautological well-being constructs, it is also important to disentangle the concept of spirituality from the concept of religion, and to carefully investigate the mechanisms of well-being in populations who overlap, partially overlap, and differ in these dimensions.
 
 A third challenge is to investigate the relationship between spirituality and subjective well-being in nationally diverse samples over individual life-spans. To assess the mechanisms of well-being production requires observing change within people who differ in theoregically relevant ways and assessing how their lives turn out [@Garssen2016-km]. However, previous investigations of spirituality and well-being, including high-quality reviews and meta-analyses, have nearly exclusively relied on cross-sectional samples [@Ano2005-hx; @Hackney2003-rs; @Sawatzky2005-rw; @Smith2003-re; @Visser2010-kq; @Yonker2012-zg]. Although researching the key questions in spirituality psychological health research requires national longitudinal investigations, unfortunately the relevant datasets are rare.
 
-Here, we addresses these three challenges of previous research in the following ways: First, to avoid a tautological elision of "spirituality" and "well-being" we adopt a non-affective measure of spirituality as a "believe in a Spirit or Life Force." On the other side, to measure subjective well-being, we use a well-validated scale for personal well-being and a well-validated scale for Life-Satisfaction (see Method). Second, to disentangle spiritual beliefs from traditional religious beliefs and dis0beliefs we adopt a four-level categorical indicator combining the binary indicator of belief in a Spirit or Life Force with the binary indicator "Do you believe in some form of a spirit or Life Force?" The levels of this four-level categorical indicator for spiritual and religious beliefs and dis-beliefs are as follows: (1) **God and Spirit Disbelievers**: those who neither believe in a God nor believe in a Spirit or Life Force; (2) **Spirit Believers/God Disbelievers**: those who disbelieve in a God and believe in a Spirit or Life Force; (3) **God Believers/Spirit Disbelievers**: those who believe in a God but do not believe in a Spirit or Life Force; (4) **God and Spirit Believers**: Those who believe in a both God and a Spirit or Life Force. Clearly such an approach to categorising religion and spirituality cannot simultaneously address many interests in previous spirituality/well-being research. For example we do not combine our cognitive measure of belief with behavioral measures or attitudinal measures. However, this cost to scope is paid for with benefits to precision. The spiritual indicators measure cognitive states in which distinct varieties of religious and spiritual beliefs and dis-beliefs are straightforwardly disentangled and measured within people, and their longitudinal associations with reliable well-being indicators are systematically quantified Third, to understand how spirit beliefs affect growth, stability, or decline in psychological well-being over time, we leverage longitudinal responses from a nationally diverse probability sample year over nine years (2010 to 2018 New Zealand Attitudes and Values Study, NZAVS).  
+Here, we addresses these three challenges of previous research in the following ways: First, to avoid a tautological elision of "spirituality" and "well-being" we adopt a non-affective measure of spirituality as a "believe in a Spirit or Life Force." On the other side, to measure subjective well-being, we use a well-validated scale for personal well-being and a well-validated scale for Life-Satisfaction (see Method). Second, to disentangle spiritual beliefs from traditional religious beliefs and dis0beliefs we adopt a four-level categorical indicator combining the binary indicator of belief in a Spirit or Life Force with the binary indicator "Do you believe in some form of a spirit or Life Force?" The levels of this four-level categorical indicator for spiritual and religious beliefs and dis-beliefs are as follows: (1) **God and Spirit Disbelievers**: those who neither believe in a God nor believe in a Spirit or Life Force; (2) **Spirit Believers/God Disbelievers**: those who disbelieve in a God and believe in a Spirit or Life Force; (3) **God Believers/Spirit Disbelievers**: those who believe in a God but do not believe in a Spirit or Life Force; (4) **God and Spirit Believers**: Those who believe in a both God and a Spirit or Life Force. Clearly such an approach to categorising religion and spirituality cannot simultaneously address many interests in previous spirituality/well-being research. For example we do not combine our cognitive measure of belief with behavioral measures or attitudinal measures. However, this cost to scope is paid for with benefits to precision. The spiritual indicators measure cognitive states in which distinct varieties of religious and spiritual beliefs and dis-beliefs are straightforwardly disentangled and measured within people, and their longitudinal associations with reliable well-being indicators are systematically quantified Third, to understand how spirit beliefs affect growth, stability, or decline in psychological well-being over time, we leverage longitudinal responses from a nationally diverse probability sample year over nine years (2010 to 2018 New Zealand Attitudes and Values Study, NZAVS).
 
 # Method
 
 The New Zealand Attitudes and Values Study (NZAVS) is reviewed every three years by the University of Auckland Human Participants Ethics Committee. Our most recent ethics approval statement is as follows: The New Zealand Attitudes and Values Study was approved by The University of Auckland Human Participants Ethics Committee on 03-June-2015 until 03-June-2018, and renewed on 05-September-2017 until 03-June-2021. Reference Number: 014889. Our previous ethics approval statement for the 2009-2015 period is: The New Zealand Attitudes and Values Study was approved by The University of Auckland Human Participants Ethics Committee on 09-September-2009 until 09-September-2012, and renewed on 17-February-2012 until 09-September-2015. Reference Number: 6171. All participants granted informed written consent and The University of Auckland Human Participants Ethics Committee approved all procedures.
 
- 
 ## Sampling Procedure
 
-The NZAVS is an annual, longitudinal national probability sample of registered New Zealand voters, which was started in 2009. The Time 10 wave of the NZAVS contained responses from 47,951 participants (17,981 retained from one or more previous waves and 29,970 new additions from booster sampling and/or unmatched participants or unsolicited opt-ins). Participants who provided an email address were also emailed and invited to complete an online version if they preferred. We offered a prize draw for participation, non-respondents were emailed and phoned multiple times, and all participants were mailed a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. We also mailed our yearly pamphlet summarizing key research findings published during the current wave of the study.
+The NZAVS is an annual, longitudinal national probability sample of registered New Zealand voters, which was started in 2009. The NZAVS samples size by waves is as follows: Wave 1 (2009/10) = 6518; Wave 2 (2010/11) = 4441; Wave 3 (2011/12) = 6884; Wave 4 (2012/13) =  12179; Wave 5 (2013/14) =  18,261; Wave 6 (2014/15) = 15,820; Wave 7 (2015/16) = 13,942; Wave 8 (2016/17) = 21,936; Wave 9 (2017/18) =  17,072; Wave 10 (2018/19) = 47951; Wave 11(2019/20) = 36,524.  
+
+The first NZAVS measures of belief in God and belief in a spirit or life force appear in Wave 2 (2010/11) NZAVS contained responses from 4,441 participants. The Wave 2 (2010/11) NZAVS retained 4,425 from the initial Time 1 (2009/10) NZAVS sample of 6,518 participants, and included an additional 16 respondents who could not be matched to the Time 1 participant database (a retention rate of 67.9% over one year). Participants in the initial Time 1 (2009) sample were randomly selected from the New Zealand electoral roll (a national registry of registered voters). The response rate in the initial Time 1 sample, adjusting for the accuracy of the electoral roll and including anonymous responses was 16.6%. Participants were posted a copy of the questionnaire, with a second postal follow-up two months later. Participants who provided an email address were also emailed and invited to complete an online questionnaire if they preferred.  Full details for the NZAVS sampling procedure can be found in the supplement to this study can be found on our OSF link: <https://osf.io/cu2gr/>
 
 ## Participants
 
-The Time 10 (2018) wave of the NZAVS included 47,951 respondents. We analyzed data from participants who responded to our survey at least three times between Time 2 (2010) and Time 10 (2018), resulting in a sample of $N$ = 21,705 ($N$ = 20,979 with complete responses). Descriptive summaries for  demographic and theoretical indicators are given in Table 1.  
+We analyzed data from participants who responded to our survey in at least 9 of the 10 waves between Time 2 (2010/2011) and Time 11 (2019/2020), resulting in a sample of $N$ = 3,257 individuals. Descriptive summaries for demographic and theoretical indicators are given in Table 1. 
 
+Table 1 about here.
 
-Table 1 about here 
-\begin{table}[h]
-\begin{center}
-\scalebox{0.45}{
-\begin{tabular}[t]{llllllllllllllllllll}
-\toprule
-\multicolumn{2}{c}{ } & \multicolumn{2}{c}{2010 (N=3820)} & \multicolumn{2}{c}{2011 (N=6153)} & \multicolumn{2}{c}{2012 (N=10385)} & \multicolumn{2}{c}{2013 (N=15836)} & \multicolumn{2}{c}{2014 (N=15026)} & \multicolumn{2}{c}{2015 (N=13665)} & \multicolumn{2}{c}{2016 (N=18071)} & \multicolumn{2}{c}{2017 (N=15779)} & \multicolumn{2}{c}{2018 (N=16501)} \\
-\cmidrule(l{3pt}r{3pt}){3-4} \cmidrule(l{3pt}r{3pt}){5-6} \cmidrule(l{3pt}r{3pt}){7-8} \cmidrule(l{3pt}r{3pt}){9-10} \cmidrule(l{3pt}r{3pt}){11-12} \cmidrule(l{3pt}r{3pt}){13-14} \cmidrule(l{3pt}r{3pt}){15-16} \cmidrule(l{3pt}r{3pt}){17-18} \cmidrule(l{3pt}r{3pt}){19-20}
-  &    & Mean & Std. Dev. & Mean  & Std. Dev.  & Mean   & Std. Dev.   & Mean    & Std. Dev.    & Mean     & Std. Dev.     & Mean      & Std. Dev.      & Mean       & Std. Dev.       & Mean        & Std. Dev.        & Mean         & Std. Dev.        \\
-\midrule
-Age &  & 51.0 & 14.7 & 50.9 & 15.5 & 50.2 & 14.8 & 48.6 & 14.0 & 49.7 & 14.0 & 51.0 & 13.9 & 50.9 & 13.6 & 51.9 & 13.6 & 52.7 & 13.5\\
-NZdep &  & 4.8 & 2.8 & 4.6 & 2.7 & 4.9 & 2.8 & 4.7 & 2.8 & 4.7 & 2.8 & 4.7 & 2.8 & 4.6 & 2.7 & 4.6 & 2.7 & 4.6 & 2.7\\
-Education &  &  &  &  &  & 5.8 & 2.8 & 6.0 & 2.8 & 6.1 & 2.8 & 6.2 & 2.8 & 6.4 & 2.7 & 6.5 & 2.7 & 6.5 & 2.7\\
-Political\_Conservativism &  & 3.9 & 1.3 & 3.7 & 1.4 & 3.6 & 1.3 & 3.6 & 1.3 & 3.6 & 1.3 & 3.6 & 1.3 & 3.6 & 1.4 & 3.6 & 1.4 & 3.6 & 1.4\\
-LIFESAT &  & 5.2 & 1.2 & 5.1 & 1.2 & 5.1 & 1.2 & 5.2 & 1.2 & 5.2 & 1.2 & 5.2 & 1.2 & 5.2 & 1.2 & 5.3 & 1.2 & 5.3 & 1.2\\
-PWI &  & 6.8 & 1.7 & 6.8 & 1.7 & 6.8 & 1.7 & 7.0 & 1.7 & 7.0 & 1.7 & 7.1 & 1.7 & 7.1 & 1.7 & 7.1 & 1.7 & 7.1 & 1.6\\
-\midrule
- &  & N & \% & N & \% & N & \% & N & \% & N & \% & N & \% & N & \% & N & \% & N & \%\\
-Employed & 0 & 793 & 0.7 & 1276 & 1.1 & 2666 & 2.3 & 3531 & 3.1 & 3262 & 2.8 & 2972 & 2.6 & 4035 & 3.5 & 3655 & 3.2 & 3746 & 3.3\\
- & 1 & 2977 & 2.6 & 4795 & 4.2 & 7566 & 6.6 & 11991 & 10.4 & 11626 & 10.1 & 10378 & 9.0 & 14016 & 12.2 & 12070 & 10.5 & 12250 & 10.6\\
-Ethnic\_Categories & Euro & 2947 & 2.6 & 4375 & 3.8 & 7881 & 6.8 & 12270 & 10.6 & 12051 & 10.5 & 10959 & 9.5 & 14641 & 12.7 & 12906 & 11.2 & 13475 & 11.7\\
- & Maori & 556 & 0.5 & 638 & 0.6 & 1489 & 1.3 & 1897 & 1.6 & 1830 & 1.6 & 1608 & 1.4 & 1964 & 1.7 & 1826 & 1.6 & 1872 & 1.6\\
- & Pacific & 110 & 0.1 & 126 & 0.1 & 343 & 0.3 & 408 & 0.4 & 400 & 0.3 & 336 & 0.3 & 385 & 0.3 & 286 & 0.2 & 296 & 0.3\\
- & Asian & 124 & 0.1 & 190 & 0.2 & 409 & 0.4 & 579 & 0.5 & 572 & 0.5 & 473 & 0.4 & 664 & 0.6 & 574 & 0.5 & 579 & 0.5\\
-Male & 0 & 2390 & 2.1 & 3862 & 3.4 & 6542 & 5.7 & 10033 & 8.7 & 9500 & 8.2 & 8548 & 7.4 & 11377 & 9.9 & 9949 & 8.6 & 10388 & 9.0\\
- & 1 & 1430 & 1.2 & 2291 & 2.0 & 3843 & 3.3 & 5803 & 5.0 & 5478 & 4.8 & 5072 & 4.4 & 6635 & 5.8 & 5776 & 5.0 & 6077 & 5.3\\
-Has\_Partner & 0 & 1054 & 0.9 & 1806 & 1.6 & 2988 & 2.6 & 4237 & 3.7 & 3664 & 3.2 & 3407 & 3.0 & 4274 & 3.7 & 3775 & 3.3 & 3931 & 3.4\\
- & 1 & 2764 & 2.4 & 4325 & 3.8 & 7331 & 6.4 & 11493 & 10.0 & 11130 & 9.7 & 10176 & 8.8 & 13613 & 11.8 & 11964 & 10.4 & 12078 & 10.5\\
-Urban & Not\_Urban & 1531 & 1.3 & 2010 & 1.7 & 3512 & 3.0 & 5116 & 4.4 & 4894 & 4.2 & 4541 & 3.9 & 6223 & 5.4 & 2873 & 2.5 & 2938 & 2.5\\
- & Urban & 2271 & 2.0 & 3695 & 3.2 & 6709 & 5.8 & 10602 & 9.2 & 9937 & 8.6 & 8815 & 7.6 & 11622 & 10.1 & 12687 & 11.0 & 13291 & 11.5\\
-Beliefs & \_Disbeliefs\_ & 625 & 0.5 & 1312 & 1.1 & 2235 & 1.9 & 3639 & 3.2 & 0 & 0.0 & 3278 & 2.8 & 4420 & 3.8 & 4135 & 3.6 & 4514 & 3.9\\
- & \_SpiritExcludesGod\_ & 778 & 0.7 & 1508 & 1.3 & 2535 & 2.2 & 4206 & 3.6 & 0 & 0.0 & 3542 & 3.1 & 4808 & 4.2 & 4148 & 3.6 & 4309 & 3.7\\
- & GodAndSpirit & 1751 & 1.5 & 2560 & 2.2 & 4181 & 3.6 & 6201 & 5.4 & 0 & 0.0 & 5780 & 5.0 & 7002 & 6.1 & 5771 & 5.0 & 6782 & 5.9\\
- & GodExcludesSpirit & 228 & 0.2 & 274 & 0.2 & 593 & 0.5 & 1137 & 1.0 & 0 & 0.0 & 523 & 0.5 & 1094 & 0.9 & 950 & 0.8 & 666 & 0.6\\
-\bottomrule
-\end{tabular}
-}
-\caption{Sample statistics by year}
-\end{center}
-\end{table}
-
-## Theoretical indicators 
-### Life Satisfaction
-Life satisfaction is a measure of emotional well-being that was assessed using a 2-item version of the Satisfaction With Life Scale, which has previously been shown to correlate with aspects of religiosity [@Diener1985-xy]. Participants rated their agreement with the statements (a) "I am satisfied with my life"; and (b) "In most ways my life is close to ideal." The items were rated on 7-point response options ranging from 1 = strongly disagree to 7 = strongly agree. The mean Cronbach’s alpha for this 2-item scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher life satisfaction. Overall scores were means of the 2-items. 
-
-
-## Sample Demographics
-
-### Age 
-Age was put into units of 10 years and centered at its mean. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 2.
-Gender. Gender was assessed by asking participants if they were "Male" was coded as "1" and "Female" was coded as "0." 
-
-### Education
-Education level was measured using an 11-point rating developed by the New Zealand Qualification Authority known as the New Zealand Qualification Framework (NZQF; 0 = no qualification, 10 = doctoral degree). Education was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
-
-### Deprivation
-We measured the socioeconomic status of participants’ immediate (small area) neighborhood using the 2013 New Zealand Deprivation Index, which uses aggregate census information about the residents of small neighborhood-type units to assign a decile-rank index from 1 (most affluent) to 10 (most impoverished) [@Atkinson2014-ex]. The index is based on a Principal Components Analysis of the following nine variables (in weighted order): the proportion of adults who received a means-tested benefit, household income, proportion not owning own home, proportion single-parent families, proportion unemployed, proportion lacking qualifications, proportion household crowding, proportion no telephone access, and proportion no car access. Thus, the index reflects the average level of deprivation for small neighborhood-type units (or small community areas of about 80–90 people each) across the entire country. Our sample had a mean deprivation index of 4.80 (SD = 2.79). Deprivation was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
-
-### Employed
-Employment status was assessed by asking participants if they were currently working, "yes" was coded as "1" and "no" was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
-
-### Partner
-Participants were asked if they were in a relationship, "yes" was coded as "1" and no was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
-
-### Ethnicity
-Ethnicity was assessed using four basic categories: (1) New Zealand European/Pakeha, (2) Maori, (3) Pacific Islander, and (4) Asian. For detailed information pertaining to yearly responses and missingness, see Table 1.
-
-### Urban
-People were coded as either residing in an urban "1" or rural "0" area based on New Zealand census data. For detailed information pertaining to yearly responses and missingness, see Table 1.
-
-### Political Orientation
-To assess political orientation, we asked people to rate their political orientation using seven-point response options (1 = Liberal; 7 = Conservative). Higher values indicate more conservative political beliefs. Political Orientation was standardized and centered at its mean. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
-
-### Personal well-being 
-Personal well-being is a measure of function all well-being that was assessed using a 4-item version of the Australian Unity well-being Index [@Cummins2017-ur]. Participants rated their satisfaction with (a) "Your standard of living"; (b) "Your health"; (c) "Your future security"; (d) "Your personal relationships." Items were rated using a 10-point response option ranging from 1 = completely dissatisfied to 10 = completely satisfied. The mean Cronbach’s alpha for this scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher personal well-being. Overall scores were means of the 4-items. 
-
-### Belief in a Spirit/Life Force and/or a God  
-We assess belief in a spirit or a God by asking two non-affective questions: "Do you believe in a spirit or Life Force" and "Do you believe in a god?" Responses were coded as 1) **God and Spirit Disbelievers**: those who neither believe in a God nor believe in a Spirit or Life Force; (2) **Spirit Believers/God Disbelievers**: those who disbelieve in a God and believe in a Spirit or Life Force; (3) **God Believers/Spirit Disbelievers**: those who believe in a God but do not believe in a Spirit or Life Force; (4) **God and Spirit Believers**: those who believe in a both God and a Spirit or Life Force.
-
-
-
-## Statistical Analyses
-Statistical analysis was performed using R version 4.0.2 R version 3.6.1 (2020-06-22) 2019-07-05). We analyze data from participants who responded to the NZAVS survey at least three times between 2010 (Time 2) and 2018 (Time 10), resulting in a sample of  21,705 (*N* = 20,979 with complete responses).  To model growth in subjective well-being we use generalized linear mixed models. In our models, we account for the non-linear effects of time within participants by including the interaction of years (a continuous variable) with Beliefs (a four-level categorical indicator). The baseline for this indicator is disbelief in a Spirit/Life Force and disbelief in a God. To handle the dependencies introduced from the repeated measures, we include individual ID as an effect modeled as random, and we estimated a random effect for the slope for years. This allowed us to model correllation between individual-level intercept (starting high or low in Personal Well-Being/Life Satisfaction) and stability/growth/decline in the slope effect of years. We estimated all statitiscal models using both REML estimation [@R-lme4] and Bayesian estimation [@BRMSpackage] with weakly informative priors. We include the full reports in the Supplement. The REML estimates and the Bayesian estimates converged to within three decimal places.  We include model equations and priors at the end of this article. Here we report the results of the Bayesian estimator. 
-
-## Potential Confounders
-
-To address confounding we first obtained the New Zealand Attitudes and Values Study standard demographic indicators recommended to address confounding: [NZAVS modelling standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf). Next we modelled potential relationships between the coefficients within the model using the daggity package in R, and plotting results using the daggity and ggdag packages in R.
-
-This method reveals two adjustments sets equired to avoid potential confounding: \{age, employment, male, political conservativism, and time\}, and \{age, ethnicty, male, and time \}.Here, we report the second set because employment is likely to contain more measurement error: some are not employed because they cannot find employment, others because they are not seeking employment (e.g. retirement).  Results were insensitive to the choice set. Indeed, the inference proved robust to the simple model with only the interaction of years and beliefs, and robust to the fully saturated model in which all covariates were included (see the online supplement for details). In the fully saturated model, it appeared that those disbelieving in a Spirit or Life Force, exhibited no growth in Persona Well-Being and Life-Satisifaction over the nine years. Although this result offers stronger stronger evidence for a Spirit/Life Force well-being mechanism, it is likely the effect of collider confounding and masking. We discuss this point in more detail in the supplement, and mention it here to caution researchers from "everything-but-the-kitchen-sink" approaches to regression modelling.  
-
-## Missing Data 
-Because missing values can result in biased estimates [@Blackwell2017-oq], we multiply imputed 10 datasets using the AmeliaII package in R[@Honaker2011-yu].We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences. Additionally the results were robust to filtering of participants of N > 3 to N = 8 waves. 
-We include the multiple-imputation results in a supplement. Here, there were no differences in estimation relevant to inference, however, to improve inference, we advocate wider use of multiple-imputation or Bayesian approaches for handling missingness. 
-
-## System and packages
-The analysis was performed using R version 4.0.2 (2020-06-22). The Platform was x86_64-apple-darwin17.0 (64-bit) Running under: macOS Catalina 10.15.6
-We are greatful to the contributors and mantainers of the following packages:
-R [Version 4.0.3; @R-base] and the R-packages *Amelia* [Version 1.7.6; @R-Amelia], *citr* [Version 0.3.2; @R-citr], *dplyr* [Version 1.0.2; @R-dplyr], *equatiomatic* [Version 0.1.0.9000; @R-equatiomatic], *forcats* [Version 0.5.0; @R-forcats], *ggeffects* [Version 1.0.0; @R-ggeffects], *gghighlight* [Version 0.3.0; @R-gghighlight], *ggplot2* [Version 3.3.2; @R-ggplot2], *ggsci* [Version 2.9; @R-ggsci], *lme4* [Version 1.1.25; @R-lme4], *Matrix* [Version 1.2.18; @R-Matrix], *papaja* [Version 0.1.0.9997; @R-papaja], *parameters* [Version 0.9.0.1; @R-parameters], *patchwork* [Version 1.1.0; @R-patchwork], *prettycode* [@R-prettycode], *purrr* [Version 0.3.4; @R-purrr], *Rcpp* [Version 1.0.5; @R-Rcpp_a; @R-Rcpp_b], *readr* [Version 1.4.0; @R-readr], *report* [Version 0.2.0; @R-report], *see* [Version 0.6.0.1; @R-see], *sjPlot* [Version 2.8.6; @R-sjPlot], *stringr* [Version 1.4.0; @R-stringr], *styler* [Version 1.3.2; @R-styler], *table1* [Version 1.2.1; @R-table1], *texreg* [Version 1.37.5; @R-texreg], *tibble* [Version 3.0.4; @R-tibble], *tidyr* [Version 1.1.2; @R-tidyr], and *tidyverse* [Version 1.3.0; @R-tidyverse]
-
-
-## Code
-All code for this analysis and a full report of the missing data imputation can be found at [https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing](https://github.com/jacopastorius/nzavs_spiritbeliefWellbeing). An html document decribing the same analysis is located at: [https://osf.io/cu2gr/](https://osf.io/cu2gr/). 
-
-# Results
-
-Table 2 about here:
-
+```{=tex}
 \begin{table}
 \begin{center}
-\scalebox{0.6}{
+\scalebox{0.8}{
 \begin{tabular}{l c c}
 \toprule
  & PWI & Life Sat \\
 \midrule
-Intercept                           & $\mathbf{7.14}$   & $\mathbf{5.29}$   \\
-                                    & $ [ 7.11;  7.18]$ & $ [ 5.26;  5.31]$ \\
-yearsC                              & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
-                                    & $ [ 0.01;  0.02]$ & $ [ 0.00;  0.01]$ \\
-Beliefs\_SpiritExcludesGod\_        & $\mathbf{-0.06}$  & $0.01$            \\
-                                    & $ [-0.09; -0.03]$ & $ [-0.01;  0.03]$ \\
-BeliefsGodAndSpirit                 & $\mathbf{-0.06}$  & $\mathbf{0.03}$   \\
-                                    & $ [-0.09; -0.03]$ & $ [ 0.01;  0.06]$ \\
-BeliefsGodExcludesSpirit            & $-0.00$           & $\mathbf{0.06}$   \\
-                                    & $ [-0.04;  0.04]$ & $ [ 0.03;  0.09]$ \\
-Age\_in\_Decades\_C                 & $\mathbf{0.07}$   & $\mathbf{0.08}$   \\
-                                    & $ [ 0.06;  0.09]$ & $ [ 0.07;  0.09]$ \\
-Ethnic\_CategoriesMaori             & $\mathbf{-0.38}$  & $\mathbf{-0.11}$  \\
-                                    & $ [-0.43; -0.33]$ & $ [-0.14; -0.08]$ \\
-Ethnic\_CategoriesPacific           & $\mathbf{-0.38}$  & $\mathbf{-0.15}$  \\
-                                    & $ [-0.48; -0.29]$ & $ [-0.22; -0.09]$ \\
-Ethnic\_CategoriesAsian             & $\mathbf{-0.09}$  & $-0.05$           \\
-                                    & $ [-0.18; -0.01]$ & $ [-0.11;  0.02]$ \\
-Male1                               & $\mathbf{-0.06}$  & $\mathbf{-0.16}$  \\
-                                    & $ [-0.10; -0.02]$ & $ [-0.19; -0.13]$ \\
-yearsC:Beliefs\_SpiritExcludesGod\_ & $\mathbf{0.01}$   & $\mathbf{0.01}$   \\
-                                    & $ [ 0.00;  0.02]$ & $ [ 0.00;  0.02]$ \\
-yearsC:BeliefsGodAndSpirit          & $\mathbf{0.01}$   & $\mathbf{0.01}$   \\
-                                    & $ [ 0.01;  0.02]$ & $ [ 0.00;  0.02]$ \\
-yearsC:BeliefsGodExcludesSpirit     & $0.00$            & $-0.00$           \\
-                                    & $ [-0.01;  0.02]$ & $ [-0.01;  0.01]$ \\
+Intercept                            & $\mathbf{7.24}$   & $\mathbf{5.36}$   \\
+                                     & $ [ 7.18;  7.30]$ & $ [ 5.31;  5.40]$ \\
+BeliefsGodAndSpirit                  & $\mathbf{-0.08}$  & $-0.01$           \\
+                                     & $ [-0.13; -0.03]$ & $ [-0.05;  0.02]$ \\
+BeliefsGodExcludesSpirit             & $-0.04$           & $0.01$            \\
+                                     & $ [-0.10;  0.03]$ & $ [-0.04;  0.06]$ \\
+BeliefsSpiritExcludesGod             & $\mathbf{-0.06}$  & $-0.02$           \\
+                                     & $ [-0.10; -0.01]$ & $ [-0.05;  0.01]$ \\
+Age\_within                          & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
+                                     & $ [ 0.01;  0.03]$ & $ [ 0.01;  0.02]$ \\
+Age\_betweenC                        & $\mathbf{0.01}$   & $\mathbf{0.01}$   \\
+                                     & $ [ 0.01;  0.01]$ & $ [ 0.01;  0.01]$ \\
+Ethnic\_CategoriesMaori              & $-0.08$           & $0.04$            \\
+                                     & $ [-0.16;  0.00]$ & $ [-0.02;  0.10]$ \\
+Ethnic\_CategoriesPacific            & $\mathbf{-0.39}$  & $\mathbf{-0.29}$  \\
+                                     & $ [-0.54; -0.24]$ & $ [-0.39; -0.18]$ \\
+Ethnic\_CategoriesAsian              & $-0.05$           & $-0.04$           \\
+                                     & $ [-0.20;  0.13]$ & $ [-0.15;  0.09]$ \\
+Male1                                & $-0.05$           & $\mathbf{-0.11}$  \\
+                                     & $ [-0.13;  0.04]$ & $ [-0.16; -0.05]$ \\
+BeliefsGodAndSpirit:Age\_within      & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
+                                     & $ [ 0.01;  0.03]$ & $ [ 0.01;  0.02]$ \\
+BeliefsGodExcludesSpirit:Age\_within & $0.01$            & $0.00$            \\
+                                     & $ [-0.01;  0.03]$ & $ [-0.01;  0.02]$ \\
+BeliefsSpiritExcludesGod:Age\_within & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
+                                     & $ [ 0.01;  0.03]$ & $ [ 0.00;  0.02]$ \\
 \midrule
-SD: Idsd(Intercept)                 & $1.42$            & $0.98$            \\
-SD: Idsd(yearsC)                    & $0.13$            & $0.10$            \\
-SD: Idcor(Intercept,yearsC)         & $-0.03$           & $0.03$            \\
+SD: Idsd(Intercept)                  & $1.37$            & $0.96$            \\
+SD: Idsd(Age\_within)                & $0.10$            & $0.08$            \\
+SD: Idcor(Intercept,Age\_within)     & $-0.05$           & $-0.01$           \\
 \bottomrule
 \end{tabular}
 }
@@ -237,105 +134,221 @@ SD: Idcor(Intercept,yearsC)         & $-0.03$           & $0.03$            \\
 \label{tab:REGRESS_LS}
 \end{center}
 \end{table}
+```
+## Theoretical indicators
 
+### Life Satisfaction
 
+Life satisfaction is a measure of emotional well-being that was assessed using a 2-item version of the Satisfaction With Life Scale, which has previously been shown to correlate with aspects of religiosity [@Diener1985-xy]. Participants rated their agreement with the statements (a) "I am satisfied with my life"; and (b) "In most ways my life is close to ideal." The items were rated on 7-point response options ranging from 1 = strongly disagree to 7 = strongly agree. The mean Cronbach's alpha for this 2-item scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher life satisfaction. Overall scores were means of the 2-items.
+
+## Sample Demographics
+
+### Age
+
+Age was put into units of 10 years and centered at its mean. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 2. Gender. Gender was assessed by asking participants if they were "Male" was coded as "1" and "Female" was coded as "0."
+
+### Education
+
+Education level was measured using an 11-point rating developed by the New Zealand Qualification Authority known as the New Zealand Qualification Framework (NZQF; 0 = no qualification, 10 = doctoral degree). Education was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
+
+### Deprivation
+
+We measured the socioeconomic status of participants' immediate (small area) neighborhood using the 2013 New Zealand Deprivation Index, which uses aggregate census information about the residents of small neighborhood-type units to assign a decile-rank index from 1 (most affluent) to 10 (most impoverished) [@Atkinson2014-ex]. The index is based on a Principal Components Analysis of the following nine variables (in weighted order): the proportion of adults who received a means-tested benefit, household income, proportion not owning own home, proportion single-parent families, proportion unemployed, proportion lacking qualifications, proportion household crowding, proportion no telephone access, and proportion no car access. Thus, the index reflects the average level of deprivation for small neighborhood-type units (or small community areas of about 80--90 people each) across the entire country. Our sample had a mean deprivation index of 4.80 (SD = 2.79). Deprivation was centered at its mean and standardized. For detailed information pertaining to yearly means, standard deviations, and missingness, see Table 1.
+
+### Employed
+
+Employment status was assessed by asking participants if they were currently working, "yes" was coded as "1" and "no" was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
+
+### Partner
+
+Participants were asked if they were in a relationship, "yes" was coded as "1" and no was coded as "0." For detailed information pertaining to yearly responses and missingness, see Table 1.
+
+### Ethnicity
+
+Ethnicity was assessed using four basic categories: (1) New Zealand European/Pakeha, (2) Maori, (3) Pacific Islander, and (4) Asian. For detailed information pertaining to yearly responses and missingness, see Table 1.
+
+### Urban
+
+People were coded as either residing in an urban "1" or rural "0" area based on New Zealand census data. For detailed information pertaining to yearly responses and missingness, see Table 1.
+
+### Political Orientation
+
+To assess political orientation, we asked people to rate their political orientation using seven-point response options (1 = Liberal; 7 = Conservative). Higher values indicate more conservative political beliefs. Political Orientation was standardized and centered at its mean. For detailed information pertaining to means, standard deviations, and missingness, see Table 1.
+
+### Personal well-being
+
+Personal well-being is a measure of function all well-being that was assessed using a 4-item version of the Australian Unity well-being Index [@Cummins2017-ur]. Participants rated their satisfaction with (a) "Your standard of living"; (b) "Your health"; (c) "Your future security"; (d) "Your personal relationships." Items were rated using a 10-point response option ranging from 1 = completely dissatisfied to 10 = completely satisfied. The mean Cronbach's alpha for this scale was $\alpha$ = 0.90. Higher scores on this scale indicate higher personal well-being. Overall scores were means of the 4-items.
+
+### Belief in a Spirit/Life Force and/or a God
+
+We assess belief in a spirit or a God by asking two non-affective questions: "Do you believe in a spirit or Life Force" and "Do you believe in a god?" Responses were coded as 1) **God and Spirit Disbelievers**: those who neither believe in a God nor believe in a Spirit or Life Force; (2) **Spirit Believers/God Disbelievers**: those who disbelieve in a God and believe in a Spirit or Life Force; (3) **God Believers/Spirit Disbelievers**: those who believe in a God but do not believe in a Spirit or Life Force; (4) **God and Spirit Believers**: those who believe in a both God and a Spirit or Life Force.
+
+## Statistical Analyses
+
+Statistical analysis was performed using R version 4.0.2 R version 3.6.1 (2020-06-22) 2019-07-05). We analyze data from participants who responded to the NZAVS survey at least nine times between 2010/11 (Time 2) and 2019/20 (Time 11), resulting in a sample of 21,705 ($N$ = 3,257 with complete responses). To model growth in subjective well-being we use generalized linear mixed models. To avoid heterogeneity bias, we "demeaned" the variable "age" separating this variable into the within and between person components. Heterogeneity bias arises when an indicators varies within and between groups, which will case fixed effects estimates to correlate with group-level effects [@bell2015explaining], which is a common feature of panel data (in which a participant is a level-2 indicator)[@R-parameters]. We modelled the interaction of within participant aging and belief by including the interaction of aging within (a continuous variable, centered) and belief-state, a four-level categorical indicator. The baseline for this indicator is disbelief in a Spirit/Life Force and disbelief in a God -- or "disbeliever." To handle the dependencies introduced from the repeated measures, we include individual ID as an effect modeled as random, and we estimated a random effect for the slope for aging (within) This approach allowed us to model correlation between individual-level intercept (starting high or low in Personal Well-Being/Life Satisfaction) and stability/growth/decline in the slope effect of years. We estimated all statistical models using both REML estimation [@R-lme4] and Bayesian estimation [@BRMSpackage] with weakly informative priors, reported in the on-line supplement. The REML estimates, which we report in the supplement, converged to within three decimal places. The model equations and priors are in the on-line supplement. 
+
+## Potential Confounders
+
+To address confounding we first obtained the New Zealand Attitudes and Values Study standard demographic indicators recommended to address confounding: [NZAVS modelling standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf). Next we modelled potential relationships between the coefficients within the model using the `ggdag` package in R.
+
+This method reveals two adjustments sets required to avoid potential confounding: \{age_within, age_between, employment, male, political conservativism, and time\}, and \{age_within, age_between, ethnicty, male, and time\}. Here, we used the second adjustment set because employment is likely to contain more measurement error: some are not employed because they cannot find employment, others because they are not seeking employment (e.g. retirement). Results were insensitive to the choice set.
+
+## Missing Data
+
+Because missing values can result in biased estimates [@Blackwell2017-oq], we multiply imputed 10 datasets using the AmeliaII package in R[@Honaker2011-yu].We conducted a parallel analysis averaging over the multiply imputed datasets, without any substantive difference to inferences. 
+
+## System and packages
+
+The analysis was performed using R version 4.0.2 (2020-06-22). The Platform was x86_64-apple-darwin17.0 (64-bit) Running under: macOS Catalina 10.15.6 We are greatful to the contributors and mantainers of the following packages: R [Version 4.0.3; @R-base] and the R-packages *Amelia* [Version 1.7.6; @R-Amelia], *citr* [Version 0.3.2; @R-citr], *dplyr* [Version 1.0.2; @R-dplyr], *equatiomatic* [Version 0.1.0.9000; @R-equatiomatic], *forcats* [Version 0.5.0; @R-forcats], *ggeffects* [Version 1.0.0; @R-ggeffects], *gghighlight* [Version 0.3.0; @R-gghighlight], *ggplot2* [Version 3.3.2; @R-ggplot2], *ggsci* [Version 2.9; @R-ggsci], *lme4* [Version 1.1.25; @R-lme4], *Matrix* [Version 1.2.18; @R-Matrix], *papaja* [Version 0.1.0.9997; @R-papaja], *parameters* [Version 0.9.0.1; @R-parameters], *patchwork* [Version 1.1.0; @R-patchwork], *prettycode* [@R-prettycode], *purrr* [Version 0.3.4; @R-purrr], *Rcpp* [Version 1.0.5; @R-Rcpp_a; @R-Rcpp_b], *readr* [Version 1.4.0; @R-readr], *report* [Version 0.2.0; @R-report], *see* [Version 0.6.0.1; @R-see], *sjPlot* [Version 2.8.6; @R-sjPlot], *stringr* [Version 1.4.0; @R-stringr], *styler* [Version 1.3.2; @R-styler], *table1* [Version 1.2.1; @R-table1], *texreg* [Version 1.37.5; @R-texreg], *tibble* [Version 3.0.4; @R-tibble], *tidyr* [Version 1.1.2; @R-tidyr], and *tidyverse* [Version 1.3.0; @R-tidyverse]
+
+## Code
+
+All code for this analysis and a full report of the missing data imputation can be found at [https://github.com/go-bayes/nzavs_spiritbeliefWellbeing](https://github.com/go-bayes/nzavs_spiritbeliefWellbeing){.uri}. An html document decribing the same analysis is located at: <https://osf.io/cu2gr/>.
+
+# Results
+
+Table 2 about here:
+
+```{=tex}
+\begin{table}
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{l c c}
+\toprule
+ & PWI & Life Sat \\
+\midrule
+Intercept                                & $\mathbf{6.61}$   & $\mathbf{4.85}$   \\
+                                         & $ [ 6.44;  6.79]$ & $ [ 4.73;  4.97]$ \\
+Beliefs\_SpiritExcludesGod\_             & $\mathbf{-0.06}$  & $-0.02$           \\
+                                         & $ [-0.10; -0.01]$ & $ [-0.05;  0.01]$ \\
+BeliefsGodAndSpirit                      & $\mathbf{-0.07}$  & $-0.01$           \\
+                                         & $ [-0.12; -0.02]$ & $ [-0.05;  0.02]$ \\
+BeliefsGodExcludesSpirit                 & $-0.03$           & $0.01$            \\
+                                         & $ [-0.11;  0.03]$ & $ [-0.04;  0.06]$ \\
+Age\_within                              & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
+                                         & $ [ 0.01;  0.03]$ & $ [ 0.01;  0.02]$ \\
+Age\_between                             & $\mathbf{0.01}$   & $\mathbf{0.01}$   \\
+                                         & $ [ 0.01;  0.01]$ & $ [ 0.01;  0.01]$ \\
+Ethnic\_CategoriesMaori                  & $-0.08$           & $0.04$            \\
+                                         & $ [-0.16;  0.00]$ & $ [-0.02;  0.09]$ \\
+Ethnic\_CategoriesPacific                & $\mathbf{-0.39}$  & $\mathbf{-0.29}$  \\
+                                         & $ [-0.53; -0.23]$ & $ [-0.40; -0.18]$ \\
+Ethnic\_CategoriesAsian                  & $-0.06$           & $-0.03$           \\
+                                         & $ [-0.23;  0.12]$ & $ [-0.16;  0.08]$ \\
+Male1                                    & $-0.05$           & $\mathbf{-0.10}$  \\
+                                         & $ [-0.13;  0.03]$ & $ [-0.17; -0.05]$ \\
+Beliefs\_SpiritExcludesGod\_:Age\_within & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
+                                         & $ [ 0.01;  0.03]$ & $ [ 0.00;  0.02]$ \\
+BeliefsGodAndSpirit:Age\_within          & $\mathbf{0.02}$   & $\mathbf{0.01}$   \\
+                                         & $ [ 0.01;  0.03]$ & $ [ 0.01;  0.02]$ \\
+BeliefsGodExcludesSpirit:Age\_within     & $0.01$            & $0.00$            \\
+                                         & $ [-0.01;  0.03]$ & $ [-0.01;  0.02]$ \\
+\midrule
+SD: Idsd(Intercept)                      & $1.37$            & $0.96$            \\
+SD: Idsd(Age\_within)                    & $0.10$            & $0.08$            \\
+SD: Idcor(Intercept,Age\_within)         & $-0.05$           & $-0.01$           \\
+\bottomrule
+\end{tabular}
+}
+\caption{}
+\label{tab:REGRESS_LS}
+\end{center}
+\end{table}
+```
 Figure 1 about here
+
 ```{r fig.cap = "Coefficient Graphs", echo =FALSE,out.width="\\textwidth"}
-knitr::include_graphics("/Users/jbul716/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/000GIT_STUFF/nzavs_spiritbeliefWellbeing/coefBayesDag.png")
+knitr::include_graphics("/Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.png")
 ```
 
-## Personal Well-Being
-We fitted a linear mixed effects model using the brms package [@BRMSpackage] in R [@R-base] to predict personal well-being (PWI) with years (0-9), beliefs (four categories), with Id as random intercept and years as a random slope effect (see below: model equations). 
+## Personal well-being
+
+We fitted a linear mixed effects model using the brms package [@BRMSpackage] in R [@R-base] to predict personal well-being (PWI) with age_within centered (range = -5.79, 6.83), beliefs (four categories), with Id as random intercept and years as a random slope effect (see below: model equations).
 
 Within this model:
 
-  - The intercept, representing the expected personal well-being among disbelievers in a Spirit/Life Force and God who are Europeans, 50.77 years of age and do not identify as male is reliable (posterior median = 7.138 HDI [ 7.111,  7.167], pd = 100.00%).  
-  - The effect of years is positive is reliable (posterior median =  7.138, HDI [ 7.111,  7.167], pd  100.00%).  We infer that personal well-being increased in the baseline disbelieving population between 2010 and 2018.
-  - The effect of beliefs in *Spirit Excludes God*  is reliably negative (posterior median =  -0.059, HDI [-0.081, -0.036], pd 100.00%). We infer that the population that believed in a Spirit but did not believe in a God was lower in personal well-being at the intercept compared to disbelievers.
-  - The effect of beliefs in *God And Spirit*  is not  negative (posterior median = -0.060, HDI [-0.086, -0.034], pd = 100.00%) . We infer that the population that believed in a God and a Spirit or Life Force was lower in personal well-being at the intercept compared to disbelievers.
-  - The effect of beliefs in *God Excludes Spirit*  is not reliable (posterior median = -0.001 HDI [-0.036,  0.035], pd = 51.10%). We infer that the population that believed in a God and doubted a Spirit or Life Force were similar were similar in personal well-being at the intercept to the disbelieving population:
-  - The effect of Age in Decades (C) is   0.072 | [ 0.060,  0.083] | 100.00% |
-  - The effect of Maori Ethnicity is  -0.380 | [-0.420, -0.341] | 100.00% | 
-  - The effect of Pacific Ethnicity is  -0.384 | [-0.464, -0.312] | 100.00% |
-  - The effect of Asian Ethnicity is -0.093 | [-0.165, -0.023] |  98.28% |  
-  - The effect of Male gender is  -0.060 | [-0.094, -0.026] |  99.90% | 
-  
+  - The intercept, representing the expected personal well-being among disbelievers in a Spirit/Life Force and God who are Europeans, 50.77 years of age and do not identify as male is reliable (posterior median = 6.611  HDI [ 6.440,  6.780], pd = 100.00%).\
+  - The effect of aging (years) is positive is reliable (posterior median =  0.021, HDI [ 0.014,  0.029], pd 100.00%). We infer that personal well-being increased in the baseline disbelieving population between 2010 and 2020.
+  - The effect of beliefs in *Spirit Excludes God* is reliably negative (posterior median = -0.058, HDI [-0.097, -0.015], pd  98.90%). We infer that the population that believed in a Spirit but did not believe in a God was lower in personal well-being at the intercept compared to disbelievers.
+  - The effect of beliefs in *God And Spirit* is negative (posterior median =-0.075 , HDI [-0.124, -0.024], pd =  99.35%) . We infer that the population that believed in a God and a Spirit or Life Force was lower in personal well-being at the intercept compared to disbelievers.
+  - The effect of beliefs in *God Excludes Spirit* is not reliable (posterior median = -0.035 HDI [-0.107,  0.029], pd = 78.50%). We infer that the population that believed in a God and doubted a Spirit or Life Force were similar in personal well-being at the intercept to the disbelieving population:
 
-## Personal Well-Being: years X beliefs 
+
+## Personal well-being: aging (years) X beliefs
 
 ```{r fig.cap = "Personal Well-being prediction graph", echo =FALSE, out.width="\\textwidth"}
-knitr::include_graphics("/Users/jbul716/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/000GIT_STUFF/nzavs_spiritbeliefWellbeing/pwi_confounder_adjusted.png")
+knitr::include_graphics("/Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/pwi.png")
 ```
 
-The effect of years $\times$ belief in a *Spirit Excludes God*  is reliably positive  (posterior median = 0.011, HDI [ 0.003,  0.018], pd = 99.02%). We infer that people with beliefs in a spirit or Life Force who do not believe in a God tended to grow in their personal well-being over time at a faster rate than disbelievers grew.
-  - The effect of years $\times$ in *God And Spirit*  is reliably positive  (posterior median = 0.014, HDI [0.007, 0.021], pd = 99.98%). We infer that people who believe in a spirit or Life Force who also believe in a God tended to grow in their personal well-being over time at a faster rate than disbelievers grew.
-  - The effect of years $\times$ belief in *God Excludes Spirit*  is not reliable (posterior median = 0.004, HDI [-0.009,  0.015], pd =  68.73%).  We infer that people who believe in a God but not a spirit or Life Force did not grow at a faster rate in personal well-being than disbelievers grew.
-  
+  - The effect of aging (years) $\times$ belief in a *Spirit Excludes God* is reliably positive (posterior median = 0.020, HDI [  0.010,  0.030], pd =  99.90%). We infer that people with beliefs in a spirit or Life Force who do not believe in a God tended to grow in their personal well-being over time at a faster rate than disbelievers grew. 
+  - The effect of aging (years) $\times$ in *God And Spirit* is reliably positive (posterior median =0.022, HDI [0.012,  0.031], pd = 100.00%). We infer that people who believe in a spirit or Life Force who also believe in a God tended to grow in their personal well-being over time at a faster rate than disbelievers grew. 
+  - The effect of aging (years) $\times$ belief in *God Excludes Spirit* is not reliable (posterior median = 0.010, HDI [-0.007,  0.026], pd = 83.40%). We infer that people who believe in a God but not a spirit or Life Force did not grow at a faster rate in personal well-being than disbelievers grew.
+
 ## Life Satisfaction
 
-We fitted a linear mixed effects model using the brms package [@BRMSpackage] in R [@R-base] to predict personal well-being (PWI) with years (0-9), beliefs (four categories), with Id as random intercept and years as a random slope effect (see model equations, below).
+We fitted a linear mixed effects model using the brms package [@BRMSpackage] in R [@R-base] to predict Life Satisfaction (LS) with age_within centered (range = -5.79, 6.83), beliefs (four categories), with Id as random intercept and years as a random slope effect (see below: model equations).
+
 
 Within this model: 
-  - The intercept, representing the expected life satisfaction among disbelievers in a Spirit/Life Force and God who are Europeans, 50.77 years of age and do not identify as male is reliable (posterior median = 5.287, HDI [ 5.267,  5.306], pd = 100.00%).
-  - The effect of years is positive is reliable (posterior median =  0.008, HDI [ 0.003, 0.011], pd = 99.75%).  We infer that life satisfaction increased in the disbelieving population between 2010 and 2018.
-  -The effect of beliefs in *Spirit Excludes God*  is not reliable (posterior median =   0.007, HDI [-0.010,  0.023], pd = 75.33%). We infer that the population that believed in a Spirit but did not believe in a God was higher in life satisfaction at the intercept compared with disbelievers.
-  - The effect of beliefs in *God And Spirit*  is reliably positive (posterior median = 0.034, HDI [ 0.015, 0.053], pd = 99.83%). We infer that the population that believed in a God and a Spirit or Life Force was higher in life satisfaction at the intercept compared with disbelievers.
-  - The effect of beliefs in *God Excludes Spirit*  is reliably positive (posterior median =  0.057, HDI [ 0.030, 0.082], pd = 99.95%). We infer that the population that believed in a God and doubted a Spirit or Life Force  was higher in life satisfaction at the intercept compared with disbelievers.
-  - The effect of Age in Decades (C) is reliably positive (posterior median = 0.079, hDI [ 0.071,  0.087] pd = 100.00%).
-  - The effect of Maori Ethnicity is reliably negative (posterior median = -0.109 | [-0.137, -0.082], pd = 100.00%).
-  - The effect of Pacific Ethnicity is reliably negative (posterior median = -0.153 | [-0.210, -0.103], pd = 100.00%).
-  - The effect of Asian Ethnicity is not reliable (posterior median = -0.047, [-0.098,  0.004], pd = 93.08%).
-  - The effect of Male gender is reliabily negative (posterior median = -0.161, [-0.184, -0.138], pd = 100.00%)
+  - The intercept, representing the expected life satisfaction among disbelievers in a Spirit/Life Force and God who are Europeans, 50.77 years of age and do not identify as male is reliable (posterior median = 6.611, HDI [6.440,  6.780], pd = 100.00%). 
+  - The effect of aging (years) is positive is reliable (posterior median = 0.021, HDI [0.014, 0.029], pd = 100.00%). We infer that life satisfaction increased in the disbelieving population between 2010 and 2018. 
+  -The effect of beliefs in *Spirit Excludes God* is negative  (posterior median = -0.058, HDI [-0.097, -0.015], pd = 98.90%). We infer that the population that believed in a Spirit but did not believe in a God was lower in life satisfaction at the intercept compared with disbelievers. 
+  - The effect of beliefs in *God And Spirit* is reliably negative (posterior median = -0.075, HDI [ -0.124, -0.024], pd =  99.35%). We infer that the population that believed in a God and a Spirit or Life Force was lower in life satisfaction at the intercept compared with disbelievers. 
+  - The effect of beliefs in *God Excludes Spirit* is not reliable  (posterior median = -0.035, HDI [-0.107,  0.029], pd = 78.50%). We infer that the population that believed in a God and doubted a Spirit or Life Force not reliably different in life satisfaction at the intercept compared with disbelievers. 
   
-## Life Satisfaction: years X beliefs
+## Life Satisfaction: aging (years) X beliefs
 
 ```{r  fig.cap = "Life satisfaction prediction graph", echo = FALSE,out.width="\\textwidth"}
-knitr::include_graphics("/Users/jbul716/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/000GIT_STUFF/nzavs_spiritbeliefWellbeing/ls_counfounder_adjusted.png")
+knitr::include_graphics("/Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/ls.png")
 ```
-  - The interaction of years $\times$ beliefs in *Spirit Excludes God* is reliably positive (posterior median = 0.011, HDI [ 0.006, 0.016], pd = 99.95%). We infer that people with beliefs in a Spirit or Life Force who do not believe in a God tended to grow over time in their life satisfaction at a faster rate than disbelievers.
-  - The interaction of years $\times$ *God And Spirit*  is reliably positive (posterior median =  0.009, HDI [ 0.004, 0.014], pd = 99.72%). We infer that people who believe in a spirit or Life Force who also believe in a God tended to grow over time in their life satisfaction at a faster rate than disbelievers.
-  - The effect of years $\times$ beliefs in *God Excludes Spirit*  is not reliable (posterior median = -0.003, HDI [-0.012, 0.006], pd = 72.28%). We infer that people who believe in a God but not a spirit or Life Force tended to grow over time in their life satisfaction at a similar rate to disbelievers.
 
-
+  - The interaction of aging (years) $\times$ beliefs in *Spirit Excludes God* is reliably positive (posterior median =  0.020 , HDI [0.010,  0.030], pd = 99.90%). We infer that people with beliefs in a Spirit or Life Force who do not believe in a God tended to grow over time in their life satisfaction at a faster rate than disbelievers.
+  - The interaction of aging (years) $\times$ *God And Spirit* is reliably positive (posterior median = 0.022, HDI [0.012,  0.031], pd = 100.00%). We infer that people who believe in a spirit or Life Force who also believe in a God tended to grow over time in their life satisfaction at a faster rate than disbelievers.
+  - The effect of years $\times$ beliefs in *God Excludes Spirit* is not reliable (posterior median = 0.010, HDI [-0.007,  0.026], pd = 83.40%). We infer that people who believe in a God but not a spirit or Life Force did no experience reliably different growth in life satisfaction compared with disbelievers.
 
 # Discussion
 
 The purpose of this study has been to clarify the relationship between belief in a spirit/Life Force and subjective well-being, addressing three challenges from previous research: (1) tautological measures of spirituality and subjective well-being; (2) insufficiently distinct measures of spirituality and religion; (3) cross-sectional samples. Here, we ask whether beliefs in a Spirit or Life Force predict growth in personal well-being and life-satisfaction over 9 waves (8 years) in nationally diverse western populations who differ in the dimensions of spiritual and religious beliefs. We observe that:
 
-1. At the outset of the study, in 2010, the expected subjective well-being as measured using the personal well-being Inventory was expected to be lower among those who believed in Spirit or Life Force but not a God ($\hat{y} =$  6.93 | [6.88, 6.98]) and lower among those who believed in both a Spirit/Life Force and a God ($\hat{y}$ = 6.91 | [6.87, 6.95]) in comparison both to the population who neither believed in a God nor Spirit/ Life Force ($\hat{y}$ = 7.04 | [6.99, 7.10]) and to the population that believed in a God but was disbelieving in a Spirit or Life Force ($\hat{y}$ 7.03 | [6.95, 7.10]). (See Figure 2)  Similarly,the expected subjective well-being as measured using the life satisfaction Inventory was lower in 2010 among those who believed in Spirit or Life Force but not a God ($\hat{y}$ =   5.20 | [5.16, 5.23]). Life satisfaction was similar among those who believed in both a Spirit/Life Force and a God  ($\hat{y}$ =   5.23 | [5.21, 5.26]) in comparison both with the disbelieving population who neither believed in a God nor a Life Force ($\hat{y}$ = 5.25 | [5.21, 5.29]). Life satisfaction was highest among the population that believed in a God but was disbelieving in a Spirit or Life Force ($\hat{y}$ 5.32 | [5.26, 5.38]) (see Figure 3)
+1.  In 2010 the expected subjective well-being as measured using the personal well-being inventory was expected to be lower among those who believed in Spirit or Life Force but not a God ($\hat{y} =$  6.95 \| [6.86, 7.03]), lower among those who believed in both a Spirit/Life Force and a God ($\hat{y}$ = 6.91 \| [6.83, 6.99]), and lower among the population that believed in a God but was disbelieving in a Spirit or Life Force 6.95 \| [6.86, 7.03] when compared with the population of disbelievers ($\hat{y}$ = 7.12 \| [7.03, 7.21]) and to ($\hat{y}$ 7.03 \| [6.95, 7.10]). (See Figure 2). 
 
-2. However, over time, belief in a Spirit or Life Force predicts a trajectory of growth in personal well-being. In 2018, personal well-being among who believe in Spirit or Life Force but not a God had grown to ($\hat{y} =   7.19$ [7.15, 7.23], $\Delta \hat{y} = 0.26$). Among those who believed in both a Spirit/Life Force and a God, personal well-being had grown to ($\hat{y} = 7.20$ [7.17, 7.24], $\Delta \hat{y} = 0.29$). By contrast, personal well-being among the disbelieving population who neither believed in a God nor a Life Force grew less steeply across the eight year interval $\hat{y} =  7.21$ [7.17, 7.25], $\Delta \hat{y} = 0.17$). By the same token, personal well-being among those who believe in a God but are disbelieving a Spirit/Life Force grew less steeply $\hat{y} =  7.22$ [7.16, 7.28] $\Delta \hat{y} = 0.19$). In practical terms, the rate of increase in personal wellbeing among those with Spirit/Life Force beliefs was about 30% greater than it was among those who lacked such Spirit/Life Force (See Figure 2).  Similarly, over time, belief in a Spirit or Life Force predicts a trajectory of growth in life satisfaction.  In 2018, the expected effect of spiritual beliefs on life satisfaction among those who believe in Spirit or Life Force but not a God had grown to ($\hat{y} =  5.37$ [5.34, 5.40], $\Delta \hat{y} = 0.17$). Among those who believed in both a Spirit/Life Force and a God, life satisfaction had grown to ($\hat{y} = 5.39$  [5.36, 5.41], $\Delta \hat{y} = 0.19$).By contrast, life satisfaction among the population who neither believed in a God nor a Life Force lagged behind over the eight year interval $\hat{y} =   5.32$ [5.29, 5.35], $\Delta \hat{y} = 0.07$). Relatedly, life satisfaction in the population that believe in God but are disbelieving in a Spirit/Life Force grew less steeply $\hat{y} =  5.36$ [5.31, 5.41], $\Delta \hat{y} = 0.04$). In practical terms, the rate of increase in life satisfaction among those with Spirit/Life Force beliefs over three times greater than among those that lacked such beliefs (See Figure 3).
+Focusing on life satisfaction, people who believed in Spirit, either with a belief in God ($\hat{y}$ = 5.18 \| [5.13, 5.24]) or without a belief in God (5.18 \| [5.12, 5.24]) tended to be lower in life satsifaction than disbelievers in both a God and a Spirit (5.27 \| [5.20, 5.33]) and disbelievers in a spirit who also believed in a God (5.26 \| [5.15, 5.36]) (see Figure 3)
 
-3. Inferred growth from spiritual beliefs is evident from 9 annual waves of data collection (8 years), and across a nationally diverse sample. On this basis of this longitudinal information accumulated across nationally, we are confident that growth in personal well-being and in life-satisfaction among those who believe in a Spirit and Life Force are evident. Such effects co-occur in people who lack a belief in a God as well as among people who believe in a God as well as a Spirit or Life Force. 
+2.  Over a decade, people who believed in a God and Spirit ($\Delta \hat{y}$ = 0.55), people who believed in God and disbelieved in a Spirit ($\Delta \hat{y}$ = 0.40), and people who believed in a spirit and disbelieved in a God ($\Delta \hat{y}$ = 0.51) grew at up to twice the rate in personal well-being that disbelievers grew ($\Delta \hat{y}$ = 0.26).
+
+Similarly, belief in a Spirit or Life Force predicts a trajectory of growth in life satisfaction over the decade (2010-2020); 
+Over a decade, people who believed in a God and Spirit ($\Delta \hat{y}$ = .35), people who believed in God and disbelieved in a Spirit ($\Delta \hat{y}$ = .24), and people who believed in a spirit and disbelieved in a God ($\Delta \hat{y}$ = 0.33) grew at up to twice the rate in personal well-being that disbelievers grew ($\Delta \hat{y}$ = 0.18). Here to we find a growth rate that is twice as large for people who believe in a spirit or life force. 
+
+Because These inferred growth rates for personal well being and life satisfaction are evident from repeated measures across 10 annual waves of nationally diverse data collection, we are confident that in New Zealand, spiritual beliefs predict strong increases in personal well-being and life satisfaction
 
 ## Key Questions
 
-Two fundamental question arise from the patterns we observe in this study. The first question is why those who believed in Spirit or Life Force  were expected to be initially lower relative the populations that did not believe in a Spirit or Life Force? During the early years of New Zealand Attitudes and Values data collection New Zealand was emerging from the twin impacts of a global financial recession and a series of devastating earthquakes that destroyed 30% of Christchurch, New Zealand's second largest city [@greaves2015regional]. Orthogonal research observes that economic and ecological distress are associated with increases in traditional religious beliefs [@sibley2012faith]. Experimental research has found among religious people death anxiety provokes acceptance of non-traditional religious beliefs [@norenzayan2006belief]. Because spiritual belief items were only introduced during the year of the earthquakes, we cannot here resolve whether the shifting relationship between spirit beliefs and well-being were the result of demand for spiritual beliefs among those secular and religious people who were adversely affected by the financial crisis or natural disaster. On the other hand, such exogenous influences might have adversely affected those with Spirit/Life Force beliefs in the early phases of this study, and the patterns observed here are better understood as a regression to a population mean. Though beyond the scope of this study, how subjective well-being changes in response to changes in spiritual beliefs, as well as special sensitivities to distress among people with spiritual beliefs are important questions for future investigations. 
+Two fundamental question arise from the patterns we observe in this study. The first question is why those who believed in Spirit or Life Force were expected to be initially lower relative the populations that did not believe in a Spirit or Life Force? During the early years of New Zealand Attitudes and Values data collection New Zealand was emerging from the twin impacts of a global financial recession and a series of devastating earthquakes that destroyed 30% of Christchurch, New Zealand's second largest city [@greaves2015regional]. Orthogonal research observes that economic and ecological distress are associated with increases in traditional religious beliefs [@sibley2012faith]. Experimental research has found among religious people death anxiety provokes acceptance of non-traditional religious beliefs [@norenzayan2006belief]. Because spiritual belief items were only introduced during the year of the earthquakes, we cannot here resolve whether the shifting relationship between spirit beliefs and well-being were the result of demand for spiritual beliefs among those secular and religious people who were adversely affected by the financial crisis or natural disaster. On the other hand, such exogenous influences might have adversely affected those with Spirit/Life Force beliefs in the early phases of this study, and the patterns observed here are better understood as a regression to a population mean. Though beyond the scope of this study, how subjective well-being changes in response to changes in spiritual beliefs, as well as special sensitivities to distress among people with spiritual beliefs are important questions for future investigations.
 
-Second, our task here has been to clarify whether beliefs predict growth in well-being. However, as we have indicated at the outset, the term "spirituality" applies to a family of concepts. We have not attempted to model the diverse philosophical, social, and behavioral attributes within people who adhere to spirit beliefs. Moreover, people might identify as spiritual without having any accompanying belief in a Spirit or Life Force. The task of clarifying how distinct features across a diverse family of "spirituality" concepts affect perceptions of individual well-being remain intriguing horizons. 
+Second, our task here has been to clarify whether beliefs predict growth in well-being. However, as we have indicated at the outset, the term "spirituality" applies to a family of concepts. We have not attempted to model the diverse philosophical, social, and behavioral attributes within people who adhere to spirit beliefs. Moreover, people might identify as spiritual without having any accompanying belief in a Spirit or Life Force. The task of clarifying how distinct features across a diverse family of "spirituality" concepts affect perceptions of individual well-being remain intriguing horizons.
 
 ## Importance
-Despite its limitations, our study is important both for its methods and its findings. We demonstrate that spirituality can be operationalised to avoid the pitfalls of tautology evident in previous research by focusing on states of beliefs, that concepts of such belief states can be refined to enable distinctions necessary to investigate spirituality in mixed secular and religious populations, and that the question of whether beliefs states predict growth in subjective well-being can be investigated in a longitudinal setting. Our finding that, indeed, spiritual beliefs predict growth in perceived well-being and life satisfaction may hold practical importance. Previous research indicates that religious beliefs are associated with psychological well-being [@Smith2003-re]. Western populations are increasingly identifying as "spiritual but not religious" [@Zinnbauer2005-vz; @Swinton2001-vr]. Here, we observe that even among people who lack a traditional religious belief in God, believing in a Spirit or Life Force predicts incremental improvements in well-being that sum to practically large effects. Though the contextual and psychological mechanisms that underpin such growth will require many decades of research, this preliminary finding is good news for those increasing numbers of individuals continue to report spiritual beliefs but who do not affirm traditional religious beliefs. 
+
+Despite its limitations, our study is important both for its methods and its findings. We demonstrate that spirituality can be operationalised to avoid the pitfalls of tautology evident in previous research by focusing on states of beliefs, that concepts of such belief states can be refined to enable distinctions necessary to investigate spirituality in mixed secular and religious populations, and that the question of whether beliefs states predict growth in subjective well-being can be investigated in a longitudinal setting. Our finding that, indeed, spiritual beliefs predict growth in perceived well-being and life satisfaction may hold practical importance. Previous research indicates that religious beliefs are associated with psychological well-being [@Smith2003-re]. Western populations are increasingly identifying as "spiritual but not religious" [@Zinnbauer2005-vz; @Swinton2001-vr]. Here, we observe that even among people who lack a traditional religious belief in God, believing in a Spirit or Life Force predicts incremental improvements in well-being that sum to practically large effects. Though the contextual and psychological mechanisms that underpin such growth will require many decades of research, this preliminary finding is good news for those increasing numbers of individuals continue to report spiritual beliefs but who do not affirm traditional religious beliefs.
 
 ### Authors contributions
-BH and JB conceived of the study. BH wrote the first draft of the manuscript. EW improved the approach with BH and JB and revised the manuscript. DD revised the manuscript. CS was responsible for NZAVS data collection and revised the manuscript. JB performed the data re-analysis and revised the manuscript. 
 
+BH and JB conceived of the study. BH wrote the first draft of the manuscript. EW improved the approach. JB did the reanalysis. BH, DD, CS, EW, and JB revised the manuscript.
 
 ### Funding statement
-The New Zealand Attitudes and Values Study is supported by a grant from the Templeton Religion Trust (TRT0196). The funders had no role in the preparation of the article or the decision to publish.
 
+The New Zealand Attitudes and Values Study is supported by a grant from the Templeton Religion Trust (TRT0196). The funders had no role in the preparation of the article or the decision to publish.
 
 \newpage
 
-
-
 # References
 
+```{=tex}
 \begingroup
 \setlength{\parindent}{-0.5in}
 \setlength{\leftskip}{0.5in}
+```
+::: {#refs custom-style="Bibliography"}
+:::
 
-<div id="refs" custom-style="Bibliography"></div>
 \endgroup
-
-

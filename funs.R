@@ -1,9 +1,9 @@
 # funs.R
 # functions used in this analysis
 data_read_mymachine <- function(){
-  out <-readRDS("~/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/00Bulbulia\ Pubs/2020/ldf.5")
+  out <-readRDS("/Users/jbul176/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/00Bulbulia\ Pubs/2021/DATA/ldf.5")
 }
-
+#  #out <-readRDS("~/The\ Virtues\ Project\ Dropbox/Joseph\ Bulbulia/00Bulbulia\ Pubs/2020/ldf.5") # previous submission did not have 2019/20 waves
 # this code is for citing packages
 
 cite_packages <- function() {
@@ -21,14 +21,14 @@ data_clean_spirit_wellbeing <- function(df,y) {
   #function for cleaning this dataset for any arbitrary number of waves
   n_waves =  as.numeric(y)
   out <- df %>%
-    dplyr::mutate(Beliefs = factor(ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Not Believe Spirit", "_Skeptic_",
-                                          ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Believe Spirit", "_SpiritExcludesGod_",
+    dplyr::mutate(Beliefs = factor(ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Not Believe Spirit", "Disbeliever",
+                                          ifelse(df$Believe.God == "Not Believe God" & df$Believe.Spirit == "Believe Spirit", "SpiritExcludesGod",
                                                  ifelse(df$Believe.God == "Believe God" & df$Believe.Spirit == "Believe Spirit","GodAndSpirit","GodExcludesSpirit")))))%>%
     dplyr::filter(Wave !=2009)%>% # exclude wave 1 (no spirit measures that wave)
-    droplevels() %>% dropp unused waves
+    droplevels() %>% #dropp unused waves
     dplyr::filter(YearMeasured==1)%>%
     dplyr::group_by(Id) %>%
-    dplyr::filter(n() > n_waves-1)%>% # select those who have responded to at least 3 waves #
+    dplyr::filter(n() > n_waves-1)%>% # select those who have responded to at least n waves #
     dplyr::filter(n() !=0)%>%
     dplyr::ungroup(Id)%>%
     dplyr:: mutate(Years = as.numeric(years))%>%
@@ -164,18 +164,17 @@ sample_report <-function(x){
 
 
 graph_predictions <- function(x,y){
-  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"),
+  out <- ggeffects::ggpredict(model = x, terms = c("Age_within [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
                               back.transform = TRUE,
                               ppd = FALSE,
-                              interval = "confidence")
   plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y) # title to be suppled
 }
 
 get_predictions <- function(x){
-  out <- ggeffects::ggpredict(model = x, terms = c("yearsC [minmax]","Beliefs"),
+  out <- ggeffects::ggpredict(model = x, terms = c("Age_within [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -188,7 +187,7 @@ get_predictions <- function(x){
 
 
 graph_predictions_BD <- function(x,y){
-  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"),
+  out <- ggeffects::ggpredict(model = x, terms = c("Age_within [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",
@@ -199,7 +198,7 @@ graph_predictions_BD <- function(x,y){
 }
 
 get_predictions_BD <- function(x){
-  out <- ggeffects::ggpredict(model = x, terms = c("years [minmax]","Beliefs"),
+  out <- ggeffects::ggpredict(model = x, terms = c("Age_within [minmax]","Beliefs"),
                               ci.lvl = 0.95,
                               type = "fe",
                               typical = "mean",

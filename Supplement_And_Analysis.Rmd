@@ -19,8 +19,9 @@ classoption       : "man"
 output            : "html_document" 
 editor_options: 
   chunk_output_type: console
+  markdown: 
+    wrap: 72
 ---
-
 
 ```{r setup, include = FALSE}
 library("papaja")
@@ -39,57 +40,190 @@ knitr::opts_chunk$set(fig.path="figs/",
                       tidy = "styler")
 ```
 
-This supplement offers a step-by-step analysis for the "Longitudinal Evidence for Growth in Subjective Well-being from Spiritual Beliefs." The functions and other materials for this analysis can be found at the following GitHub link: [https://github.com/jacopastorius/nzavs_spiritbeliefwell-being](https://github.com/jacopastorius/nzavs_spiritbeliefwell-being) 
 
-First, we load our functions. 
+## Sample
+
+### Sampling Procedure -- NZAVS Time 1 (2009; conducted from 01.07.2009-14.10.2010)
+The Time 1 (2009) NZAVS contained responses from 6,518 participants sampled from the 2009 New Zealand electoral roll, who were currently residing in New Zealand (one can be registered to vote in New Zealand but living overseas). The electoral roll is publicly available for scientific research and in 2009 contained 2,986,546 registered voters. This represented all citizens over 18 years of age who were eligible to vote regardless of whether they chose to vote, barring people who had their contact details removed due to specific case-by-case concerns about privacy. The sample frame was spilt into three parts. Sample Frame 1 constituted a sample of 25,000 people from the electoral roll (4,060 respondents). Sample Frame 2 constituted a further 10,000 people from the electoral roll (1,609 respondents). Sample Frame 3 constituted 5,500 people randomly selected from meshblock area units of the country with a high proportion of Māori, Pacific Nations and Asian peoples (671 respondents).  All three samples were drawn using a stratified random procedure in which 25,000, 10,000 and 5,500 unique households (postal addresses) were first drawn, and then one person per household was randomly selected. A further 178 people responded but did not provide contact details and so could not be matched to a sample frame. 
+In sum, postal questionnaires were sent to 40,500 registered voters or roughly 1.36% of all registered voters in New Zealand. The overall response rate (adjusting for the address accuracy of the electoral roll and including anonymous responses) was 16.6%.
+
+### Sampling Procedure -- NZAVS Time 2 (2010; conducted from 15.10.2010-26.08.2011)
+
+The Time 2 (2010) NZAVS contained responses from 4,441 participants. The Time 2 (2010) NZAVS retained 4,425 from the initial Time 1 (2009) NZAVS sample of 6,518 participants, and included an additional 16 respondents who could not be matched to the Time 1 participant database (a retention rate of 67.9% over one year). Participants in the initial Time 1 (2009) sample were randomly selected from the New Zealand electoral roll (a national registry of registered voters). The response rate in the initial Time 1 sample, adjusting for the accuracy of the electoral roll and including anonymous responses was 16.6%. Participants were posted a copy of the questionnaire, with a second postal follow-up two months later. Participants who provided an email address were also emailed and invited to complete an online questionnaire if they preferred. 
+
+### Sampling Procedure -- NZAVS Time 3 (2011; conducted from 27.08.2011-18.09.2012)
+
+The Time 3 (2011) NZAVS contained responses from 6,884 participants (3,918 retained from one or more previous wave, 2,966 new additions from booster sampling, and 4 unmatched participants or unsolicited opt-ins). The Time 3 (2011) NZAVS retained 3,918 from the initial Time 1 national probability sample (a 60.1% retention rate over two years). A further three participants who joined at Time 2 were also retained. Participants were posted a copy of the questionnaire, with a second postal follow-up two months later. Participants who provided an email address were also emailed and invited to complete an online version if they preferred. 
+
+To boost sample size at Time 3 and compensate for sample attrition, a booster sample was recruited through an unrelated survey posted on the website of a major New Zealand newspaper in 2011. A total of 3,208 participants registered an initial expression of interest in being contacted to participate in the NZAVS via this survey. Participants in this non-random booster sample were emailed an invitation to participate in an online version of the NZAVS, and those who did not respond to the email were also sent a postal version of the questionnaire. A total of 2,966 participants completed the questionnaire when subsequently contacted (92.5%). This yielded a total sample size for the Time 3 (2012) NZAVS of 6,884 (3,918 retained from Time 1, 3 additions retained from opt-ins at Time 2, 2,966 recruited from the newspaper website at Time 3, and 4 opt-ins at Time 3). 
+
+### Sampling Procedure -- NZAVS Time 3.5 (2012 mid-year)
+
+The Time 3.5 (2012 mid-year) NZAVS contained responses from 4,514 participants who completed a follow-up online-only questionnaire administered roughly six months following the full Time 3 (2011) questionnaire. The Time 3.5 sample was supplementary to the full Time 3 (2011) NZAVS. The sample frame included those participants who had provided an email address when completing the full Time 3 questionnaire earlier that year, as well as approximately 400-450 Pacific participants who were recruited informally via Pacifika networks. The sample included 1,977 retained participants from the initial Time 1 (2009) NZAVS random electoral roll sample, 2,113 participants from the non-random online newspaper website sample collected as part of the Time 3 (2011) NZAVS, a further 50 participants online newspaper website sample who has initially indicated but had not responded initially at T3 (but did responded when contacted again at Time 3.5), 197 participants who self-selected into the study or who were unable to be matched to a sample frame, and 177 additional Pacific participants recruited via Pacifika networks who complete a different version of the questionnaire focusing on Pacific identity and wellbeing. 
+Sampling Procedure -- NZAVS Time 4 (2012; conducted from 19.09.2012-16.09.2013) 
+
+
+### The Time 4 (2012) NZAVS contained responses from 12,179 participants (6,807 retained from one or more previous wave, 5,107 new additions from booster sampling, and 265 unmatched participants or unsolicited opt-ins). 
+
+Informal analysis indicates that unsolicited opt-ins were often the partners of existing participants. The sample retained 4,053 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 62.2% over three years). The sample retained 5,762 participants from the full Time 3 (2011) sample (a retention rate of 83.7% from the previous year). Participants were posted a copy of the questionnaire, with a second postal follow-up two months later. Participants who provided an email address were also emailed and invited to complete an online version if they preferred. 
+Non-respondents were emailed a follow-up reminder email approximately two months later. Three attempts were then made using each provided phone number (typically home and cell phone) to contact non-respondents to encourage participation. These attempts were made on separate days, approximately one week apart. When possible, a phone message was left for each phone number after the third attempt. Participants were also posted a pamphlet outlining recent findings from the study mid-way through the year. Finally, participants were posted a Season’s Greetings from the NZAVS research team, and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw for a total pool of $NZ 1,000). Participants were informed that the draw would happen automatically and winners contacted. The Season’s Greetings card also asked participants to contact us (online, email or phone) to let us know if any of their contact details had changed before the prize draw was conducted. These additional materials are presented by Huang, Greaves, and Sibley (2014) in an online NZAVS technical report. 
+
+To boost sample size at Time 4 and increase sample diversity for subsequent waves, five independent booster samples using different sample frames were also conducted. Booster sampling was conducted without replacement (i.e., all people included in previous sample frames were identified and removed from the electoral roll before generation of the new sample frames). The first sample frame consisted of a randomly selected sample of 20,000 people from the 2012 New Zealand Electoral, and who were currently residing in New Zealand (one can be registered to vote in New Zealand but living overseas). A total of 2,429 participants responded to this booster sample (response rate = 12.33% when adjusting for the 98.5% accuracy of the 2012 electoral roll). The second sample frame consisted of a regional booster of 10,000 people randomly selected from people listed in the 2012 Electoral Roll who lived in the Auckland region. A total of 890 participants responded to this booster sample (adjusted response rate = 9.04). The Auckland region was oversampled because it is the fastest growing and most ethnically diverse region of the country with an increasing number of Asian and Pacific peoples in particular. The questionnaire used for this Auckland sample was longer than the standard NZAVS questionnaire, and contained additional unrelated questions that are not included in the NZAVS dataset (these related to the use of community facilities). Exit interviews conducted during
+
+Time 5 indicated that the longer length of this questionnaire may have contributed to the low response rate in this case. 
+The third sample frame consisted of 3,000 people randomly selected from the 2012 Electoral Roll who lived in the Christchurch region. A total of 332 participants responded to this booster sample (adjusted response rate = 11.24%). The Christchurch region was oversampled because it has experienced significant hardship and change due to the Christchurch earthquakes of 2010 and 2011 with many people moving out of the region (Statistics New Zealand, 2013) and problems with mail delivery with some city zones being placed under restricted entry due to safety concerns and considerable infrastructure destroyed). 
+The fourth sample frame consisted of 9,000 respondents selected from meshblock area units across the country that were moderate-to-high in deprivation according to the index developed by Salmond, Crampton and Atkinson (2007). Regions with levels of deprivation were selected using scores on the decile-ranked NZ Deprivation index from 6-10, with 10 being the most deprived). This sample frame used scaled weighting so that people in increasingly deprived regions were increasingly more likely to be selected (with random sampling of people within regions that had a given level of deprivation). The scaling factor was as follows: ni = nbase * weighti, where nbase = 600, and weighti, ranged from 1 to 5 and increased by 1 for each one-unit increased in deprivation score. Thus, 600 people were randomly selected from regions with a deprivation score of 6, 1,200 people were randomly selected from regions with a deprivation score of 7, and so on. This sampling strategy was designed to increase the representativeness of the sample across regions with different levels of deprivation, as the NZAVS showed increased attrition in increasingly more deprived regions over the first three years of the study. A total of 767 participants responded to this booster sample (adjusted response rate = 8.65%). The fifth sample frame consisted of 9,000 people randomly selected from those who indicated on the 2012 Electoral Roll that they were of Māori ethnicity (ethnic affiliation as Māori is listed on the roll, but other ethnic affiliations are not). A total of 689 participants responded to this booster sample (adjusted response rate = 7.78%). The questionnaire administered to the Māori booster sample included questions specifically designed for Māori.
+
+
+### Sampling Procedure -- NZAVS Time 5 (2013; conducted from 17.09.2013-20.10.2014)
+
+The Time 5 (2013) NZAVS contained responses from 18,261 participants (10,502 retained from one or more previous wave, 7,579 new additions from booster sampling, and 179 unmatched participants or unsolicited opt-ins). Informal analysis indicates that unsolicited opt-ins were often the partners of existing participants. The sample retained 3,934 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 60.4% over four years). The sample retained 9,844 participants from the full Time 4 (2011) sample (a retention rate of 80.8% from the previous year). Participants were posted a copy of the questionnaire, with a second postal follow-up two months later. Participants who provided an email address were also emailed and invited to complete an online version if they preferred. As described in the Time 4 procedure, we offered a prize draw for participation, non-respondents were emailed and phoned multiple times, and all participants were posted a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. We also posted our yearly pamphlet summarizing key research findings published during the current wave of the study. 
+
+To boost sample size and increase sample diversity for subsequent waves, two booster samples were also conducted by selecting people from the New Zealand electoral roll. As with previous booster samples, sampling was conducted without replacement (i.e., all people included in previous sample frames were identified and removed from the 2014 roll). The first sample frame consisted of 70,000 people aged from 18-60 randomly selected from the 2014 New Zealand Electoral Roll, who were currently residing in New Zealand (one can be registered to vote in New Zealand but living overseas). The New Zealand Electoral Roll contains participants’ date of birth (within a one-year window), and we limited our frame to people who 60 or younger, due to our aim of retaining participants for the following 15 years. A total of 7487 participants responded to this booster sample (response rate = 10.9% when adjusting for the 98.6% accuracy of the 2014 electoral roll). The second sample frame consisted of 1,500 people who were listed on the Electoral Roll as being of Maori ancestry, aged between 18-60 years of age, and currently residing in New Zealand. A total of 92 participants responded to this booster sample (response rate = 6.2% adjusting for electoral roll accuracy). 
+
+### Sampling Procedure -- NZAVS Time 6 (2014; conducted from 21.10.2014-19.08.2015)
+
+The Time 6 (2014) NZAVS contained responses from 15,820 participants (15,740 retained from one or more previous wave, and 82 unmatched participants or unsolicited opt-ins). The sample retained 3,728 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 57.2% over five years). The sample retained 14,878 participants from the full Time 5 (2013) sample (a retention rate of 81.5% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. As described in the Time 5 procedure, we offered a prize draw for participation, non-respondents were emailed and phoned multiple times, and all participants were posted a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. We also emailed participants an online pamphlet containing a series of video interviews with the researchers summarizing different research findings. 
+
+### Sampling Procedure -- NZAVS Time 7 (2015; conducted from 20.08.2015-10.09.2016)
+
+The Time 7 (2015) NZAVS contained responses from 13,942 participants (13,941 retained from one or more previous wave, and 1 unmatched participant or unsolicited opt-ins). The sample retained 3,344 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 51.3% over five years). The sample retained 12,550 participants from the full Time 6 (2014) sample (a retention rate of 79.3% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. As described in the Time 5 procedure, we offered a prize draw for participation, non-respondents were emailed and phoned multiple times, and all participants were posted a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. 
+
+### Sampling Procedure -- NZAVS Time 8 (2016; conducted from 11.09.2016-12.08.2017)
+
+The Time 8 (2016) NZAVS contained responses from 21,936 participants (13,781 retained from one or more previous wave, 7,667 new additions from booster sampling, and 488 unmatched participants or unsolicited opt-ins). The sample retained 3,347 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 51.4%). The sample retained 11,933 participants from the full Time 7 (2015) sample (a retention rate of 85.6% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. As described in the Time 4 procedure, we offered a prize draw for participation, non-respondents were emailed and phoned multiple times, and all participants were posted a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. 
+To boost sample size and increase sample diversity for subsequent waves, a booster sample was also conducted by selecting people from the New Zealand electoral roll. As with previous booster samples, sampling was conducted without replacement (i.e., all people included in previous sample frames were identified and removed from the 2016 roll). The sample frame consisted of 80,000 people aged from 18-65 randomly selected from the 2016 New Zealand Electoral Roll, who were currently residing in New Zealand (one can be registered to vote in New Zealand but living overseas). The New Zealand Electoral Roll contains participants’ date of birth (within a one-year window), and we limited our frame to people who 65 or younger, due to our aim of retaining participants longitudinally. A total of 7667 participants responded to this booster sample (response rate = 9.7% when adjusting for the 98.6% accuracy of the 2016 electoral roll). 
+
+### Sampling Procedure -- NZAVS Time 9 (2017; conducted from 13.08.2017-17.06.2018)
+
+The Time 9 (2017) NZAVS contained responses from 17,072 participants (16,931 retained from one or more previous wave, and 141 unmatched participants or unsolicited opt-ins). The sample retained 2,771 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 42.5% over five years). The sample retained 15,784 participants from the full Time 8 (2016) sample (a retention rate of 72.0% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. We offered a prize draw for participation (five draws each for $1000 grocery vouchers, $5000 total prize pool). All participants were posted a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. 
+
+The retention rate from Time 8 to Time 9 of 72% was notably lower than the ~80% achieved in previous few years. We had opted not to phone non-respondents during the Time 9 wave of data collection, and instead decided to let one-year past and then intensify phoning of non-respondents the following year. We decided on this approach in the hope that it might reduce ‘contact fatigue’, and hence increase the recovery rate and give more time (two years) for intermittent and non-respondents to become re-enthused about participating in the study. We thus decided to risk a lower retention rate in Time 9 with the hopes of getting a bounce back in the recovery rate during the following wave of data collection amongst these most hard-to-retain participants (see Satherley et al. 2015, for a detailed analysis of the demographic and individual difference factors predicting retention, non-response and intermittent response). Our decision to reduce the risk of contact fatigue during Time 9 was also compounded by a major telecommunications carrier in New Zealand opting to discontinue their email servers in November 2017. Many of our participants had used these email services, and hence a large number of the emails in our database were rendered invalid. This increased the subsequent load on attempting to contact participants via postal mail and phone until contact could be made and our email database could be updated with participants’ new email addresses. 
+
+
+### Sampling Procedure -- NZAVS Time 10 (2018; conducted from 18.06.2018-28.09.2019)
+
+The Time 10 (2018) NZAVS contained responses from 47,951 participants (18,010 retained from one or more previous wave. The sample retained 2,964 participants from the Time 1 (2009) sample (a retention rate of 45.5%). The sample retained 14,049 participants from Time 9 (2017; a retention rate of 82.3% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. We offered a prize draw for participation (five draws each for \$1000 grocery vouchers, \$5000 total prize pool). All participants were posted a Season’s Greetings card from the NZAVS research team and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw. Participants were also emailed an eight-page newsletter about the study. 
+
+To boost sample size and increase sample diversity for subsequent waves, a booster sample was conducted by selecting people from the New Zealand electoral roll. As with previous booster samples, sampling was conducted without replacement (i.e., people included in previous sample frames were identified and removed from the 2018 roll). The sample frame consisted of 325,000 people aged from 18-65 randomly selected from the 2018 New Zealand Electoral Roll, who were currently residing in New Zealand (one can be registered to vote in New Zealand but living overseas). The electoral roll contained ~3,250,000 registered voters. The New Zealand Electoral Roll contains participants’ date of birth (within a one-year window), and we limited our frame to people who 65 or younger, due to our aim of retaining participants longitudinally. We concurrently advertised the survey on Facebook via a $5000 paid promotion of a link to a YouTube video describing the NZAVS and the large booster sample we were conducting. The advertisement targeted men and women aged 18-65+ who lived in New Zealand and ran for 14 days. This paid promotion reached 147,296 people, with 4,721 link clicks (i.e., clicking to watch the video), according to Facebook. The goal of the paid promotion was twofold: (a) to increase name recognition of the NZAVS during the period in which questionnaires were being posted, and (b) to help improve retention by potentially reaching previous participants who happened to see the advertisement. A total of 29,293 participants who were contained in our sample frame completed the questionnaire (response rate = 9.2% when adjusting for the 98.2% accuracy of the 2018 electoral roll). A further 648 participants completed the questionnaire, but were unable to be matched to our sample frame (for example, due to a lack of contact information) or were unsolicited opt-ins. Informal analysis indicates that unsolicited opt-ins were often the partners of existing participants. 
+
+### Sampling Procedure -- NZAVS Time 11 (2019; conducted from 29.09.2019-17.10.2020)
+
+The Time 11 wave was conducted during COVID-19 pandemic. Procedures thus differed in that there was an increased focus on online deliver using email reminders and extensive Facebook advertising, no Christmas card, and incomplete phoning of non-respondents.
+
+The Time 11 (2019) NZAVS contained responses from 42,684 participants (36,522 retained from one or more previous wave. The sample retained 2,506 participants from the Time 1 (2009) sample (a retention rate of 38.4%). The sample retained 34,782 participants from Time 10 (2018; a retention rate of 72.5% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. A second reminder email was sent approximately four months following the first email attempt. We offered a prize draw for participation (five draws each for $1000 grocery vouchers, $5000 total prize pool). Participants were also emailed an eight-page newsletter about the study. As in past years, three attempts were made to phone non-respondents using each available cell and landline number. However, due to the university closure during COVID-19 lockdowns, phoning attempts were made for only 54% of the phoning pool (11,687 from a total of 21,636 non-respondents who provided at least one phone number). 
+
+Two additional forms of recruitment were also introduced during Time 11. The first was a large  information box in the questionnaire (taking a full page on the paper version), which asked people: ‘Do you have a partner who would also like to join the NZAVS?’ with additional details for how partners might join the study (see questionnaire for the full text). The second was a Facebook advertisement. The advertisement targeted men and women aged 18-65+ who lived in New Zealand and ran from and 4th April 2020 – 4th July 2020 (overlapping with New Zeeland’s first lockdown period and recovery), and again from 18th August 2020 – 4th September (during the second Auckland lockdown). Given the unprecedented nature of the COVID-19 lockdowns, we thought it important to maximise sampling during these periods. The goal of the Facebook advertisement was threefold: (a) to increase name recognition of the NZAVS and remind people to complete the paper/online version already posted/emailed to them, (b) to help improve retention by potentially reaching previous lost participants who happened to see the advertisement, and (c) to recruit new participants (and also the partners of existing participants) while people were at home with some possibly having more free time during lockdown. This last goal was indirect and not explicitly stated it in the advertisement. 
+
+The Facebook advertisement read as follows: “Participate in the New Zealand Attitudes and Values Study. Complete the 2020 Questionnaire online” with the body of text: “If you are part of the NZAVS, but have not heard from us in the last year, then please consider completing the 2020 questionnaire online. The study is more important than ever as we aim to understand the impact of COVID-19 on mental health, wellbeing and resilience in our communities. We wish you all the best at this time and hope you keep well and stay safe.” This paid promotion reached 883,969 people, with 37,850 link clicks (i.e., clicking the link for the Qualtrics survey) according to Facebook. A total of 6106 people continued complete the questionnaire and provide full contact details, and were thus included in the dataset (4734 were new participants opting in to the study, and 1372 were previously ‘lost’ participants). 
+
+### References
+Huang, Y., Greaves, L. M., & Sibley, C. G., (2014). Archive of additional (non-questionnaire) materials posted to participants. NZAVS Technical Documents, e07. Available at: www.nzavs.auckland.ac.nz
+
+Salmond, C., Crampton, P., & Atkinson, J. (2007). NZDep2006 Index of Deprivation User’s Manual. University of Otago. 
+
+Satherley, N., Milojev, P., Greaves, L. M., Huang, Y., Osborne, D., Bulbulia, J., & Sibley, C. G. (2015). Demographic and psychological predictors of panel attrition: evidence from the New Zealand Attitudes and Values Study. PLoS ONE, 10, e0121950. 
+
+Statistics New Zealand (2013). Glossary of Terms. Statistics New Zealand. 
+
+Statistics New Zealand (2014). Quickstats about great Christchurch. Statistics New Zealand.
+
+
+
+
+## Analysis
+
+This supplement offers a step-by-step analysis for the "Longitudinal
+Evidence for Growth in Subjective Well-being from Spiritual Beliefs."
+The functions and other materials for this analysis can be found at the
+following GitHub link:
+<https://github.com/jacopastorius/nzavs_spiritbeliefwell-being>
+
+First, we load our functions.
 
 ```{r load_libraries, echo=TRUE, include=TRUE}
 source("libs.R")
 source("funs.R")
 ```
 
-We use functions to automate repetition in coding, to avoid errors from such repetition, and to make the data analysis easier to follow.
+Next we read the data:
 
-This function reads our data into my machine. 
-```{r, read_data, cache=TRUE}
+```{r read_data, cache=TRUE}
 # custom function for my machine to read data. you'll need to read data to your machine. tweak function in the `funs.R` script for your machine
 d<-data_read_mymachine()
 
+# pa<-d%>%
+#  dplyr::filter(YearMeasured==1)%>%
+#     dplyr::group_by(Id) %>%
+#     dplyr::filter(n() !=0)%>%
+#     dplyr::ungroup(Id)
+# length(unique(pa$Id))
+# table(pa$Wave)
+
+
+# d2<-data_clean_spirit_wellbeing(pa,0) # d = dataframe, 3 = number of waves
+# table(d2$Wave) 
+
+
 # function to clean data, specify number of waves as 3 
-d_3<-data_clean_spirit_wellbeing(d,3) # d = dataframe, 3 = number of waves
+d_3<-data_clean_spirit_wellbeing(d,9) # d = dataframe, 3 = number of waves
 # function to count uinque ides
 show_unique_id(d_3$Id) 
 # function to count waves for participants
 count_waves_participants(d_3)
 # table of beliefs 
 table(d_3$Beliefs)
-# years Note that we use a continuous response measure particpants. 
+# years Note that we use a continuous response measure participants. 
 range(d_3$years)
 # html talbe
-demographic_table(d_3)
+#demographic_table(d_3)
+
+d_3 <- cbind(
+  d_3,
+  demean(d_3, select = c("Age"), group = "Id"
+))
+
+d_3<-d_3%>%
+  dplyr::mutate(Age_betweenC = scale(Age_between, scale = FALSE))
+
+```
+
+Breakdown of participants by wave
+```{r}
+table(d_3$Wave)
 ```
 
 Sample details are as follows:
+
 ```{r sample details}
 sample_report(d_3)
 ```
 
-
 <!-- ```{r  badlatextable} badd tables -->
+
 <!-- library("arsenal") -->
+
 <!-- summary(arsenal::tableby(Wave ~ Age + -->
+
 <!--                    NZdep + -->
+
 <!--                    Education + -->
+
 <!--                    Employed + -->
+
 <!--                    Ethnic_Categories + -->
+
 <!--                    Male  + -->
+
 <!--                    Has_Partner  + -->
+
 <!--                    Political_Conservativism + -->
+
 <!--                    Urban + -->
+
 <!--                    LIFESAT + PWI + includeNA(Beliefs), data = d_3,digits = 2, total=FALSE, format.p = FALSE, digits.p = 0))%>% -->
 <!--     kable( booktabs = T, "latex") -->
 <!-- ``` -->
-
 
 ```{r latextable, cache=TRUE}
 library(modelsummary)
@@ -110,6 +244,7 @@ ts<-d_3 %>%
 modelsummary::datasummary_balance( ~ Wave, data=ts, dinm=FALSE, output = 'table.tex')
 # https://github.com/IndrajeetPatil/ggstatsplot
 # https://www.datanovia.com/en/lessons/compute-summary-statistics-in-r/
+
 ```
 
 ## Sample demographic table
@@ -121,125 +256,240 @@ demographic_table(d_3)
 ```
 
 <!-- ```{r, include=FALSE} -->
+
 <!-- beliefs_table(d_3) -->
+
 <!-- ``` -->
 
 <!-- We wrote the publication in $\LaTeX$, which requires converting the tables to .tex files; this conversion used a custom function we wrote in the `funs.R` file.  -->
 
 <!-- ```{r latex_data_table, include=FALSE} -->
+
 <!-- # you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture") -->
+
 <!-- demographic_table_latex() # note the furniture package conflicts with the table1 package. -->
+
 <!-- d_3%>% -->
+
 <!--   group_by(Wave)%>% -->
+
 <!-- furniture::table1( -->
+
 <!--                   Age,  -->
+
 <!--                   NZdep, -->
+
 <!--                   Education, -->
+
 <!--                   Employed, -->
+
 <!--                   Ethnic_Categories, -->
+
 <!--                   Male,Has_Partner,  -->
+
 <!--                   Political_Conservativism, -->
+
 <!--                   Urban,  -->
+
 <!--                   Beliefs,  -->
+
 <!--                   LIFESAT, -->
+
 <!--                   PWI, -->
+
 <!--                   overall=F) -->
 
 <!-- dat3<-d_3%>%dplyr::select( Age, NZdep, -->
+
 <!--                   Education, -->
+
 <!--                   Employed, -->
+
 <!--                   Ethnic_Categories, -->
+
 <!--                   Male,Has_Partner, -->
+
 <!--                   Political_Conservativism, -->
+
 <!--                   Urban, -->
+
 <!--                   Beliefs, -->
+
 <!--                   LIFESAT, -->
+
 <!--                   PWI,Wave) -->
+
 <!-- stargazer::stargazer(dat3) -->
+
 <!-- library(modelsummary) -->
+
 <!--   modelsummary::datasummary_df(ALL(Age) ~ Mean + SD + Histogram, data=dat3) -->
+
 <!-- ``` -->
 
-## How many waves to select? 
+<!-- ## How many waves to select? We are using 10 years -->
 
-We selected a minimum of three waves because we want to recover a longitudinal sample in which a slope for the effect of the years $\times$ beliefs effect might be recovered. However, we needed to consider whether our selection of three waves was sensitive to that degree of researcher freedom. So we also prepared 4-8 years of data frames for separate analyses.
+<!-- We selected a minimum of three waves because we want to recover a -->
 
-```{r, include = TRUE}
-# create datasets to test robustness to years
-d_4<-data_clean_spirit_wellbeing(d,4) # 4 years
-d_5<-data_clean_spirit_wellbeing(d,5) # 5 years
-d_6<-data_clean_spirit_wellbeing(d,6) # 6 years
-d_7<-data_clean_spirit_wellbeing(d,7) # 7 years
-d_8<-data_clean_spirit_wellbeing(d,8) # 7 years
+<!-- longitudinal sample in which a slope for the effect of the years -->
 
-# function to count uinque number of ID's
-show_unique_id(d_3$Id) 
-show_unique_id(d_4$Id)
-show_unique_id(d_5$Id) 
-show_unique_id(d_6$Id) 
-show_unique_id(d_7$Id) 
-show_unique_id(d_8$Id) 
+<!-- $\times$ beliefs effect might be recovered. However, we needed to -->
 
-# function to count waves for participants
-count_waves_participants(d_3)
-count_waves_participants(d_4)
-count_waves_participants(d_5)
-count_waves_participants(d_6)
-count_waves_participants(d_7)
-count_waves_participants(d_8)
-```
+<!-- consider whether our selection of three waves was sensitive to that -->
 
-The analyses for these waves is described below. These analyses reveal that the inference of the paper is not sensitive to the threshold number of waves for participant selection. Which is to say, we recover the same inference with an 8-wave selection criterion.
+<!-- degree of researcher freedom. So we also prepared 4-8 years of data -->
+
+<!-- frames for separate analyses. -->
+
+<!-- ```{r, include = TRUE} -->
+
+<!-- # create datasets to test robustness to years -->
+
+<!-- # d_4<-data_clean_spirit_wellbeing(d,4) # 4 years -->
+
+<!-- # d_5<-data_clean_spirit_wellbeing(d,5) # 5 years -->
+
+<!-- # d_6<-data_clean_spirit_wellbeing(d,6) # 6 years -->
+
+<!-- # d_7<-data_clean_spirit_wellbeing(d,7) # 7 years -->
+
+<!-- # d_8<-data_clean_spirit_wellbeing(d,8) # 7 years -->
+
+<!-- #  -->
+
+<!-- # # function to count uinque number of ID's -->
+
+<!-- # show_unique_id(d_3$Id)  -->
+
+<!-- # show_unique_id(d_4$Id) -->
+
+<!-- # show_unique_id(d_5$Id)  -->
+
+<!-- # show_unique_id(d_6$Id)  -->
+
+<!-- # show_unique_id(d_7$Id)  -->
+
+<!-- # show_unique_id(d_8$Id)  -->
+
+<!-- #  -->
+
+<!-- # # function to count waves for participants -->
+
+<!-- # count_waves_participants(d_3) -->
+
+<!-- # count_waves_participants(d_4) -->
+
+<!-- # count_waves_participants(d_5) -->
+
+<!-- # count_waves_participants(d_6) -->
+
+<!-- # count_waves_participants(d_7) -->
+
+<!-- # count_waves_participants(d_8) -->
+
+<!-- ``` -->
+
+<!-- The analyses for these waves is described below. These analyses reveal -->
+
+<!-- that the inference of the paper is not sensitive to the threshold number -->
+
+<!-- of waves for participant selection. Which is to say, we recover the same -->
+
+<!-- inference with an -wave selection criterion. -->
 
 ## Covariates
 
-Where $Z$ is a third variable, $X$ is the predictor, and $Y$ is the outcome, there are at least four types of confounding that might arise: 
+Where $Z$ is a third variable, $X$ is the predictor, and $Y$ is the
+outcome, there are at least four types of confounding that might arise:
 
-1. $Z$ causes $X$ and  $Z$ causes $Y$: $Z \leftarrow Z \rightarrow Y$
-2. $X$ causes $Z$ and  $Z$ causes $Y$: $X \rightarrow Z \rightarrow Y$
-3. $X$ causes $Z$ and $Y$ causes $Z$: $X \rightarrow Z; Y \rightarrow Z$
-4. $X$ causes $Z$; $Z$ causes $D$; and we condition on D (the descendent of $Z$: $Y$ causes $Z$: $Z$ \rightarrow D; $X \rightarrow Z; Y \rightarrow Z$ (see: [@mcelreath2020statistical], Chapter 6). 
+1.  $Z$ causes $X$ and $Z$ causes $Y$: $Z \leftarrow Z \rightarrow Y$
+2.  $X$ causes $Z$ and $Z$ causes $Y$: $X \rightarrow Z \rightarrow Y$
+3.  $X$ causes $Z$ and $Y$ causes $Z$:
+    $X \rightarrow Z; Y \rightarrow Z$
+4.  $X$ causes $Z$; $Z$ causes $D$; and we condition on D (the
+    descendent of $Z$: $Y$ causes $Z$: $Z$ \rightarrow D;
+    $X \rightarrow Z; Y \rightarrow Z$ (see:
+    [@mcelreath2020statistical], Chapter 6).
 
-We do not wish to exclude third variable explanations of the kind that arise from the first type of confounding. The second type of counfounding can mask a relationship. The third and fourth type of confounding illustrate how conditioning on a covariates may confound by *opening* a relationship between the $X$ and $Y$ indicators in a regression analysis. Such confounding is particularly worrying in the case of longitudinal research.  
+We do not wish to exclude third variable explanations of the kind that
+arise from the first type of confounding. The second type of
+counfounding can mask a relationship. The third and fourth type of
+confounding illustrate how conditioning on a covariates may confound by
+*opening* a relationship between the $X$ and $Y$ indicators in a
+regression analysis. Such confounding is particularly worrying in the
+case of longitudinal research.
 
-To address confounding we first obtained the New Zealand Attitudes and Values Study standard demographic indicators recommended to address confounding: [NZAVS modelling standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf). Next we modelled potential relationships between the coefficients within the model using the daggity package in R, and plotting results using the daggity and ggdag packages in R.
-
+To address confounding we first obtained the New Zealand Attitudes and
+Values Study standard demographic indicators recommended to address
+confounding: [NZAVS modelling
+standards](https://cdn.auckland.ac.nz/assets/psych/about/our-research/nzavs/NZAVSTechnicalDocuments/NZAVS-Technical-Documents-e11-Default-Statistical-Standards.pdf).
+Next we modelled potential relationships between the coefficients within
+the model using the daggity package in R, and plotting results using the
+daggity and ggdag packages in R.
 
 ```{r}
 # obtain dag
+range(d_3$Age_within)
 tidy_ggdag <- dagify(
-  WB ~ belief + years + partner + nzdep + urban + male + pols + empl,
-  WB ~~ partner + years,
-  belief ~ years + age + male + ethn,
-  partner ~ nzdep + age + belief, 
-  nzdep ~ empl,
-  pols ~ age  + empl + ethn + years,
-  empl ~ nzdep + edu + ethn,
+  WB ~ belief + age_within + age_between + partner + nzdep + urban + male + pols + empl,
+  WB ~~ partner,
+  belief ~ age_within + age_between + male + ethn,
+  partner ~ nzdep + age_within + age_between + belief, 
+  nzdep ~ empl + age_within + age_between,
+  pols ~ age_within + age_between + empl + ethn + years,
+  empl ~  edu + ethn + age_within + age_between,
   exposure =  "belief",
   outcome =   "WB")%>%
   tidy_dagitty()
 
 # graph adjustment sets
 ggdag::ggdag_adjustment_set(tidy_ggdag, node_size = 14) + 
-  theme(legend.position = "bottom") 
+  theme(legend.position = "bottom")  + theme_dag_gray()
 ```
 
-This method reveals two adjustments sets: \{age, employment, male, political conservativism, and time\}, and \{age, ethnicty, male, and time.\}  We report the second set because employment is likely to contain more measurement error: some are not employed because they cannot find employment, others because they are not seeking employment (e.g. retirement).  However we report both model in our frequentist analysis. Neither model choice affects the results. We also report the simple unadjusted model and the fully saturated model (with potential collider and masking effects). 
+This method reveals two adjustments sets: {age, employment, male,
+political conservativism, and time}, and {age, ethnicty, male, and
+time.} We report the second set because employment is likely to contain
+more measurement error: some are not employed because they cannot find
+employment, others because they are not seeking employment (e.g.
+retirement). However we report both model in our frequentist analysis.
+Neither model choice affects the results. We also report the simple
+unadjusted model and the fully saturated model (with potential collider
+and masking effects).
 
-Importantly, in the fully-saturated model -- which would be typical in a longitudinal regression analysis -- attenuates the growth in personal well-being and in life satisfaction among those who are skeptical in a spirit or Life-fore.  The inference of this study is not sensitive to this difference because the slopes differ for spirit beliefs across all models. However, we do not wish to infer that skepticism about a spirit or life force entirely prevents growth in personal well-being or life-satisfaction. We advise that researchers do not introduce variables into regression models without systematically. evaluating potential confounding. 
-
+Importantly, in the fully-saturated model -- which would be typical in a
+longitudinal regression analysis -- attenuates the growth in personal
+well-being and in life satisfaction among those who do not believe in a
+spirit or Life-fore. The inference of this study is not sensitive to
+this difference because the slopes differ for spirit beliefs across all
+models. However, we do not wish to infer that skepticism about a spirit
+or life force entirely prevents growth in personal well-being or
+life-satisfaction. We advise that researchers do not introduce variables
+into regression models without systematically. evaluating potential
+confounding.
 
 ## Bayesian data analysis
 
-
-Below we write the model in a notation that explicitly states the the default weakly informative priors that the BRMS package produces. And indicated in the model we include group-level indicator for variation in subject-level intercepts $\alpha_j$, a group-level indicator for subject-level time (or "growth")  slope  $\beta_j$, and we model the co-variance of $\alpha_j$, Below we write the model in a notation that explicitly states the the default weakly informative priors that the BRMS package produces.  And indicated in the model we include group-level indicator for variation in subject-level intercepts $\alpha_j$, a group-level indicator for subject-level time (or "growth")  slope  $\beta_j$, and we model the co-variance of $\alpha_j$ and  $\beta_j$ which for computational reasons is estimate as a correlation matrix of (${\bf S}$} and ${\bf R}$).
-
+Below we write the model in a notation that explicitly states the the
+default weakly informative priors that the BRMS package produces. And
+indicated in the model we include group-level indicator for variation in
+subject-level intercepts $\alpha_j$, a group-level indicator for
+subject-level time (or "growth") slope $\beta_j$, and we model the
+co-variance of $\alpha_j$, Below we write the model in a notation that
+explicitly states the the default weakly informative priors that the
+BRMS package produces. And indicated in the model we include group-level
+indicator for variation in subject-level intercepts $\alpha_j$, a
+group-level indicator for subject-level time (or "growth") slope
+$\beta_j$, and we model the co-variance of $\alpha_j$ and $\beta_j$
+which for computational reasons is estimate as a correlation matrix of
+(${\bf S}$} and ${\bf R}$).
 
 ### Priors for the Personal Well-Being model
 
-First we report priors for the Personal Well-Being model. Note that we model the correlation of the id-level intercept and id-level year-slope.
+First we report priors for the Personal Well-Being model. Note that we
+model the correlation of the id-level intercept and id-level year-slope.
 
-\[
+$$
 \begin{aligned}
 \operatorname{Personal Well Being}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
 \mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
@@ -274,14 +524,14 @@ First we report priors for the Personal Well-Being model. Note that we model the
 \boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
 \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
 \end{aligned}
-\]
-
+$$
 
 ### Priors for the Life Satisfaction model:
 
-Model priors for the  Life Satisfaction model. Here, again, we model the correlation of the id-level intercept and id-level year-slope.
+Model priors for the Life Satisfaction model. Here, again, we model the
+correlation of the id-level intercept and id-level year-slope.
 
-\[
+$$
 \begin{aligned}
 \operatorname{Life Satisfaction}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
 \mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
@@ -318,63 +568,62 @@ Model priors for the  Life Satisfaction model. Here, again, we model the correla
 \boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
 \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
 \end{aligned}
-\]
+$$
 
-### Theoretical model 
+### Theoretical model
 
-The deterministic part of both the Personal Well-Being and the Life Satisfaction models is as follows. 
+The deterministic part of both the Personal Well-Being and the Life
+Satisfaction models is as follows.
 
-\[
+$$
 \begin{aligned}
 & \quad  \boldsymbol{b} = \\
-& \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\
-&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\  + \\
-& \quad  \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\
-&\quad \beta_{5}(\operatorname{Age in Decades (C)})\  +\\ 
-& \quad  \beta_{6}(\operatorname{Ethnicity}_{\operatorname{Maori}})\ +\\
-&\quad \beta_{7}(\operatorname{Ethnicity}_{\operatorname{Pacific}})\ +  \\ 
-& \quad  \beta_{8}(\operatorname{Ethnicity}_{\operatorname{Asian}})\ +\\
-& \quad \beta_{4}(\operatorname{Male} )+ \\ 
-& \quad \beta_{4}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ 
-& \quad \beta_{5}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
-&\quad \beta_{6}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ 
+& \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{Spirit~excludes~God}})\ + \\
+&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{God~and~Spirit}})\  + \\
+& \quad  \beta_{3}(\operatorname{Beliefs}_{\operatorname{God~excludes~Spirit}})\ +\\
+&\quad \beta_{4}(\operatorname{Aging-within-subjects (centered~within)})\  +\\ 
+&\quad \beta_{5}(\operatorname{Age-between-subjects (centered~between)})\  +\\ 
+& \quad  \beta_{5}(\operatorname{Ethnicity}_{\operatorname{Maori}})\ +\\
+&\quad \beta_{6}(\operatorname{Ethnicity}_{\operatorname{Pacific}})\ +  \\ 
+& \quad  \beta_{7}(\operatorname{Ethnicity}_{\operatorname{Asian}})\ +\\
+& \quad \beta_{8}(\operatorname{Male} )+ \\ 
+& \quad \beta_{9}(\operatorname{Aging-within-subjects} \times \operatorname{Beliefs}_{\operatorname{Spirit~excludes~God}})\ + \\ 
+& \quad \beta_{10}(\operatorname{Aging-within-subjects} \times \operatorname{Beliefs}_{\operatorname{God~and~Spirit}})\ + \\
+&\quad \beta_{11}(\operatorname{Aging-within-subjects} \times \operatorname{Beliefs}_{\operatorname{God~Excludes~Spirit}}) \\ 
 \end{aligned}
-\]
+$$
 
+To assess potential confounding we write a DAG for our theoretically
+postulated model.
 
-
-
-To close the "back door" on potential confounds we create a regression model
 ```{r dag}
 library("dagitty")
 library("ggdag")
 
 # theoretically plausible relationships
 tidy_ggdag <- dagify(
-  WB ~ belief + time + age + partner + nzdep + urban + male + pols + empl, # what might affect wellbeing?
+  WB ~ belief + age_within + age_between + partner + nzdep + urban + male + pols + empl, # what might affect wellbeing?
   WB ~~ partner, # bi-causal path
-  belief ~ time + age + male + ethn, # predictors of beliefs
-  partner ~ nzdep + age + belief,  # predictors of having a partner
+  belief ~ age_within  + age_between  + male + ethn, # predictors of beliefs
+  partner ~ nzdep + age_within  + age_between + belief,  # predictors of having a partner
   nzdep ~ empl,  # predictor of deprivation
-  pols ~ age  + empl + ethn, # predictor of political orientation
-  empl ~ nzdep + edu + ethn, # predictor of employment
+  pols ~ age_within  + age_between  + empl + ethn, # predictor of political orientation
+  empl ~ nzdep + edu + ethn + age_within  + age_between, # predictor of employment
   exposure =  "belief",
   outcome =   "WB")%>%
-  tidy_dagitty()
+  tidy_dagitty() + theme_dag_gray()
 
 #graph
 ggdag_adjustment_set(tidy_ggdag, node_size = 14) + 
   theme(legend.position = "bottom") 
 ```
 
-
-
-
 ## Priors in the Bayesian Model
 
 ### Priors for the Personal Wellbeing model
 
-Model priors for Personal Wellbeing including group-level ID intercept and beliefs slopes are as follows:
+Model priors for Personal Wellbeing including group-level ID intercept
+and beliefs slopes are as follows:
 
 $$
 \begin{aligned}
@@ -413,13 +662,12 @@ $$
 \end{aligned}
 $$
 
-
 ### Priors for the Life Satisfaction model
 
-Model priors for Life Satisfaction Model with including group-level ID intercept and belief slopes are as follows:
+Model priors for Life Satisfaction Model with including group-level ID
+intercept and belief slopes are as follows:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \operatorname{Life Satisfaction}_{ij} \sim \text{Normal}(\mu_{ij},\sigma^2) \nonumber\\
 \mu_{ij}\sim \boldsymbol{\alpha +\beta} \nonumber\\
 \boldsymbol{\alpha} \sim \alpha_{0} +\alpha_j \nonumber\\
@@ -454,60 +702,61 @@ $$
 \text{HalfCauchy}(0,1) \nonumber\\
 \boldsymbol{R}\sim \text{LKJcorr}(1) \nonumber\\
 \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) 
-\end{aligned}
-$$
-\newpage
+\end{aligned}$$ 
 
-### Deterministic model 
+### Deterministic model
 
-The deterministic portion of both the Personal Wellbeing and the Life Satisfaction models is as follows: 
-$$
-\begin{aligned}
+The deterministic portion of both the Personal Wellbeing and the Life
+Satisfaction models is as follows: 
+
+$$\begin{aligned}
 & \quad  \boldsymbol{b} = \\
-& \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\
-&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\  + \\
-& \quad  \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\
-&\quad \beta_{4}(\operatorname{Age in Decades (C)})\  +\\ 
+& \quad \beta_{1}(\operatorname{Beliefs}_{\operatorname{Spirit~excludes~God}})\ + \\
+&\quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{God~and~Spirit}})\  + \\
+& \quad  \beta_{3}(\operatorname{Beliefs}_{\operatorname{God~excludes~Spirit}})\ +\\
+&\quad \beta_{4}(\operatorname{Aging-within-subjects (centered~within)})\  +\\ 
+&\quad \beta_{5}(\operatorname{Age-between-subjects (centered~between)})\  +\\ 
 & \quad  \beta_{5}(\operatorname{Ethnicity}_{\operatorname{Maori}})\ +\\
 &\quad \beta_{6}(\operatorname{Ethnicity}_{\operatorname{Pacific}})\ +  \\ 
 & \quad  \beta_{7}(\operatorname{Ethnicity}_{\operatorname{Asian}})\ +\\
 & \quad \beta_{8}(\operatorname{Male} )+ \\ 
-& \quad \beta_{9}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ 
-& \quad \beta_{10}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\
-&\quad \beta_{11}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ 
-\end{aligned}
-$$
-\newpage
+& \quad \beta_{9}(\operatorname{Aging-within-subjects} \times \operatorname{Beliefs}_{\operatorname{Spirit~excludes~God}})\ + \\ 
+& \quad \beta_{10}(\operatorname{Aging-within-subjects} \times \operatorname{Beliefs}_{\operatorname{God~and~Spirit}})\ + \\
+&\quad \beta_{11}(\operatorname{Aging-within-subjects} \times \operatorname{Beliefs}_{\operatorname{God~Excludes~Spirit}}) \\ 
+\end{aligned}$$ 
 
-## Bayesian counfounder model
 
+## Bayesian causal model
 
 ```{r setmodelformulaSAT}
-forumula_bayesPWI_DAG <- bf(PWI ~  yearsC * Beliefs +  Age_in_Decades_C + Ethnic_Categories + Male + (1+ yearsC|Id))
-forumula_bayesLIFESAT_DAG <- bf(LIFESAT ~   yearsC * Beliefs +  Age_in_Decades_C + Ethnic_Categories + Male + (1+ yearsC|Id))
+forumula_bayesPWI_DAG <- bf(PWI ~  Beliefs *  Age_within +  Age_betweenC  + Ethnic_Categories + Male + (1 + Age_within|Id))
+forumula_bayesLIFESAT_DAG <- bf(LIFESAT ~   Beliefs *  Age_within +  Age_betweenC  + Ethnic_Categories + Male + (1 + Age_within|Id))
 ```
 
 ```{r pwi_bayesmodelPWI_DAG}
 # PWI
-mod.1_bDAG <-brm(forumula_bayesPWI_DAG, data= d_3, file ="mod.1_bDAG.rds", cores = 8) # note these are very large files
-summary(mod.1_bDAG)
-```
+# mod.1_bDAG <-brm(forumula_bayesPWI_DAG, data= d_3, file ="mod.1_bDAG.rds", cores = 8) # note these are very large files
+# summary(mod.1_bDAG)
 
+        # REDO
+mod.1_bDAGR <-brm(forumula_bayesPWI_DAG, data= d_3, file ="mod.1_bDAGR.rds", cores = 8) # note these are very large files
+#summary(mod.1_bDAGR)
+```
 
 ```{r lsbayesmodelLS_DAG}
 # LIFE SAT
-mod.2_bDAG <-brm (forumula_bayesLIFESAT_DAG, data= d_3,cores = 8, file ="mod.2_bDAG.rds")
+mod.2_bDAGR <-brm (forumula_bayesLIFESAT_DAG, data= d_3,cores = 8, file ="mod.2_bDAGR.rds")
+summary(mod.2_bDAGR)
 ###
-tab_model(mod.1_bDAG,mod.2_bDAG)
 # note these are very large files
 ```
 
-The posterior prediction plots look reasonable.  
+The posterior prediction plots look reasonable.
 
 ```{r posteriorpredictivechecks:pwi_BAYES_CONFOUNDER, cache=TRUE}
 # cannot run on my laptop
-pp_1<-rstanarm::pp_check(mod.1_bDAG) + ylab("Personal well-being")
-pp_2<-rstanarm::pp_check(mod.2_bDAG) + ylab("Life Satisfaction") ## life sat suggests an ordinal model
+pp_1<-rstanarm::pp_check(mod.1_bDAGR) + ylab("Personal well-being")
+pp_2<-rstanarm::pp_check(mod.2_bDAGR) + ylab("Life Satisfaction") ## life sat suggests an ordinal model
 pp_1 
 ```
 
@@ -515,514 +764,735 @@ pp_1
 pp_2
 ```
 
+Here we describe the posteriors for both models
 
-
-Here we describe the posteriors for both models 
 ```{r simple_table, cache =TRUE}
-bayestestR::describe_posterior(mod.1_bDAG, test = c("p_direction"),diagnostic = "ESS")
+bayestestR::describe_posterior(mod.1_bDAGR, test = c("p_direction"),diagnostic = "ESS")
 ```
 
 ```{r simple_table_ls, cache =TRUE}
-bayestestR::describe_posterior(mod.2_bDAG, test = c("p_direction"), diagnostic = "ESS")
+bayestestR::describe_posterior(mod.2_bDAGR, test = c("p_direction"), diagnostic = "ESS")
 ```
-
 
 ```{r Bayesian_model_table, cache=TRUE, include =FALSE}
-table_model_latex_dual(mod.1_bDAG,mod.2_bDAG)
+table_model_latex_dual(mod.1_bDAGR,mod.2_bDAGR)
 ```
 
-
 ```{r cache =TRUE}
-g1dag1<-plot(parameters::model_parameters(mod.1_bDAG))+ ggtitle("Personal Well-Being Coefficients")
-g2dag1<-plot(parameters::model_parameters(mod.2_bDAG))+ ggtitle("Life Satisfaction Coefficients")
+g1dag1<-plot(parameters::model_parameters(mod.1_bDAGR))+ ggtitle("Personal Well-Being Coefficients")
+g2dag1<-plot(parameters::model_parameters(mod.2_bDAGR))+ ggtitle("Life Satisfaction Coefficients")
 ```
 
 And here's the graph.
 
-```{r plot_coefficientplots_BayesDAG1, cache = TRUE}
+```{r coef, cache = TRUE}
 g1dag1/g2dag1
 ```
-we used `r cite_r("b-references.bib")`
-
-<!-- ```{r} -->
-<!-- cite_r("b-references.bib") -->
-<!-- ``` -->
-
-
 
 Next we plot the graphs. First we extract the predictions
 
 ```{r Bayesian_pwi_predictedSAT_DAG_GET, cache=TRUE}
-get_predictions(mod.1_bDAG)
+get_predictions(mod.1_bDAGR)
 ```
 
 ```{r Bayesian_lifesat_predictedSAT_DAG_GET, cache=TRUE}
-get_predictions(mod.2_bDAG)
-```
-```{r DAGS, cache =TRUE}
-g1dag1<-plot(parameters::model_parameters(mod.1_bDAG))+ ggtitle("Personal well-being Coefficients")
-g2dag2<-plot(parameters::model_parameters(mod.2_bDAG))+ ggtitle("Life Satisfaction Coefficients")
+get_predictions(mod.2_bDAGR)
 ```
 
-And here's the graph.
+<!-- ```{r DAGS, cache =TRUE} old graphs -->
+<!-- g1dag1<-plot(parameters::model_parameters(mod.1_bDAG))+ ggtitle("Personal well-being Coefficients") -->
+<!-- g2dag2<-plot(parameters::model_parameters(mod.2_bDAG))+ ggtitle("Life Satisfaction Coefficients") -->
+<!-- ``` -->
 
-```{r plot_coefficientplots_LMER_FULL_DAG, cache = TRUE}
-g1dag1/g2dag1
+# Personal wellbeing graph
+
+
+```{r}
+p0 <- brms::conditional_effects(
+  mod.1_bDAGR,
+  c("Age_within:Beliefs" ),
+  spaghetti = TRUE,
+  categorical = FALSE,
+  nsamples = 200,
+  prob = .95,
+  method = 'fitted'
+)
+
+plot(p0, plot = FALSE)[[1]] +   facet_wrap("Beliefs",nrow = 1) + xlab("Years of Aging (centered)") + ylab ("Personal Wellbeing 0-10")  + theme_blank() + labs(title = "Predicted effects of beliefs states for personal wellbeing")+ theme(legend.position="top") + scale_color_viridis_d(alpha = .2)
+# pwi
 ```
 
-Here are the coefficient plots
+# Life Satisfaction graph 
+```{r}
+p2 <- brms::conditional_effects(
+  mod.2_bDAGR,
+  c("Age_within:Beliefs" ),
+  spaghetti = TRUE,
+  categorical = FALSE,
+  nsamples = 200,
+  prob = .95,
+  method = 'fitted'
+)
 
-```{r Bayesian_pwi_predictedSAT_DAG, cache=TRUE}
-graph_predictions(mod.1_bDAG, "Predicted Values of Personal Well-Being: Bayesian Model (Confounder Adjusted)")
+plot(p2, plot = FALSE)[[1]] +   facet_wrap("Beliefs",nrow = 1) + xlab("Years of Aging (centered)") + ylab ("Life Satisfaction 1-7")  + theme_blank() + labs(title = "Predicted effects of beliefs states for life satisfaction") + theme(legend.position="top") + scale_color_viridis_d(alpha = .2)
+# graph called LS
 ```
 
-```{r Bayesian_lifesat_predictedSAT_DAG, cache=TRUE}
-graph_predictions(mod.2_bDAG, "Predicted Values of Life Satisfaction: Bayesian Model (Confounder Adjusted)")
-```
+<!-- ```{r Bayesian_pwi_predictedSAT_DAG, cache=TRUE} -->
+<!-- graph_predictions(mod.1_bDAGR, "Predicted Values of Personal Well-Being: Bayesian Model (Confounder Adjusted)") -->
+<!-- ``` -->
 
+<!-- ```{r Bayesian_lifesat_predictedSAT_DAG, cache=TRUE} -->
+<!-- graph_predictions(mod.2_bDAGR, "Predicted Values of Life Satisfaction: Bayesian Model (Confounder Adjusted)") -->
+<!-- ``` -->
+
+Check mixing
 
 ```{r mixing_pwi_DAG, cache=TRUE}
-plot(mod.1_bDAG, pars ="b_") 
+plot(mod.1_bDAGR, pars ="b_") 
 ```
 
 ```{r mixing_lsDAG, cache=TRUE}
-plot(mod.2_bDAG, pars ="b_") 
+plot(mod.2_bDAGR, pars ="b_") 
 ```
 
-As do the random components
-
 ```{r mixing_sd_pwi, cache=TRUE}
-plot(mod.1_bDAG, pars ="sd_") #
+plot(mod.1_bDAGR, pars ="sd_") #
 ```
 
 ```{r mixing_ls_pwi, cache=TRUE}
-plot(mod.2_bDAG, pars ="sd_") # 
+plot(mod.2_bDAGR, pars ="sd_") # 
 ```
 
-## Bayesian model, no confounders addressed
+The packages we used are: `r cite_r("b-references.bib")`
 
-In the simple model, the in
+<!-- ### EXTRA DETAIL  PREVIOUS MODELS -->
 
-```{r setmodelformula}
-forumula_bayesPWI <- bf(PWI ~ yearsC * Beliefs + (1 + yearsC|Id))
-forumula_bayesLIFESAT <- bf(LIFESAT ~  yearsC * Beliefs + (1 + yearsC|Id))
-```
+<!-- ## Bayesian model, no confounders addressed -->
 
-```{r pwi_bayesmodel_DAG}
-# PWI
-mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds", cores = 8) # note these are very large files
-```
+<!-- In the simple model, the in -->
 
-```{r lsbayesmodel_DAG}
-# LIFE SAT
-mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds")
-# note these are very large files
-```
+<!-- ```{r setmodelformula} -->
 
+<!-- forumula_bayesPWI <- bf(PWI ~ yearsC * Beliefs + (1 + yearsC|Id)) -->
 
-```{r simple_table_DAG, cache =TRUE}
-bayestestR::describe_posterior(mod.1_b, ci = 0.90,  test = c("p_direction"),diagnostic = "ESS")
-```
+<!-- forumula_bayesLIFESAT <- bf(LIFESAT ~  yearsC * Beliefs + (1 + yearsC|Id)) -->
 
-```{r simple_table_ls_DAG, cache =TRUE}
-bayestestR::describe_posterior(mod.2_b, ci = 0.90, test = c("p_direction"), diagnostic = "ESS")
-```
-
-
-
-
-<!-- Tables: -->
-<!-- # ```{r pwi_Bayesian_model_table_pwi, cache =TRUE} -->
-<!-- # tab_model(mod.1_b) -->
-<!-- # ``` -->
-<!-- # -->
-<!-- # ```{r lifesat_Bayesian_model_table_ls lifesat, cache =TRUE} -->
-<!-- # tab_model(mod.2_b) -->
-<!-- # ``` -->
-
-
-<!-- ```{r texreg_bayes_table:pwi,cache=TRUE, include=FALSE} -->
-<!-- #Results for publication. -->
-<!-- table_model_latex_pwi(mod.1_b) -->
 <!-- ``` -->
 
-<!-- ```{r texreg_bayes_table:ls, cache=TRUE, include=FALSE} -->
-<!-- table_model_latex_ls(mod.2_b) -->
+<!-- ```{r pwi_bayesmodel_DAG} -->
+
+<!-- # PWI -->
+
+<!-- mod.1_b <-brm(forumula_bayesPWI, data= d_3, file ="mod.1_b.rds", cores = 8) # note these are very large files -->
+
 <!-- ``` -->
 
-<!-- Coefficient plots used in manuscript-->
-<!-- ```{r coefficientplotsbayes, cache=TRUE} -->
-<!-- plot_coefs(mod.1_b,mod.2_b) -->
+<!-- ```{r lsbayesmodel_DAG} -->
+
+<!-- # LIFE SAT -->
+
+<!-- mod.2_b <-brm (forumula_bayesLIFESAT, data= d_3,cores = 8, file ="mod.2_b.rds") -->
+
+<!-- # note these are very large files -->
+
 <!-- ``` -->
 
-```{r stancode for models, include=FALSE}
-#model equation
-#Here we extract our priors for reporting
+<!-- ```{r simple_table_DAG, cache =TRUE} -->
 
-stancode(mod.1_b)
-stancode(mod.2_b)
-```
+<!-- bayestestR::describe_posterior(mod.1_b, ci = 0.90,  test = c("p_direction"),diagnostic = "ESS") -->
 
-```{r prior summaries, include =FALSE}
-#this does the same as the stancode
-brms::prior_summary(mod.1_b)
-brms::prior_summary(mod.2_b)
-```
-
-```{r Bayesian_model_table_SIMPLE, cache=TRUE}
-#tab_model(mod.1_b, show.ci= .89) # we really should use something other than 95 but the team consensus is to use 95
-tab_model(mod.1_b, mod.2_b, show.ci= .95) # no difference to inference
-```
-
-We inspected the posterior distributions, which look good.
-
-
-The posterior prediction plots look reasonable.  
-
-```{r posteriorpredictivechecks:pwi, cache=TRUE}
-# cannot run on my laptop
-pp_1<-rstanarm::pp_check(mod.1_b) + ylab("Personal well-being")
-pp_2<-rstanarm::pp_check(mod.2_b) + ylab("Life Satisfaction") ## life sat suggests an ordinal model
-pp_1 + pp_2
-```
-
-### Predictions graphs
-
-Personal Well being predictions.
-
-```{r}
-preds_1b<-get_predictions(mod.1_b)
-preds_1b
-```
-
-Life Satisfaction predictions.
-
-```{r}
-preds_2b<-get_predictions(mod.2_b)
-preds_2b
-```
-
-Next we graph the expected effects. 
-
-```{r Bayesian_pwi_predicted, cache=TRUE, dependson= mod.1_b}
-graph_predictions(mod.1_b, "Predicted Values of Personal Well-Being")
-```
-
-```{r Bayesian_lifesat_predicted, cache=TRUE, dependson= mod.2_b}
-graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction")
-```
-
-
-
-## Test of the Bayesian saturated model 
-
-
-```{r setmodelformulaSAT_FULL}
-# note that BRMS automatically centers so we do not need to center years
-forumula_bayesPWI_SATUR <- bf(PWI ~  years * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ years|Id))
-
-forumula_bayesLIFESAT_SATUR <- bf(LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ years|Id))
-```
-
-
-```{r pwi_bayesmodelSAT_FULL}
-# PWI
-mod.1_bSAT <-brm(forumula_bayesPWI_SATUR, data= d_3, file ="mod.1_bS.rds", cores = 8) # note these are very large files
-summary(mod.1_bSAT)
-```
-
-
-```{r lsbayesmodelSAT}
-# LIFE SAT
-mod.2_bSAT <-brm (forumula_bayesLIFESAT_SATUR, data= d_3,cores = 8, file ="mod.2_bS.rds")
-summary(mod.2_bSAT)
-###
-tab_model(mod.1_bSAT,mod.2_bSAT)
-# note these are very large files
-```
-
-
-```{r Bayesian_pwi_predictedSAT, cache=TRUE}
-graph_predictions(mod.1_bSAT, "Predicted Values of Personal Well-Being")
-```
-```{r Bayesian_lifesat_predictedSAT, cache=TRUE}
-graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction")
-```
-
-## REML estimation
-
-Many researchers have yet to familiarise themselves with Bayesian estimation. We therefore report results from models using a Maximum Likelihood estimator. We do so to avoid the perception of chicanery, as our experience is that such a choice does not affect inference for a dataset such as ours.  ML estimatation is also faster than our preferred Bayesian estimator. 
-
-Results are virtually identical to the Bayesian model.
-
-## Adjusting for confounds
-
-### First confounder model 
-
-```{r lmer_model_with_full_covariatesDAG1, cache =TRUE}
-library(lme4)
-pwi_formulaDag1 <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C  + Ethnic_Categories + Male + (1 + yearsC|Id)'
-ls_formulaDag1 <- 'LIFESAT ~ yearsC * Beliefs +  Age_in_Decades_C  + Ethnic_Categories + Male  + (1 + yearsC|Id)'
-
-mod.1dag1 <-lmer (pwi_formulaDag1, data= d_3)
-mod.2dag1 <-lmer (ls_formulaDag1, data= d_3)
-```
-
-Here is the table.
-```{r tab_dag1, cache = TRUE}
-sjPlot::tab_model(mod.1dag1,mod.2dag1)
-```
-
-We compared complex with simple models, and we found the inference does not change. 
-```{r}
-# identical result
-sjPlot::tab_model(mod.1dag1,mod.2dag1)
-```
-
-
-```{r grapwi_predict_DAG, cache =TRUE}
-graph_predictions(mod.1dag1, "Predicted Values of Life Satisfaction: Dag 1")
-```
-```{r gralifesat_predict_DAG, cache =TRUE}
-graph_predictions(mod.2dag1, "Predicted Values of Life Satisfaction: Dag 1")
-```
-
-
-## Second confounder model 
-
-```{r lmer_model_with_full_covariates_DAG, cache =TRUE}
-library(lme4)
-pwi_formulaDag2 <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C  + Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + yearsC|Id)'
-ls_formulaDag2 <- 'LIFESAT ~ yearsC * Beliefs + Employed +  Age_in_Decades_C  + Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + yearsC|Id)'
-
-mod.1dag2 <-lmer (pwi_formulaDag2, data= d_3)
-mod.2dag2 <-lmer (ls_formulaDag2, data= d_3)
-
-
-dat <- cbind(
-  d_3,
-  demean(d_3, select = c("Age", "Beliefs"), group = "Id")
-)
-
-dat<-dat%>%
-  dplyr::mutate(Age_between_C = scale(Age_between, center =TRUE, scale = FALSE))
-
-str(dat)
-head(dat$Age_between_C)
-
-# After thought -- check within and between group aging... no differences
-# dmPWI <- 'PWI ~  Age_within * Beliefs + Age_between_C  +  Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + Age_within|Id)'
-# mod_dmPWI <-lmer (dmPWI, data= dat)
-# tab_model(mod_dmPWI)
-# summary(mod_dmPWI)
-# n1<-ggeffects::ggpredict(model = mod_dmPWI, terms = c("Age_within [minmax]","Beliefs"), 
-#                               ci.lvl = 0.95,
-#                               type = "fe",
-#                               typical = "mean",
-#                               back.transform = TRUE,
-#                               ppd = FALSE,
-#                               interval = "confidence")
-#   plot(n1, facets = T) +  gghighlight::gghighlight()  +  theme_blank() #+ ggtitle(y) # title to be suppled
-#   
-# graph_predictions(mod_dmPWI, "Predicted Values of PWI")
-# # 
-# lsPWI <- 'LIFESAT ~  Age_within * Beliefs + Age_between_C  +  Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + Age_within|Id)'
-# mod_lsPWI <-lmer (lsPWI, data= dat)
-# tab_model(mod_lsPWI)
-# summary(mod_lsPWI)
-# head(dat$Age_within)
-# n2<-ggeffects::ggpredict(model = mod_lsPWI, terms = c("Age_within [minmax]","Beliefs"),
-#                               ci.lvl = 0.95,
-#                               type = "fe",
-#                               typical = "mean",
-#                               back.transform = TRUE,
-#                               ppd = FALSE,
-#                               interval = "confidence")
-# plot(n2, facets = T) +  gghighlight::gghighlight()  +  theme_blank() #+ ggtitle(y) # title to be suppled
-
-```
-
-Here is the table
-
-```{r tab_dag2, cache = TRUE}
-sjPlot::tab_model(mod.1dag2,mod.1dag2)
-```
-
-
-```{r dag2_plotcreate, cache =TRUE}
-g1dag2<-plot(parameters::model_parameters(mod.1dag2))+ ggtitle("Personal well-being Coefficients")
-g2dag2<-plot(parameters::model_parameters(mod.2dag2))+ ggtitle("Life Satisfaction Coefficients")
-```
-
-And here's the graph.
-
-```{r plot_coefficientplots_LMER_FULL_DAG2, cache = TRUE}
-g1dag2/g2dag2 
-```
-
-
-```{r pwi_predict_DAG, cache =TRUE}
-graph_predictions(mod.1dag2, "Predicted Values of Life Satisfaction: Dag 2")
-```
-
-```{r glifesat_predict_DAG, cache =TRUE}
-graph_predictions(mod.2dag2, "Predicted Values of Life Satisfaction: Dag 2")
-```
-
-
-Note we would prefer the the first counfounder model because there is less measurement error (not employed could mean mean not retired). 
-
-Additionally the first counfounder model has fewer terms to estimate. 
-
-<!-- Her are the coefficient plots for the full models -->
-<!-- ```{r coefficientplots_LMER_FULL, cache=TRUE} -->
-<!-- plot_models(mod.2, mod.1) + ylim(-.4, .75) + theme_plain()  # Plots -->
 <!-- ``` -->
 
+<!-- ```{r simple_table_ls_DAG, cache =TRUE} -->
 
-Next, recall we want to check whether inference is robustness to the researcher degree of freedom in selecting how many number of waves a participant must have responded to for inclusion.
+<!-- bayestestR::describe_posterior(mod.2_b, ci = 0.90, test = c("p_direction"), diagnostic = "ESS") -->
 
-```{r run all the models with different ns, cache = TRUE}
-mod.1_3 <-lmer (pwi_formulaDag1, data= d_4)
-mod.2_3 <-lmer (mod.2dag2, data= d_4)
+<!-- ``` -->
 
-mod.1_4 <-lmer (pwi_formulaDag1, data= d_4)
-mod.2_4 <-lmer (mod.2dag2, data= d_4)
+<!-- <!-- Tables: -->
 
-mod.1_5 <-lmer (pwi_formulaDag1, data= d_5)
-mod.2_5 <-lmer (mod.2dag2, data= d_5)
+<!-- <!-- # ```{r pwi_Bayesian_model_table_pwi, cache =TRUE} -->
 
-mod.1_6 <-lmer (pwi_formulaDag1, data= d_6)
-mod.2_6 <-lmer (mod.2dag2, data= d_6)
+<!-- <!-- # tab_model(mod.1_b) -->
 
-mod.1_7 <-lmer (pwi_formulaDag1, data= d_7)
-mod.2_7 <-lmer (mod.2dag2, data= d_7)
+<!-- <!-- # ``` -->
 
-mod.1_8 <-lmer (pwi_formulaDag1, data= d_8)
-mod.2_8 <-lmer (mod.2dag2, data= d_8)
+<!-- <!-- # -->
+
+<!-- <!-- # ```{r lifesat_Bayesian_model_table_ls lifesat, cache =TRUE} -->
+
+<!-- <!-- # tab_model(mod.2_b) -->
+
+<!-- <!-- # ``` -->
+
+<!-- <!-- ```{r texreg_bayes_table:pwi,cache=TRUE, include=FALSE} -->
+
+<!-- <!-- #Results for publication. -->
+
+<!-- <!-- table_model_latex_pwi(mod.1_b) -->
+
+<!-- <!-- ``` -->
+
+<!-- <!-- ```{r texreg_bayes_table:ls, cache=TRUE, include=FALSE} -->
+
+<!-- <!-- table_model_latex_ls(mod.2_b) -->
+
+<!-- <!-- ``` -->
+
+<!-- <!-- Coefficient plots used in manuscript-->
+
+<!-- <!-- ```{r coefficientplotsbayes, cache=TRUE} -->
+
+<!-- <!-- plot_coefs(mod.1_b,mod.2_b) -->
+
+<!-- <!-- ``` -->
+
+<!-- ```{r stancode for models, include=FALSE} -->
+
+<!-- #model equation -->
+
+<!-- #Here we extract our priors for reporting -->
+
+<!-- stancode(mod.1_b) -->
+
+<!-- stancode(mod.2_b) -->
+
+<!-- ``` -->
+
+<!-- ```{r prior summaries, include =FALSE} -->
+
+<!-- #this does the same as the stancode -->
+
+<!-- brms::prior_summary(mod.1_b) -->
+
+<!-- brms::prior_summary(mod.2_b) -->
+
+<!-- ``` -->
+
+<!-- ```{r Bayesian_model_table_SIMPLE, cache=TRUE} -->
+
+<!-- #tab_model(mod.1_b, show.ci= .89) # we really should use something other than 95 but the team consensus is to use 95 -->
+
+<!-- tab_model(mod.1_b, mod.2_b, show.ci= .95) # no difference to inference -->
+
+<!-- ``` -->
+
+<!-- We inspected the posterior distributions, which look good. -->
+
+<!-- The posterior prediction plots look reasonable.   -->
+
+<!-- ```{r posteriorpredictivechecks:pwi, cache=TRUE} -->
+
+<!-- # cannot run on my laptop -->
+
+<!-- pp_1<-rstanarm::pp_check(mod.1_b) + ylab("Personal well-being") -->
+
+<!-- pp_2<-rstanarm::pp_check(mod.2_b) + ylab("Life Satisfaction") ## life sat suggests an ordinal model -->
+
+<!-- pp_1 + pp_2 -->
+
+<!-- ``` -->
+
+<!-- ### Predictions graphs -->
+
+<!-- Personal Well being predictions. -->
+
+<!-- ```{r} -->
+
+<!-- preds_1b<-get_predictions(mod.1_b) -->
+
+<!-- preds_1b -->
+
+<!-- ``` -->
+
+<!-- Life Satisfaction predictions. -->
+
+<!-- ```{r} -->
+
+<!-- preds_2b<-get_predictions(mod.2_b) -->
+
+<!-- preds_2b -->
+
+<!-- ``` -->
+
+<!-- Next we graph the expected effects.  -->
+
+<!-- ```{r Bayesian_pwi_predicted, cache=TRUE, dependson= mod.1_b} -->
+
+<!-- graph_predictions(mod.1_b, "Predicted Values of Personal Well-Being") -->
+
+<!-- ``` -->
+
+<!-- ```{r Bayesian_lifesat_predicted, cache=TRUE, dependson= mod.2_b} -->
+
+<!-- graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction") -->
+
+<!-- ``` -->
+
+<!-- ## Test of the Bayesian saturated model:  do not do this -->
+
+<!-- ```{r setmodelformulaSAT_FULL} -->
+
+<!-- # note that BRMS automatically centers so we do not need to center years -->
+
+<!-- forumula_bayesPWI_SATUR <- bf(PWI ~  years * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ years|Id)) -->
+
+<!-- forumula_bayesLIFESAT_SATUR <- bf(LIFESAT ~  yearsC * Beliefs +  Age_in_Decades_C + Deprivation_S + Education_S  + Employed + Ethnic_Categories + Male  + Has_Partner  + Political_Conservativism_S + Urban + (1+ years|Id)) -->
+
+```{=html}
+<!-- ``` --
+<!-- ```{r pwi_bayesmodelSAT_FULL} -->
 ```
+<!-- # PWI -->
 
-The inference is robut even to the poorly specified models using REML estimation.
+<!-- mod.1_bSAT <-brm(forumula_bayesPWI_SATUR, data= d_3, file ="mod.1_bS.rds", cores = 8) # note these are very large files -->
 
-```{r extremes_of_researcher_degree_of_freedom_test, cache =TRUE}
-library(parameters)
-g1a_3<-plot(parameters::model_parameters(mod.1_3))+ ggtitle("Personal well-being Coefficients: 8 Waves")
-g2a_3<-plot(parameters::model_parameters(mod.2_3))+ ggtitle("Life Satisfaction Coefficients: 8 Waves")
+<!-- summary(mod.1_bSAT) -->
 
-g1a_8<-plot(parameters::model_parameters(mod.1_8))+ ggtitle("Personal well-being Coefficients: 8 Waves")
-g2a_8<-plot(parameters::model_parameters(mod.2_8))+ ggtitle("Life Satisfaction Coefficients: 8 Waves")
-```
+<!-- ``` -->
 
-```{r USE_2_coefficientplots_LMER_FULL_pwi,cache =TRUE}
-library(patchwork)
-g1a_3/g1a_8 +   plot_annotation(title = "Compare 3 X response model (top) with 8 X response model (bottom): Personal Well-Being")
-```
+<!-- ```{r lsbayesmodelSAT} -->
 
-```{r USE_2_coefficientplots_LMER_FULL_ls,cache =TRUE}
-library(patchwork)
-g2a_3/g2a_8 +   plot_annotation(title = "Compare 3 X response model (top) with 8 X response model (bottom) : Life Satisfaction")
-```
+<!-- # LIFE SAT -->
 
-# Missing Data Analysis
+<!-- mod.2_bSAT <-brm (forumula_bayesLIFESAT_SATUR, data= d_3,cores = 8, file ="mod.2_bS.rds") -->
 
-Finally, we ran our analyses on 10 multiply imputed datasets. Missing responses can be an important source of bias in a longitudinal study. Again we wrote some functions to deal with all the work, you can find these in `funs.R` file.
+<!-- summary(mod.2_bSAT) -->
 
-```{r echo = TRUE,  cache = TRUE}
-# Imputed data
-imputed3<-amelia_imputation_clean(d_3)
-# saveRDS(imputed3,"imputed3")
-# imputed3<-readRDS(imputed3)
-```
+<!-- ### -->
 
-We reran the imputed data analysis. (Note we ajust for confounds)
+<!-- tab_model(mod.1_bSAT,mod.2_bSAT) -->
 
-```{r cache = TRUE, imputedsimplePWI, cache=TRUE}
-# run models iterating over imputed data
-mod_imputed_pwi<-loop_lmer_model(pwi_formulaDag1, imputed3)
-```
+<!-- # note these are very large files -->
 
-```{r imputed pwi table, cache=TRUE}
-tab_mods_pwi<-loop_lmer_model_tab(mod_imputed_pwi)
-#create_hux_table(tab_mods_pwi)
-```
+<!-- ``` -->
 
-Next a graph of the coefficients.
+<!-- ```{r Bayesian_pwi_predictedSAT, cache=TRUE} -->
 
-```{r coef_PWI_imputed_coefplot, cache =TRUE}
-# coeff plot
-imp_pwi <- plot(tab_mods_pwi) + ggtitle("Personal well-being Coefficients (Imputed)") # pick your  own title
-```
+<!-- graph_predictions(mod.1_bSAT, "Predicted Values of Personal Well-Being") -->
 
-The inference is robust in the imputation model.
+<!-- ``` -->
 
-The following code returns the analysis for the life satisfaction model (again the functions are in the `funs.R` file).
+<!-- ```{r Bayesian_lifesat_predictedSAT, cache=TRUE} -->
 
-```{r cache = TRUE}
-# run models iterating over imputed data
-mod_imputed_ls<-loop_lmer_model(ls_formulaDag1 ,imputed3)
+<!-- graph_predictions(mod.2_b, "Predicted Values of Life Satisfaction") -->
 
-```{r table_ls_imputed,cache=TRUE}
-# table
-tab_mods_ls<-loop_lmer_model_tab(mod_imputed_ls)
-#create_hux_table(tab_mods_ls)
-```
+<!-- ``` -->
 
-Here's the graph:
+<!-- ## REML estimation -->
 
-```{r coef_imputed_ls, cache = TRUE}
-# coeff plot
-imp_ls<-plot(tab_mods_ls) + ggtitle("Life Satisfaction Coefficients (Imputed)") 
-```
-We found that the model is robust to multiple imputations over the missing data, though with greater uncertainty for the Personal Well-being effect. 
+<!-- Many researchers have yet to familiarise themselves with Bayesian estimation. We therefore report results from models using a Maximum Likelihood estimator. We do so to avoid the perception of chicanery, as our experience is that such a choice does not affect inference for a dataset such as ours.  ML estimatation is also faster than our preferred Bayesian estimator.  -->
 
-```{r coefficient_plot_both_imputed,  cache = TRUE}
- imp_pwi/imp_ls +  plot_annotation(tag_levels = 'i')
-```
+<!-- Results are virtually identical to the Bayesian model. -->
 
-Here are the prediction graphs.
+<!-- ## Adjusting for confounds -->
 
-```{r  coef_PWI_imputed coefplot, cache=TRUE}
-# function for prediction
-graph_predictions_imputed(mod_imputed_pwi,"Predicted Values of Personal well-being (imputed)")
-```
+<!-- ### First confounder model  -->
 
-```{r pred_LS_imputed,  cache = TRUE}
-# function for prediction
-graph_predictions_imputed(mod_imputed_ls,"Predicted Values of Life Satisfaction (imputed)")
-```
+<!-- ```{r lmer_model_with_full_covariatesDAG1, cache =TRUE} -->
+
+<!-- library(lme4) -->
+
+<!-- pwi_formulaDag1 <- 'PWI ~  Beliefs *  Age_within +  Age_between  + Ethnic_Categories + Male + (1 + Age_within|Id)' -->
+
+<!-- ls_formulaDag1 <- 'LIFESAT ~ Beliefs *  Age_within +  Age_between  + Ethnic_Categories + Male + (1 + Age_within|Id' -->
+
+<!-- mod.1dag1 <-lmer (pwi_formulaDag1, data= d_3) -->
+
+<!-- mod.2dag1 <-lmer (ls_formulaDag1, data= d_3) -->
+
+<!-- ``` -->
+
+<!-- Here is the table. -->
+
+<!-- ```{r tab_dag1, cache = TRUE} -->
+
+<!-- sjPlot::tab_model(mod.1dag1,mod.2dag1) -->
+
+<!-- ``` -->
+
+<!-- We compared complex with simple models, and we found the inference does not change.  -->
+
+<!-- ```{r} -->
+
+<!-- # identical result -->
+
+<!-- sjPlot::tab_model(mod.1dag1,mod.2dag1) -->
+
+<!-- ``` -->
+
+<!-- ```{r grapwi_predict_DAG, cache =TRUE} -->
+
+<!-- graph_predictions(mod.1dag1, "Predicted Values of Life Satisfaction: Dag 1") -->
+
+<!-- ``` -->
+
+<!-- ```{r gralifesat_predict_DAG, cache =TRUE} -->
+
+<!-- graph_predictions(mod.2dag1, "Predicted Values of Life Satisfaction: Dag 1") -->
+
+<!-- ``` -->
+
+<!-- ## Second confounder model  -->
+
+<!-- ```{r lmer_model_with_full_covariates_DAG, cache =TRUE} -->
+
+<!-- library(lme4) -->
+
+<!-- pwi_formulaDag2 <- 'PWI ~  yearsC * Beliefs +  Age_in_Decades_C  + Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + yearsC|Id)' -->
+
+<!-- ls_formulaDag2 <- 'LIFESAT ~ yearsC * Beliefs + Employed +  Age_in_Decades_C  + Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + yearsC|Id)' -->
+
+<!-- mod.1dag2 <-lmer (pwi_formulaDag2, data= d_3) -->
+
+<!-- mod.2dag2 <-lmer (ls_formulaDag2, data= d_3) -->
+
+<!-- dat <- cbind( -->
+
+<!--   d_3, -->
+
+<!--   demean(d_3, select = c("Age", "Beliefs"), group = "Id") -->
+
+<!-- ) -->
+
+<!-- dat<-dat%>% -->
+
+<!--   dplyr::mutate(Age_between_C = scale(Age_between, center =TRUE, scale = FALSE)) -->
+
+<!-- str(dat) -->
+
+<!-- head(dat$Age_between_C) -->
+
+<!-- # After thought -- check within and between group aging... no differences -->
+
+<!-- # dmPWI <- 'PWI ~  Age_within * Beliefs + Age_between_C  +  Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + Age_within|Id)' -->
+
+<!-- # mod_dmPWI <-lmer (dmPWI, data= dat) -->
+
+<!-- # tab_model(mod_dmPWI) -->
+
+<!-- # summary(mod_dmPWI) -->
+
+<!-- # n1<-ggeffects::ggpredict(model = mod_dmPWI, terms = c("Age_within [minmax]","Beliefs"),  -->
+
+<!-- #                               ci.lvl = 0.95, -->
+
+<!-- #                               type = "fe", -->
+
+<!-- #                               typical = "mean", -->
+
+<!-- #                               back.transform = TRUE, -->
+
+<!-- #                               ppd = FALSE, -->
+
+<!-- #                               interval = "confidence") -->
+
+<!-- #   plot(n1, facets = T) +  gghighlight::gghighlight()  +  theme_blank() #+ ggtitle(y) # title to be suppled -->
+
+<!-- #    -->
+
+<!-- # graph_predictions(mod_dmPWI, "Predicted Values of PWI") -->
+
+<!-- # #  -->
+
+<!-- # lsPWI <- 'LIFESAT ~  Age_within * Beliefs + Age_between_C  +  Employed + Male + Deprivation_S + Political_Conservativism_S + (1 + Age_within|Id)' -->
+
+<!-- # mod_lsPWI <-lmer (lsPWI, data= dat) -->
+
+<!-- # tab_model(mod_lsPWI) -->
+
+<!-- # summary(mod_lsPWI) -->
+
+<!-- # head(dat$Age_within) -->
+
+<!-- # n2<-ggeffects::ggpredict(model = mod_lsPWI, terms = c("Age_within [minmax]","Beliefs"), -->
+
+<!-- #                               ci.lvl = 0.95, -->
+
+<!-- #                               type = "fe", -->
+
+<!-- #                               typical = "mean", -->
+
+<!-- #                               back.transform = TRUE, -->
+
+<!-- #                               ppd = FALSE, -->
+
+<!-- #                               interval = "confidence") -->
+
+<!-- # plot(n2, facets = T) +  gghighlight::gghighlight()  +  theme_blank() #+ ggtitle(y) # title to be suppled -->
+
+<!-- ``` -->
+
+<!-- Here is the table -->
+
+<!-- ```{r tab_dag2, cache = TRUE} -->
+
+<!-- sjPlot::tab_model(mod.1dag2,mod.1dag2) -->
+
+<!-- ``` -->
+
+<!-- ```{r dag2_plotcreate, cache =TRUE} -->
+
+<!-- g1dag2<-plot(parameters::model_parameters(mod.1dag2))+ ggtitle("Personal well-being Coefficients") -->
+
+<!-- g2dag2<-plot(parameters::model_parameters(mod.2dag2))+ ggtitle("Life Satisfaction Coefficients") -->
+
+<!-- ``` -->
+
+<!-- And here's the graph. -->
+
+<!-- ```{r plot_coefficientplots_LMER_FULL_DAG2, cache = TRUE} -->
+
+<!-- g1dag2/g2dag2  -->
+
+<!-- ``` -->
+
+<!-- ```{r pwi_predict_DAG, cache =TRUE} -->
+
+<!-- graph_predictions(mod.1dag2, "Predicted Values of Life Satisfaction: Dag 2") -->
+
+<!-- ``` -->
+
+<!-- ```{r glifesat_predict_DAG, cache =TRUE} -->
+
+<!-- graph_predictions(mod.2dag2, "Predicted Values of Life Satisfaction: Dag 2") -->
+
+<!-- ``` -->
+
+<!-- Note we would prefer the the first counfounder model because there is less measurement error (not employed could mean mean not retired).  -->
+
+<!-- Additionally the first counfounder model has fewer terms to estimate.  -->
+
+<!-- <!-- Her are the coefficient plots for the full models -->
+
+--\> <!-- <!-- ```{r coefficientplots_LMER_FULL, cache=TRUE} --> --\>
+<!-- <!-- plot_models(mod.2, mod.1) + ylim(-.4, .75) + theme_plain()  # Plots -->
+--\> <!-- <!-- ``` --> --\>
+
+<!-- Next, recall we want to check whether inference is robustness to the researcher degree of freedom in selecting how many number of waves a participant must have responded to for inclusion. -->
+
+<!-- ```{r run all the models with different ns, cache = TRUE} -->
+
+<!-- mod.1_3 <-lmer (pwi_formulaDag1, data= d_4) -->
+
+<!-- mod.2_3 <-lmer (mod.2dag2, data= d_4) -->
+
+<!-- mod.1_4 <-lmer (pwi_formulaDag1, data= d_4) -->
+
+<!-- mod.2_4 <-lmer (mod.2dag2, data= d_4) -->
+
+<!-- mod.1_5 <-lmer (pwi_formulaDag1, data= d_5) -->
+
+<!-- mod.2_5 <-lmer (mod.2dag2, data= d_5) -->
+
+<!-- mod.1_6 <-lmer (pwi_formulaDag1, data= d_6) -->
+
+<!-- mod.2_6 <-lmer (mod.2dag2, data= d_6) -->
+
+<!-- mod.1_7 <-lmer (pwi_formulaDag1, data= d_7) -->
+
+<!-- mod.2_7 <-lmer (mod.2dag2, data= d_7) -->
+
+<!-- mod.1_8 <-lmer (pwi_formulaDag1, data= d_8) -->
+
+<!-- mod.2_8 <-lmer (mod.2dag2, data= d_8) -->
+
+<!-- ``` -->
+
+<!-- The inference is robut even to the poorly specified models using REML estimation. -->
+
+<!-- ```{r extremes_of_researcher_degree_of_freedom_test, cache =TRUE} -->
+
+<!-- library(parameters) -->
+
+<!-- g1a_3<-plot(parameters::model_parameters(mod.1_3))+ ggtitle("Personal well-being Coefficients: 8 Waves") -->
+
+<!-- g2a_3<-plot(parameters::model_parameters(mod.2_3))+ ggtitle("Life Satisfaction Coefficients: 8 Waves") -->
+
+<!-- g1a_8<-plot(parameters::model_parameters(mod.1_8))+ ggtitle("Personal well-being Coefficients: 8 Waves") -->
+
+<!-- g2a_8<-plot(parameters::model_parameters(mod.2_8))+ ggtitle("Life Satisfaction Coefficients: 8 Waves") -->
+
+<!-- ``` -->
+
+<!-- ```{r USE_2_coefficientplots_LMER_FULL_pwi,cache =TRUE} -->
+
+<!-- library(patchwork) -->
+
+<!-- g1a_3/g1a_8 +   plot_annotation(title = "Compare 3 X response model (top) with 8 X response model (bottom): Personal Well-Being") -->
+
+<!-- ``` -->
+
+<!-- ```{r USE_2_coefficientplots_LMER_FULL_ls,cache =TRUE} -->
+
+<!-- library(patchwork) -->
+
+<!-- g2a_3/g2a_8 +   plot_annotation(title = "Compare 3 X response model (top) with 8 X response model (bottom) : Life Satisfaction") -->
+
+<!-- ``` -->
+
+<!-- # Missing Data Analysis -->
+
+<!-- Finally, we ran our analyses on 10 multiply imputed datasets. Missing responses can be an important source of bias in a longitudinal study. Again we wrote some functions to deal with all the work, you can find these in `funs.R` file. -->
+
+<!-- ```{r echo = TRUE,  cache = TRUE} -->
+
+<!-- # Imputed data -->
+
+<!-- imputed3<-amelia_imputation_clean(d_3) -->
+
+<!-- # saveRDS(imputed3,"imputed3") -->
+
+<!-- # imputed3<-readRDS(imputed3) -->
+
+<!-- ``` -->
+
+<!-- We reran the imputed data analysis. (Note we ajust for confounds) -->
+
+<!-- ```{r cache = TRUE, imputedsimplePWI, cache=TRUE} -->
+
+<!-- # run models iterating over imputed data -->
+
+<!-- mod_imputed_pwi<-loop_lmer_model(pwi_formulaDag1, imputed3) -->
+
+<!-- ``` -->
+
+<!-- ```{r imputed pwi table, cache=TRUE} -->
+
+<!-- tab_mods_pwi<-loop_lmer_model_tab(mod_imputed_pwi) -->
+
+<!-- #create_hux_table(tab_mods_pwi) -->
+
+<!-- ``` -->
+
+<!-- Next a graph of the coefficients. -->
+
+<!-- ```{r coef_PWI_imputed_coefplot, cache =TRUE} -->
+
+<!-- # coeff plot -->
+
+<!-- imp_pwi <- plot(tab_mods_pwi) + ggtitle("Personal well-being Coefficients (Imputed)") # pick your  own title -->
+
+<!-- ``` -->
+
+<!-- The inference is robust in the imputation model. -->
+
+<!-- The following code returns the analysis for the life satisfaction model (again the functions are in the `funs.R` file). -->
+
+<!-- ```{r cache = TRUE} -->
+
+<!-- # run models iterating over imputed data -->
+
+<!-- mod_imputed_ls<-loop_lmer_model(ls_formulaDag1 ,imputed3) -->
+
+<!-- ```{r table_ls_imputed,cache=TRUE} -->
+
+<!-- # table -->
+
+<!-- tab_mods_ls<-loop_lmer_model_tab(mod_imputed_ls) -->
+
+<!-- #create_hux_table(tab_mods_ls) -->
+
+<!-- ``` -->
+
+<!-- Here's the graph: -->
+
+<!-- ```{r coef_imputed_ls, cache = TRUE} -->
+
+<!-- # coeff plot -->
+
+<!-- imp_ls<-plot(tab_mods_ls) + ggtitle("Life Satisfaction Coefficients (Imputed)")  -->
+
+<!-- ``` -->
+
+<!-- We found that the model is robust to multiple imputations over the missing data, though with greater uncertainty for the Personal Well-being effect.  -->
+
+<!-- ```{r coefficient_plot_both_imputed,  cache = TRUE} -->
+
+<!--  imp_pwi/imp_ls +  plot_annotation(tag_levels = 'i') -->
+
+<!-- ``` -->
+
+<!-- Here are the prediction graphs. -->
+
+<!-- ```{r  coef_PWI_imputed coefplot, cache=TRUE} -->
+
+<!-- # function for prediction -->
+
+<!-- graph_predictions_imputed(mod_imputed_pwi,"Predicted Values of Personal well-being (imputed)") -->
+
+<!-- ``` -->
+
+<!-- ```{r pred_LS_imputed,  cache = TRUE} -->
+
+<!-- # function for prediction -->
+
+<!-- graph_predictions_imputed(mod_imputed_ls,"Predicted Values of Life Satisfaction (imputed)") -->
+
+<!-- ``` -->
 
 <!-- ## Bayesian Multiple imputation models -->
+
 <!-- We wanted to run a Bayesian MI model. However, we did this, we blew up the RAM in JB's machine. So we must satisfy ourselves with ML MI models.  -->
-<!-- ```{r} won't work for missing categorical predictors--> 
+
+<!-- ```{r} won't work for missing categorical predictors-->
+
 <!-- form_pwi <- bf(PWI | mi() ~ years * mi(Beliefs)) + -->
+
 <!--   bf(Beliefs | mi() ~ years) + set_rescor(FALSE) -->
+
 <!-- imp_bayes_pwi <- brm(form_pwi, data = d_3) -->
-<!-- ``` -->
-<!-- ```{r create data frame of lists for BRMS imputation} -->
-<!-- # brms requires a list of the imputations -->
-<!-- brmdat <-list(imputed3$imputations$imp1, -->
-<!--               imputed3$imputations$imp2, -->
-<!--               imputed3$imputations$imp3, -->
-<!--               imputed3$imputations$imp4, -->
-<!--               imputed3$imputations$imp5, -->
-<!--               imputed3$imputations$imp6,   -->
-<!--               imputed3$imputations$imp7, -->
-<!--               imputed3$imputations$imp8, -->
-<!--               imputed3$imputations$imp9, -->
-<!--               imputed3$imputations$imp10) -->
-<!-- ``` -->
-<!-- ```{r Bayesian imputed model_pwi} -->
-<!-- # not run -->
-<!-- #fit_imp1 <- brm_multiple(PWI ~ years * Beliefs + (1 + years|Id), data = brmdat) -->
-<!-- #summary(fit_imp1) -->
-<!-- #save(fit_imp1) -->
-<!-- ``` -->
-<!-- ```{r Bayesian imputation model_ls} -->
-<!-- # not run -->
-<!-- #fit_imp2 <- brm_multiple(LIFESAT ~ years * Beliefs + (1+years|Id), data = brmdat, file = "fit_imp2") -->
+
 <!-- ``` -->
 
-There are further analyses that we ran (e.g. within/between subject effects). These can be found in the GitHub link, posted above. The inferences remain the same.
+<!-- ```{r create data frame of lists for BRMS imputation} -->
+
+<!-- # brms requires a list of the imputations -->
+
+<!-- brmdat <-list(imputed3$imputations$imp1, -->
+
+<!--               imputed3$imputations$imp2, -->
+
+<!--               imputed3$imputations$imp3, -->
+
+<!--               imputed3$imputations$imp4, -->
+
+<!--               imputed3$imputations$imp5, -->
+
+<!--               imputed3$imputations$imp6,   -->
+
+<!--               imputed3$imputations$imp7, -->
+
+<!--               imputed3$imputations$imp8, -->
+
+<!--               imputed3$imputations$imp9, -->
+
+<!--               imputed3$imputations$imp10) -->
+
+<!-- ``` -->
+
+<!-- ```{r Bayesian imputed model_pwi} -->
+
+<!-- # not run -->
+
+<!-- #fit_imp1 <- brm_multiple(PWI ~ years * Beliefs + (1 + years|Id), data = brmdat) -->
+
+<!-- #summary(fit_imp1) -->
+
+<!-- #save(fit_imp1) -->
+
+<!-- ``` -->
+
+<!-- ```{r Bayesian imputation model_ls} -->
+
+<!-- # not run -->
+
+<!-- #fit_imp2 <- brm_multiple(LIFESAT ~ years * Beliefs + (1+years|Id), data = brmdat, file = "fit_imp2") -->
+
+<!-- ``` -->
+
+<!-- There are further analyses that we ran (e.g. within/between subject effects). These can be found in the GitHub link, posted above. The inferences remain the same. -->
 
 ```{r}
 print(citation("brms"), bibtex=TRUE)
@@ -1030,320 +1500,629 @@ print(citation("brms"), bibtex=TRUE)
 
 ## Data
 
-The NZAVS is an ongoing longitudinal study. Our ethics requires us to protect the privacy of our participants. For this reason, we cannot post the raw data, even anonymous data. However, we provide data by request to qualified researchers for the purposes of replication. We areare interested in collaboration with qualified researchers: please contact Chris G. Sibley [c.sibley@auckland.ac.nz](c.sibley@auckland.ac.nz).
-
+The NZAVS is an ongoing longitudinal study. Our ethics requires us to
+protect the privacy of our participants. For this reason, we cannot post
+the raw data, even anonymous data. However, we provide data by request
+to qualified researchers for the purposes of replication. We areare
+interested in collaboration with qualified researchers: please contact
+Chris G. Sibley [c.sibley\@auckland.ac.nz](c.sibley@auckland.ac.nz).
 
 # References
 
+```{=tex}
 \begingroup
 \setlength{\parindent}{-0.5in}
 \setlength{\leftskip}{0.5in}
+```
+::: {#refs custom-style="Bibliography"}
+:::
 
-<div id="refs" custom-style="Bibliography"></div>
 \endgroup
+
 <!-- ## model equations -->
+
 <!-- ```{r} -->
+
 <!-- stancode(mod.1_b) -->
+
 <!-- ``` -->
+
 <!-- <!-- Frequentist model: -->
+
 <!-- ```{r eq1} -->
+
 <!-- library(equatiomatic) -->
+
 <!-- summary(mod.1aa) -->
+
 <!-- print(extract_eq(mod.1aa, wrap = TRUE)) -->
+
 <!-- ``` -->
+
 <!-- ```{r eq2} -->
+
 <!-- library(equatiomatic) -->
+
 <!-- print(extract_eq(mod.1aa, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3)) -->
+
 <!-- ``` -->
+
 <!-- We might want to look at within/between indivual change (i.e. do people who change in degree of spirit beliefs manifest different well-being.  I ran this as below, however, what we really want is a markov model, where we compare state changes between the different types of belief. So this model is not useful. For more on demeaning see:  -->
+
 <!-- https://easystats.github.io/parameters/articles/demean.html -->
+
 <!-- ```{r} -->
+
 <!-- dfben <- cbind( -->
+
 <!--   dfben, -->
+
 <!--   parameters::demean(dfben, select = c("Beliefs"), group = "Id") -->
+
 <!-- ) -->
+
 <!-- ``` -->
+
 <!-- ```{r models, cache = TRUE, dependson = "dfben"} -->
+
 <!-- ### Spirit Belief Models ###  -->
+
 <!-- mod01<-lmer (PWI ~ Years + -->
+
 <!--                 Beliefs__Skeptic__between  +   -->
+
 <!--                 Beliefs__SpiritExcludesGod__between +  -->
+
 <!--                 Beliefs_GodAndSpirit_between  +  -->
+
 <!--                 Beliefs_GodExcludesSpirit_between + -->
+
 <!--                 Beliefs__Skeptic__within  +   -->
+
 <!--                 Beliefs__SpiritExcludesGod__within +  -->
+
 <!--                 Beliefs_GodAndSpirit_within  +  -->
+
 <!--                 Beliefs_GodExcludesSpirit_within + -->
+
 <!--                 (1|Id), data= dfben, na.action = na.omit) -->
+
 <!-- parameters::check_heterogeneity(mod01, group = "ID") -->
+
 <!-- parameters::check_heterogeneity(mod01, group = "ID") -->
+
 <!-- mod02<-lmer (LIFESAT ~ Years + -->
+
 <!--                 Beliefs__Skeptic__between  +   -->
+
 <!--                 Beliefs__SpiritExcludesGod__between +  -->
+
 <!--                 Beliefs_GodAndSpirit_between  +  -->
+
 <!--                 Beliefs_GodExcludesSpirit_between + -->
+
 <!--                 Beliefs__Skeptic__within  +   -->
+
 <!--                 Beliefs__SpiritExcludesGod__within +  -->
+
 <!--                 Beliefs_GodAndSpirit_within  +  -->
+
 <!--                 Beliefs_GodExcludesSpirit_within + -->
+
 <!--                 (1|Id), data= dfben, na.action = na.omit) -->
+
 <!-- parameters::check_heterogeneity(mod02, group = "ID") -->
+
 <!-- # inference holds, but can we use this method with factors? What do the contrasts mean?  -->
+
 <!-- tab_model(mod01) -->
+
 <!-- tab_model(mod02) -->
+
 <!-- plot_models(mod01,mod02) -->
+
 <!-- ``` -->
+
 <!-- ```{r eq1} -->
+
 <!-- #for model equation -->
+
 <!-- library(equatiomatic) -->
+
 <!-- print(extract_eq(mod.1, wrap = TRUE,terms_per_line =3)) -->
+
 <!-- ``` -->
+
 <!-- PWI Model 2 equation -->
+
 <!-- ```{r eq2} -->
+
 <!-- library(equatiomatic) -->
+
 <!-- print(extract_eq(mod.2, wrap = TRUE, use_coefs=TRUE,terms_per_line = 3)) -->
+
 <!-- ``` -->
+
 <!-- ## report -->
+
 <!-- ### Model 1 -->
+
 <!-- model 1 report: for publication change all "significants" to "reliable" -->
+
 <!-- short report: -->
+
 <!-- ```{r, report1, cache =TRUE, dependson=mod.1,include=FALSE} -->
+
 <!-- easystats::model_text(mod.1) -->
+
 <!-- ``` -->
+
 <!-- short report -->
+
 <!-- ```{r, cache=TRUE, include=FALSE } -->
+
 <!-- library(report) -->
+
 <!-- r1<- easystats::report(mod.1) -->
+
 <!-- easystats::table_short(r1) -->
+
 <!-- easystats::text_short(r1) -->
+
 <!-- ``` -->
+
 <!-- ```{r, cache =TRUE, dependson=mod.1, include=FALSE} -->
+
 <!-- r1<- easystats::report(mod.1) -->
+
 <!-- easystats::text_long(r1) -->
+
 <!-- ``` -->
+
 <!-- short report -->
+
 <!-- ```{r, cache =TRUE, dependson=mod.2,include=FALSE} -->
+
 <!-- # Model 2 -->
+
 <!-- # For publication change all "significants" to "reliable" -->
+
 <!-- easystats::model_text(mod.2) -->
+
 <!-- ``` -->
+
 <!-- short report -->
+
 <!-- ```{r,include=FALSE} -->
+
 <!-- r2 <- easystats::report(mod.2) -->
+
 <!-- easystats::text_short(r2) -->
+
 <!-- easystats::table_short(r2) -->
+
 <!-- ``` -->
+
 <!-- long report -->
+
 <!-- ```{r,include=FALSE} -->
+
 <!-- r2<- easystats::report(mod.2) -->
+
 <!-- easystats::text_long(r2) -->
+
 <!-- ``` -->
+
 <!-- ## Equation 1: Personal Well-being  -->
+
 <!-- model equations for models without random intercept slope correlations; not correct, or reported\[ -->
+
 <!-- \begin{aligned} -->
+
 <!-- \operatorname{{\small PWI}}  &\sim N \left(\mu,\sigma^2 \right) \\  -->
+
 <!-- \mu & =  \boldsymbol{a} +  \boldsymbol{b} \\ -->
+
 <!-- & \quad \boldsymbol{a} =  \alpha_{0} + \alpha_{j[i]} \\ -->
+
 <!-- & \quad \alpha_{0} \sim \operatorname{Student T}^{+}(3,7.2,2.5) \\ -->
+
 <!-- & \quad  \alpha_{j[i]}  \sim \operatorname{Normal}(0, \sigma_j) \\  -->
+
 <!-- & \quad \sigma_j \sim \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+
 <!-- & \quad   \boldsymbol{b}   \sim \operatorname{Student T}^{+}(0, 2.5) \\  -->
+
 <!-- & \quad \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+
 <!-- & \quad  \boldsymbol{b} = \\ -->
+
 <!-- & \quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ -->
+
 <!-- &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ +  \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\ -->
+
 <!-- & \quad \beta_{5}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\  -->
+
 <!-- & \quad \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\ -->
+
 <!-- &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\  -->
+
 <!-- \end{aligned} -->
+
 <!-- \] -->
+
 <!-- ## Equation 2: Life Satisfaction. -->
+
 <!-- \[ -->
+
 <!-- \begin{aligned} -->
+
 <!-- \operatorname{{\small LifeSatisfaction}}  &\sim N \left(\mu,\sigma^2 \right) \\  -->
+
 <!-- \mu & =  \boldsymbol{a} +  \boldsymbol{b} \\ -->
+
 <!-- & \quad \boldsymbol{a} =  \alpha_{0} + \alpha_{j[i]} \\ -->
+
 <!-- & \quad \alpha_{0} \sim \operatorname{Student T}^{+}(3,5.5, 2.5) \\ -->
+
 <!-- & \quad  \alpha_{j[i]}  \sim \operatorname{Normal}(0, \sigma_j) \\  -->
+
 <!-- & \quad \sigma_j \sim \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+
 <!-- & \quad   \boldsymbol{b}   \sim \operatorname{Student T}^{+}(0, 2.5) \\  -->
+
 <!-- & \quad \sigma  \sim  \operatorname{HalfStudent T}^{+}(3, 0, 2.5) \\ -->
+
 <!-- & \quad  \boldsymbol{b} = \\ -->
+
 <!-- & \quad \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ -->
+
 <!-- &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ +  \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}})\ +\\ -->
+
 <!-- & \quad \beta_{5}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\  -->
+
 <!-- & \quad \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\ -->
+
 <!-- &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\  -->
+
 <!-- \end{aligned} -->
+
 <!-- \] -->
+
 <!-- ## Equation 2 -->
+
 <!-- \[ -->
+
 <!-- \begin{aligned} -->
+
 <!-- \operatorname{{\small LIFESAT/PWI}}  &\sim N \left(\mu,\sigma^2 \right) \\ \mu &=\alpha_{j[i]} + \beta_{1}(\operatorname{Years}) + \beta_{2}(\operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}})\ + \\ -->
+
 <!-- &\quad \beta_{3}(\operatorname{Beliefs}_{\operatorname{GodAndSpirit}}) + \beta_{4}(\operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) + \beta_{5}(\operatorname{Age.10yrs.C})\ + \\ -->
+
 <!-- &\quad \beta_{6}(\operatorname{Deprivation.S}) + \beta_{7}(\operatorname{Edu.S}) + \beta_{8}(\operatorname{Employed})\ + \\ -->
+
 <!-- &\quad \beta_{9}(\operatorname{EthnicCats}_{\operatorname{Maori}}) + \beta_{10}(\operatorname{EthnicCats}_{\operatorname{Pacific}}) + \beta_{11}(\operatorname{EthnicCats}_{\operatorname{Asian}})\ + \\ -->
+
 <!-- &\quad \beta_{12}(\operatorname{Male}_{\operatorname{1}}) + \beta_{13}(\operatorname{Partner}_{\operatorname{Has\ }}) + \beta_{14}(\operatorname{Pol.Orient.S})\ + \\ -->
+
 <!-- &\quad \beta_{15}(\operatorname{Urban}) + \beta_{16}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{SpiritExcludesGod}}) + \beta_{17}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodAndSpirit}})\ + \\ -->
+
 <!-- &\quad \beta_{18}(\operatorname{Years} \times \operatorname{Beliefs}_{\operatorname{GodExcludesSpirit}}) \\ \alpha_{j} &\sim N \left(\mu_{\alpha_{j}},\sigma^2_{\alpha_{j}} \right) , \operatorname{ for  Id }~j~= 1, \dots~J = 20,979~\operatorname{Individuals} -->
+
 <!-- \end{aligned} -->
+
 <!-- \] -->
+
 <!-- \[ -->
+
 <!-- \begin{table}[ ht ]  -->
+
 <!-- \centering  -->
+
 <!-- \caption{}\label{} -->
+
 <!-- \scalebox{.6}{ -->
+
 <!-- \begin{tabular}{ l c c c c c c c c c } -->
+
 <!-- \toprule -->
+
 <!--  &   \multicolumn{ 9 }{c}{ Wave }\\  -->
+
 <!--   & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 \\  -->
+
 <!--  & n = \emph{missing} & n = \emph{missing} & n = 8547 & n = 13472 & n = \emph{missing} & n = 11687 & n = 16048 & n = 14174 & n = 14883 \\  -->
+
 <!--  \midrule -->
+
 <!-- Age &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- NZdep &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- Education &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- Employed &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \hspace{6pt}    0 &  (\%) &  (\%) & 2094 (24.5\%) & 2955 (21.9\%) &  (\%) & 2525 (21.6\%) & 3486 (21.7\%) & 3223 (22.7\%) & 3404 (22.9\%)\\  -->
+
 <!-- \hspace{6pt}    1 &  (\%) &  (\%) & 6453 (75.5\%) & 10517 (78.1\%) &  (\%) & 9162 (78.4\%) & 12562 (78.3\%) & 10951 (77.3\%) & 11479 (77.1\%)\\  -->
+
 <!-- EthnicCategories &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \hspace{6pt}    Euro &  (\%) &  (\%) & 6731 (78.8\%) & 11024 (81.8\%) &  (\%) & 9671 (82.8\%) & 13389 (83.4\%) & 11814 (83.3\%) & 12427 (83.5\%)\\  -->
+
 <!-- \hspace{6pt}    Maori &  (\%) &  (\%) & 1188 (13.9\%) & 1608 (11.9\%) &  (\%) & 1341 (11.5\%) & 1749 (10.9\%) & 1620 (11.4\%) & 1677 (11.3\%)\\  -->
+
 <!-- \hspace{6pt}    Pacific &  (\%) &  (\%) & 284 (3.3\%) & 339 (2.5\%) &  (\%) & 277 (2.4\%) & 331 (2.1\%) & 243 (1.7\%) & 261 (1.8\%)\\  -->
+
 <!-- \hspace{6pt}    Asian &  (\%) &  (\%) & 344 (4\%) & 501 (3.7\%) &  (\%) & 398 (3.4\%) & 579 (3.6\%) & 497 (3.5\%) & 518 (3.5\%)\\  -->
+
 <!-- Male &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \hspace{6pt}    0 &  (\%) &  (\%) & 5302 (62\%) & 8457 (62.8\%) &  (\%) & 7325 (62.7\%) & 10148 (63.2\%) & 9011 (63.6\%) & 9433 (63.4\%)\\  -->
+
 <!-- \hspace{6pt}    1 &  (\%) &  (\%) & 3245 (38\%) & 5015 (37.2\%) &  (\%) & 4362 (37.3\%) & 5900 (36.8\%) & 5163 (36.4\%) & 5450 (36.6\%)\\  -->
+
 <!-- Partner &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \hspace{6pt}    0 &  (\%) &  (\%) & 2408 (28.2\%) & 3546 (26.3\%) &  (\%) & 2815 (24.1\%) & 3773 (23.5\%) & 3330 (23.5\%) & 3556 (23.9\%)\\  -->
+
 <!-- \hspace{6pt}    1 &  (\%) &  (\%) & 6139 (71.8\%) & 9926 (73.7\%) &  (\%) & 8872 (75.9\%) & 12275 (76.5\%) & 10844 (76.5\%) & 11327 (76.1\%)\\  -->
+
 <!-- Pol Orient &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- Urban &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \hspace{6pt}    Not\_Urban &  (\%) &  (\%) & 2865 (33.5\%) & 4278 (31.8\%) &  (\%) & 3951 (33.8\%) & 5538 (34.5\%) & 2610 (18.4\%) & 2661 (17.9\%)\\  -->
+
 <!-- \hspace{6pt}    Urban &  (\%) &  (\%) & 5682 (66.5\%) & 9194 (68.2\%) &  (\%) & 7736 (66.2\%) & 10510 (65.5\%) & 11564 (81.6\%) & 12222 (82.1\%)\\  -->
+
 <!-- Beliefs &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \hspace{6pt}    \_Skeptic\_ &  (\%) &  (\%) & 2048 (24\%) & 3286 (24.4\%) &  (\%) & 2951 (25.3\%) & 4116 (25.6\%) & 3916 (27.6\%) & 4120 (27.7\%)\\  -->
+
 <!-- \hspace{6pt}    \_SpiritExcludesGod\_ &  (\%) &  (\%) & 2295 (26.9\%) & 3735 (27.7\%) &  (\%) & 3169 (27.1\%) & 4501 (28\%) & 3918 (27.6\%) & 3970 (26.7\%)\\  -->
+
 <!-- \hspace{6pt}    GodAndSpirit &  (\%) &  (\%) & 3707 (43.4\%) & 5499 (40.8\%) &  (\%) & 5119 (43.8\%) & 6453 (40.2\%) & 5464 (38.5\%) & 6210 (41.7\%)\\  -->
+
 <!-- \hspace{6pt}    GodExcludesSpirit &  (\%) &  (\%) & 497 (5.8\%) & 952 (7.1\%) &  (\%) & 448 (3.8\%) & 978 (6.1\%) & 876 (6.2\%) & 583 (3.9\%)\\  -->
+
 <!-- LIFESAT &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- PWI &   &   &   &   &   &   &   &   &  \\  -->
+
 <!-- \bottomrule -->
+
 <!-- \end{tabular} -->
+
 <!-- } -->
+
 <!-- \end{table} -->
+
 <!-- \] -->
+
 <!-- \[ -->
+
 <!-- \begin{table} -->
+
 <!-- \begin{center} -->
+
 <!-- \scalebox{0.6}{ -->
+
 <!-- \begin{tabular}{l c c} -->
+
 <!-- \toprule -->
+
 <!--  & PWI & Life Satisfaction \\ -->
+
 <!-- \midrule -->
+
 <!-- (Intercept)                        & $\mathbf{6.63}^{***}$  & $\mathbf{4.94}^{***}$  \\ -->
+
 <!--                                    & $(0.03)$               & $(0.02)$               \\ -->
+
 <!-- Years                              & $0.00$                 & $-0.00$                \\ -->
+
 <!--                                    & $(0.00)$               & $(0.00)$               \\ -->
+
 <!-- Beliefs\_SpiritExcludesGod\_       & $\mathbf{-0.14}^{***}$ & $\mathbf{-0.08}^{***}$ \\ -->
+
 <!--                                    & $(0.03)$               & $(0.02)$               \\ -->
+
 <!-- BeliefsGodAndSpirit                & $\mathbf{-0.16}^{***}$ & $-0.04$                \\ -->
+
 <!--                                    & $(0.03)$               & $(0.02)$               \\ -->
+
 <!-- BeliefsGodExcludesSpirit           & $0.02$                 & $0.07$                 \\ -->
+
 <!--                                    & $(0.05)$               & $(0.04)$               \\ -->
+
 <!-- Age.10yrs.C                        & $\mathbf{0.08}^{***}$  & $\mathbf{0.09}^{***}$  \\ -->
+
 <!--                                    & $(0.01)$               & $(0.01)$               \\ -->
+
 <!-- Deprivation.S                      & $\mathbf{-0.14}^{***}$ & $\mathbf{-0.07}^{***}$ \\ -->
+
 <!--                                    & $(0.01)$               & $(0.01)$               \\ -->
+
 <!-- Edu.S                              & $\mathbf{0.12}^{***}$  & $\mathbf{0.06}^{***}$  \\ -->
+
 <!--                                    & $(0.01)$               & $(0.01)$               \\ -->
+
 <!-- EmployedEmployed                   & $\mathbf{0.09}^{***}$  & $\mathbf{0.08}^{***}$  \\ -->
+
 <!--                                    & $(0.01)$               & $(0.01)$               \\ -->
+
 <!-- EthnicCatsMaori                    & $\mathbf{-0.30}^{***}$ & $\mathbf{-0.06}^{**}$  \\ -->
+
 <!--                                    & $(0.03)$               & $(0.02)$               \\ -->
+
 <!-- EthnicCatsPacific                  & $\mathbf{-0.29}^{***}$ & $\mathbf{-0.08}^{*}$   \\ -->
+
 <!--                                    & $(0.05)$               & $(0.04)$               \\ -->
+
 <!-- EthnicCatsAsian                    & $-0.08$                & $-0.04$                \\ -->
+
 <!--                                    & $(0.05)$               & $(0.03)$               \\ -->
+
 <!-- Male1                              & $\mathbf{-0.11}^{***}$ & $\mathbf{-0.19}^{***}$ \\ -->
+
 <!--                                    & $(0.02)$               & $(0.01)$               \\ -->
+
 <!-- PartnerHas Partner                 & $\mathbf{0.61}^{***}$  & $\mathbf{0.42}^{***}$  \\ -->
+
 <!--                                    & $(0.02)$               & $(0.01)$               \\ -->
+
 <!-- Pol.Orient.S                       & $\mathbf{0.02}^{***}$  & $\mathbf{0.01}^{**}$   \\ -->
+
 <!--                                    & $(0.01)$               & $(0.00)$               \\ -->
+
 <!-- UrbanUrban                         & $\mathbf{-0.02}^{*}$   & $\mathbf{-0.02}^{*}$   \\ -->
+
 <!--                                    & $(0.01)$               & $(0.01)$               \\ -->
+
 <!-- Years:Beliefs\_SpiritExcludesGod\_ & $\mathbf{0.02}^{**}$   & $\mathbf{0.02}^{***}$  \\ -->
+
 <!--                                    & $(0.00)$               & $(0.00)$               \\ -->
+
 <!-- Years:BeliefsGodAndSpirit          & $\mathbf{0.02}^{***}$  & $\mathbf{0.01}^{***}$  \\ -->
+
 <!--                                    & $(0.00)$               & $(0.00)$               \\ -->
+
 <!-- Years:BeliefsGodExcludesSpirit     & $0.00$                 & $-0.00$                \\ -->
+
 <!--                                    & $(0.01)$               & $(0.01)$               \\ -->
+
 <!-- \midrule -->
+
 <!-- AIC                                & $248580.18$            & $200599.16$            \\ -->
+
 <!-- BIC                                & $248775.08$            & $200793.96$            \\ -->
+
 <!-- Log Likelihood                     & $-124269.09$           & $-100278.58$           \\ -->
+
 <!-- Num. obs.                          & $79270$                & $78888$                \\ -->
+
 <!-- Num. groups: Id                    & $20979$                & $20972$                \\ -->
+
 <!-- Var: Id (Intercept)                & $1.78$                 & $0.88$                 \\ -->
+
 <!-- Var: Residual                      & $0.74$                 & $0.42$                 \\ -->
+
 <!-- \bottomrule -->
+
 <!-- \multicolumn{3}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}} -->
+
 <!-- \end{tabular} -->
+
 <!-- } -->
+
 <!-- \caption{Regression Models} -->
+
 <!-- \label{table:coefficients} -->
+
 <!-- \end{center} -->
+
 <!-- \end{table} -->
+
 <!-- \] -->
+
 <!-- \newpage -->
+
 <!-- ## Personal Well-Being -->
+
 <!-- We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict personal well-being (PWI) with years (0-9), beliefs (four categories), Age.10yrs.C, deprivation (S), education (S), employed, ethnic categories, male, partner, political conservativism (S) and urban, with Id as a random effect. The model's intercept, corresponding to years = 0, beliefs = Skeptic, age = (sample mean), deprivation.S = (sample mean), education (S) =(sample mean), employed = not employed, ethnic Categories = European, male = not male, partner = no partner, political conservativism (S) = (sample mean), urban = not urban, is at 4.94 (SE = 0.02, 95% CI [4.89, 4.99], p < .001) is at 6.63 (SE = 0.03, 95% CI [6.57, 6.70], p < .001). Within this model: -->
+
 <!--   - The effect of Years is positive is not reliable (beta = 2.66e-03, SE = 3.58e-03, std. beta = 3.19e-03, p = 0.458).  We infer that personal well-being did not increase in the Skeptic population between 2010 and 2018. -->
+
 <!--   - The effect of Beliefs in *Spirit Excludes God*  is reliably negative (beta = -0.14, SE = 0.03, std. beta = -0.03, p < .001). We infer that in 2010, the population that believed in a Spirit but did not believe in a God had lower personal well-being than did Skeptics.  -->
+
 <!--   - The effect of Beliefs in *God And Spirit*  is reliably negative (beta = -0.16, SE = 0.03, std. beta = -0.02, p < .001). We infer that in 2010, the population that believed in a God and a Spirit or Life Force had lower Personal Well-being than did Skeptics.  -->
+
 <!--   - The effect of Beliefs in *God Excludes Spirit*  is not reliable (beta = 0.02, SE = 0.05, std. beta = 0.02, p = 0.669). We infer that in 2010, the population that believed in a God and doubted a Spirit or Life Force similar levels of personal well-being to Skeptics. -->
+
 <!--   - The effect of Age.10yrs.C is reliably positive  (beta = 0.08, SE = 7.38e-03, std. beta = 0.07, p < .001). Older people tend to have greater personal well-being. -->
+
 <!--   - The effect of Deprivation (S) is reliably negative (beta = -0.14, SE = 7.50e-03, std. beta = -0.08, p < .001). Deprived people tend to have lower personal well-being. -->
+
 <!--   - The effect of Education (S) is reliably positive  (beta = 0.12, SE = 8.74e-03, std. beta = 0.07, p < .001). Educated people tend to have greater personal well-being. -->
+
 <!--   - The effect of Employed is reliably positive  (beta = 0.09, SE = 0.01, std. beta = 0.05, p < .001). -->
+
 <!--   - The effect of identifying as M\={a}ori is reliably negative (beta = -0.30, SE = 0.03, std. beta = -0.18, p < .001). -->
+
 <!--   - The effect of identifying as Pacific is reliably negative (beta = -0.29, SE = 0.05, std. beta = -0.17, p < .001).  -->
+
 <!--   - The effect of identifying as Asian is not reliable (beta = -0.08, SE = 0.05, std. beta = -0.05, p = 0.089). -->
+
 <!--   - The effect of identifying as male is reliably negative (beta = -0.11, SE = 0.02, std. beta = -0.06, p < .001).  -->
+
 <!--   - The effect of having a partner is reliably positive (beta = 0.61, SE = 0.02, std. beta = 0.37, p < .001). -->
+
 <!--   - The effect of political conservativism (S) is reliably positive  (beta = 0.02, SE = 5.67e-03, std. beta = 0.01, p < .001).  -->
+
 <!--   - The effect of living in an Urban area is reliably negative (beta = -0.02, SE = 0.01, std. beta = -0.01, p < .05). T -->
+
 <!-- ##  Personal well-being: years X beliefs  -->
+
 <!-- ```{r fig.cap = "Combination Coefficient plots for personal well-being and life satisfaction longitudinal growth models"} -->
+
 <!-- knitr::include_graphics("Figs/USEPWI_expected-1.png") -->
+
 <!-- ``` -->
+
 <!-- Focusing on the interaction of time with belief-type on personal well-being we observe:  -->
 
 <!--   - The effect of years $\times$ belief in a *Spirit Excludes God*  is reliably positive  (beta = 0.02, SE = 4.86e-03, std. beta = 0.02, p < .01). We infer that, unlike the skeptic population, people with beliefs in a spirit or life force who do not believe in a God tend to grow in their personal well-being over time. -->
+
 <!--   - The effect of years $\times$ in *God And Spirit*  is reliably positive  (beta = 0.02, SE = 4.41e-03, std. beta = 0.03, p < .001). We infer that people who believe in a spirit or life force who also believe in a God tend to grow in their personal well-being over time -->
+
 <!--   - The effect of Years $\times$ belief in *God Excludes Spirit*  is not reliable(beta = 1.96e-03, SE = 8.29e-03, std. beta = 2.36e-03, p = 0.813).  Thus, God believers who doubt in a Spirit or Life Force start maintain higher personal well-being than do other groups, but they are not expected to grow in personal well-being over time.  -->
+
 <!-- ## Life Satisfaction  -->
+
 <!-- We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict personal well-being (PWI) with years (0-9), beliefs (four categories), Age.10yrs.C, deprivation (S), education (S), employed, ethnic categories, male, partner, political conservativism (S) and urban, with Id as a random effect. Standardized parameters were obtained by fitting the model on a standardized version of the dataset. The model's total explanatory power is substantial (conditional R2 = 0.69). The model's intercept, corresponding to years = 0, beliefs = Skeptic, age = (sample mean), deprivation.S = (sample mean), education (S) =(sample mean), employed = not employed, ethnic Categories = European, male = not male, partner = no partner, political conservativism (S) = (sample mean), urban = not urban is at 4.94 (SE = 0.02, 95% CI [4.89, 4.99], p < .001). Within this model: -->
+
 <!--   - The effect of years is not reliable (beta = -5.50e-04, SE = 2.69e-03, std. beta = -9.32e-04, p = 0.838).  We infer that life satisfaction did not increase in the Skeptic population between 2010 and 2018. -->
+
 <!--   - The effect of beliefs in *Spirit Excludes God* is reliably negative (beta = -0.08, SE = 0.02, std. beta = 0.01, p < .001). We infer that overall the population that believes in a Spirit but does not believe in a God is expected to have a lower Life Satisfaction than skeptics.  -->
+
 <!--   - The effect of beliefs in *God And Spirit* is not reliable (beta = -0.04, SE = 0.02, std. beta = 0.04, p = 0.105). People who believe in God but doubt a Spirit/Life force are expected to have had similar levels of life satisfaction in Wave 10 as skeptics. -->
+
 <!--   - The effect of beliefs in *God Excludes Spirit* is reliably positive (beta = 0.07, SE = 0.04, std. beta = 0.05, p = 0.062).We infer that overall the population that believes in a God but does not believe in a spirit is not reliably different from  the Skeptics population in Life Satisfaction.  -->
+
 <!--   - The effect of Age.10yrs.C is reliably positive (beta = 0.09, SE = 5.26e-03, std. beta = 0.10, p < .001). Older people have greater Life Satisfaction -->
+
 <!--   - The effect of Deprivation (S) is  is reliably negative (beta = -0.07, SE = 5.50e-03, std. beta = -0.06, p < .001). People who are more deprived have lower Life Satisfaction. -->
+
 <!--   - The effect of Education (S) is reliably positive (beta = 0.06, SE = 6.33e-03, std. beta = 0.05, p < .001). Educated people have greater Life Satisfaction -->
+
 <!--   - The effect of being Employed is reliably positive (beta = 0.08, SE = 9.69e-03, std. beta = 0.07, p < .001). People who are employed tend to have greater Life Satisfaction -->
+
 <!--   - The effect of identifying as Maori is reliably negative (beta = -0.06, SE = 0.02, std. beta = -0.05, p < .01).  People who belong to the minority Maori group tend to have lower Life Satisfaction. -->
+
 <!--   - The effect of identifying as Pacific is reliably negative (beta = -0.08, SE = 0.04, std. beta = -0.07, p < .05).  People who belong to the minority Pacific peoples group tend to have lower life satisfaction. -->
+
 <!--   - The effect of identifying as Asian is not reliably different from people of European ethnicity in life satisfaction(beta = -0.04, SE = 0.03, std. beta = -0.03, p = 0.223). -->
+
 <!--   - The effect of identifying as male is reliably negative (beta = -0.19, SE = 0.01, std. beta = -0.16, p < .001). -->
+
 <!--   - The effect of having a partner is reliably positive (beta = 0.42, SE = 0.01, std. beta = 0.35, p < .001). -->
+
 <!--   - The effect of political conservativism (S) is reliably positive (beta = 0.01, SE = 4.23e-03, std. beta = 0.01, p < .01). -->
+
 <!--   - The effect of living in an urban area is reliably negative (beta = -0.02, SE = 8.85e-03, std. beta = -0.02, p < .05). -->
+
 <!-- ## Life Satisfaction: years X beliefs  -->
+
 <!-- ```{r fig.cap = "Prediction Plot Life Satisfaction Spirit Belief Longitudinal Models"} -->
+
 <!-- knitr::include_graphics("/Users/joseph/Documents/GitHub/nzavs_spiritbeliefWellbeing/Figs/USElifsat_expected-1.png") -->
+
 <!-- ``` -->
+
 <!--   - The interaction of years $\times$ beliefs in *Spirit Excludes God* ludesGod is reliably positive (beta = 0.02, SE = 3.66e-03, std. beta = 0.03, p < .001). We infer that, unlike the Skeptic population, people with beliefs in a Spirit or Life Force who do not believe in a God tend to grow in their Life Satisfaction over time. -->
+
 <!--   - The interaction of years $\times$ *God And Spirit*  is reliably positive (beta = 0.01, SE = 3.32e-03, std. beta = 0.02, p < .001). We infer that people who believe in a spirit or life force who also believe in a God tend to grow in their life satisfaction over time -->
-  <!--   - The effect of years $\times$ beliefs in *God Excludes Spirit*  is not reliable (beta = -1.59e-03, SE = 6.25e-03, std. beta = -2.70e-03, p = 0.799). Thus, God believers who doubt in a Spirit or Life Force start maintain higher Life-Satisfaction than do other groups, but they are not expected to grow in Life-Satisfaction over time.   -->
-  
+
+<!--   - The effect of years $\times$ beliefs in *God Excludes Spirit*  is not reliable (beta = -1.59e-03, SE = 6.25e-03, std. beta = -2.70e-03, p = 0.799). Thus, God believers who doubt in a Spirit or Life Force start maintain higher Life-Satisfaction than do other groups, but they are not expected to grow in Life-Satisfaction over time.   -->
