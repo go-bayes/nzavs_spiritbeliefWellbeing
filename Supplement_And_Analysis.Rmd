@@ -66,13 +66,14 @@ Sampling Procedure -- NZAVS Time 4 (2012; conducted from 19.09.2012-16.09.2013)
 ### The Time 4 (2012) NZAVS contained responses from 12,179 participants (6,807 retained from one or more previous wave, 5,107 new additions from booster sampling, and 265 unmatched participants or unsolicited opt-ins). 
 
 Informal analysis indicates that unsolicited opt-ins were often the partners of existing participants. The sample retained 4,053 participants from the initial Time 1 (2009) NZAVS of 6,518 participants (a retention rate of 62.2% over three years). The sample retained 5,762 participants from the full Time 3 (2011) sample (a retention rate of 83.7% from the previous year). Participants were posted a copy of the questionnaire, with a second postal follow-up two months later. Participants who provided an email address were also emailed and invited to complete an online version if they preferred. 
+
 Non-respondents were emailed a follow-up reminder email approximately two months later. Three attempts were then made using each provided phone number (typically home and cell phone) to contact non-respondents to encourage participation. These attempts were made on separate days, approximately one week apart. When possible, a phone message was left for each phone number after the third attempt. Participants were also posted a pamphlet outlining recent findings from the study mid-way through the year. Finally, participants were posted a Season’s Greetings from the NZAVS research team, and informed that they had been automatically entered into a bonus seasonal grocery voucher prize draw for a total pool of $NZ 1,000). Participants were informed that the draw would happen automatically and winners contacted. The Season’s Greetings card also asked participants to contact us (online, email or phone) to let us know if any of their contact details had changed before the prize draw was conducted. These additional materials are presented by Huang, Greaves, and Sibley (2014) in an online NZAVS technical report. 
 
 To boost sample size at Time 4 and increase sample diversity for subsequent waves, five independent booster samples using different sample frames were also conducted. Booster sampling was conducted without replacement (i.e., all people included in previous sample frames were identified and removed from the electoral roll before generation of the new sample frames). The first sample frame consisted of a randomly selected sample of 20,000 people from the 2012 New Zealand Electoral, and who were currently residing in New Zealand (one can be registered to vote in New Zealand but living overseas). A total of 2,429 participants responded to this booster sample (response rate = 12.33% when adjusting for the 98.5% accuracy of the 2012 electoral roll). The second sample frame consisted of a regional booster of 10,000 people randomly selected from people listed in the 2012 Electoral Roll who lived in the Auckland region. A total of 890 participants responded to this booster sample (adjusted response rate = 9.04). The Auckland region was oversampled because it is the fastest growing and most ethnically diverse region of the country with an increasing number of Asian and Pacific peoples in particular. The questionnaire used for this Auckland sample was longer than the standard NZAVS questionnaire, and contained additional unrelated questions that are not included in the NZAVS dataset (these related to the use of community facilities). Exit interviews conducted during
 
 Time 5 indicated that the longer length of this questionnaire may have contributed to the low response rate in this case. 
 The third sample frame consisted of 3,000 people randomly selected from the 2012 Electoral Roll who lived in the Christchurch region. A total of 332 participants responded to this booster sample (adjusted response rate = 11.24%). The Christchurch region was oversampled because it has experienced significant hardship and change due to the Christchurch earthquakes of 2010 and 2011 with many people moving out of the region (Statistics New Zealand, 2013) and problems with mail delivery with some city zones being placed under restricted entry due to safety concerns and considerable infrastructure destroyed). 
-The fourth sample frame consisted of 9,000 respondents selected from meshblock area units across the country that were moderate-to-high in deprivation according to the index developed by Salmond, Crampton and Atkinson (2007). Regions with levels of deprivation were selected using scores on the decile-ranked NZ Deprivation index from 6-10, with 10 being the most deprived). This sample frame used scaled weighting so that people in increasingly deprived regions were increasingly more likely to be selected (with random sampling of people within regions that had a given level of deprivation). The scaling factor was as follows: ni = nbase * weighti, where nbase = 600, and weighti, ranged from 1 to 5 and increased by 1 for each one-unit increased in deprivation score. Thus, 600 people were randomly selected from regions with a deprivation score of 6, 1,200 people were randomly selected from regions with a deprivation score of 7, and so on. This sampling strategy was designed to increase the representativeness of the sample across regions with different levels of deprivation, as the NZAVS showed increased attrition in increasingly more deprived regions over the first three years of the study. A total of 767 participants responded to this booster sample (adjusted response rate = 8.65%). The fifth sample frame consisted of 9,000 people randomly selected from those who indicated on the 2012 Electoral Roll that they were of Māori ethnicity (ethnic affiliation as Māori is listed on the roll, but other ethnic affiliations are not). A total of 689 participants responded to this booster sample (adjusted response rate = 7.78%). The questionnaire administered to the Māori booster sample included questions specifically designed for Māori.
+The fourth sample frame consisted of 9,000 respondents selected from meshblock area units across the country that were moderate-to-high in deprivation according to the index developed by Salmond, Crampton and Atkinson (2007). Regions with levels of deprivation were selected using scores on the decile-ranked NZ Deprivation index from 6-10, with 10 being the most deprived). This sample frame used scaled weighting so that people in increasingly deprived regions were increasingly more likely to be selected (with random sampling of people within regions that had a given level of deprivation). The scaling factor was as follows: n_i = n_base * weigh_i, where n_base = 600, and weight_i, ranged from 1 to 5 and increased by 1 for each one-unit increased in deprivation score. Thus, 600 people were randomly selected from regions with a deprivation score of 6, 1,200 people were randomly selected from regions with a deprivation score of 7, and so on. This sampling strategy was designed to increase the representativeness of the sample across regions with different levels of deprivation, as the NZAVS showed increased attrition in increasingly more deprived regions over the first three years of the study. A total of 767 participants responded to this booster sample (adjusted response rate = 8.65%). The fifth sample frame consisted of 9,000 people randomly selected from those who indicated on the 2012 Electoral Roll that they were of Māori ethnicity (ethnic affiliation as Māori is listed on the roll, but other ethnic affiliations are not). A total of 689 participants responded to this booster sample (adjusted response rate = 7.78%). The questionnaire administered to the Māori booster sample included questions specifically designed for Māori.
 
 
 ### Sampling Procedure -- NZAVS Time 5 (2013; conducted from 17.09.2013-20.10.2014)
@@ -111,11 +112,11 @@ To boost sample size and increase sample diversity for subsequent waves, a boost
 
 The Time 11 wave was conducted during COVID-19 pandemic. Procedures thus differed in that there was an increased focus on online deliver using email reminders and extensive Facebook advertising, no Christmas card, and incomplete phoning of non-respondents.
 
-The Time 11 (2019) NZAVS contained responses from 42,684 participants (36,522 retained from one or more previous wave. The sample retained 2,506 participants from the Time 1 (2009) sample (a retention rate of 38.4%). The sample retained 34,782 participants from Time 10 (2018; a retention rate of 72.5% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. A second reminder email was sent approximately four months following the first email attempt. We offered a prize draw for participation (five draws each for $1000 grocery vouchers, $5000 total prize pool). Participants were also emailed an eight-page newsletter about the study. As in past years, three attempts were made to phone non-respondents using each available cell and landline number. However, due to the university closure during COVID-19 lockdowns, phoning attempts were made for only 54% of the phoning pool (11,687 from a total of 21,636 non-respondents who provided at least one phone number). 
+The Time 11 (2019) NZAVS contained responses from 42,684 participants (36,522 retained from one or more previous wave. The sample retained 2,506 participants from the Time 1 (2009) sample (a retention rate of 38.4%). The sample retained 34,782 participants from Time 10 (2018; a retention rate of 72.5% from the previous year). Participants who provided an email address were first emailed and invited to complete an online version if they preferred. Participants who did not complete the online version (or did not provide an email) were then posted a copy of the questionnaire, with a second postal follow-up two months later. We staggered the time of contact, so that participants who had completed the previous wave were contacted approximately one year after they last completed the questionnaire. A second reminder email was sent approximately four months following the first email attempt. We offered a prize draw for participation (five draws each for \$1000 grocery vouchers, \$5000 total prize pool). Participants were also emailed an eight-page newsletter about the study. As in past years, three attempts were made to phone non-respondents using each available cell and landline number. However, due to the university closure during COVID-19 lockdowns, phoning attempts were made for only 54% of the phoning pool (11,687 from a total of 21,636 non-respondents who provided at least one phone number). 
 
 Two additional forms of recruitment were also introduced during Time 11. The first was a large  information box in the questionnaire (taking a full page on the paper version), which asked people: ‘Do you have a partner who would also like to join the NZAVS?’ with additional details for how partners might join the study (see questionnaire for the full text). The second was a Facebook advertisement. The advertisement targeted men and women aged 18-65+ who lived in New Zealand and ran from and 4th April 2020 – 4th July 2020 (overlapping with New Zeeland’s first lockdown period and recovery), and again from 18th August 2020 – 4th September (during the second Auckland lockdown). Given the unprecedented nature of the COVID-19 lockdowns, we thought it important to maximise sampling during these periods. The goal of the Facebook advertisement was threefold: (a) to increase name recognition of the NZAVS and remind people to complete the paper/online version already posted/emailed to them, (b) to help improve retention by potentially reaching previous lost participants who happened to see the advertisement, and (c) to recruit new participants (and also the partners of existing participants) while people were at home with some possibly having more free time during lockdown. This last goal was indirect and not explicitly stated it in the advertisement. 
 
-The Facebook advertisement read as follows: “Participate in the New Zealand Attitudes and Values Study. Complete the 2020 Questionnaire online” with the body of text: “If you are part of the NZAVS, but have not heard from us in the last year, then please consider completing the 2020 questionnaire online. The study is more important than ever as we aim to understand the impact of COVID-19 on mental health, wellbeing and resilience in our communities. We wish you all the best at this time and hope you keep well and stay safe.” This paid promotion reached 883,969 people, with 37,850 link clicks (i.e., clicking the link for the Qualtrics survey) according to Facebook. A total of 6106 people continued complete the questionnaire and provide full contact details, and were thus included in the dataset (4734 were new participants opting in to the study, and 1372 were previously ‘lost’ participants). 
+The Facebook advertisement read as follows: “Participate in the New Zealand Attitudes and Values Study. Complete the 2020 Questionnaire online” with the body of text: "If you are part of the NZAVS, but have not heard from us in the last year, then please consider completing the 2020 questionnaire online. The study is more important than ever as we aim to understand the impact of COVID-19 on mental health, wellbeing and resilience in our communities. We wish you all the best at this time and hope you keep well and stay safe." This paid promotion reached 883,969 people, with 37,850 link clicks (i.e., clicking the link for the Qualtrics survey) according to Facebook. A total of 6106 people continued complete the questionnaire and provide full contact details, and were thus included in the dataset (4734 were new participants opting in to the study, and 1372 were previously ‘lost’ participants). 
 
 ### References
 Huang, Y., Greaves, L. M., & Sibley, C. G., (2014). Archive of additional (non-questionnaire) materials posted to participants. NZAVS Technical Documents, e07. Available at: www.nzavs.auckland.ac.nz
@@ -128,16 +129,14 @@ Statistics New Zealand (2013). Glossary of Terms. Statistics New Zealand.
 
 Statistics New Zealand (2014). Quickstats about great Christchurch. Statistics New Zealand.
 
-
-
-
 ## Analysis
 
-This supplement offers a step-by-step analysis for the "Longitudinal
+This supplement offers a step-by-step analysis for the manuscript: "Longitudinal
 Evidence for Growth in Subjective Well-being from Spiritual Beliefs."
-The functions and other materials for this analysis can be found at the
+
+The functions and figures for this analysis can be found at the
 following GitHub link:
-<https://github.com/jacopastorius/nzavs_spiritbeliefwell-being>
+<https://github.com/go-bayes/nzavs_spiritbeliefwell-being>
 
 First, we load our functions.
 
@@ -152,21 +151,11 @@ Next we read the data:
 # custom function for my machine to read data. you'll need to read data to your machine. tweak function in the `funs.R` script for your machine
 d<-data_read_mymachine()
 
-# pa<-d%>%
-#  dplyr::filter(YearMeasured==1)%>%
-#     dplyr::group_by(Id) %>%
-#     dplyr::filter(n() !=0)%>%
-#     dplyr::ungroup(Id)
-# length(unique(pa$Id))
-# table(pa$Wave)
-
-
-# d2<-data_clean_spirit_wellbeing(pa,0) # d = dataframe, 3 = number of waves
-# table(d2$Wave) 
-
 
 # function to clean data, specify number of waves as 3 
-d_3<-data_clean_spirit_wellbeing(d,9) # d = dataframe, 3 = number of waves
+d_3<-data_clean_spirit_wellbeing(d,9) # d = dataframe, 9 = number of waves
+d_3a<-data_clean_spirit_wellbeing(d,3) # d = dataframe, 3 = number of waves
+
 # function to count uinque ides
 show_unique_id(d_3$Id) 
 # function to count waves for participants
@@ -178,6 +167,8 @@ range(d_3$years)
 # html talbe
 #demographic_table(d_3)
 
+
+## For data with min 9 x waves
 d_3 <- cbind(
   d_3,
   demean(d_3, select = c("Age"), group = "Id"
@@ -186,6 +177,14 @@ d_3 <- cbind(
 d_3<-d_3%>%
   dplyr::mutate(Age_betweenC = scale(Age_between, scale = FALSE))
 
+# data with 3 x waves.
+d_3a <- cbind(
+  d_3a,
+  demean(d_3a, select = c("Age"), group = "Id"
+))
+
+d_3a<-d_3a%>%
+  dplyr::mutate(Age_betweenC = scale(Age_between, scale = FALSE))
 ```
 
 Breakdown of participants by wave
@@ -193,37 +192,19 @@ Breakdown of participants by wave
 table(d_3$Wave)
 ```
 
+# Unique participants
+
+```{r}
+length(unique(d_3$Id)) #3257
+```
+
+
 Sample details are as follows:
 
 ```{r sample details}
 sample_report(d_3)
 ```
 
-<!-- ```{r  badlatextable} badd tables -->
-
-<!-- library("arsenal") -->
-
-<!-- summary(arsenal::tableby(Wave ~ Age + -->
-
-<!--                    NZdep + -->
-
-<!--                    Education + -->
-
-<!--                    Employed + -->
-
-<!--                    Ethnic_Categories + -->
-
-<!--                    Male  + -->
-
-<!--                    Has_Partner  + -->
-
-<!--                    Political_Conservativism + -->
-
-<!--                    Urban + -->
-
-<!--                    LIFESAT + PWI + includeNA(Beliefs), data = d_3,digits = 2, total=FALSE, format.p = FALSE, digits.p = 0))%>% -->
-<!--     kable( booktabs = T, "latex") -->
-<!-- ``` -->
 
 ```{r latextable, cache=TRUE}
 library(modelsummary)
@@ -254,148 +235,6 @@ modelsummary::datasummary_balance( ~ Wave, data=ts, dinm=FALSE, output = 'table.
 demographic_table(d_3)
 #demographic_table_latex() not wurking  d
 ```
-
-<!-- ```{r, include=FALSE} -->
-
-<!-- beliefs_table(d_3) -->
-
-<!-- ``` -->
-
-<!-- We wrote the publication in $\LaTeX$, which requires converting the tables to .tex files; this conversion used a custom function we wrote in the `funs.R` file.  -->
-
-<!-- ```{r latex_data_table, include=FALSE} -->
-
-<!-- # you might need to install the dev verion.//remotes::install_github("tysonstanley/furniture") -->
-
-<!-- demographic_table_latex() # note the furniture package conflicts with the table1 package. -->
-
-<!-- d_3%>% -->
-
-<!--   group_by(Wave)%>% -->
-
-<!-- furniture::table1( -->
-
-<!--                   Age,  -->
-
-<!--                   NZdep, -->
-
-<!--                   Education, -->
-
-<!--                   Employed, -->
-
-<!--                   Ethnic_Categories, -->
-
-<!--                   Male,Has_Partner,  -->
-
-<!--                   Political_Conservativism, -->
-
-<!--                   Urban,  -->
-
-<!--                   Beliefs,  -->
-
-<!--                   LIFESAT, -->
-
-<!--                   PWI, -->
-
-<!--                   overall=F) -->
-
-<!-- dat3<-d_3%>%dplyr::select( Age, NZdep, -->
-
-<!--                   Education, -->
-
-<!--                   Employed, -->
-
-<!--                   Ethnic_Categories, -->
-
-<!--                   Male,Has_Partner, -->
-
-<!--                   Political_Conservativism, -->
-
-<!--                   Urban, -->
-
-<!--                   Beliefs, -->
-
-<!--                   LIFESAT, -->
-
-<!--                   PWI,Wave) -->
-
-<!-- stargazer::stargazer(dat3) -->
-
-<!-- library(modelsummary) -->
-
-<!--   modelsummary::datasummary_df(ALL(Age) ~ Mean + SD + Histogram, data=dat3) -->
-
-<!-- ``` -->
-
-<!-- ## How many waves to select? We are using 10 years -->
-
-<!-- We selected a minimum of three waves because we want to recover a -->
-
-<!-- longitudinal sample in which a slope for the effect of the years -->
-
-<!-- $\times$ beliefs effect might be recovered. However, we needed to -->
-
-<!-- consider whether our selection of three waves was sensitive to that -->
-
-<!-- degree of researcher freedom. So we also prepared 4-8 years of data -->
-
-<!-- frames for separate analyses. -->
-
-<!-- ```{r, include = TRUE} -->
-
-<!-- # create datasets to test robustness to years -->
-
-<!-- # d_4<-data_clean_spirit_wellbeing(d,4) # 4 years -->
-
-<!-- # d_5<-data_clean_spirit_wellbeing(d,5) # 5 years -->
-
-<!-- # d_6<-data_clean_spirit_wellbeing(d,6) # 6 years -->
-
-<!-- # d_7<-data_clean_spirit_wellbeing(d,7) # 7 years -->
-
-<!-- # d_8<-data_clean_spirit_wellbeing(d,8) # 7 years -->
-
-<!-- #  -->
-
-<!-- # # function to count uinque number of ID's -->
-
-<!-- # show_unique_id(d_3$Id)  -->
-
-<!-- # show_unique_id(d_4$Id) -->
-
-<!-- # show_unique_id(d_5$Id)  -->
-
-<!-- # show_unique_id(d_6$Id)  -->
-
-<!-- # show_unique_id(d_7$Id)  -->
-
-<!-- # show_unique_id(d_8$Id)  -->
-
-<!-- #  -->
-
-<!-- # # function to count waves for participants -->
-
-<!-- # count_waves_participants(d_3) -->
-
-<!-- # count_waves_participants(d_4) -->
-
-<!-- # count_waves_participants(d_5) -->
-
-<!-- # count_waves_participants(d_6) -->
-
-<!-- # count_waves_participants(d_7) -->
-
-<!-- # count_waves_participants(d_8) -->
-
-<!-- ``` -->
-
-<!-- The analyses for these waves is described below. These analyses reveal -->
-
-<!-- that the inference of the paper is not sensitive to the threshold number -->
-
-<!-- of waves for participant selection. Which is to say, we recover the same -->
-
-<!-- inference with an -wave selection criterion. -->
 
 ## Covariates
 
@@ -601,21 +440,21 @@ library("dagitty")
 library("ggdag")
 
 # theoretically plausible relationships
-tidy_ggdag <- dagify(
-  WB ~ belief + age_within + age_between + partner + nzdep + urban + male + pols + empl, # what might affect wellbeing?
-  WB ~~ partner, # bi-causal path
-  belief ~ age_within  + age_between  + male + ethn, # predictors of beliefs
-  partner ~ nzdep + age_within  + age_between + belief,  # predictors of having a partner
-  nzdep ~ empl,  # predictor of deprivation
-  pols ~ age_within  + age_between  + empl + ethn, # predictor of political orientation
-  empl ~ nzdep + edu + ethn + age_within  + age_between, # predictor of employment
+tidy_ggdag <- ggdag::dagify(
+  WB ~ belief + age_within + age_between + partner + nzdep + urban + male + pols + empl,
+  WB ~~ partner,
+  belief ~ age_within  + age_between  + male + ethn,
+  partner ~ nzdep + age_within  + age_between + belief,
+  nzdep ~ empl,
+  pols ~ age_within  + age_between  + empl + ethn,
+  empl ~ nzdep + edu + ethn + age_within  + age_between,
   exposure =  "belief",
-  outcome =   "WB")%>%
-  tidy_dagitty() + theme_dag_gray()
+  outcome =   "WB"
+) %>%
+  tidy_dagitty()
 
-#graph
 ggdag_adjustment_set(tidy_ggdag, node_size = 14) + 
-  theme(legend.position = "bottom") 
+  theme(legend.position = "bottom")  + theme_dag_gray()
 ```
 
 ## Priors in the Bayesian Model
@@ -733,6 +572,48 @@ forumula_bayesPWI_DAG <- bf(PWI ~  Beliefs *  Age_within +  Age_betweenC  + Ethn
 forumula_bayesLIFESAT_DAG <- bf(LIFESAT ~   Beliefs *  Age_within +  Age_betweenC  + Ethnic_Categories + Male + (1 + Age_within|Id))
 ```
 
+
+
+## Models
+
+
+```{r}
+# REDO
+m1<-brm(forumula_bayesPWI_DAG, data= d_3, file ="mod.1_bDAGR.rds", cores = 8) # note these are very large files
+summary(m1)
+```
+
+```{r}
+conditions <- data.frame(Age_within = c(-5:5))
+p0 <- brms::conditional_effects(
+  m1,
+  c("Age_within:Beliefs" ),
+  spaghetti = TRUE,
+  categorical = FALSE,
+  nsamples = 200,
+  prob = .95,
+  method = 'fitted',
+  conditions = conditions
+)
+
+plot(p0, plot = FALSE)[[1]] +   facet_wrap("Beliefs",nrow = 1) + xlab("Years of Aging (centered)") + ylab ("Personal Wellbeing 0-10")  + theme_blank() + labs(title = "Predicted effects of beliefs states for personal wellbeing")+ theme(legend.position="top") + scale_color_viridis_d(alpha = .2)
+# pwi
+
+
+```
+
+```{r lsbayesmodelLS_DAG2}
+# LIFE SAT
+m2 <-brm (forumula_bayesLIFESAT_DAG, data= d_3,cores = 8, file ="mod.2_bDAGR.rds")
+summary(m2)
+###
+# note these are very large files
+```
+
+
+
+
+
 ```{r pwi_bayesmodelPWI_DAG}
 # PWI
 # mod.1_bDAG <-brm(forumula_bayesPWI_DAG, data= d_3, file ="mod.1_bDAG.rds", cores = 8) # note these are very large files
@@ -778,6 +659,11 @@ bayestestR::describe_posterior(mod.2_bDAGR, test = c("p_direction"), diagnostic 
 table_model_latex_dual(mod.1_bDAGR,mod.2_bDAGR)
 ```
 
+
+```{r}
+
+```
+
 ```{r cache =TRUE}
 g1dag1<-plot(parameters::model_parameters(mod.1_bDAGR))+ ggtitle("Personal Well-Being Coefficients")
 g2dag1<-plot(parameters::model_parameters(mod.2_bDAGR))+ ggtitle("Life Satisfaction Coefficients")
@@ -789,8 +675,16 @@ And here's the graph.
 g1dag1/g2dag1
 ```
 
-Next we plot the graphs. First we extract the predictions
+Next we plot the graphs. First we extract the predictions:
 
+
+```{r Bayesian_pwi_predictedSAT_DAG, cache=TRUE}
+get_predictions(m1)
+```
+
+```{r Bayesian_lifesat_predictedSAT_DAG_GET2, cache=TRUE}
+get_predictions(mod.2_bDAGR)
+```
 ```{r Bayesian_pwi_predictedSAT_DAG_GET, cache=TRUE}
 get_predictions(mod.1_bDAGR)
 ```
@@ -1547,7 +1441,7 @@ Chris G. Sibley [c.sibley\@auckland.ac.nz](c.sibley@auckland.ac.nz).
 
 <!-- ``` -->
 
-<!-- We might want to look at within/between indivual change (i.e. do people who change in degree of spirit beliefs manifest different well-being.  I ran this as below, however, what we really want is a markov model, where we compare state changes between the different types of belief. So this model is not useful. For more on demeaning see:  -->
+<!-- We might want to look at within/between individual change (i.e. do people who change in degree of spirit beliefs manifest different well-being.  I ran this as below, however, what we really want is a markov model, where we compare state changes between the different types of belief. So this model is not useful. For more on demeaning see:  -->
 
 <!-- https://easystats.github.io/parameters/articles/demean.html -->
 

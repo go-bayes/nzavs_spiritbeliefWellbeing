@@ -163,24 +163,30 @@ sample_report <-function(x){
 # }
 
 
-graph_predictions <- function(x,y){
-  out <- ggeffects::ggpredict(model = x, terms = c("Age_within [minmax]","Beliefs"),
-                              ci.lvl = 0.95,
-                              type = "fe",
-                              typical = "mean",
-                              back.transform = TRUE,
-                              ppd = FALSE,
-  plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y) # title to be suppled
+
+graph_predictions <- function(x, y) {
+  out <- ggeffects::ggpredict(
+      model = x,
+      terms = c("Age_within [minmax]", "Beliefs"),
+      ci.lvl = 0.95,
+      type = "fe",
+      typical = "mean",
+      back.transform = TRUE,
+      ppd = FALSE,
+      plot(out, facets = T) +  gghighlight::gghighlight()  +  theme_blank() + ggtitle(y))
 }
 
-get_predictions <- function(x){
-  out <- ggeffects::ggpredict(model = x, terms = c("Age_within [minmax]","Beliefs"),
-                              ci.lvl = 0.95,
-                              type = "fe",
-                              typical = "mean",
-                              back.transform = TRUE,
-                              ppd = FALSE,
-                              interval = "confidence")
+get_predictions <- function(x) {
+  out <- ggeffects::ggpredict(
+      model = x,
+      terms = c("Age_within [minmax]", "Beliefs"),
+      ci.lvl = 0.95,
+      type = "fe",
+      typical = "mean",
+      back.transform = TRUE,
+      ppd = FALSE,
+      interval = "confidence"
+    )
   return(out)
 }
 

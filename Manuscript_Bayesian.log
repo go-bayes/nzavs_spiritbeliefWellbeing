@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.25)  26 FEB 2021 11:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.25)  11 MAR 2021 22:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -695,18 +695,18 @@ p}
 Underfull \vbox (badness 7649) has occurred while \output is active []
 
 [4]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 7649) has occurred while \output is active []
 
-[5] [6]
-Underfull \vbox (badness 1342) has occurred while \output is active []
-
-[7] [8] [9] [10]
+[5] [6] [7] [8] [9] [10]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
 22.
 (/Users/jbul176/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [11]
-</Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.png, id=213, 1069.9975pt x
+)
+Underfull \vbox (badness 3536) has occurred while \output is active []
+
+[11] [12]
+</Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.png, id=219, 1069.9975pt x
  803.0pt>
 File: /Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.png Graphic file (typ
 e png)
@@ -714,13 +714,13 @@ e png)
 Package pdftex.def Info: /Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.pn
 g  used on input line 394.
 (pdftex.def)             Requested size: 469.75543pt x 352.53691pt.
-[12]
+[13 </Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.png>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
 07.
 (/Users/jbul176/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [13 </Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/coef.png>]
-</Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/pwi.png, id=230, 1069.9975pt x 
+)
+</Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/pwi.png, id=229, 1069.9975pt x 
 803.0pt>
 File: /Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/pwi.png Graphic file (type
  png)
@@ -737,14 +737,15 @@ png)
 Package pdftex.def Info: /Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/ls.png 
  used on input line 451.
 (pdftex.def)             Requested size: 469.75543pt x 352.53691pt.
-[16] [17 </Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/ls.png>] [18]
-Underfull \vbox (badness 1838) has occurred while \output is active []
-
-[19] [20] [21]
+[16] [17 </Users/jbul176/GIT/nzavs_spiritbeliefWellbeing/ls.png>] [18] [19] [20
+] [21] [22] [23]
 Underfull \vbox (badness 1389) has occurred while \output is active []
 
-[22] [23] [24] [25] AED endfloat: Processing end Figures and Tables [26] [27] [
-28] (./Manuscript_Bayesian.aux)
+[24]
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
+[25] [26] [27] AED endfloat: Processing end Figures and Tables [28] [29] [30] (
+./Manuscript_Bayesian.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -752,13 +753,13 @@ Package rerunfilecheck Info: File `Manuscript_Bayesian.out' has not changed.
 (rerunfilecheck)             Checksum: EC9427ED782FCCEABEB09F2AE87B3865;4426.
  ) 
 Here is how much of TeX's memory you used:
- 14481 strings out of 480971
- 216936 string characters out of 5906949
- 569651 words of memory out of 5000000
+ 14489 strings out of 480971
+ 217086 string characters out of 5906949
+ 568652 words of memory out of 5000000
  31256 multiletter control sequences out of 15000+600000
  441583 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,12n,88p,2258b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,12n,88p,2258b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/jbul176/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Use
 rs/jbul176/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/
 jbul176/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/jbul17
@@ -771,10 +772,10 @@ xmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/jbul176/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/lm/lmri12.pfb></Users/jbul176/Library/TinyTeX/texmf-dist
 /fonts/type1/public/lm/lmsy10.pfb></Users/jbul176/Library/TinyTeX/texmf-dist/fo
 nts/type1/public/lm/lmtt12.pfb>
-Output written on Manuscript_Bayesian.pdf (28 pages, 1044819 bytes).
+Output written on Manuscript_Bayesian.pdf (30 pages, 1047499 bytes).
 PDF statistics:
- 475 PDF objects out of 1000 (max. 8388607)
- 427 compressed objects within 5 object streams
- 162 named destinations out of 1000 (max. 500000)
+ 491 PDF objects out of 1000 (max. 8388607)
+ 441 compressed objects within 5 object streams
+ 170 named destinations out of 1000 (max. 500000)
  272 words of extra memory for PDF output out of 10000 (max. 10000000)
 
