@@ -41,6 +41,7 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
+keep_tex: true
 extra_dependencies: ["rotating", "booktabs", "graphicx","longtable","amsmath","amsfonts","amssymb"]
 ---
 
