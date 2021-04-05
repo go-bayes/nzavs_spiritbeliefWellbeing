@@ -149,8 +149,7 @@ Next we read the data:
 
 ```{r read_data, cache=TRUE}
 # custom function for my machine to read data. you'll need to read data to your machine. tweak function in the `funs.R` script for your machine
-d<-data_read_mymachine()
-
+d <- data_read_mymachine()
 
 # function to clean data, specify number of waves as 3 
 d_3<-data_clean_spirit_wellbeing(d,9) # d = dataframe, 9 = number of waves
@@ -192,7 +191,7 @@ Breakdown of participants by wave
 table(d_3$Wave)
 ```
 
-# Unique participants
+Unique participants
 
 ```{r}
 length(unique(d_3$Id)) #3257
@@ -204,7 +203,6 @@ Sample details are as follows:
 ```{r sample details}
 sample_report(d_3)
 ```
-
 
 ```{r latextable, cache=TRUE}
 library(modelsummary)
@@ -223,6 +221,7 @@ ts<-d_3 %>%
                 PWI,
                 Wave)
 modelsummary::datasummary_balance( ~ Wave, data=ts, dinm=FALSE, output = 'table.tex')
+modelsummary::datasummary_balance( ~ Wave, data=ts, dinm=FALSE)
 # https://github.com/IndrajeetPatil/ggstatsplot
 # https://www.datanovia.com/en/lessons/compute-summary-statistics-in-r/
 
@@ -231,7 +230,7 @@ modelsummary::datasummary_balance( ~ Wave, data=ts, dinm=FALSE, output = 'table.
 ## Sample demographic table
 
 ```{r demographic table, cache=TRUE}
-# must remove Furniture package before running table 1
+# must remove this table is is for the manuscript
 demographic_table(d_3)
 #demographic_table_latex() not wurking  d
 ```
